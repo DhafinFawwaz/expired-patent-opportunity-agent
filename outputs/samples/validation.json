@@ -42,6 +42,26 @@
       "9 slides"
     ],
     [
+      "html matches bundle",
+      true,
+      ""
+    ],
+    [
+      "label in html",
+      true,
+      "title, footers"
+    ],
+    [
+      "html slide count",
+      true,
+      "9 slides"
+    ],
+    [
+      "report html matches bundle",
+      true,
+      ""
+    ],
+    [
       "report schema",
       true,
       ""

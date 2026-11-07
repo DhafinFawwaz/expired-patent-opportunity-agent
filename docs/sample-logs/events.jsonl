@@ -1,455 +1,455 @@
-{"ts": "2026-11-07T11:56:21.778395+00:00", "thread_id": "run-real-4", "stage": "intake", "event": "done"}
-{"ts": "2026-11-07T11:58:05.910947+00:00", "thread_id": "run-real-4", "stage": "plan", "event": "done"}
-{"ts": "2026-11-07T11:58:05.917062+00:00", "thread_id": "run-real-4", "stage": "approve", "event": "done"}
-{"ts": "2026-11-07T11:58:05.918208+00:00", "thread_id": "run-real-4", "stage": "discovery", "event": "bigquery_start", "grant_from": "2012-11-09", "grant_to": "2022-11-07"}
-{"ts": "2026-11-07T11:58:06.057221+00:00", "thread_id": "run-real-4", "stage": "discovery", "event": "bigquery_done", "found": 6999, "core": 2404}
-{"ts": "2026-11-07T11:58:06.063414+00:00", "thread_id": "run-real-4", "stage": "discover", "event": "done"}
-{"ts": "2026-11-07T11:58:06.097245+00:00", "thread_id": "run-real-4", "stage": "status_index", "event": "gazette_start", "weeks": 104, "keys": 2404}
-{"ts": "2026-11-07T11:58:10.081740+00:00", "thread_id": "run-real-4", "stage": "status_index", "event": "gazette_done", "weeks_fetched": 104, "missing": 0, "expired_candidates": 299}
-{"ts": "2026-11-07T11:58:10.082412+00:00", "thread_id": "run-real-4", "stage": "status_index", "event": "done"}
-{"ts": "2026-11-07T11:58:10.129184+00:00", "thread_id": "run-real-4", "stage": "claims", "event": "bigquery_start", "patents": 300}
-{"ts": "2026-11-07T11:58:10.150396+00:00", "thread_id": "run-real-4", "stage": "claims", "event": "bigquery_done", "patents": 226}
-{"ts": "2026-11-07T11:58:10.151063+00:00", "thread_id": "run-real-4", "stage": "claims", "event": "done"}
-{"ts": "2026-11-07T11:58:10.363211+00:00", "thread_id": "run-real-4", "stage": "normalise", "event": "screened", "candidates": 299, "passed": 210}
-{"ts": "2026-11-07T11:58:10.363755+00:00", "thread_id": "run-real-4", "stage": "normalise", "event": "done"}
-{"ts": "2026-11-07T11:58:10.406288+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-10004374", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.428123+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-10010232", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.430458+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.432267+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-10041219", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.434776+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.436505+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.437725+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-10052665", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.438934+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-10052751", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.440398+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.441425+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.442499+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-10064481", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.443333+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.443624+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-10065611", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.443847+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.443994+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-10772419", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.444337+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-10787313", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.444552+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.444695+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.444832+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-10791904", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.445038+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.445175+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-10792686", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.445386+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.445540+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-10799082", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.445758+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.445902+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-10806303", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.446117+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.446261+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-10827823", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.446479+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.446626+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-10836055", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.446837+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.446981+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-10842252", "label": "reinstated", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.447190+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.447339+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-10842339", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.447632+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.447849+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-10842342", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.448105+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.448273+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-10856644", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.448502+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.448662+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-10863879", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.448896+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.449053+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-10869584", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.449270+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.449419+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-10874207", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.449668+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.449816+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-10874264", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.450073+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.450221+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-10888166", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.450435+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.450588+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-10888881", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.450813+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.450957+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-10897986", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.451171+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.451319+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-10898037", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.451533+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.451682+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-10899517", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.451895+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.452034+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-10905291", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.452295+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.452443+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-10918256", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.452656+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.452809+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-10925443", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.453022+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.453169+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-10925458", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.453387+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.453533+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-10932646", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.453740+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.453875+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-10933522", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.454074+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.454205+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-10941532", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.454404+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.454551+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-10959509", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.454749+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.454881+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-10959599", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.455081+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.455217+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-10966589", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.455436+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.455577+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-10973388", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.455785+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.455927+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-10986967", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.456126+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.456265+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-10986978", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.456474+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.456616+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-11000114", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.456824+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.456966+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-11006815", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.457172+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.457312+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-11006816", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.457519+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.457664+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-11008742", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.457884+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.458037+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-11013391", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.458247+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.458410+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-11013392", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.458632+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.458785+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-11013393", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.458999+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.459142+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-11019977", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.459372+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.459507+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-11020779", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.459712+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.459853+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-11033169", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.460069+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.460205+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-11051666", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.460418+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.460560+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-11051667", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.460770+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.460908+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-11058277", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.461115+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.461253+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-11066049", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.461465+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.461606+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-11067217", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.461816+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.461956+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-11071434", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.462160+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.462311+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-11076686", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.462518+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.462657+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-11083359", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.462857+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.462995+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-11109723", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.463197+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.463333+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-11129496", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.463612+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.463795+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-8312588", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.464034+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.464231+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-8321990", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.464549+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.464745+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-8332986", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.465052+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.465221+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-8336157", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.465513+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.465780+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-8338354", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.466034+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.466283+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-8341794", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.466573+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-8342321", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.466895+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.467062+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-8343882", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.467318+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.467525+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-8343908", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.467827+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.468029+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-8356379", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.468300+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.468507+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-8359698", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.468778+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.468977+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-8365341", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.469286+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.469482+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-8375498", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.469756+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.469943+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-8376376", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.470197+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.470390+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-8381351", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.470657+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.470844+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-8397338", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.471116+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.471360+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-8402589", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.471616+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.471782+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-8402590", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.472043+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.472237+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-8404053", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.472518+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.472721+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-8407848", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.473013+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.473206+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-8409688", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.473467+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.473662+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-8425136", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.473925+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.474116+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-8434187", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.474372+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.474571+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-8438688", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.474828+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.475024+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-8438690", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.475282+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.475470+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-8443481", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.475727+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.475920+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-8449212", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.476174+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.476415+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-8449682", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.476668+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.476858+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-8460775", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.477119+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.477327+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-8468644", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.477583+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.477792+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-8485611", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.478050+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.478249+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-8501648", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.478547+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.478744+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-8505147", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.479010+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.479204+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-8524350", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.479479+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.479670+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-8533885", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.479942+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.480135+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-8549694", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.480396+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.480588+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-8557360", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.480851+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.481048+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-8561245", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.481304+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.481494+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-8566997", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.481757+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.481933+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-8572795", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.482231+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.482424+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-8579121", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.482698+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.482890+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-8584300", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.483175+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.483375+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-8595884", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.483849+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.484035+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-8602220", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.484301+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.484459+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-8607397", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.484743+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.484925+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-8607400", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.485172+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.485352+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-8632410", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.485634+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.485828+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-8635732", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.486083+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.486269+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-8635735", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.486528+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.486717+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-8635736", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.486981+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.487163+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-8641112", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.487427+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.487610+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-8641311", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.487866+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.488049+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-8646144", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.488311+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.488495+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-8647606", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.488739+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.488925+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-8651761", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.489233+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.489416+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-8652263", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.489680+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.489865+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-8657515", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.490148+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.490334+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-8661600", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.490594+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.490810+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-8663782", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.491072+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.491272+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-8677543", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.491528+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.491732+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-8677547", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.491993+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.492193+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-8684619", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.492453+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.492657+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-8696028", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.492917+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.493105+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-8701238", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.493382+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.493575+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-8707505", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.493835+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.494022+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-8713745", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.494294+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.494485+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-8719972", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.494763+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.494951+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-8763192", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.495214+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.495408+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-8771428", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.495669+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.495856+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-8778086", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.496128+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.496339+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-8783472", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.496604+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.496815+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-8784504", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.497086+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.497293+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-8793831", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.497564+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.497752+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-8793832", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.498026+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.498216+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-8793834", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.498486+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.498675+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-8800092", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.498948+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.499136+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-8826467", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.499408+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.499595+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-8826487", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.499838+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.500066+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-9439545", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.500334+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.500533+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-9439550", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.500815+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.500994+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-9459046", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.501257+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.501440+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-9475104", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.501708+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.501892+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-9480384", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.502171+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.502367+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-9485896", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.502661+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.502842+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-9487188", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.503085+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.503300+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-9492049", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.503538+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.503757+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.503949+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-9492808", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.504189+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.504405+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-9498092", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.504733+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.504951+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-9498879", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.505222+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.505403+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-9510722", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.505694+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.505878+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-9526392", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.506161+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.506358+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-9532640", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.506624+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.506831+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-9539620", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.507088+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.507287+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-9560950", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.507551+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.507747+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-9572471", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.508038+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.508225+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-9580050", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.508490+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.508680+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-9604241", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.508942+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.509147+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-9609971", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.509398+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.509584+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-9609994", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.509839+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.510020+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-9615717", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.510278+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.510437+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-9622567", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.510650+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.510785+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-9622621", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.510991+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.511134+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-9622639", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.511339+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.511478+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-9629702", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.511684+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.511815+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-9630215", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.512038+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.512174+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-9630221", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.512374+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.512501+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-9655490", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.512705+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.512835+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-9655491", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.513031+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.513161+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-9655492", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.513359+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.513490+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-9675209", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.513683+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.513811+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-9681789", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.514017+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.514152+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-9682688", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.514356+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.514493+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-9687133", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.514693+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.514829+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-9700192", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.515027+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.515160+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-9700198", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.515359+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.515494+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-9717394", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.515692+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.515828+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-9750385", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.516023+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.516154+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-9757007", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.516358+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.516509+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-9758925", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.516776+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.516943+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-9770094", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.517160+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.517301+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-9775490", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.517508+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.517655+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-9777128", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.517864+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.518005+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-9788702", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.518208+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.518346+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-9795266", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.518549+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.518711+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-9801520", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.518916+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.519055+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-9802583", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.519256+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.519393+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-9808123", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.519597+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.519727+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-9814303", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.519922+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.520055+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-9828753", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.520250+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.520393+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-9834919", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.520596+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.520735+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-9839943", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.520938+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.521071+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-9848743", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.521273+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.521403+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-9884419", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.521601+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.521737+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-9888824", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.521941+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.522080+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-9907460", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.522279+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.522415+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-9913566", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.522617+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.522756+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-9918607", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.522956+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.523084+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-9925739", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.523292+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.523421+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-9930884", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.523616+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.523758+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-9936799", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.523964+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.524102+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-9936849", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.524312+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.524457+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-9936856", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.524660+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.524799+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-9944257", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.525001+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.525145+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-9949559", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.525339+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.525478+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-9951502", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.525679+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.525815+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-9962056", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.526015+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.526153+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-9969366", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.526363+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.526492+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-9974381", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.526691+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.526824+00:00", "thread_id": "run-real-4", "stage": "status", "event": "assessed", "key": "US-9974424", "label": "expired_nonpayment", "confidence": "high"}
-{"ts": "2026-11-07T11:58:10.527018+00:00", "thread_id": "run-real-4", "stage": "verify_candidate", "event": "done"}
-{"ts": "2026-11-07T11:58:10.584526+00:00", "thread_id": "run-real-4", "stage": "rank", "event": "pool", "analysed": 8, "not_analysed": 201}
-{"ts": "2026-11-07T11:58:10.584996+00:00", "thread_id": "run-real-4", "stage": "rank", "event": "done"}
-{"ts": "2026-11-07T11:59:50.747070+00:00", "thread_id": "run-real-4", "stage": "technical", "event": "summarised", "key": "US-8826467", "powered": "non_powered", "method": "json_schema", "error": "Invalid json output: # Patent Summary\n\n**Patent Number:** US-8826467\n**Title:** Glove with liquid storage and dispensation capabilities\n\n**Description:**\nThe claimed invention is \"A glove adapted to absorb and retain liquid\" [31153aaae958]. It comprises \"a base layer being fashioned for receiving a "}
-{"ts": "2026-11-07T12:01:15.424004+00:00", "thread_id": "run-real-4", "stage": "technical", "event": "summarised", "key": "US-8826487", "powered": "unclear", "method": "fallback", "error": "Invalid json output: \nFor troubleshooting, visit: https://docs.langchain.com/oss/python/langchain/errors/OUTPUT_PARSING_FAILURE "}
-{"ts": "2026-11-07T12:04:00.936554+00:00", "thread_id": "run-real-4", "stage": "technical", "event": "summarised", "key": "US-10065611", "powered": "unclear", "method": "fallback", "error": "Failed to parse TechnicalSummary from completion {\"Patent Number\": \"US-10065611\", \"Title\": \"Windshield cleaning implement\", \"Summary\": \"The invention is \\\"A windshield cleaning implement comprising: an elongated shaft having a proximal end and a distal end\\\" [22ca5dba3b75]. It features \\\"a cleaning "}
-{"ts": "2026-11-07T12:05:28.067847+00:00", "thread_id": "run-real-4", "stage": "technical", "event": "summarised", "key": "US-10064481", "powered": "unclear", "method": "json_schema", "error": "Failed to parse TechnicalSummary from completion {\"evidence_ids\": [\"4699abc048b9\"], \"implementation_unknowns\": [\"unclear\"], \"key_claim_elements\": [\"A cleaning element for a textile machine, the cleaning element intended for fastening onto a cylindrical base body to form a cleaning brush for use in t"}
-{"ts": "2026-11-07T12:06:14.192585+00:00", "thread_id": "run-real-4", "stage": "technical", "event": "summarised", "key": "US-10052665", "powered": "non_powered", "method": "json_schema", "error": null}
-{"ts": "2026-11-07T12:07:10.497203+00:00", "thread_id": "run-real-4", "stage": "technical", "event": "summarised", "key": "US-10052751", "powered": "non_powered", "method": "json_schema", "error": null}
-{"ts": "2026-11-07T12:09:25.745898+00:00", "thread_id": "run-real-4", "stage": "technical", "event": "summarised", "key": "US-8800092", "powered": "non_powered", "method": "json_schema", "error": "Failed to parse TechnicalSummary from completion {\"evidence_ids\": [\"dab24a31a6ea\"], \"implementation_unknowns\": [], \"key_claim_elements\": [\"A flat mop having a handle and apparatus for retaining the handle to a top plate of the flat mop\", \"a top plate including a first cover member and a second cover"}
-{"ts": "2026-11-07T12:09:41.089474+00:00", "thread_id": "run-real-4", "stage": "technical", "event": "summarised", "key": "US-10041219", "powered": "powered", "method": "json_schema", "error": null}
-{"ts": "2026-11-07T12:09:41.090968+00:00", "thread_id": "run-real-4", "stage": "analyse", "event": "done"}
-{"ts": "2026-11-07T12:16:07.593280+00:00", "thread_id": "run-real-4", "stage": "screening", "event": "scored", "scored": 7, "shortlisted": 2}
-{"ts": "2026-11-07T12:16:07.595083+00:00", "thread_id": "run-real-4", "stage": "score", "event": "done"}
-{"ts": "2026-11-07T12:16:07.923140+00:00", "thread_id": "run-real-4", "stage": "review", "event": "done"}
-{"ts": "2026-11-07T12:28:58.109209+00:00", "thread_id": "run-real-4", "stage": "generation", "event": "bundle_written", "candidates": 5, "shortlist": 2}
-{"ts": "2026-11-07T12:28:58.111465+00:00", "thread_id": "run-real-4", "stage": "bundle", "event": "done"}
-{"ts": "2026-11-07T12:28:58.323816+00:00", "thread_id": "run-real-4", "stage": "generation", "event": "files_written", "report": "report.docx", "deck": "deck.pptx", "attempt": 1}
-{"ts": "2026-11-07T12:28:58.324207+00:00", "thread_id": "run-real-4", "stage": "generate", "event": "done"}
-{"ts": "2026-11-07T12:28:59.126296+00:00", "thread_id": "run-real-4", "stage": "validation", "event": "checked", "ok": true, "failed": "none", "pages": null}
-{"ts": "2026-11-07T12:28:59.127028+00:00", "thread_id": "run-real-4", "stage": "validate", "event": "done"}
-{"ts": "2026-11-07T12:28:59.229826+00:00", "thread_id": "run-real-4", "stage": "run", "event": "completed"}
+{"ts": "2026-11-07T13:26:41.505748+00:00", "thread_id": "run-real-5", "stage": "intake", "event": "done"}
+{"ts": "2026-11-07T13:26:54.169191+00:00", "thread_id": "run-real-5", "stage": "plan", "event": "done"}
+{"ts": "2026-11-07T13:26:54.177552+00:00", "thread_id": "run-real-5", "stage": "approve", "event": "done"}
+{"ts": "2026-11-07T13:26:54.180174+00:00", "thread_id": "run-real-5", "stage": "discovery", "event": "bigquery_start", "grant_from": "2012-11-09", "grant_to": "2022-11-07"}
+{"ts": "2026-11-07T13:26:54.323571+00:00", "thread_id": "run-real-5", "stage": "discovery", "event": "bigquery_done", "found": 6999, "core": 2404}
+{"ts": "2026-11-07T13:26:54.333359+00:00", "thread_id": "run-real-5", "stage": "discover", "event": "done"}
+{"ts": "2026-11-07T13:26:54.352391+00:00", "thread_id": "run-real-5", "stage": "status_index", "event": "gazette_start", "weeks": 104, "keys": 2404}
+{"ts": "2026-11-07T13:26:58.176828+00:00", "thread_id": "run-real-5", "stage": "status_index", "event": "gazette_done", "weeks_fetched": 104, "missing": 0, "expired_candidates": 299}
+{"ts": "2026-11-07T13:26:58.178232+00:00", "thread_id": "run-real-5", "stage": "status_index", "event": "done"}
+{"ts": "2026-11-07T13:26:58.221694+00:00", "thread_id": "run-real-5", "stage": "claims", "event": "bigquery_start", "patents": 300}
+{"ts": "2026-11-07T13:26:58.243470+00:00", "thread_id": "run-real-5", "stage": "claims", "event": "bigquery_done", "patents": 226}
+{"ts": "2026-11-07T13:26:58.244168+00:00", "thread_id": "run-real-5", "stage": "claims", "event": "done"}
+{"ts": "2026-11-07T13:26:58.456268+00:00", "thread_id": "run-real-5", "stage": "normalise", "event": "screened", "candidates": 299, "passed": 210}
+{"ts": "2026-11-07T13:26:58.457403+00:00", "thread_id": "run-real-5", "stage": "normalise", "event": "done"}
+{"ts": "2026-11-07T13:26:58.499124+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-10052665", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:26:58.500182+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-10052751", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:26:58.501159+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:26:58.501816+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-10065611", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:26:58.502451+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:26:58.502647+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:26:59.652527+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-10787313", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:26:59.654557+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:01.894469+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-10836055", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:01.896033+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:01.928042+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-10010232", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:01.929086+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:01.984413+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-10827823", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:01.985562+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:02.443379+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-10064481", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:02.444985+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:02.617407+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-10842252", "label": "reinstated", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:02.618785+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:02.775302+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-10041219", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:02.776567+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:02.789402+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-10772419", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:02.790563+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:02.802494+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-10004374", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:02.803457+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:02.943385+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-10806303", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:02.945109+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:02.977007+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-10791904", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:02.978155+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:03.175527+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-10792686", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:03.176871+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:03.197609+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-10799082", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:03.198706+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:04.822045+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-10842342", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:04.823628+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:04.920579+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-10842339", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:04.921746+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:04.976703+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-10856644", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:04.977786+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:05.353036+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-10898037", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:05.354946+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:05.391610+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-10899517", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:05.392037+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:05.515118+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-10863879", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:05.516362+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:05.601871+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-10869584", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:05.603334+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:05.718083+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-10874207", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:05.719328+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:05.737767+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-10888166", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:05.739161+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:05.744393+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-10874264", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:05.745254+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:05.944533+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-10888881", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:05.945426+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:06.130983+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-10897986", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:06.132313+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:06.992638+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-10905291", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:06.993648+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:07.431661+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-10932646", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:07.432737+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:07.628812+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-10959509", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:07.630524+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:07.730089+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-10959599", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:07.731212+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:07.798656+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-10925458", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:07.799848+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:07.914847+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-10918256", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:07.917227+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:07.942845+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-10973388", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:07.944111+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:08.338970+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-10925443", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:08.340596+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:08.508940+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-10933522", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:08.510418+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:08.668034+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-10941532", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:08.669399+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:08.699942+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-10966589", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:08.700848+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:09.008703+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-10986967", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:09.009580+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:09.540015+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-11000114", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:09.541233+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:09.959579+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-10986978", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:09.960515+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:10.667918+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-11019977", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:10.668583+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:10.763489+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-11006815", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:10.764918+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:10.818599+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-11013391", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:10.819772+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:10.920046+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-11006816", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:10.921393+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:10.994188+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-11008742", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:10.995553+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:11.068860+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-11051666", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:11.070199+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:11.107064+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-11013392", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:11.108307+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:11.232294+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-11013393", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:11.233571+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:11.600793+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-11051667", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:11.601894+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:11.606102+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-11020779", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:11.606802+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:11.660187+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-11033169", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:11.661159+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:12.949385+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-11076686", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:12.950161+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:13.062015+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-11058277", "label": "reinstated", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:13.062993+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:13.133013+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-11109723", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:13.133589+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:13.136014+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-11129496", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:13.136428+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:13.459139+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-11083359", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:13.459828+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:13.634191+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-11067217", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:13.635723+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:13.666946+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-11066049", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:13.667434+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:13.832871+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-8321990", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:13.834435+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:14.336610+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-11071434", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:14.337269+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:14.579364+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-8312588", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:14.579865+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:14.610020+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-8332986", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:14.610434+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:14.673544+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-8336157", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:14.674264+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:15.162009+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-8338354", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:15.162516+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:15.544629+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-8343882", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:15.545197+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:15.667890+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-8359698", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:15.668495+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:15.816305+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-8343908", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:15.816905+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:15.956475+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-8341794", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:15.957634+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:16.144263+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-8356379", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:16.145486+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:16.561704+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-8342321", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:16.563071+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:16.782190+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-8365341", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:16.783780+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:17.318298+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-8375498", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:17.319793+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:17.548732+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-8381351", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:17.549791+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:17.683293+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-8404053", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:17.685653+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:17.692783+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-8376376", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:17.694056+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:17.702890+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-8397338", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:17.703903+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:18.250937+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-8407848", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:18.252268+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:18.343555+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-8402589", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:18.344815+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:18.562015+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-8434187", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:18.562552+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:18.567767+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-8402590", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:18.568177+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:18.835032+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-8438688", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:18.836968+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:18.897366+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-8409688", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:18.898671+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:19.308655+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-8425136", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:19.310013+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:20.309016+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-8449212", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:20.310512+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:20.518873+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-8438690", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:20.520986+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:20.576319+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-8468644", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:20.577678+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:20.741862+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-8449682", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:20.743444+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:20.843572+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-8443481", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:20.845277+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:20.976473+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-8460775", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:20.978366+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:20.997946+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-8505147", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:20.999203+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:21.048731+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-8533885", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:21.049959+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:21.670201+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-8485611", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:21.671827+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:21.737082+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-8501648", "label": "expired_nonpayment", "confidence": "high"}
+{"ts": "2026-11-07T13:27:21.738430+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:21.741295+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-8524350", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:21.742109+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:22.270544+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-8549694", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:22.271912+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:23.078694+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-8602220", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:23.081551+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:23.487188+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-8557360", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:23.489136+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:23.692721+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-8572795", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:23.693733+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:23.903247+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-8561245", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:23.904072+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:24.017157+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-8566997", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:24.018932+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:24.054745+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-8584300", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:24.055794+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:24.161869+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-8579121", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:24.163135+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:24.503109+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-8595884", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:24.504397+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:24.541249+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-8607397", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:24.542460+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:24.762927+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-8607400", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:24.764308+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:25.483713+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-8635732", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:25.484953+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:26.399065+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-8635736", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:26.400714+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:26.617691+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-8652263", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:26.618970+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:28.809482+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-8641112", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:28.811101+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:28.828822+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-8635735", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:28.830058+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:29.373169+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-8646144", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:29.374782+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:29.381175+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-8677543", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:29.382353+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:29.512605+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-8647606", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:29.514195+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:29.681797+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-8632410", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:29.683229+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:29.995424+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-8651761", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:29.996785+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:30.041183+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-8657515", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:30.042225+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:30.177590+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-8641311", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:30.178907+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:30.357645+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-8663782", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:30.359159+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:30.446725+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-8661600", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:30.448244+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:30.558516+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-8677547", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:30.559941+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:31.715704+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-8719972", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:31.716717+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:31.865463+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-8696028", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:31.867610+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:31.872215+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-8684619", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:31.872958+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:31.875995+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-8800092", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:31.876744+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:32.019144+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-8771428", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:32.020641+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:32.033514+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-8826487", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:32.038836+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:32.047389+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-8763192", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:32.050631+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:32.255944+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-8701238", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:32.256983+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:32.468323+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-8707505", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:32.469400+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:32.623940+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-8713745", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:32.625395+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:33.416096+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-8784504", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:33.416919+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:33.620864+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-8783472", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:33.622044+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:33.866618+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-8826467", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:33.867682+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:34.278644+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-8793831", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:34.279948+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:34.748649+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-8793832", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:34.749955+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:34.940383+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-8793834", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:34.941779+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:35.128893+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-9439550", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:35.130304+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:35.484618+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-9475104", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:35.485288+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:36.510613+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-9485896", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:36.514919+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:36.515583+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-9459046", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:36.516168+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:37.061227+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-9480384", "label": "reinstated", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:37.061735+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:37.341774+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-8778086", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:37.343485+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:37.669631+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-9498092", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:37.670920+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:37.971323+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-9498879", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:37.972589+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:39.253441+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-9526392", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:39.254093+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:39.701151+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-9532640", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:39.702480+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:39.905405+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-9439545", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:39.906673+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:39.913145+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-9539620", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:39.914238+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:40.205686+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-9487188", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:40.206944+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:40.443279+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-9560950", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:40.443909+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:40.666068+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-9492808", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:40.667375+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:40.689329+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-9492049", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:40.690351+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:41.325068+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-9604241", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:41.326257+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:41.844535+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-9572471", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:41.845611+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:41.897548+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-9615717", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:41.898631+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:43.021859+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-9609994", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:43.023259+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:43.460450+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-9630221", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:43.461683+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:43.920902+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-9580050", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:43.922345+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:43.969330+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-9622639", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:43.970528+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:44.708753+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-9510722", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:44.710157+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:44.755897+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-9629702", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:44.757029+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:45.066868+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-9622567", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:45.068129+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:47.896787+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-9609971", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:47.898091+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:48.751726+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-9655490", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:48.753151+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:51.620096+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-9622621", "label": "expired_nonpayment", "confidence": "high"}
+{"ts": "2026-11-07T13:27:51.622260+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:51.957833+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-9630215", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:51.959560+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:51.970527+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-9655492", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:51.971574+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:52.236398+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-9700198", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:52.237653+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:52.390046+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-9687133", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:52.391229+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:52.432165+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-9675209", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:52.433096+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:52.449999+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-9682688", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:52.451139+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:52.718015+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-9655491", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:52.718723+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:52.756950+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-9681789", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:52.757812+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:52.954226+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-9700192", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:52.955625+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:53.157945+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-9717394", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:53.159312+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:53.311542+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-9750385", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:53.313024+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:54.327718+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-9758925", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:54.329114+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:54.520995+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-9795266", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:54.522224+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:54.615511+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-9757007", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:54.616182+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:54.892336+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-9770094", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:54.893268+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:55.515386+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-9777128", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:55.520724+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:55.523277+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-9802583", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:55.524047+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:55.524456+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-9775490", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:55.525024+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:55.538697+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-9814303", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:55.539532+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:55.661383+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-9788702", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:55.662709+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:55.773581+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-9801520", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:55.774890+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:55.895614+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-9808123", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:55.896809+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:55.996768+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-9828753", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:55.997585+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:56.333575+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-9834919", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:56.334909+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:56.507407+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-9839943", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:56.508475+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:57.338334+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-9913566", "label": "expired_nonpayment", "confidence": "high"}
+{"ts": "2026-11-07T13:27:57.340293+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:57.436692+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-9848743", "label": "expired_nonpayment", "confidence": "high"}
+{"ts": "2026-11-07T13:27:57.437727+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:57.589743+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-9884419", "label": "expired_nonpayment", "confidence": "high"}
+{"ts": "2026-11-07T13:27:57.591060+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:58.267460+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-9918607", "label": "expired_nonpayment", "confidence": "high"}
+{"ts": "2026-11-07T13:27:58.269328+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:58.349957+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-9907460", "label": "expired_nonpayment", "confidence": "high"}
+{"ts": "2026-11-07T13:27:58.351294+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:58.377748+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-9925739", "label": "expired_nonpayment", "confidence": "high"}
+{"ts": "2026-11-07T13:27:58.379255+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:58.513333+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-9888824", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:58.514649+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:58.677761+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-9936799", "label": "expired_nonpayment", "confidence": "high"}
+{"ts": "2026-11-07T13:27:58.678261+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:58.913303+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-9936849", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:58.914307+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:59.002845+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-9930884", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:59.004141+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:59.065262+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-9936856", "label": "expired_nonpayment", "confidence": "high"}
+{"ts": "2026-11-07T13:27:59.066185+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:27:59.521643+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-9944257", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:27:59.522962+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:42:58.149924+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-9969366", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:42:58.165123+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:42:58.984934+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-9949559", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:42:58.986050+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:42:59.139089+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-9962056", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:42:59.139518+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:42:59.277894+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-9974381", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:42:59.278933+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:42:59.332788+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-9974424", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:42:59.333756+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:42:59.479261+00:00", "thread_id": "run-real-5", "stage": "status", "event": "assessed", "key": "US-9951502", "label": "expired_nonpayment", "confidence": "very_high"}
+{"ts": "2026-11-07T13:42:59.480231+00:00", "thread_id": "run-real-5", "stage": "verify_candidate", "event": "done"}
+{"ts": "2026-11-07T13:42:59.701770+00:00", "thread_id": "run-real-5", "stage": "rank", "event": "pool", "analysed": 8, "not_analysed": 199}
+{"ts": "2026-11-07T13:42:59.702220+00:00", "thread_id": "run-real-5", "stage": "rank", "event": "done"}
+{"ts": "2026-11-07T13:48:05.024923+00:00", "thread_id": "run-real-5", "stage": "technical", "event": "summarised", "key": "US-8826467", "powered": "non_powered", "method": "json_schema", "error": "Invalid json output: \nFor troubleshooting, visit: https://docs.langchain.com/oss/python/langchain/errors/OUTPUT_PARSING_FAILURE "}
+{"ts": "2026-11-07T13:54:18.219999+00:00", "thread_id": "run-real-5", "stage": "technical", "event": "summarised", "key": "US-8826487", "powered": "unclear", "method": "fallback", "error": "Invalid json output: \nFor troubleshooting, visit: https://docs.langchain.com/oss/python/langchain/errors/OUTPUT_PARSING_FAILURE "}
+{"ts": "2026-11-07T13:59:06.541054+00:00", "thread_id": "run-real-5", "stage": "technical", "event": "summarised", "key": "US-10065611", "powered": "non_powered", "method": "json_schema", "error": "Invalid json output: \nFor troubleshooting, visit: https://docs.langchain.com/oss/python/langchain/errors/OUTPUT_PARSING_FAILURE "}
+{"ts": "2026-11-07T14:01:59.201451+00:00", "thread_id": "run-real-5", "stage": "technical", "event": "summarised", "key": "US-10064481", "powered": "unclear", "method": "json_schema", "error": null}
+{"ts": "2026-11-07T14:06:19.174725+00:00", "thread_id": "run-real-5", "stage": "technical", "event": "summarised", "key": "US-10052665", "powered": "unclear", "method": "json_schema", "error": null}
+{"ts": "2026-11-07T14:08:57.235808+00:00", "thread_id": "run-real-5", "stage": "technical", "event": "summarised", "key": "US-10052751", "powered": "non_powered", "method": "json_schema", "error": "Invalid json output: \nFor troubleshooting, visit: https://docs.langchain.com/oss/python/langchain/errors/OUTPUT_PARSING_FAILURE "}
+{"ts": "2026-11-07T14:14:21.968076+00:00", "thread_id": "run-real-5", "stage": "technical", "event": "summarised", "key": "US-8800092", "powered": "unclear", "method": "fallback", "error": "Invalid json output: \nFor troubleshooting, visit: https://docs.langchain.com/oss/python/langchain/errors/OUTPUT_PARSING_FAILURE "}
+{"ts": "2026-11-07T14:18:45.108128+00:00", "thread_id": "run-real-5", "stage": "technical", "event": "summarised", "key": "US-10041219", "powered": "powered", "method": "json_schema", "error": null}
+{"ts": "2026-11-07T14:18:45.110841+00:00", "thread_id": "run-real-5", "stage": "analyse", "event": "done"}
+{"ts": "2026-11-07T14:25:34.983432+00:00", "thread_id": "run-real-5", "stage": "screening", "event": "scored", "scored": 7, "shortlisted": 2}
+{"ts": "2026-11-07T14:25:34.984747+00:00", "thread_id": "run-real-5", "stage": "score", "event": "done"}
+{"ts": "2026-11-07T14:25:35.368325+00:00", "thread_id": "run-real-5", "stage": "review", "event": "done"}
+{"ts": "2026-11-07T14:39:13.552514+00:00", "thread_id": "run-real-5", "stage": "generation", "event": "bundle_written", "candidates": 5, "shortlist": 2}
+{"ts": "2026-11-07T14:39:13.556902+00:00", "thread_id": "run-real-5", "stage": "bundle", "event": "done"}
+{"ts": "2026-11-07T14:39:13.805346+00:00", "thread_id": "run-real-5", "stage": "generation", "event": "files_written", "report": "report.docx", "deck": "deck.pptx", "attempt": 1}
+{"ts": "2026-11-07T14:39:13.805767+00:00", "thread_id": "run-real-5", "stage": "generate", "event": "done"}
+{"ts": "2026-11-07T14:39:15.276909+00:00", "thread_id": "run-real-5", "stage": "validation", "event": "checked", "ok": true, "failed": "none", "pages": null}
+{"ts": "2026-11-07T14:39:15.277628+00:00", "thread_id": "run-real-5", "stage": "validate", "event": "done"}
+{"ts": "2026-11-07T14:39:15.390401+00:00", "thread_id": "run-real-5", "stage": "run", "event": "completed"}

@@ -1,98 +1,123 @@
 {
   "plan": {
     "search_terms": [
-      "mop",
-      "brush",
-      "squeegee",
-      "scraper",
-      "dust pan",
-      "hand-held",
-      "manual",
-      "household",
-      "cleaning implement"
+      "Manual cleaning tool",
+      "Hand-operated mop",
+      "Household brush",
+      "Window squeegee",
+      "Floor scraper",
+      "Dust pan assembly",
+      "Cleaning implement",
+      "Non-powered cleaner"
     ],
     "cpc_codes": [
-      "A47L (Domestic cleaning)",
-      "A46B (Brushes)",
-      "B25G (Handles for hand tools)"
+      "A47L (Domestic Cleaning or Laundering)",
+      "A47L 13/00 (Cleaning implements)",
+      "A47L 13/10 (Mops)",
+      "A47L 13/16 (Brushes)",
+      "A47L 13/20 (Squeegees)",
+      "A47L 13/22 (Dust pans)",
+      "A46B (Brushes)"
     ],
     "exclusion_terms": [
-      "electric",
-      "motor",
-      "battery",
-      "powered",
-      "electronic",
-      "robotic",
-      "automated",
-      "vacuum",
-      "machine"
+      "Electric",
+      "Motor",
+      "Battery",
+      "Powered",
+      "Electronic",
+      "Ultrasonic",
+      "Robotic",
+      "Automated",
+      "Corded"
     ],
     "sources": [
-      "USPTO Official Gazette notices",
       "BigQuery PatentsView tables",
+      "USPTO Official Gazette notices",
       "EPO OPS legal events"
     ],
     "screening_criteria": [
-      "US jurisdiction only",
-      "Active grant status",
-      "Manual operation confirmed",
-      "Household scale",
-      "No electronics",
-      "Small manufacturer feasibility"
+      "Jurisdiction: US Grants and Applications only",
+      "Status: Active or Expired (for freedom to operate)",
+      "Mechanism: Purely mechanical, no circuitry",
+      "Materials: Common plastics, wood, metal, rubber",
+      "Complexity: Suitable for small-scale manufacturing",
+      "Date Range: Last 20 years for utility patents",
+      "Candidate Limit: Maximum two for technical/legal review"
     ],
     "output_structure": [
       "Patent Number",
       "Title",
       "Assignee",
       "Status",
-      "CPC Class",
-      "Relevance Score",
-      "Reason for Selection"
+      "Key Claims Summary",
+      "Manufacturing Complexity",
+      "Risk Assessment"
     ]
   },
   "technical": {
     "US-10041219": {
-      "summary": "The patent describes \"A hand scraper system for waste removal comprising: a bag; a pair of scrapers\". Each scraper includes \"a panel, a strap, at least one hazard detection unit, a power source, a microprocessor and an alert device\". The system is designed such that \"the power source being electrically connected to the at least one hazard detection unit and the microprocessor\".",
-      "mechanism": "non_powered",
+      "summary": "The patent describes a reusable hand scraper system for waste removal, comprising a bag and a pair of scrapers. Each scraper has a panel with surfaces and a peripheral edge, a strap for securing the scraper to the hand, and a hazard detection unit. The bag is positioned over animal waste, and the scrapers are used to push the waste into the bag, which is then closed with a closure. The system includes various sensors for detecting hazards and a strap mechanism to secure the scrapers to the hands.",
+      "mechanism": "The system uses a bag and a pair of scrapers to urge animal waste into the bag. The scrapers are manipulated by the user to push the waste into the bag, which is then closed using a closure.",
       "key_claim_elements": [
-        "A hand scraper system for waste removal comprising: a bag; a pair of scrapers",
-        "each of the pair of scrapers comprising a panel, a strap, at least one hazard detection unit, a power source, a microprocessor and an alert device",
-        "the power source being electrically connected to the at least one hazard detection unit and the microprocessor"
+        "A hand scraper system for waste removal comprising a bag and a pair of scrapers.",
+        "Each scraper has a panel with a first surface, a second surface, and a peripheral edge, with the upper side of the peripheral edge configured to have a user's hand positioned thereon and the lower side configured to urge animal waste into the bag.",
+        "Each scraper also has a strap coupled to the first surface, separated from the upper side toward the lower side, and wrapping around the panel to extend along the second surface, configured to be wrapped around the hand.",
+        "The panel comprises a plurality of finger indentations traversing into the second surface.",
+        "The bag is configured to be positioned over animal waste, with a closure coupled to the bag to retain the waste inside.",
+        "The bag comprises a bottom wall and a peripheral wall extending upwardly from the bottom wall, with the peripheral wall having an outer surface and a distal edge defining an opening into the bag.",
+        "The closure is positioned on the outer surface and is substantially coextensive with the distal edge, with a pair of ends configured to be tied together to close the opening.",
+        "The hazard detection unit is positioned proximate the lower side of the panel and can be removably attached to the panel.",
+        "The strap comprises a first end and a second end, each being matable, and is configured to retain the panel on the hand.",
+        "The strap may include a first coupler and a second coupler, which are complementary and configured to retain the panel on the hand."
       ],
-      "implementation_unknowns": [],
+      "implementation_unknowns": [
+        "The exact type of hazard detection unit is not specified, as it can be a toxic gas sensor, chemical vapor sensor, explosives detection sensor, radiation sensor, or bio sensor."
+      ],
       "powered": "powered",
       "evidence_ids": [
+        "157761f4df9f",
+        "887eacf4c249",
+        "20a9bdc5904e",
+        "4474fb9def94",
         "725cea55b6f8"
       ],
       "quotes": [
-        "A hand scraper system for waste removal comprising: a bag; a pair of scrapers",
-        "each of the pair of scrapers comprising a panel, a strap, at least one hazard detection unit, a power source, a microprocessor and an alert device",
-        "the power source being electrically connected to the at least one hazard detection unit and the microprocessor"
+        "the bag being configured to be positioned over an animal waste",
+        "each of the pair of scrapers being configured to be manipulated to urge the animal waste into the bag in response to the bag being positioned over the animal waste",
+        "the panel comprising a plurality of finger indentations",
+        "the closure being coupled to the bag",
+        "the closure being configured to retain the animal waste in the bag",
+        "the hazard detection unit being positioned proximate the lower side",
+        "the strap being configured to retain the panel on the hand"
       ]
     },
     "US-10052665": {
-      "summary": "The patent claims a cleaning device configured to selectively dispense a fluid to a surface being cleaned. The device includes a housing where the outer portion is \"configured to be grasped and manipulated by a user during a cleaning procedure\" [9f5af1b5d8ca]. It comprises \"a dispenser comprising a porous or fluid permeable material\" [9f5af1b5d8ca] and \"a wiper removably attached to the wiper portion of the outer housing portion\" [9f5af1b5d8ca]. The wiper is repositionable \"to enable a different portion of the outer fabric layer to comprise the wiping surface\" [9f5af1b5d8ca]. No motor, battery, or power source is claimed.",
-      "mechanism": "non_powered",
+      "summary": "The patent describes a cleaning device designed to dispense fluid onto a surface and then wipe it off. The device includes a housing with an outer and inner portion, a dispenser with a porous material for delivering fluid, and a wiper with a stiff inner core and an outer fabric layer. The wiper can be repositioned to use different parts of the fabric. The device can also include caps for the dispenser and wiper. The dispenser and wiper have specific dimensions for their protruding portions. Another embodiment describes a housing with separate cavities for the dispenser and wiper, with the wiper core being slightly smaller than its cavity to allow for easy positioning.",
+      "mechanism": "The cleaning device works by having a dispenser that selectively delivers fluid to a surface being cleaned and a wiper that wipes the dispensed fluid from the surface. The wiper can be repositioned to use different portions of the outer fabric layer.",
       "key_claim_elements": [
-        "housing comprising an outer housing portion and an inner housing portion",
-        "dispenser comprising a porous or fluid permeable material",
-        "wiper removably attached to the wiper portion of the outer housing portion"
+        "A cleaning device configured to selectively dispense a fluid to a surface being cleaned, the cleaning device comprising: a housing comprising an outer housing portion and an inner housing portion, the outer housing portion configured to be grasped and manipulated by a user during a cleaning procedure, the outer housing portion comprising a wiper portion and an inner cavity, the inner housing portion comprising a dispenser cavity; wherein at least a portion of the inner housing portion is positioned within the inner cavity of the outer housing portion; a dispenser comprising a porous or fluid permeable material, the dispenser positioned at least partially within the dispenser cavity of the inner housing portion and protruding at least partially from an opening of the dispenser cavity; wherein the dispenser comprises a dispensing surface configured to contact a surface being cleaned and to selectively deliver fluid thereto; and a wiper removably attached to the wiper portion of the outer housing portion, the wiper comprising an inner core and an outer fabric layer, the inner core comprising a material that is stiffer than the outer fabric layer, a portion of the outer fabric layer comprising a wiping surface, the wiping surface configured to wipe dispensed fluid from a surface being cleaned, wherein the wiper is repositionable relative to the wiper portion of the outer housing portion to enable a different portion of the outer fabric layer to comprise the wiping surface.",
+        "A cleaning device configured to selectively dispense a fluid to a surface being cleaned, the cleaning device comprising: a housing comprising a first end and a second end, the first end comprising a dispenser cavity and the second end comprising a wiper cavity; a dispenser positioned at least partially within the dispenser cavity, the dispenser comprising a porous or fluid permeable material; wherein the dispenser comprises a dispensing portion at least partially protruding from the dispenser cavity, the dispensing portion configured to contact a surface being cleaned and to selectively deliver fluid thereto; and a wiper removably positioned at least partially within the wiper cavity, the wiper comprising a wiper core wrapped in at least one layer of fabric; wherein the wiper core and the wiper cavity each comprise a thickness, and the thickness of the wiper cavity is greater than the thickness of the wiper core."
       ],
-      "implementation_unknowns": [],
-      "powered": "non_powered",
+      "implementation_unknowns": [
+        "The claims do not specify if the device is powered or non-powered."
+      ],
+      "powered": "unclear",
       "evidence_ids": [
-        "9f5af1b5d8ca"
+        "31b197301214",
+        "08b14e37b541",
+        "feb505fa551f",
+        "67b1dd76694c",
+        "9f5af1b5d8ca",
+        "818679383999"
       ],
       "quotes": [
-        "configured to be grasped and manipulated by a user during a cleaning procedure",
-        "a dispenser comprising a porous or fluid permeable material",
-        "a wiper removably attached to the wiper portion of the outer housing portion",
-        "to enable a different portion of the outer fabric layer to comprise the wiping surface"
+        "A cleaning device configured to selectively dispense a fluid to a surface being cleaned, the cleaning device comprising: a housing comprising an outer housing portion and an inner housing portion, the outer housing portion configured to be grasped and manipulated by a user during a cleaning procedure, the outer housing portion comprising a wiper portion and an inner cavity, the inner housing portion comprising a dispenser cavity; wherein at least a portion of the inner housing portion is positioned within the inner cavity of the outer housing portion; a dispenser comprising a porous or fluid permeable material, the dispenser positioned at least partially within the dispenser cavity of the inner housing portion and protruding at least partially from an opening of the dispenser cavity; wherein the dispenser comprises a dispensing surface configured to contact a surface being cleaned and to selectively deliver fluid thereto; and a wiper removably attached to the wiper portion of the outer housing portion, the wiper comprising an inner core and an outer fabric layer, the inner core comprising a material that is stiffer than the outer fabric layer, a portion of the outer fabric layer comprising a wiping surface, the wiping surface configured to wipe dispensed fluid from a surface being cleaned, wherein the wiper is repositionable relative to the wiper portion of the outer housing portion to enable a different portion of the outer fabric layer to comprise the wiping surface.",
+        "A cleaning device configured to selectively dispense a fluid to a surface being cleaned, the cleaning device comprising: a housing comprising a first end and a second end, the first end comprising a dispenser cavity and the second end comprising a wiper cavity; a dispenser positioned at least partially within the dispenser cavity, the dispenser comprising a porous or fluid permeable material; wherein the dispenser comprises a dispensing portion at least partially protruding from the dispenser cavity, the dispensing portion configured to contact a surface being cleaned and to selectively deliver fluid thereto; and a wiper removably positioned at least partially within the wiper cavity, the wiper comprising a wiper core wrapped in at least one layer of fabric; wherein the wiper core and the wiper cavity each comprise a thickness, and the thickness of the wiper cavity is greater than the thickness of the wiper core."
       ]
     },
     "US-10052751": {
-      "summary": "The patent discloses \"A height adjustment lock system comprising: a braking cylinder for receiving an upper pole section and a lower pole section\" [8dd7d8547c94]. The system utilizes \"the locking handle comprises a brake shoe pusher that protrudes inward from the generally cylindrical inner surface and is capable of applying force to the brake shoe when the locking handle is moved downward toward the lower pole section\" [8dd7d8547c94]. The invention may be embodied in \"A height adjustable cleaning device comprising: a pole comprising a lower pole section and an upper pole section; a cleaning head attached to the lower pole section\" [8dd7d8547c94].",
-      "mechanism": "manual",
+      "summary": "Patent US-10052751 describes a height adjustment lock system and a height adjustable cleaning device. The system includes a braking cylinder, brake shoe, and locking handle. The handle applies force to the brake shoe to lock the pole sections. It is manually operated.",
+      "mechanism": "The device uses a braking cylinder with a brake shoe and a locking handle. The handle has a pusher that applies force to the brake shoe to retain the pole section.",
       "key_claim_elements": [
         "braking cylinder",
         "brake shoe",
@@ -102,106 +127,143 @@
       "implementation_unknowns": [],
       "powered": "non_powered",
       "evidence_ids": [
-        "8dd7d8547c94"
+        "e2b395481a81",
+        "3d334f31d2ba",
+        "b6a339c2a300",
+        "bc40cab90290",
+        "775c5279027b",
+        "8dd7d8547c94",
+        "ecd1d98be25c"
       ],
       "quotes": [
         "A height adjustment lock system comprising: a braking cylinder for receiving an upper pole section and a lower pole section",
         "the locking handle comprises a brake shoe pusher that protrudes inward from the generally cylindrical inner surface and is capable of applying force to the brake shoe when the locking handle is moved downward toward the lower pole section",
-        "A height adjustable cleaning device comprising: a pole comprising a lower pole section and an upper pole section; a cleaning head attached to the lower pole section"
+        "A height adjustable cleaning device comprising: a pole comprising a lower pole section and an upper pole section",
+        "the frictional surface of the brake shoe comprises a soft durometer material",
+        "further comprising a stop plug capable of coupling to the lower pole section",
+        "the braking cylinder further comprises a stop flange for halting the linear travel of the lower pole section into the braking cylinder"
       ]
     },
     "US-10064481": {
-      "summary": "The patent claims a cleaning element for a textile machine comprising a skeleton with support rings, a spiked lattice, and a rubber sealing compound, which forms a cleaning brush when fastened to a base body.",
-      "mechanism": "Mechanical cleaning via a spiked lattice mounted on a skeleton with support rings, secured by rubber sealing compound",
+      "summary": "The claims describe a textile-machine cleaning brush element that is fastened to a cylindrical base body. Claim 1 defines a skeleton of concentric support rings and longitudinal webs, a spiked lattice over the skeleton, and a rubber sealing compound connecting them, with a cylindrical hollow element formed by a tube component or rubber inner surface. Dependent claims add interlocking ends, coupling pieces, recessed or raised inner surfaces, plug-in skeleton components, a polyamide skeleton, and U-shaped wire hooks. An independent claim describes a brush comprising a shaft and the cleaning element. The claims do not specify a motor, battery, heater, electric pump, or other power source, so powered status is unclear.",
+      "mechanism": "A modular brush element is assembled over a cylindrical base body using a ring-and-web skeleton, spiked lattice, and rubber sealing compound; adjacent elements can be rotationally locked by interlocking ends or a coupling piece to form a continuous cleaning brush.",
       "key_claim_elements": [
-        "A cleaning element for a textile machine, the cleaning element intended for fastening onto a cylindrical base body to form a cleaning brush for use in the textile machine",
-        "a skeleton, the skeleton comprising a plurality of support rings arranged at intervals concentric with a longitudinal axis of the cleaning element",
-        "a spiked lattice applied over the skeleton",
-        "a rubber sealing compound connecting the skeleton to the spiked lattice",
-        "A cleaning brush for use in a textile machine, comprising: a shaft; and a cleaning element according to"
+        "cleaning element intended for fastening onto a cylindrical base body to form a cleaning brush for use in the textile machine",
+        "skeleton comprising a plurality of support rings arranged at intervals concentric with a longitudinal axis",
+        "spiked lattice applied over the skeleton",
+        "rubber sealing compound connecting the skeleton to the spiked lattice",
+        "cylindrical hollow element having an inner surface facing the longitudinal axis",
+        "interlocking profile or coupling piece for rotationally locked engagement between adjacent cleaning elements",
+        "inner surface may include recesses or raised areas extending in the direction of the longitudinal axis",
+        "skeleton may be injection-molded polyamide or comprised of skeleton components with plug-in connections",
+        "spiked lattice may comprise fabric or web with U-shaped wire hooks",
+        "independent claim recites a cleaning brush comprising a shaft and a cleaning element"
       ],
-      "implementation_unknowns": [
-        "unclear"
-      ],
+      "implementation_unknowns": [],
       "powered": "unclear",
       "evidence_ids": [
-        "4699abc048b9"
+        "768dda5c7846",
+        "69dab86cde3a",
+        "1d3ebbe0b2e8"
       ],
       "quotes": [
         "A cleaning element for a textile machine, the cleaning element intended for fastening onto a cylindrical base body to form a cleaning brush for use in the textile machine",
-        "a skeleton, the skeleton comprising a plurality of support rings arranged at intervals concentric with a longitudinal axis of the cleaning element",
-        "a spiked lattice applied over the skeleton",
-        "a rubber sealing compound connecting the skeleton to the spiked lattice",
+        "the skeleton comprising a plurality of support rings arranged at intervals concentric with a longitudinal axis of the cleaning element",
         "A cleaning brush for use in a textile machine, comprising: a shaft; and a cleaning element according to"
       ]
     },
     "US-10065611": {
-      "summary": "Windshield cleaning implement. First independent claim: 1. A windshield cleaning implement comprising: an elongated shaft having a proximal end and a distal end, wherein said shaft is elongated, arcuate and constructed with a resilient but flexible material, a cleaning head attached to the distal end of said shaft, said cleaning head having a front face ",
+      "summary": "The patent describes a windshield cleaning implement with an arcuate, flexible shaft and a cleaning head that can simultaneously hold a sponge, a scrubbing brush, and a wiper blade. These elements are removably attached to the cleaning head via tubular slots, allowing the user to dampen, scrub, and scrape a windshield in one motion. The device is operated manually via a handle at the proximal end of the shaft.",
+      "mechanism": "The windshield cleaning implement has an arcuate, flexible shaft with a cleaning head at its distal end. The cleaning head features multiple tubular slots on its front face, allowing for the removable attachment of a sponge, a wiper blade, and a scrubbing brush. The sponge, scrubbing brush, and wiper blade can be simultaneously used to dampen, scrub, and scrape a windshield with a single swipe. A handle at the proximal end of the shaft enables the user to apply force, pressing the attached cleaning elements against the windshield.",
+      "key_claim_elements": [
+        "an elongated shaft having a proximal end and a distal end, wherein said shaft is elongated, arcuate and constructed with a resilient but flexible material",
+        "a cleaning head attached to the distal end of said shaft, said cleaning head having a front face and a rear face",
+        "said cleaning head including a plurality of juxtaposed, tubular slots on the front face",
+        "a sponge having a projection that is slidably receivable within one of said tubular slots to removably attach said sponge to the front face of said cleaning head",
+        "a wiper blade having a projection that is slidably receivable within one of said tubular slots to removably attach said wiper blade to the front face of said cleaning head",
+        "a scrubbing brush having a projection that is slidably receivable within one of said tubular slots to removably attach said scrubbing brush to the front face of said cleaning head, between said sponge and said wiper blade",
+        "a handle at the proximal end of said shaft whereby, when a user applies a predetermined amount of force to the handle, said sponge, said scrubbing brush and said wiper blade are simultaneously forced against a windshield"
+      ],
+      "implementation_unknowns": [
+        "unclear"
+      ],
+      "powered": "non_powered",
+      "evidence_ids": [
+        "b322b6500ab7",
+        "5e65320b51c8",
+        "37827bcc0933",
+        "08cbcf4ed47e",
+        "055a26752763",
+        "22ca5dba3b75",
+        "1ef4595eef13"
+      ],
+      "quotes": [
+        "an elongated shaft having a proximal end and a distal end, wherein said shaft is elongated, arcuate and constructed with a resilient but flexible material",
+        "a cleaning head attached to the distal end of said shaft, said cleaning head having a front face and a rear face",
+        "said cleaning head including a plurality of juxtaposed, tubular slots on the front face",
+        "a sponge having a projection that is slidably receivable within one of said tubular slots to removably attach said sponge to the front face of said cleaning head",
+        "a wiper blade having a projection that is slidably receivable within one of said tubular slots to removably attach said wiper blade to the front face of said cleaning head",
+        "a scrubbing brush having a projection that is slidably receivable within one of said tubular slots to removably attach said scrubbing brush to the front face of said cleaning head, between said sponge and said wiper blade",
+        "a handle at the proximal end of said shaft whereby, when a user applies a predetermined amount of force to the handle, said sponge, said scrubbing brush and said wiper blade are simultaneously forced against a windshield"
+      ]
+    },
+    "US-8800092": {
+      "summary": "Apparatus to remove a disposable cloth from a hand operated flat mop through a single trigger mechanism without having to touch the disposable cloth. First independent claim: 1. A flat mop having a handle and apparatus for retaining the handle to a top plate of the flat mop, the flat mop comprising: a. a top plate including a first cover member and a second cover member, a bottom surface further retaining a pair of spaced apart steel pins which are molded into the bottom",
       "mechanism": "Not summarised; the model was unavailable.",
       "key_claim_elements": [
-        "1. A windshield cleaning implement comprising: an elongated shaft having a proximal end and a distal end",
-        "wherein said shaft is elongated",
-        "arcuate and constructed with a resilient but flexible material",
-        "a cleaning head attached to the distal end of said shaft",
-        "said cleaning head having a front face and a rear face"
+        "1. A flat mop having a handle and apparatus for retaining the handle to a top plate of the flat mop",
+        "the flat mop comprising: a. a top plate including a first cover member and a second cover member",
+        "a bottom surface further retaining a pair of spaced apart steel pins which are molded into the bottom surface respectively aligned with the first cover and the second cover",
+        "b. a push plate having a top surface which contains thereon along a first side a multiplicity of groups of spaced apart spikes and adjacent an opposite side of the push plate a corresponding multiplicity of groups of spaced apart spikes",
+        "the push plate also has four spaced apart flat housing members on the top surface of the push plate and four corresponding flat housing members on the bottom of the push plate"
       ],
       "implementation_unknowns": [
         "Needs a manual read of the full claims and drawings."
       ],
       "powered": "unclear",
       "evidence_ids": [
-        "22ca5dba3b75"
+        "dafe67844e99",
+        "22ae38d9535a",
+        "355a8cd83634",
+        "f098bceacb62",
+        "0cb5ffae9dd2",
+        "a1799912d88d",
+        "dab24a31a6ea"
       ],
       "quotes": []
     },
-    "US-8800092": {
-      "summary": "The patent claims a hand-operated flat mop apparatus featuring a trigger mechanism to release a disposable cloth without manual contact. The device comprises a top plate, a push plate with spikes or hooks, a mechanical plate, linkages, ratchet collars, and compression springs. Activating the trigger allows spring force to move the push plate, releasing the cloth.",
-      "mechanism": "Mechanical trigger mechanism utilizing compression springs and linkages to release cloth",
-      "key_claim_elements": [
-        "A flat mop having a handle and apparatus for retaining the handle to a top plate of the flat mop",
-        "a top plate including a first cover member and a second cover member",
-        "a push plate having a top surface which contains thereon along a first side a multiplicity of groups of spaced apart spikes",
-        "a mechanical plate with openings to receive the pair of ratchet collars and a pair of spring housings",
-        "a trigger mechanism",
-        "a first compression spring and a second compression spring"
-      ],
-      "implementation_unknowns": [],
-      "powered": "non_powered",
-      "evidence_ids": [
-        "dab24a31a6ea"
-      ],
-      "quotes": [
-        "A flat mop having a handle and apparatus for retaining the handle to a top plate of the flat mop",
-        "when the trigger is activated, a downward force of the springs cause the push plate to move away from the mechanical plate and the micro-fiber cloth is released from the spikes and is released",
-        "when the trigger is activated, a downward force of the springs cause the push plate to move away from the mechanical plate and the non-woven cloth is pulled away from the hook retaining members and is released"
-      ]
-    },
     "US-8826467": {
-      "summary": "The claimed invention is \"A glove adapted to absorb and retain liquid\" [31153aaae958]. It comprises \"a base layer being fashioned for receiving a user's hand\" and \"a storage layer, the storage layer comprising an inner side attached to the exterior side of the base layer and an exterior side opposite the inner side, the storage layer being absorbent and able to retain and subsequently dispense fluid\" [31153aaae958]. The device includes \"an application layer attached to the storage layer\" wherein \"mechanisms adapted to provide removable attachment\" such as \"a hook-and-loop fastener\" are used [31153aaae958]. Embodiments may include \"a sleeve of the glove with a length extending substantially beyond the wrist of a user\" [31153aaae958]. Materials specified include configurations where \"the synthetic rubber is nitrile\" [31153aaae958].\n\n**Power Status:**\nnon_powered\n\n**Evidence IDs:**\n31153aaae958",
+      "summary": "The patent describes a glove designed to absorb and retain liquid, featuring a base layer for the user's hand, an absorbent storage layer, an attachment layer with mechanisms for removable attachment, and an application layer with corresponding mechanisms. The storage layer has a discontinuous surface with openings that allow fluid communication between the storage layer and the application layer. The glove may include a sleeve extending beyond the wrist with a fold to hold liquid, and the storage layer may be limited to the palm and finger area. The base layer can be made from synthetic rubber, such as nitrile.",
       "mechanism": "non_powered",
       "key_claim_elements": [
-        "A glove adapted to absorb and retain liquid",
-        "a base layer being fashioned for receiving a user's hand",
-        "a storage layer, the storage layer comprising an inner side attached to the exterior side of the base layer and an exterior side opposite the inner side, the storage layer being absorbent and able to retain and subsequently dispense fluid",
-        "an application layer attached to the storage layer",
-        "mechanisms adapted to provide removable attachment",
-        "a hook-and-loop fastener",
-        "a sleeve of the glove with a length extending substantially beyond the wrist of a user",
-        "the synthetic rubber is nitrile"
+        "A glove adapted to absorb and retain liquid, comprising a base layer for receiving a user's hand, a storage layer attached to the base layer that is absorbent and able to retain and subsequently dispense fluid, an attachment layer with mechanisms for removable attachment, and an application layer with corresponding mechanisms for removable attachment.",
+        "The storage layer has a discontinuous surface with row portions defining openings that enable fluid communication between the storage layer and the application layer.",
+        "The mechanisms on the inner side of the application layer and the exterior side of the attachment layer may comprise a hook-and-loop fastener.",
+        "The glove may include a sleeve extending beyond the wrist of a user, with a fold at the end of the sleeve to hold liquid.",
+        "The storage layer may be provided only around the palm and finger area of the glove.",
+        "The base layer may be made from up to 100% synthetic rubber, such as nitrile."
       ],
       "implementation_unknowns": [],
       "powered": "non_powered",
       "evidence_ids": [
-        "31153aaae958"
+        "fdfbbae71692",
+        "ec69b3a5b56f",
+        "9814cec58749",
+        "ac9f53767a33",
+        "966d9560ec5d",
+        "31153aaae958",
+        "d71ff172cc26"
       ],
       "quotes": [
-        "A glove adapted to absorb and retain liquid",
-        "a base layer being fashioned for receiving a user's hand",
-        "a storage layer, the storage layer comprising an inner side attached to the exterior side of the base layer and an exterior side opposite the inner side, the storage layer being absorbent and able to retain and subsequently dispense fluid",
-        "an application layer attached to the storage layer",
-        "mechanisms adapted to provide removable attachment",
-        "a hook-and-loop fastener",
+        "A glove adapted to absorb and retain liquid, comprising: a base layer being fashioned for receiving a user's hand",
+        "the storage layer being absorbent and able to retain and subsequently dispense fluid",
+        "the attachment layer forms a discontinuous surface on the storage layer and defines a plurality of row portions, wherein adjacent row portions of the attachment layer define openings such that the plurality of row openings alternates between rows of the attachment layer and rows of the openings",
+        "the mechanisms on the inner side of the application layer correspond to the mechanisms on the exterior side of the attachment layer to allow interchangeability of different types of the application layer",
+        "the mechanisms on the inner side of the application layer and the mechanisms on the exterior side of the attachment layer comprise a hook-and-loop fastener",
         "a sleeve of the glove with a length extending substantially beyond the wrist of a user",
+        "a portion of the sleeve at an end further from the glove is folded back in an outwards direction creating a fold such that at least a quantity of liquid flowing from the glove toward the sleeve is held in the fold",
+        "the storage layer is provided only around a palm and finger area of the glove",
+        "the base layer is made from up to 100% synthetic rubber",
         "the synthetic rubber is nitrile"
       ]
     },
@@ -219,118 +281,166 @@
       ],
       "powered": "unclear",
       "evidence_ids": [
-        "1f3ca4225097"
+        "2d487ce79662",
+        "98851d038197",
+        "63b93584aed9",
+        "7b5a8ab08f5b",
+        "63db8fcedd72",
+        "1f3ca4225097",
+        "1f123e64172a"
       ],
       "quotes": []
     }
   },
   "opportunity": {
     "US-10052665": {
-      "commercial_relevance": 4,
+      "commercial_relevance": 3,
       "engineering_effort": 3,
       "applications": [
-        "Assessment of Expired Patent US-10052665"
+        "Repositionable wiper hand-cleaning tool",
+        "Fluid-dispensing microfiber wipe",
+        "Refillable surface cleaning module",
+        "Compact spray-and-wipe device for floors or windows"
       ],
       "challenges": [
-        "Confirming absolute expiration status across all jurisdictions",
-        "Ensuring no active continuations or divisionals exist"
+        "Designing a leak-resistant fluid path without powered pumps",
+        "Selecting porous dispenser material with repeatable flow",
+        "Retaining and repositioning a fabric wiper around a stiff core",
+        "Avoiding mold cavities and tolerance issues for wiper core fit",
+        "Keeping assembly simple for a small non-electronic manufacturer"
       ],
-      "rationale": "The patent covers a manual cleaning device configured to dispense fluid and wipe surfaces, aligning directly with the intended product category of non-powered household cleaning tools [9f5af1b5d8ca]. The claims describe a housing grasped by a user and a wiper removably attached to the outer housing portion, which matches the design constraints for manual mops or scrubbers [9f5af1b5d8ca]. The inclusion of a dispenser with porous material suggests a specific mechanism for fluid delivery that is commercially desirable in modern cleaning tools [9f5af1b5d8ca]. Engineering effort is moderate as the device requires no motor, battery, or power source, but does involve mechanical design for fluid dispensing and repositionable wiper attachment [9f5af1b5d8ca]. Regarding maintenance fees, the owner's decision to stop payments usually indicates the patent was worth little to them. This does apply to a new entrant in terms of reduced legal risk, as the technology is likely in the public domain. However, the low value to the original owner may not apply to a new entrant who can integrate these features into a broader product line where fluid dispensing and reversible wipers are standard consumer expectations, providing value through product completeness rather than exclusive monopoly rights.",
+      "rationale": "The patent fits the intended manual household cleaning category because it combines a fluid dispenser with a wiping surface, and the disclosed features such as a porous fluid element, stiff-core fabric wiper, repositionable wiper, and simple housing cavities can be implemented without electronics. Its commercial relevance is moderate rather than high because the core idea is functionally straightforward and likely not unique enough to carry a product line by itself. Engineering effort is moderate because a small manufacturer would need to solve fluid storage, porous dispensing, wiper retention, and replacement or repositioning, but does not need complex electronics or precision manufacturing. The maintenance-fee lapse is a meaningful signal that the owner did not treat this as a high-value standalone asset, so it should not be viewed as a blocking risk or a premium differentiator. That signal may not fully apply to a new entrant because the patent is now expired and can be used freely, and a small maker could use the disclosed structure as one feature in a broader product, a refill system, or a niche customer need that the original owner did not prioritize.",
       "evidence_ids": [
-        "9f5af1b5d8ca"
+        "31b197301214",
+        "08b14e37b541",
+        "feb505fa551f",
+        "67b1dd76694c",
+        "9f5af1b5d8ca",
+        "818679383999"
       ]
     },
     "US-10052751": {
-      "commercial_relevance": 4,
+      "commercial_relevance": 3,
       "engineering_effort": 3,
       "applications": [
-        "Assessment of Expired Patent US-10052751"
+        "patent_id",
+        "US-10052751"
       ],
       "challenges": [
-        "Evaluation of Commercial Relevance",
-        "Evaluation of Engineering Effort",
-        "Analysis of Maintenance Fee Status"
+        "status",
+        "expired_nonpayment"
       ],
-      "rationale": "The patent discloses a height adjustment lock system specifically for cleaning devices comprising a pole and cleaning head [8dd7d8547c94]. This aligns directly with the intended product category of manual cleaning tools like mops. The mechanism involves a braking cylinder and locking handle with a brake shoe pusher [8dd7d8547c94], offering a specific mechanical solution for pole adjustment common in this category. As the patent is expired due to nonpayment, the technology is in the public domain, removing licensing barriers for a small manufacturer. The original owner's decision to stop paying fees suggests the specific implementation may not have provided sufficient competitive advantage or margin to justify the cost at their scale. However, for a new entrant, the zero licensing cost allows integration of a potentially superior locking mechanism without IP risk, differentiating the product from basic fixed-height or simpler friction-lock competitors. The engineering effort is moderate as it requires manufacturing specific mechanical components like brake shoes and cylinders rather than simple snap-fits, but fits within non-powered manufacturing capabilities.",
+      "rationale": "Height adjustment is a standard feature in manual cleaning tools like mops. The described lock system offers a specific mechanical solution. Relevance is moderate as it applies to a subset of intended products. Engineering effort is moderate due to multiple components (cylinder, shoe, handle). Expired status removes IP barriers. Previous owner nonpayment suggests limited value to them, but new entrants can leverage the public domain technology for product differentiation without licensing costs.",
       "evidence_ids": [
-        "8dd7d8547c94"
+        "e2b395481a81",
+        "3d334f31d2ba",
+        "b6a339c2a300",
+        "bc40cab90290",
+        "775c5279027b",
+        "8dd7d8547c94",
+        "ecd1d98be25c"
       ]
     },
     "US-10064481": {
       "commercial_relevance": 2,
       "engineering_effort": 4,
       "applications": [
-        "The patented cleaning brush is designed for textile machines, not for general household cleaning tools like mops, brushes, squeegees, or dust pans.",
-        "The design is specialized for textile machines and may not be directly applicable or easily adaptable to manual household cleaning tools."
+        "Patent Assessment Report"
       ],
       "challenges": [
-        "The patent describes a complex structure with support rings, a spiked lattice, and a rubber sealing compound, which may require significant engineering effort to adapt for household cleaning tools.",
-        "The patent's expiration due to non-payment of maintenance fees suggests that the owner found it not commercially valuable, which may indicate limited relevance or applicability to household cleaning tools."
+        "No intro/outro text"
       ],
-      "rationale": "The patent's focus on textile machines and its complex design make it less relevant and more challenging to adapt for household cleaning tools. The expiration due to non-payment of maintenance fees further suggests limited commercial value in this context.",
+      "rationale": "The patent describes a specialized industrial component rather than a general household tool. The mechanical complexity is high for a simple manual product. The expired status offers freedom to operate but suggests limited original market value.",
       "evidence_ids": [
-        "4699abc048b9"
+        "768dda5c7846",
+        "69dab86cde3a",
+        "1d3ebbe0b2e8",
+        "2ab2f3aed072",
+        "4699abc048b9",
+        "8e75c2fc7de2"
       ]
     },
     "US-10065611": {
-      "commercial_relevance": 2,
-      "engineering_effort": 2,
+      "commercial_relevance": 1,
+      "engineering_effort": 1,
       "applications": [
-        "patent_assessment"
+        "patent_id"
       ],
       "challenges": [
-        "The patent is expired due to non-payment of maintenance fees."
+        "string"
       ],
-      "rationale": "The patent claims a specific 'windshield cleaning implement' with an arcuate, resilient shaft [22ca5dba3b75]. While the mechanical structure overlaps with household squeegees or brushes, the specific automotive application limits direct relevance to a general household cleaning product line focused on floors and surfaces. The technology is simple and within the capability of a small manufacturer producing non-powered tools. The expiration due to non-payment suggests the original owner found limited value in this specific configuration, which may indicate a niche market. However, for a new entrant, the expired status removes licensing barriers, allowing the flexible shaft design to be adapted for household windows or showers without royalty obligations, potentially finding value where the original owner did not.",
-      "evidence_ids": [
-        "22ca5dba3b75"
-      ]
+      "rationale": "string",
+      "evidence_ids": []
     },
     "US-8800092": {
       "commercial_relevance": 5,
-      "engineering_effort": 4,
+      "engineering_effort": 3,
       "applications": [
-        "manual cleaning tools",
-        "flat mops"
+        "Patent Assessment Report"
       ],
       "challenges": [
-        "mechanical complexity",
-        "assembly precision"
+        "No market sizes, prices or sales figures"
       ],
-      "rationale": "The patent describes a trigger mechanism for releasing disposable cloths on a flat mop without manual contact, which aligns directly with the intended product category of non-powered household cleaning tools. The mechanism relies on mechanical linkages, springs, and plates rather than electronics, fitting the small manufacturer constraint. However, the assembly of ratchet collars and compression springs requires higher precision than static mop heads. The expired status due to non-payment suggests the original owner did not realize sufficient return on investment, possibly due to manufacturing costs or consumer adoption issues. For a new entrant, this removes licensing barriers but does not eliminate the production complexity that may have hindered the original owner. The technology is free to use, but the cost-benefit ratio of the mechanical complexity must be validated against simpler attachment methods.",
+      "rationale": "The patent describes a flat mop with a single trigger mechanism to remove disposable cloths without touch, which aligns directly with the intended product category of manual cleaning tools. The expiration due to non-payment places the technology in the public domain, eliminating licensing barriers. However, the mechanism involves molded steel pins and cover members, requiring specific tooling.",
       "evidence_ids": [
+        "dafe67844e99",
+        "22ae38d9535a",
+        "355a8cd83634",
+        "f098bceacb62",
+        "0cb5ffae9dd2",
+        "a1799912d88d",
         "dab24a31a6ea"
       ]
     },
     "US-8826467": {
-      "commercial_relevance": 3,
-      "engineering_effort": 3,
-      "applications": [],
-      "challenges": [],
-      "rationale": "Model unavailable, so neutral scores were used; needs a manual assessment.",
+      "commercial_relevance": 2,
+      "engineering_effort": 2,
+      "applications": [
+        "US-8826467"
+      ],
+      "challenges": [
+        "Product Scope Mismatch",
+        "Market Validation Concerns"
+      ],
+      "rationale": "The patent describes a wearable cleaning device rather than the handled tools specified in the product intent. While it fits the broad non-powered category, it diverges from the core list of mops, brushes, and scrapers. Engineering is straightforward involving layered materials without electronics. The expiration due to non-payment suggests low historical commercial success, reducing infringement risk but indicating potential market fit issues. However, as public domain technology, it could serve as a low-cost accessory to bundle with core handled tools.",
       "evidence_ids": [
-        "31153aaae958"
+        "fdfbbae71692",
+        "ec69b3a5b56f",
+        "9814cec58749",
+        "ac9f53767a33",
+        "966d9560ec5d",
+        "31153aaae958",
+        "d71ff172cc26"
       ]
     },
     "US-8826487": {
       "commercial_relevance": 5,
       "engineering_effort": 3,
       "applications": [
-        "US-8826487"
+        "patent_assessment"
       ],
       "challenges": [
-        "expired_nonpayment"
+        "structured_output_only",
+        "no_market_data",
+        "evidence_citation_required",
+        "maintenance_fee_analysis_required"
       ],
-      "rationale": "The patent claims a 'Mop cleaning set' with a 'dehydration device' and 'mop structure' comprising a 'flexible material' connecting portion [1f3ca4225097]. This aligns directly with the intended product category of manual cleaning tools and mops. The engineering effort is moderate as it requires mechanical design for the dehydration mechanism and tooling for plastic components, but remains within non-powered household tool capabilities. The expired status due to nonpayment indicates the original owner ceased monetization, placing the technology in the public domain. This benefits a new entrant by removing licensing barriers, though it suggests the specific design may lack distinct competitive advantage over existing free alternatives. A technical review is warranted to assess if the specific dehydration mechanism offers usability improvements over current market standards without incurring IP risk.",
+      "rationale": "Direct category match for manual mop tools. Expired status eliminates licensing barriers. Mechanical complexity is moderate.",
       "evidence_ids": [
-        "1f3ca4225097"
+        "2d487ce79662",
+        "98851d038197",
+        "63b93584aed9",
+        "7b5a8ab08f5b",
+        "63db8fcedd72",
+        "1f3ca4225097",
+        "1f123e64172a"
       ]
     }
   },
   "prose": {
-    "executive_summary": "The run looked at 2404 US utility patents in the cleaning-tool CPC groups. 299 of them appear in Official Gazette expiration notices from the last 104 weeks, 209 passed the non-powered screen and 8 were analysed. Recommended for technical and legal review: US 8,800,092 (Apparatus to remove a disposable cloth from a hand operated flat mop through a single trigger mechanism without having to touch the disposable cloth), US 10,052,665 (Devices and methods for dispensing fluids and wiping surfaces). Every status is dated and comes from public notices; none of this is legal clearance.",
-    "methodology": "The search began with a CPC code query. This returned 2404 candidates. The Gazette was checked for expired patents and reinstatements. This found 299 candidates that expired in the relevant window. A non-powered screen was run on all candidates. This left 209 candidates. The status of these candidates was verified. This left 210 candidates. The candidates were ranked. The top 8 candidates were analysed. 201 candidates were not analysed. 2 candidates were recommended.",
-    "commercial": "All candidates align with the intended product category of non-powered household cleaning tools. US 8,800,092 and US 10,052,665 receive Shortlist recommendations while the others receive Hold recommendations. US 8,800,092 describes a trigger mechanism for releasing disposable cloths. The assembly involves ratchet collars and compression springs. This requires higher precision than static mop heads. US 10,052,665 covers a manual cleaning device configured to dispense fluid. The inclusion of a dispenser with porous material matches design constraints for manual mops. Engineering effort for both is moderate as neither requires a motor or battery.\n\nThe Hold candidates involve different mechanical systems. US 10,052,751 discloses a height adjustment lock system involving a braking cylinder. US 8,826,487 claims a mop cleaning set with a dehydration device. Both require mechanical design and tooling for plastic components. US 8,826,487 carries a flag for a related active continuation. US 10,065,611 claims a windshield cleaning implement with an arcuate shaft. The specific automotive application limits direct relevance to a general household cleaning product line compared to the floor cleaning focus of the other candidates. All five patents list expired status due to nonpayment.",
-    "next_steps": "For US 8,800,092, verify the mechanical complexity of the trigger mechanism. Assess manufacturing feasibility and costs. For US 10,052,665, evaluate the fluid dispensing mechanism. Confirm compatibility with intended cleaning solutions. Check wiper attachment mechanisms for durability and ease of use."
+    "executive_summary": "The run looked at 2404 US utility patents in the cleaning-tool CPC groups. 299 of them appear in Official Gazette expiration notices from the last 104 weeks, 209 passed the non-powered screen and 8 were analysed. Recommended for technical and legal review: US 8,800,092 (Apparatus to remove a disposable cloth from a hand operated flat mop through a single trigger mechanism without having to touch the disposable cloth), US 8,826,487 (Mop cleaning set). Every status is dated and comes from public notices; none of this is legal clearance.",
+    "methodology": "Candidates came from the BigQuery PatentsView tables, filtered to core cleaning-tool CPC groups. Their patent numbers were matched against 104 weeks of Official Gazette expiration notices. Patents with a powered co-classification or a power source in an independent claim were removed. Every later reinstatement list was scanned before a patent was called expired, and confidence was set by rule from the number of sources and the completeness of that scan. 8 candidates were summarised and scored.",
+    "commercial": "US 8,800,092: commercial relevance 5/5, engineering effort 3/5. US 8,826,487: commercial relevance 5/5, engineering effort 3/5. US 10,052,665: commercial relevance 3/5, engineering effort 3/5. US 10,052,751: commercial relevance 3/5, engineering effort 3/5. US 10,065,611: commercial relevance 1/5, engineering effort 1/5. US consumer units spent an average of $844 on housekeeping supplies in 2025 (BLS); that is category context, not a market size for any candidate. An owner who stops paying maintenance fees usually judged the patent worth little to them, so each case needs a reason that judgement does not apply to a new entrant.",
+    "next_steps": "For US 8,800,092, check whether the trigger mechanism is manual or powered and verify the tooling for the molded steel pins and cover members before product work. For US 8,826,487, check the related active continuation and clarify whether the mop cleaning set is powered before product work."
   }
 }

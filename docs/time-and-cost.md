@@ -30,20 +30,23 @@ Hours are wall-clock, taken from commit times in UTC+7. They measure elapsed tim
 | Build | 23 Cross-file validation | 17:21 | 17:27 | 0.10 | LibreOffice render made opt-in after a macOS Gatekeeper prompt |
 | Build | 24 First real run and fixes | 17:27 | 19:32 | 2.08 | four live runs; run 1 exposed a relative-path bug in the OOXML check and a 1024-token cap that truncated model answers; most of the time was free-model latency |
 | Build | 25 Docs, outage fix, final checks | 19:32 | 19:38 | 0.10 | writing the docs found that a simulated Gazette outage was hidden by the page cache |
-| Build | Total | 16:00 | 19:38 | 3.6 | inside the 10-hour target; nothing from the plan was cut except the Census market lookup |
+| Review | Whole-branch review and fixes | 19:39 | 20:06 | 0.45 | one critical finding (reinstatements dated before the expiry notice were missed) and four important ones, each fixed with a test |
+| After review | Video, EPO OPS live, HTML design pass, restyled Word and PowerPoint | 20:06 | 21:40 | 1.57 | the deck and report were designed as HTML pages first, approved, then ported; live run 5 took 73 minutes of free-model time |
+| Build | Total | 16:00 | 21:40 | 5.7 | inside the 10-hour target; nothing from the plan was cut except the Census market lookup |
 
 ## Run cost
 
-Sample run `run-real-4` (committed under `outputs/samples/` and `docs/sample-logs/`):
+Sample run `run-real-5` (committed under `outputs/samples/` and `docs/sample-logs/`):
 
 | Item | Value |
 |---|---|
 | BigQuery bytes, first fresh run | 44.0 GB (discovery 2.30, claims 38.95, citations 2.20, continuity 0.55), inside the 1 TB monthly free tier |
 | BigQuery bytes, later runs the same day | 0, every query was served from the local cache (a later day or a new Gazette issue would repeat discovery and claims) |
 | Gazette pages fetched | 104 weekly issues, about 73 MB of HTML, fetched once at one request per second |
-| LLM calls | 20 (4 fell back to templates), 28k tokens in, 72k out |
+| EPO OPS lookups | 200, about 6 MB of the 4 GB weekly allowance |
+| LLM calls | 20 (5 fell back to templates), 28k tokens in, 87k out |
 | LLM cost | $0.00 on free models through `freellm` |
-| Wall time | about 15 minutes, almost all of it model latency on free tiers |
+| Wall time | about 73 minutes, almost all of it model latency on free tiers |
 
 The replay bundle (`fixtures/replay/`, 10 MB) reruns this result offline in about 6 seconds.
 

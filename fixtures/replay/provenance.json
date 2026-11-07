@@ -1,5 +1,5 @@
 {
-  "thread_id": "run-real-4",
+  "thread_id": "run-real-5",
   "today": "2026-11-07",
   "request": {
     "technology_category": "non-powered household cleaning tools",
@@ -13,11 +13,15 @@
     "max_recommended": 2,
     "lapse_window_weeks": 104
   },
-  "commit": "626644a",
+  "commit": "b18af45",
   "bigquery_bytes": 46207598592,
   "candidates": [
     [
       "US-8800092",
+      "expired_nonpayment"
+    ],
+    [
+      "US-8826487",
       "expired_nonpayment"
     ],
     [
@@ -26,10 +30,6 @@
     ],
     [
       "US-10052751",
-      "expired_nonpayment"
-    ],
-    [
-      "US-8826487",
       "expired_nonpayment"
     ],
     [

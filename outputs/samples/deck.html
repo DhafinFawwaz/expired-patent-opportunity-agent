@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Expired-patent screening: non-powered household cleaning tools</title>
+<style>
+/* Arial-family text and a navy accent so the approved look ports to PowerPoint unchanged. */
+:root {
+  --ink: #17202b;
+  --muted: #5b6573;
+  --rule: #dde2e8;
+  --navy: #1f3a5f;
+  --navy-tint: #e9eef5;
+  --amber: #a85d0a;
+  --amber-tint: #fbf0e1;
+  --rust: #9c3324;
+  --rust-tint: #f8e7e3;
+  --page: #e9ebee;
+  --font: "Helvetica Neue", Arial, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  height: 100%;
+  background: var(--page);
+  color: var(--ink);
+  font-family: var(--font);
+}
+
+.viewport {
+  position: fixed;
+  inset: 0 0 56px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.stage {
+  position: relative;
+  width: 1280px;
+  height: 720px;
+  flex: none;
+  transform-origin: center center;
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  display: none;
+  flex-direction: column;
+  padding: 52px 72px 0;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(23, 32, 43, 0.12);
+}
+
+.slide.active { display: flex; }
+
+.slide h2 {
+  margin: 0;
+  font-size: 32px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.takeaway {
+  margin: 10px 0 0;
+  max-width: 1000px;
+  color: var(--muted);
+  font-size: 18px;
+  line-height: 1.4;
+}
+
+.body {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  padding-bottom: 20px;
+  margin-top: 30px;
+  display: flex;
+  gap: 48px;
+}
+
+.col { flex: 1; min-width: 0; }
+.col.narrow { flex: 0 0 380px; }
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 52px;
+  margin: 0 -72px;
+  padding: 0 72px;
+  border-top: 1px solid var(--rule);
+  color: var(--muted);
+  font-size: 12px;
+}
+
+/* Title slide: the one full-colour moment in the deck. */
+.slide.title {
+  background: var(--navy);
+  color: #fff;
+  justify-content: center;
+  padding-bottom: 52px;
+}
+
+.slide.title h1 {
+  margin: 0;
+  max-width: 980px;
+  font-size: 50px;
+  font-weight: 600;
+  line-height: 1.12;
+  letter-spacing: -0.015em;
+}
+
+.slide.title .sub { margin: 22px 0 0; font-size: 22px; opacity: 0.85; }
+.slide.title .meta { margin: 56px 0 0; font-size: 15px; opacity: 0.75; line-height: 1.6; }
+
+.slide.title .label {
+  position: absolute;
+  left: 72px;
+  bottom: 40px;
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+p, li { font-size: 18px; line-height: 1.45; }
+
+.lead { margin: 0; font-size: 26px; line-height: 1.3; font-weight: 600; }
+.lead-sub { margin: 16px 0 0; color: var(--muted); }
+
+ol.points { margin: 0; padding: 0; list-style: none; counter-reset: point; }
+
+ol.points li {
+  counter-increment: point;
+  position: relative;
+  padding: 14px 0 14px 44px;
+  border-bottom: 1px solid var(--rule);
+}
+
+ol.points li::before {
+  content: counter(point);
+  position: absolute;
+  left: 0;
+  top: 13px;
+  color: var(--navy);
+  font-weight: 600;
+}
+
+ul.plain { margin: 0; padding: 0 0 0 20px; }
+ul.plain li { margin: 0 0 10px; }
+
+.flow {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 22px 26px;
+}
+
+.step {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 74px;
+  padding: 10px 14px;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  background: var(--navy-tint);
+  font-size: 15px;
+  line-height: 1.25;
+}
+
+.step .n { margin-right: 10px; color: var(--navy); font-weight: 600; }
+.step.gate { background: var(--amber-tint); border-color: var(--amber); }
+.step:not(:last-child)::after {
+  content: "\203A";
+  position: absolute;
+  right: -19px;
+  top: 50%;
+  transform: translateY(-52%);
+  color: var(--muted);
+  font-size: 22px;
+}
+.step:nth-child(6)::after { display: none; }
+
+.legend { margin: 22px 0 0; color: var(--muted); font-size: 14px; }
+.swatch { display: inline-block; width: 12px; height: 12px; margin: 0 6px -1px 0; border: 1px solid var(--amber); background: var(--amber-tint); }
+
+.notes-row { display: flex; gap: 48px; margin-top: 34px; }
+.notes-row p { flex: 1; margin: 0; padding-top: 14px; border-top: 1px solid var(--rule); font-size: 16px; }
+
+.funnel { display: flex; flex-direction: column; gap: 14px; }
+.funnel .row { display: grid; grid-template-columns: 1fr 72px; align-items: center; gap: 12px; }
+.funnel .what { font-size: 15px; margin-bottom: 6px; }
+.funnel .bar { height: 14px; background: var(--navy-tint); }
+.funnel .bar span { display: block; height: 100%; background: var(--navy); }
+.funnel .num { text-align: right; font-size: 22px; font-weight: 600; font-variant-numeric: tabular-nums; }
+
+table { width: 100%; border-collapse: collapse; font-size: 15px; }
+th { text-align: left; color: var(--muted); font-weight: 600; font-size: 13px; padding: 0 12px 8px 0; border-bottom: 2px solid var(--ink); }
+td { padding: 11px 12px 11px 0; border-bottom: 1px solid var(--rule); vertical-align: top; line-height: 1.35; }
+td.num { font-variant-numeric: tabular-nums; }
+tr.shortlist td { background: var(--navy-tint); }
+tr.shortlist td:first-child { box-shadow: inset 3px 0 0 var(--navy); padding-left: 10px; }
+td:first-child, th:first-child { padding-left: 10px; white-space: nowrap; }
+tr.shortlist .chip { background: #fff; }
+.cpc { margin: 18px 0 0; color: var(--muted); font-size: 14px; }
+
+.chip { display: inline-block; padding: 2px 8px; border-radius: 3px; font-size: 13px; white-space: nowrap; background: #eef0f3; }
+.chip.expired_nonpayment { background: var(--navy-tint); color: var(--navy); }
+.chip.reinstated { background: var(--amber-tint); color: var(--amber); }
+.chip.conflicting { background: var(--rust-tint); color: var(--rust); }
+
+.banner { margin: 0 0 14px; padding: 8px 12px; background: var(--amber-tint); color: var(--amber); font-size: 14px; font-weight: 600; }
+.empty { color: var(--muted); }
+
+.timeline { margin: 0; padding: 0; list-style: none; }
+.timeline li { display: grid; grid-template-columns: 96px 1fr 290px; gap: 14px; padding: 7px 0; border-bottom: 1px solid var(--rule); font-size: 14px; line-height: 1.3; }
+.timeline .date { font-variant-numeric: tabular-nums; color: var(--muted); }
+.timeline .src { color: var(--muted); }
+.status-line { margin: 0 0 18px; font-size: 18px; }
+.col.note { flex: 0 0 300px; }
+.aside-note { margin: 0; padding: 16px 18px; background: var(--navy-tint); font-size: 15px; line-height: 1.5; }
+
+.card { flex: 1; min-width: 0; display: flex; flex-direction: column; overflow: hidden; padding: 20px 24px; border: 1px solid var(--rule); border-radius: 4px; }
+.card > * { flex-shrink: 0; }
+.card h3 { margin: 0; font-size: 18px; line-height: 1.3; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; }
+.card .id { color: var(--navy); font-weight: 600; font-size: 14px; margin-bottom: 6px; }
+.card p { font-size: 15px; margin: 12px 0 0; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 4; overflow: hidden; }
+.card h4 { margin: 16px 0 6px; color: var(--muted); font-size: 13px; font-weight: 600; }
+.card ul { margin: 0; padding-left: 18px; }
+.card li { font-size: 14px; line-height: 1.4; margin-bottom: 4px; }
+
+.chart { display: flex; flex-direction: column; gap: 16px; }
+.chart .row { display: grid; grid-template-columns: 150px 1fr 48px; align-items: center; gap: 14px; font-size: 15px; }
+.chart .track { height: 26px; background: #f2f4f6; }
+.chart .fill { height: 100%; background: #b9c3cf; }
+.chart .row.shortlist .fill { background: var(--navy); }
+.chart .val { font-weight: 600; font-variant-numeric: tabular-nums; }
+.chart-caption { margin: 18px 0 0; color: var(--muted); font-size: 13px; }
+.weights { margin-top: 22px; }
+
+.label-strong { margin-top: 26px; padding-top: 14px; border-top: 2px solid var(--ink); font-size: 16px; font-weight: 600; }
+
+aside.notes { display: none; }
+body.show-notes aside.notes {
+  display: block;
+  position: absolute;
+  left: 72px;
+  right: 72px;
+  bottom: 60px;
+  padding: 10px 14px;
+  background: #fffbe6;
+  border: 1px solid #e6d9a3;
+  font-size: 13px;
+  line-height: 1.4;
+  max-height: 140px;
+  overflow: auto;
+}
+
+.controls {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.controls button {
+  min-width: 88px;
+  padding: 8px 14px;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  background: #fff;
+  color: var(--ink);
+  font: inherit;
+  cursor: pointer;
+}
+
+.controls button:hover:not(:disabled) { border-color: var(--navy); }
+.controls button:focus-visible { outline: 2px solid var(--navy); outline-offset: 2px; }
+.controls button:disabled { opacity: 0.4; cursor: default; }
+.controls .count { min-width: 60px; text-align: center; font-variant-numeric: tabular-nums; }
+.controls .hint { position: absolute; right: 24px; font-size: 12px; }
+
+@media print {
+  @page { size: 1280px 720px; margin: 0; }
+  html, body { background: #fff; }
+  .viewport { position: static; display: block; overflow: visible; }
+  .stage { transform: none !important; width: 1280px; height: auto; }
+  .slide { display: flex !important; position: relative; height: 720px; box-shadow: none; page-break-after: always; break-after: page; }
+  .controls { display: none; }
+}
+
+</style>
+</head>
+<body>
+<main class="viewport"><div class="stage">
+<section class="slide title" data-title="Title"><h1>Expired-patent screening: non-powered household cleaning tools</h1><p class="sub">US patents that appear to have lapsed for nonpayment of maintenance fees</p><p class="meta">Run run-real-5<br>2026-11-07 &middot; US patents only</p><div class="label">Research screening only. Not a legal opinion or freedom-to-operate determination.</div></section>
+<section class="slide" data-title="Business objective"><h2>Business objective</h2><p class="takeaway">What the run was asked to find, and what it does not claim.</p><div class="body"><div class="col narrow"><p class="lead">Non-powered household cleaning tools</p><p class="lead-sub">Manual cleaning tools for home use (mops, brushes, squeegees, scrapers, dust pans) that a small manufacturer could make without electronics.</p></div><div class="col"><ol class="points"><li>Find US patents in non-powered household cleaning tools that appear to have expired for nonpayment.</li><li>Verify each status over time, including later reinstatement.</li><li>Rank up to 5 candidates and recommend up to 2 for technical and legal review.</li><li>Evidence-backed screening, not a claim that the technology is free to use.</li></ol></div></div><div class="footer"><span>Research screening only. Not a legal opinion or freedom-to-operate determination.</span><span>Run run-real-5 &middot; 2 / 9</span></div></section>
+<section class="slide" data-title="Agent workflow and architecture"><h2>Agent workflow and architecture</h2><p class="takeaway">A fixed workflow: code fetches and judges the evidence, the model only drafts text.</p><div class="body"><div class="col"><div class="flow"><div class="step"><span class="n">1</span>Intake</div><div class="step"><span class="n">2</span>Plan (model)</div><div class="step gate"><span class="n">3</span>Approval (you)</div><div class="step"><span class="n">4</span>Discovery: BigQuery</div><div class="step"><span class="n">5</span>Gazette index</div><div class="step"><span class="n">6</span>Claims and continuity</div><div class="step"><span class="n">7</span>Screen and verify status</div><div class="step"><span class="n">8</span>Analyse (model)</div><div class="step"><span class="n">9</span>Score</div><div class="step gate"><span class="n">10</span>Review (you)</div><div class="step"><span class="n">11</span>Report and deck</div></div><p class="legend"><span class="swatch"></span>The run pauses for a person at these two steps.</p><div class="notes-row"><p>Code makes every data call and applies the status rules; the model drafts the plan, summarises claims and writes prose.</p><p>Every claim in the outputs points to an evidence record with its source URL and retrieval time.</p></div></div></div><aside class="notes">Amber boxes are human gates; the run pauses there.</aside><div class="footer"><span>Research screening only. Not a legal opinion or freedom-to-operate determination.</span><span>Run run-real-5 &middot; 3 / 9</span></div></section>
+<section class="slide" data-title="Search scope and evidence sources"><h2>Search scope and evidence sources</h2><p class="takeaway">2,404 patents searched; 2 recommended for review.</p><div class="body"><div class="col narrow"><div class="funnel"><div class="row"><div><div class="what">Found in the cleaning-tool CPC groups</div><div class="bar"><span style="width:100.0%"></span></div></div><div class="num">2,404</div></div><div class="row"><div><div class="what">Listed as expired for nonpayment</div><div class="bar"><span style="width:12.4%"></span></div></div><div class="num">299</div></div><div class="row"><div><div class="what">Passed the non-powered screen</div><div class="bar"><span style="width:8.7%"></span></div></div><div class="num">209</div></div><div class="row"><div><div class="what">Analysed and scored</div><div class="bar"><span style="width:0.6%"></span></div></div><div class="num">8</div></div><div class="row"><div><div class="what">Recommended for review</div><div class="bar"><span style="width:0.6%"></span></div></div><div class="num">2</div></div></div></div><div class="col"><table><thead><tr><th>Source</th><th>What it gave</th><th>Grade</th></tr></thead><tbody><tr><td>Official Gazette notices</td><td>104 weekly issues, last issue 2026-11-03</td><td>A</td></tr><tr><td>BigQuery PatentsView</td><td>Bibliographic data, claims, citations, continuity (grants to 2021-09-28)</td><td>A</td></tr><tr><td>EPO OPS legal events</td><td>Used as a cross-check</td><td>B</td></tr></tbody></table><p class="cpc">CPC groups searched: A47L (Domestic Cleaning or Laundering), A47L 13/00 (Cleaning implements), A47L 13/10 (Mops), A47L 13/16 (Brushes), A47L 13/20 (Squeegees), A47L 13/22 (Dust pans), A46B (Brushes)</p></div></div><div class="footer"><span>Research screening only. Not a legal opinion or freedom-to-operate determination.</span><span>Run run-real-5 &middot; 4 / 9</span></div></section>
+<section class="slide" data-title="Candidate comparison"><h2>Candidate comparison</h2><p class="takeaway">5 candidates scored; 2 shortlisted (highlighted).</p><div class="body"><div class="col"><table class="comparison"><thead><tr><th>Patent</th><th>Title</th><th>Status</th><th>Confidence</th><th>Score</th><th>Recommendation</th></tr></thead><tbody><tr class="shortlist"><td>US 8,800,092</td><td>Apparatus to remove a disposable cloth from a hand operated flat mop through a single trigger mechanism without having to touch the disposable cloth</td><td data-status="Expired (nonpayment)"><span class="chip expired_nonpayment">Expired (nonpayment)</span></td><td>very high</td><td class="num">4.2</td><td>Shortlist</td></tr><tr class="shortlist"><td>US 8,826,487</td><td>Mop cleaning set</td><td data-status="Expired (nonpayment)"><span class="chip expired_nonpayment">Expired (nonpayment)</span></td><td>very high</td><td class="num">3.8</td><td>Shortlist</td></tr><tr class=""><td>US 10,052,665</td><td>Devices and methods for dispensing fluids and wiping surfaces</td><td data-status="Expired (nonpayment)"><span class="chip expired_nonpayment">Expired (nonpayment)</span></td><td>very high</td><td class="num">3.5</td><td>Hold</td></tr><tr class=""><td>US 10,052,751</td><td>Height adjustment lock system</td><td data-status="Expired (nonpayment)"><span class="chip expired_nonpayment">Expired (nonpayment)</span></td><td>very high</td><td class="num">3.5</td><td>Hold</td></tr><tr class=""><td>US 10,065,611</td><td>Windshield cleaning implement</td><td data-status="Expired (nonpayment)"><span class="chip expired_nonpayment">Expired (nonpayment)</span></td><td>very high</td><td class="num">3.4</td><td>Hold</td></tr></tbody></table></div></div><aside class="notes">Evidence: dafe67844e99, 22ae38d9535a, 355a8cd83634, f098bceacb62, 0cb5ffae9dd2, a1799912d88d, dab24a31a6ea, 2d487ce79662, 98851d038197, 63b93584aed9, 7b5a8ab08f5b, 63db8fcedd72, 1f3ca4225097, 1f123e64172a, 31b197301214, 08b14e37b541, feb505fa551f, 67b1dd76694c, 9f5af1b5d8ca, 818679383999, e2b395481a81, 3d334f31d2ba, b6a339c2a300, bc40cab90290, 775c5279027b, 8dd7d8547c94, ecd1d98be25c, b322b6500ab7, 5e65320b51c8, 37827bcc0933, 08cbcf4ed47e, 055a26752763, 22ca5dba3b75, 1ef4595eef13</aside><div class="footer"><span>Research screening only. Not a legal opinion or freedom-to-operate determination.</span><span>Run run-real-5 &middot; 5 / 9</span></div></section>
+<section class="slide" data-title="Status-verification example"><h2>Status-verification example</h2><p class="takeaway">Every status is dated and sourced; a later official notice overrides an earlier one.</p><div class="body"><div class="col"><p class="status-line"><strong>US 8,646,606</strong> Gift card packet holder &middot; <span class="chip reinstated">Reinstated</span> &middot; confidence high</p><ul class="timeline"><li><span class="date">2014-02-11</span><span>Granted</span><span class="src">BigQuery PatentsView (A)</span></li><li><span class="date">2017-04-12</span><span>Maintenance fee paid</span><span class="src">Manual observation (Google Patents) (C)</span></li><li><span class="date">2021-08-11</span><span>Maintenance fee paid</span><span class="src">Manual observation (Google Patents) (C)</span></li><li><span class="date">2025-09-29</span><span>Fee reminder mailed</span><span class="src">Manual observation (Google Patents) (C)</span></li><li><span class="date">2026-03-16</span><span>Listed as expired for nonpayment</span><span class="src">Manual observation (Google Patents) (C)</span></li><li><span class="date">2026-03-16</span><span>Listed as expired for nonpayment</span><span class="src">Manual observation (Google Patents) (C)</span></li><li><span class="date">2026-04-07</span><span>Listed as expired for nonpayment (effective 2026-02-11)</span><span class="src">Manual observation (Google Patents) (C)</span></li><li><span class="date">2026-10-07</span><span>Reinstated after late fee accepted</span><span class="src">USPTO Official Gazette (A)</span></li></ul></div><div class="col note"><p class="aside-note">Not a cleaning tool; shown because the official record and a secondary display disagree. The Gazette reinstatement row is in this run&#x27;s scan window. Read by hand from Google Patents during research on 2026-11-07. The pipeline does not fetch Google Patents; this record exists only to show a secondary source lagging behind the Official Gazette.</p></div></div><aside class="notes">Evidence: f9461a22e42b, d53a069fca78, 14e315643270, 9565aa9f1719, 6ec35b6b291b, 07c02ac642c4, 8b95928e1eac</aside><div class="footer"><span>Research screening only. Not a legal opinion or freedom-to-operate determination.</span><span>Run run-real-5 &middot; 6 / 9</span></div></section>
+<section class="slide" data-title="Technical opportunity"><h2>Technical opportunity</h2><p class="takeaway">What the shortlisted patents claim, and what a prototype would need to settle.</p><div class="body"><div class="card"><div class="id">US 8,800,092</div><h3>Apparatus to remove a disposable cloth from a hand operated flat mop through a single trigger mechanism without having to touch the disposable cloth</h3><p>Apparatus to remove a disposable cloth from a hand operated flat mop through a single trigger mechanism without having to touch the disposable cloth. First independent claim: 1. A flat mop having a handle and apparatus for retaining the handle to a top plate of the flat mop, the flat mop comprising: a. a top plate including a first cover member and a second cover member, a bottom surface further retaining a pair of spaced apart steel pins which are molded into the bottom</p><h4>Key claim elements</h4><ul class="plain"><li>1. A flat mop having a handle and apparatus for retaining the handle to a top plate of the flat mop</li><li>the flat mop comprising: a. a top plate including a first cover member and a second cover member</li><li>a bottom surface further retaining a pair of spaced apart steel pins which are molded into the bottom surface respectively aligned with the first cover and the second cover</li></ul><h4>Open questions</h4><ul class="plain"><li>Needs a manual read of the full claims and drawings.</li></ul></div><div class="card"><div class="id">US 8,826,487</div><h3>Mop cleaning set</h3><p>Mop cleaning set. First independent claim: 1. A mop cleaning set comprising: a dehydration device for dehydrating a mop structure, said dehydration device comprising: the mop structure comprising: a connecting portion being composed of a flexible material, said connecting portion connecting with the first fixing base portion and the second f</p><h4>Key claim elements</h4><ul class="plain"><li>1. A mop cleaning set comprising: a dehydration device for dehydrating a mop structure</li><li>said dehydration device comprising: the mop structure comprising: a connecting portion being composed of a flexible material</li><li>said connecting portion connecting with the first fixing base portion and the second fixing base portion of the fixing base</li></ul><h4>Open questions</h4><ul class="plain"><li>Needs a manual read of the full claims and drawings.</li></ul></div></div><aside class="notes">Evidence: dafe67844e99, 22ae38d9535a, 355a8cd83634, f098bceacb62, 0cb5ffae9dd2, a1799912d88d, dab24a31a6ea, 2d487ce79662, 98851d038197, 63b93584aed9, 7b5a8ab08f5b, 63db8fcedd72, 1f3ca4225097, 1f123e64172a, 31b197301214, 08b14e37b541, feb505fa551f, 67b1dd76694c, 9f5af1b5d8ca, 818679383999, e2b395481a81, 3d334f31d2ba, b6a339c2a300, bc40cab90290, 775c5279027b, 8dd7d8547c94, ecd1d98be25c, b322b6500ab7, 5e65320b51c8, 37827bcc0933, 08cbcf4ed47e, 055a26752763, 22ca5dba3b75, 1ef4595eef13</aside><div class="footer"><span>Research screening only. Not a legal opinion or freedom-to-operate determination.</span><span>Run run-real-5 &middot; 7 / 9</span></div></section>
+<section class="slide" data-title="Commercial assessment"><h2>Commercial assessment</h2><p class="takeaway">How the candidates compare on the weighted score.</p><div class="body"><div class="col"><div class="chart"><div class="row shortlist"><span>US 8,800,092</span><div class="track"><div class="fill" style="width:84.0%"></div></div><span class="val">4.2</span></div><div class="row shortlist"><span>US 8,826,487</span><div class="track"><div class="fill" style="width:76.0%"></div></div><span class="val">3.8</span></div><div class="row"><span>US 10,052,665</span><div class="track"><div class="fill" style="width:70.0%"></div></div><span class="val">3.5</span></div><div class="row"><span>US 10,052,751</span><div class="track"><div class="fill" style="width:70.0%"></div></div><span class="val">3.5</span></div><div class="row"><span>US 10,065,611</span><div class="track"><div class="fill" style="width:68.0%"></div></div><span class="val">3.4</span></div></div><p class="chart-caption">Total score out of 5. Navy bars are shortlisted.</p></div><div class="col narrow"><ul class="plain"><li>Scores run 1 to 5; effort and risk count against a candidate.</li><li>Owners who stop paying usually judged the patent worth little to them; each case needs a reason that does not bind a new entrant.</li><li>US housekeeping-supplies spending: $844 per household in 2025 (BLS). Category context only.</li></ul><p class="weights cpc">Weights: commercial relevance 35%, engineering effort 20%, evidence quality 25%, unresolved risk 20%.</p></div></div><aside class="notes">Weights: commercial relevance 35%, engineering effort 20%, evidence quality 25%, unresolved risk 20%.</aside><div class="footer"><span>Research screening only. Not a legal opinion or freedom-to-operate determination.</span><span>Run run-real-5 &middot; 8 / 9</span></div></section>
+<section class="slide" data-title="Unresolved risks and next steps"><h2>Unresolved risks and next steps</h2><p class="takeaway">Treat every candidate as a lead to check, not a product to build yet.</p><div class="body"><div class="col"><h3>Unresolved risks</h3><ul class="plain"><li>15 related records (continuations, citations, same owner) need their own status check.</li><li>A lapsed patent can be reinstated; recent lapses carry the most risk.</li><li>Design patents and trade dress may cover the product&#x27;s look.</li></ul></div><div class="col"><h3>Next steps</h3><ol class="points"><li>Confirm each status in USPTO Patent Center and check for a pending petition.</li><li>Read the full claims and drawings; build a test sample before tooling.</li><li>Have a patent attorney run a freedom-to-operate search, including related patents.</li></ol><p class="label-strong">Research screening only. Not a legal opinion or freedom-to-operate determination.</p></div></div><div class="footer"><span>Research screening only. Not a legal opinion or freedom-to-operate determination.</span><span>Run run-real-5 &middot; 9 / 9</span></div></section>
+</div></main>
+<nav class="controls" aria-label="Slide navigation">
+<button id="prev" type="button">Previous</button>
+<span id="count" class="count" aria-live="polite"></span>
+<button id="next" type="button">Next</button>
+<span class="hint">Arrow keys to move, N for notes</span>
+</nav>
+<script>
+(() => {
+  const slides = Array.from(document.querySelectorAll(".slide"));
+  const stage = document.querySelector(".stage");
+  const prev = document.getElementById("prev");
+  const next = document.getElementById("next");
+  const count = document.getElementById("count");
+  let index = 0;
+
+  function show(target) {
+    index = Math.max(0, Math.min(slides.length - 1, target));
+    slides.forEach((slide, i) => slide.classList.toggle("active", i === index));
+    count.textContent = `${index + 1} / ${slides.length}`;
+    prev.disabled = index === 0;
+    next.disabled = index === slides.length - 1;
+    history.replaceState(null, "", `#${index + 1}`);
+  }
+
+  function fit() {
+    const box = document.querySelector(".viewport").getBoundingClientRect();
+    const scale = Math.min((box.width - 48) / 1280, (box.height - 32) / 720);
+    stage.style.transform = `scale(${Math.max(scale, 0.2)})`;
+  }
+
+  prev.addEventListener("click", () => show(index - 1));
+  next.addEventListener("click", () => show(index + 1));
+  document.addEventListener("keydown", (event) => {
+    if (event.target instanceof HTMLButtonElement && (event.key === " " || event.key === "Enter")) return;
+    if (["ArrowRight", "PageDown", " "].includes(event.key)) { event.preventDefault(); show(index + 1); }
+    else if (["ArrowLeft", "PageUp"].includes(event.key)) { event.preventDefault(); show(index - 1); }
+    else if (event.key === "Home") show(0);
+    else if (event.key === "End") show(slides.length - 1);
+    else if (event.key === "n" || event.key === "N") document.body.classList.toggle("show-notes");
+  });
+  window.addEventListener("resize", fit);
+
+  const start = parseInt(location.hash.slice(1), 10);
+  fit();
+  show(Number.isNaN(start) ? 0 : start - 1);
+})();
+
+</script>
+</body>
+</html>

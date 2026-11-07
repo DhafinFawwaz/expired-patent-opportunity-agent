@@ -1,14 +1,14 @@
 {
   "run": {
-    "thread_id": "run-real-4",
-    "created": "2026-11-07T12:28:58.103646Z",
+    "thread_id": "run-real-5",
+    "created": "2026-11-07T14:39:13.548240Z",
     "is_demo": false,
     "model": "free, free-tools",
     "llm_calls": 20,
-    "fallback_calls": 4,
+    "fallback_calls": 5,
     "bigquery_bytes": 46207598592,
     "outages": [],
-    "ops_configured": false
+    "ops_configured": true
   },
   "request": {
     "technology_category": "non-powered household cleaning tools",
@@ -25,53 +25,57 @@
   },
   "plan": {
     "search_terms": [
-      "mop",
-      "brush",
-      "squeegee",
-      "scraper",
-      "dust pan",
-      "hand-held",
-      "manual",
-      "household",
-      "cleaning implement"
+      "Manual cleaning tool",
+      "Hand-operated mop",
+      "Household brush",
+      "Window squeegee",
+      "Floor scraper",
+      "Dust pan assembly",
+      "Cleaning implement",
+      "Non-powered cleaner"
     ],
     "cpc_codes": [
-      "A47L (Domestic cleaning)",
-      "A46B (Brushes)",
-      "B25G (Handles for hand tools)"
+      "A47L (Domestic Cleaning or Laundering)",
+      "A47L 13/00 (Cleaning implements)",
+      "A47L 13/10 (Mops)",
+      "A47L 13/16 (Brushes)",
+      "A47L 13/20 (Squeegees)",
+      "A47L 13/22 (Dust pans)",
+      "A46B (Brushes)"
     ],
     "exclusion_terms": [
-      "electric",
-      "motor",
-      "battery",
-      "powered",
-      "electronic",
-      "robotic",
-      "automated",
-      "vacuum",
-      "machine"
+      "Electric",
+      "Motor",
+      "Battery",
+      "Powered",
+      "Electronic",
+      "Ultrasonic",
+      "Robotic",
+      "Automated",
+      "Corded"
     ],
     "sources": [
-      "USPTO Official Gazette notices",
       "BigQuery PatentsView tables",
+      "USPTO Official Gazette notices",
       "EPO OPS legal events"
     ],
     "screening_criteria": [
-      "US jurisdiction only",
-      "Active grant status",
-      "Manual operation confirmed",
-      "Household scale",
-      "No electronics",
-      "Small manufacturer feasibility"
+      "Jurisdiction: US Grants and Applications only",
+      "Status: Active or Expired (for freedom to operate)",
+      "Mechanism: Purely mechanical, no circuitry",
+      "Materials: Common plastics, wood, metal, rubber",
+      "Complexity: Suitable for small-scale manufacturing",
+      "Date Range: Last 20 years for utility patents",
+      "Candidate Limit: Maximum two for technical/legal review"
     ],
     "output_structure": [
       "Patent Number",
       "Title",
       "Assignee",
       "Status",
-      "CPC Class",
-      "Relevance Score",
-      "Reason for Selection"
+      "Key Claims Summary",
+      "Manufacturing Complexity",
+      "Risk Assessment"
     ]
   },
   "coverage": {
@@ -87,7 +91,7 @@
     "passed_screening": 209,
     "status_verified": 210,
     "analysed": 8,
-    "not_analysed": 201,
+    "not_analysed": 199,
     "recommended": 2
   },
   "candidates": [
@@ -106,9 +110,69 @@
         "effective_date": "2026-08-12",
         "stage": 12,
         "evidence_ids": [
+          "dafe67844e99",
+          "22ae38d9535a",
+          "355a8cd83634",
+          "f098bceacb62",
+          "0cb5ffae9dd2",
+          "a1799912d88d",
           "dab24a31a6ea"
         ],
         "timeline": [
+          {
+            "event_type": "reminder",
+            "event_date": "2018-03-26",
+            "effective_date": null,
+            "stage": null,
+            "source": "ops",
+            "source_code": "FEPP",
+            "evidence_id": "dafe67844e99"
+          },
+          {
+            "event_type": "fee_paid",
+            "event_date": "2018-08-10",
+            "effective_date": null,
+            "stage": null,
+            "source": "ops",
+            "source_code": "MAFP",
+            "evidence_id": "22ae38d9535a"
+          },
+          {
+            "event_type": "fee_paid",
+            "event_date": "2022-02-11",
+            "effective_date": null,
+            "stage": null,
+            "source": "ops",
+            "source_code": "MAFP",
+            "evidence_id": "355a8cd83634"
+          },
+          {
+            "event_type": "reminder",
+            "event_date": "2026-03-30",
+            "effective_date": null,
+            "stage": null,
+            "source": "ops",
+            "source_code": "FEPP",
+            "evidence_id": "f098bceacb62"
+          },
+          {
+            "event_type": "lapse",
+            "event_date": "2026-09-14",
+            "effective_date": null,
+            "stage": null,
+            "source": "ops",
+            "source_code": "STCH",
+            "evidence_id": "0cb5ffae9dd2"
+          },
+          {
+            "event_type": "lapse",
+            "event_date": "2026-09-14",
+            "effective_date": null,
+            "stage": null,
+            "source": "ops",
+            "source_code": "LAPS",
+            "evidence_id": "a1799912d88d"
+          },
           {
             "event_type": "lapse",
             "event_date": "2026-10-06",
@@ -120,7 +184,7 @@
           }
         ],
         "notes": [],
-        "confidence": "high"
+        "confidence": "very_high"
       },
       "timeline": [
         {
@@ -129,6 +193,48 @@
           "source": "bigquery",
           "grade": "A",
           "evidence_id": ""
+        },
+        {
+          "date": "2018-03-26",
+          "event": "Fee reminder mailed",
+          "source": "ops",
+          "grade": "B",
+          "evidence_id": "dafe67844e99"
+        },
+        {
+          "date": "2018-08-10",
+          "event": "Maintenance fee paid",
+          "source": "ops",
+          "grade": "B",
+          "evidence_id": "22ae38d9535a"
+        },
+        {
+          "date": "2022-02-11",
+          "event": "Maintenance fee paid",
+          "source": "ops",
+          "grade": "B",
+          "evidence_id": "355a8cd83634"
+        },
+        {
+          "date": "2026-03-30",
+          "event": "Fee reminder mailed",
+          "source": "ops",
+          "grade": "B",
+          "evidence_id": "f098bceacb62"
+        },
+        {
+          "date": "2026-09-14",
+          "event": "Listed as expired for nonpayment",
+          "source": "ops",
+          "grade": "B",
+          "evidence_id": "0cb5ffae9dd2"
+        },
+        {
+          "date": "2026-09-14",
+          "event": "Listed as expired for nonpayment",
+          "source": "ops",
+          "grade": "B",
+          "evidence_id": "a1799912d88d"
         },
         {
           "date": "2026-10-06",
@@ -146,40 +252,47 @@
         }
       ],
       "technical": {
-        "summary": "The patent claims a hand-operated flat mop apparatus featuring a trigger mechanism to release a disposable cloth without manual contact. The device comprises a top plate, a push plate with spikes or hooks, a mechanical plate, linkages, ratchet collars, and compression springs. Activating the trigger allows spring force to move the push plate, releasing the cloth.",
-        "mechanism": "Mechanical trigger mechanism utilizing compression springs and linkages to release cloth",
+        "summary": "Apparatus to remove a disposable cloth from a hand operated flat mop through a single trigger mechanism without having to touch the disposable cloth. First independent claim: 1. A flat mop having a handle and apparatus for retaining the handle to a top plate of the flat mop, the flat mop comprising: a. a top plate including a first cover member and a second cover member, a bottom surface further retaining a pair of spaced apart steel pins which are molded into the bottom",
+        "mechanism": "Not summarised; the model was unavailable.",
         "key_claim_elements": [
-          "A flat mop having a handle and apparatus for retaining the handle to a top plate of the flat mop",
-          "a top plate including a first cover member and a second cover member",
-          "a push plate having a top surface which contains thereon along a first side a multiplicity of groups of spaced apart spikes",
-          "a mechanical plate with openings to receive the pair of ratchet collars and a pair of spring housings",
-          "a trigger mechanism",
-          "a first compression spring and a second compression spring"
+          "1. A flat mop having a handle and apparatus for retaining the handle to a top plate of the flat mop",
+          "the flat mop comprising: a. a top plate including a first cover member and a second cover member",
+          "a bottom surface further retaining a pair of spaced apart steel pins which are molded into the bottom surface respectively aligned with the first cover and the second cover",
+          "b. a push plate having a top surface which contains thereon along a first side a multiplicity of groups of spaced apart spikes and adjacent an opposite side of the push plate a corresponding multiplicity of groups of spaced apart spikes",
+          "the push plate also has four spaced apart flat housing members on the top surface of the push plate and four corresponding flat housing members on the bottom of the push plate"
         ],
-        "implementation_unknowns": [],
-        "powered": "non_powered",
+        "implementation_unknowns": [
+          "Needs a manual read of the full claims and drawings."
+        ],
+        "powered": "unclear",
         "evidence_ids": [
+          "dafe67844e99",
+          "22ae38d9535a",
+          "355a8cd83634",
+          "f098bceacb62",
+          "0cb5ffae9dd2",
+          "a1799912d88d",
           "dab24a31a6ea"
         ],
-        "quotes": [
-          "A flat mop having a handle and apparatus for retaining the handle to a top plate of the flat mop",
-          "when the trigger is activated, a downward force of the springs cause the push plate to move away from the mechanical plate and the micro-fiber cloth is released from the spikes and is released",
-          "when the trigger is activated, a downward force of the springs cause the push plate to move away from the mechanical plate and the non-woven cloth is pulled away from the hook retaining members and is released"
-        ]
+        "quotes": []
       },
       "opportunity": {
         "commercial_relevance": 5,
-        "engineering_effort": 4,
+        "engineering_effort": 3,
         "applications": [
-          "manual cleaning tools",
-          "flat mops"
+          "Patent Assessment Report"
         ],
         "challenges": [
-          "mechanical complexity",
-          "assembly precision"
+          "No market sizes, prices or sales figures"
         ],
-        "rationale": "The patent describes a trigger mechanism for releasing disposable cloths on a flat mop without manual contact, which aligns directly with the intended product category of non-powered household cleaning tools. The mechanism relies on mechanical linkages, springs, and plates rather than electronics, fitting the small manufacturer constraint. However, the assembly of ratchet collars and compression springs requires higher precision than static mop heads. The expired status due to non-payment suggests the original owner did not realize sufficient return on investment, possibly due to manufacturing costs or consumer adoption issues. For a new entrant, this removes licensing barriers but does not eliminate the production complexity that may have hindered the original owner. The technology is free to use, but the cost-benefit ratio of the mechanical complexity must be validated against simpler attachment methods.",
+        "rationale": "The patent describes a flat mop with a single trigger mechanism to remove disposable cloths without touch, which aligns directly with the intended product category of manual cleaning tools. The expiration due to non-payment places the technology in the public domain, eliminating licensing barriers. However, the mechanism involves molded steel pins and cover members, requiring specific tooling.",
         "evidence_ids": [
+          "dafe67844e99",
+          "22ae38d9535a",
+          "355a8cd83634",
+          "f098bceacb62",
+          "0cb5ffae9dd2",
+          "a1799912d88d",
           "dab24a31a6ea"
         ]
       },
@@ -227,264 +340,27 @@
           "status_to_verify": true
         }
       ],
-      "flags": [],
+      "flags": [
+        "powered_unclear"
+      ],
       "scores": {
         "commercial_relevance": 5,
-        "engineering_effort": 4,
-        "evidence_quality": 4,
+        "engineering_effort": 3,
+        "evidence_quality": 5,
         "unresolved_risk": 3,
-        "total": 3.75
+        "total": 4.2
       },
       "recommendation": "Shortlist",
       "reviewer_note": null,
       "is_synthetic": false,
       "evidence_ids": [
+        "dafe67844e99",
+        "22ae38d9535a",
+        "355a8cd83634",
+        "f098bceacb62",
+        "0cb5ffae9dd2",
+        "a1799912d88d",
         "dab24a31a6ea"
-      ]
-    },
-    {
-      "key": "US-10052665",
-      "display": "US 10,052,665",
-      "title": "Devices and methods for dispensing fluids and wiping surfaces",
-      "grant_date": "2018-08-21",
-      "filing_date": "2014-09-19",
-      "cpc_codes": [
-        "A47L25/00",
-        "B05C17/00596",
-        "B08B1/006"
-      ],
-      "status": {
-        "label": "expired_nonpayment",
-        "as_of": "2026-11-07",
-        "effective_date": "2026-08-21",
-        "stage": 8,
-        "evidence_ids": [
-          "9f5af1b5d8ca"
-        ],
-        "timeline": [
-          {
-            "event_type": "lapse",
-            "event_date": "2026-10-20",
-            "effective_date": "2026-08-21",
-            "stage": null,
-            "source": "og_notice",
-            "source_code": "OG",
-            "evidence_id": "9f5af1b5d8ca"
-          }
-        ],
-        "notes": [],
-        "confidence": "high"
-      },
-      "timeline": [
-        {
-          "date": "2018-08-21",
-          "event": "Granted",
-          "source": "bigquery",
-          "grade": "A",
-          "evidence_id": ""
-        },
-        {
-          "date": "2026-10-20",
-          "event": "Listed as expired for nonpayment (effective 2026-08-21)",
-          "source": "og_notice",
-          "grade": "A",
-          "evidence_id": "9f5af1b5d8ca"
-        },
-        {
-          "date": "2026-11-03",
-          "event": "No reinstatement listed in Gazette issues 2024-11-12 to 2026-11-03",
-          "source": "og_notice",
-          "grade": "A",
-          "evidence_id": ""
-        }
-      ],
-      "technical": {
-        "summary": "The patent claims a cleaning device configured to selectively dispense a fluid to a surface being cleaned. The device includes a housing where the outer portion is \"configured to be grasped and manipulated by a user during a cleaning procedure\" [9f5af1b5d8ca]. It comprises \"a dispenser comprising a porous or fluid permeable material\" [9f5af1b5d8ca] and \"a wiper removably attached to the wiper portion of the outer housing portion\" [9f5af1b5d8ca]. The wiper is repositionable \"to enable a different portion of the outer fabric layer to comprise the wiping surface\" [9f5af1b5d8ca]. No motor, battery, or power source is claimed.",
-        "mechanism": "non_powered",
-        "key_claim_elements": [
-          "housing comprising an outer housing portion and an inner housing portion",
-          "dispenser comprising a porous or fluid permeable material",
-          "wiper removably attached to the wiper portion of the outer housing portion"
-        ],
-        "implementation_unknowns": [],
-        "powered": "non_powered",
-        "evidence_ids": [
-          "9f5af1b5d8ca"
-        ],
-        "quotes": [
-          "configured to be grasped and manipulated by a user during a cleaning procedure",
-          "a dispenser comprising a porous or fluid permeable material",
-          "a wiper removably attached to the wiper portion of the outer housing portion",
-          "to enable a different portion of the outer fabric layer to comprise the wiping surface"
-        ]
-      },
-      "opportunity": {
-        "commercial_relevance": 4,
-        "engineering_effort": 3,
-        "applications": [
-          "Assessment of Expired Patent US-10052665"
-        ],
-        "challenges": [
-          "Confirming absolute expiration status across all jurisdictions",
-          "Ensuring no active continuations or divisionals exist"
-        ],
-        "rationale": "The patent covers a manual cleaning device configured to dispense fluid and wipe surfaces, aligning directly with the intended product category of non-powered household cleaning tools [9f5af1b5d8ca]. The claims describe a housing grasped by a user and a wiper removably attached to the outer housing portion, which matches the design constraints for manual mops or scrubbers [9f5af1b5d8ca]. The inclusion of a dispenser with porous material suggests a specific mechanism for fluid delivery that is commercially desirable in modern cleaning tools [9f5af1b5d8ca]. Engineering effort is moderate as the device requires no motor, battery, or power source, but does involve mechanical design for fluid dispensing and repositionable wiper attachment [9f5af1b5d8ca]. Regarding maintenance fees, the owner's decision to stop payments usually indicates the patent was worth little to them. This does apply to a new entrant in terms of reduced legal risk, as the technology is likely in the public domain. However, the low value to the original owner may not apply to a new entrant who can integrate these features into a broader product line where fluid dispensing and reversible wipers are standard consumer expectations, providing value through product completeness rather than exclusive monopoly rights.",
-        "evidence_ids": [
-          "9f5af1b5d8ca"
-        ]
-      },
-      "related": [
-        {
-          "relation": "terminal_disclaimer",
-          "patent_key": "US-10052665",
-          "source_field": "term_disclaimer",
-          "evidence": "A terminal disclaimer ties this patent's term to another patent.",
-          "status_to_verify": true
-        },
-        {
-          "relation": "terminal_disclaimer",
-          "patent_key": "US-10052665",
-          "source_field": "term_disclaimer",
-          "evidence": "A terminal disclaimer ties this patent's term to another patent.",
-          "status_to_verify": true
-        }
-      ],
-      "flags": [],
-      "scores": {
-        "commercial_relevance": 4,
-        "engineering_effort": 3,
-        "evidence_quality": 4,
-        "unresolved_risk": 3,
-        "total": 3.6
-      },
-      "recommendation": "Shortlist",
-      "reviewer_note": null,
-      "is_synthetic": false,
-      "evidence_ids": [
-        "9f5af1b5d8ca"
-      ]
-    },
-    {
-      "key": "US-10052751",
-      "display": "US 10,052,751",
-      "title": "Height adjustment lock system",
-      "grant_date": "2018-08-21",
-      "filing_date": "2015-03-17",
-      "cpc_codes": [
-        "A47L13/10",
-        "A47L13/42",
-        "B25G1/04"
-      ],
-      "status": {
-        "label": "expired_nonpayment",
-        "as_of": "2026-11-07",
-        "effective_date": "2026-08-21",
-        "stage": 8,
-        "evidence_ids": [
-          "8dd7d8547c94"
-        ],
-        "timeline": [
-          {
-            "event_type": "lapse",
-            "event_date": "2026-10-20",
-            "effective_date": "2026-08-21",
-            "stage": null,
-            "source": "og_notice",
-            "source_code": "OG",
-            "evidence_id": "8dd7d8547c94"
-          }
-        ],
-        "notes": [],
-        "confidence": "high"
-      },
-      "timeline": [
-        {
-          "date": "2018-08-21",
-          "event": "Granted",
-          "source": "bigquery",
-          "grade": "A",
-          "evidence_id": ""
-        },
-        {
-          "date": "2026-10-20",
-          "event": "Listed as expired for nonpayment (effective 2026-08-21)",
-          "source": "og_notice",
-          "grade": "A",
-          "evidence_id": "8dd7d8547c94"
-        },
-        {
-          "date": "2026-11-03",
-          "event": "No reinstatement listed in Gazette issues 2024-11-12 to 2026-11-03",
-          "source": "og_notice",
-          "grade": "A",
-          "evidence_id": ""
-        }
-      ],
-      "technical": {
-        "summary": "The patent discloses \"A height adjustment lock system comprising: a braking cylinder for receiving an upper pole section and a lower pole section\" [8dd7d8547c94]. The system utilizes \"the locking handle comprises a brake shoe pusher that protrudes inward from the generally cylindrical inner surface and is capable of applying force to the brake shoe when the locking handle is moved downward toward the lower pole section\" [8dd7d8547c94]. The invention may be embodied in \"A height adjustable cleaning device comprising: a pole comprising a lower pole section and an upper pole section; a cleaning head attached to the lower pole section\" [8dd7d8547c94].",
-        "mechanism": "manual",
-        "key_claim_elements": [
-          "braking cylinder",
-          "brake shoe",
-          "locking handle",
-          "brake shoe pusher"
-        ],
-        "implementation_unknowns": [],
-        "powered": "non_powered",
-        "evidence_ids": [
-          "8dd7d8547c94"
-        ],
-        "quotes": [
-          "A height adjustment lock system comprising: a braking cylinder for receiving an upper pole section and a lower pole section",
-          "the locking handle comprises a brake shoe pusher that protrudes inward from the generally cylindrical inner surface and is capable of applying force to the brake shoe when the locking handle is moved downward toward the lower pole section",
-          "A height adjustable cleaning device comprising: a pole comprising a lower pole section and an upper pole section; a cleaning head attached to the lower pole section"
-        ]
-      },
-      "opportunity": {
-        "commercial_relevance": 4,
-        "engineering_effort": 3,
-        "applications": [
-          "Assessment of Expired Patent US-10052751"
-        ],
-        "challenges": [
-          "Evaluation of Commercial Relevance",
-          "Evaluation of Engineering Effort",
-          "Analysis of Maintenance Fee Status"
-        ],
-        "rationale": "The patent discloses a height adjustment lock system specifically for cleaning devices comprising a pole and cleaning head [8dd7d8547c94]. This aligns directly with the intended product category of manual cleaning tools like mops. The mechanism involves a braking cylinder and locking handle with a brake shoe pusher [8dd7d8547c94], offering a specific mechanical solution for pole adjustment common in this category. As the patent is expired due to nonpayment, the technology is in the public domain, removing licensing barriers for a small manufacturer. The original owner's decision to stop paying fees suggests the specific implementation may not have provided sufficient competitive advantage or margin to justify the cost at their scale. However, for a new entrant, the zero licensing cost allows integration of a potentially superior locking mechanism without IP risk, differentiating the product from basic fixed-height or simpler friction-lock competitors. The engineering effort is moderate as it requires manufacturing specific mechanical components like brake shoes and cylinders rather than simple snap-fits, but fits within non-powered manufacturing capabilities.",
-        "evidence_ids": [
-          "8dd7d8547c94"
-        ]
-      },
-      "related": [
-        {
-          "relation": "terminal_disclaimer",
-          "patent_key": "US-10052751",
-          "source_field": "term_disclaimer",
-          "evidence": "A terminal disclaimer ties this patent's term to another patent.",
-          "status_to_verify": true
-        },
-        {
-          "relation": "terminal_disclaimer",
-          "patent_key": "US-10052751",
-          "source_field": "term_disclaimer",
-          "evidence": "A terminal disclaimer ties this patent's term to another patent.",
-          "status_to_verify": true
-        }
-      ],
-      "flags": [],
-      "scores": {
-        "commercial_relevance": 4,
-        "engineering_effort": 3,
-        "evidence_quality": 4,
-        "unresolved_risk": 3,
-        "total": 3.6
-      },
-      "recommendation": "Hold",
-      "reviewer_note": null,
-      "is_synthetic": false,
-      "evidence_ids": [
-        "8dd7d8547c94"
       ]
     },
     {
@@ -504,9 +380,60 @@
         "effective_date": "2026-09-09",
         "stage": 12,
         "evidence_ids": [
-          "1f3ca4225097"
+          "2d487ce79662",
+          "98851d038197",
+          "63b93584aed9",
+          "7b5a8ab08f5b",
+          "63db8fcedd72",
+          "1f3ca4225097",
+          "1f123e64172a"
         ],
         "timeline": [
+          {
+            "event_type": "fee_paid",
+            "event_date": "2018-02-22",
+            "effective_date": null,
+            "stage": null,
+            "source": "ops",
+            "source_code": "MAFP",
+            "evidence_id": "2d487ce79662"
+          },
+          {
+            "event_type": "fee_paid",
+            "event_date": "2022-03-09",
+            "effective_date": null,
+            "stage": null,
+            "source": "ops",
+            "source_code": "MAFP",
+            "evidence_id": "98851d038197"
+          },
+          {
+            "event_type": "reminder",
+            "event_date": "2026-04-27",
+            "effective_date": null,
+            "stage": null,
+            "source": "ops",
+            "source_code": "FEPP",
+            "evidence_id": "63b93584aed9"
+          },
+          {
+            "event_type": "lapse",
+            "event_date": "2026-10-12",
+            "effective_date": null,
+            "stage": null,
+            "source": "ops",
+            "source_code": "STCH",
+            "evidence_id": "7b5a8ab08f5b"
+          },
+          {
+            "event_type": "lapse",
+            "event_date": "2026-10-12",
+            "effective_date": null,
+            "stage": null,
+            "source": "ops",
+            "source_code": "LAPS",
+            "evidence_id": "63db8fcedd72"
+          },
           {
             "event_type": "lapse",
             "event_date": "2026-11-03",
@@ -515,10 +442,19 @@
             "source": "og_notice",
             "source_code": "OG",
             "evidence_id": "1f3ca4225097"
+          },
+          {
+            "event_type": "lapse",
+            "event_date": "2026-11-03",
+            "effective_date": "2026-09-09",
+            "stage": null,
+            "source": "ops",
+            "source_code": "FP",
+            "evidence_id": "1f123e64172a"
           }
         ],
         "notes": [],
-        "confidence": "high"
+        "confidence": "very_high"
       },
       "timeline": [
         {
@@ -529,11 +465,53 @@
           "evidence_id": ""
         },
         {
+          "date": "2018-02-22",
+          "event": "Maintenance fee paid",
+          "source": "ops",
+          "grade": "B",
+          "evidence_id": "2d487ce79662"
+        },
+        {
+          "date": "2022-03-09",
+          "event": "Maintenance fee paid",
+          "source": "ops",
+          "grade": "B",
+          "evidence_id": "98851d038197"
+        },
+        {
+          "date": "2026-04-27",
+          "event": "Fee reminder mailed",
+          "source": "ops",
+          "grade": "B",
+          "evidence_id": "63b93584aed9"
+        },
+        {
+          "date": "2026-10-12",
+          "event": "Listed as expired for nonpayment",
+          "source": "ops",
+          "grade": "B",
+          "evidence_id": "7b5a8ab08f5b"
+        },
+        {
+          "date": "2026-10-12",
+          "event": "Listed as expired for nonpayment",
+          "source": "ops",
+          "grade": "B",
+          "evidence_id": "63db8fcedd72"
+        },
+        {
           "date": "2026-11-03",
           "event": "Listed as expired for nonpayment (effective 2026-09-09)",
           "source": "og_notice",
           "grade": "A",
           "evidence_id": "1f3ca4225097"
+        },
+        {
+          "date": "2026-11-03",
+          "event": "Listed as expired for nonpayment (effective 2026-09-09)",
+          "source": "ops",
+          "grade": "B",
+          "evidence_id": "1f123e64172a"
         },
         {
           "date": "2026-11-03",
@@ -557,7 +535,13 @@
         ],
         "powered": "unclear",
         "evidence_ids": [
-          "1f3ca4225097"
+          "2d487ce79662",
+          "98851d038197",
+          "63b93584aed9",
+          "7b5a8ab08f5b",
+          "63db8fcedd72",
+          "1f3ca4225097",
+          "1f123e64172a"
         ],
         "quotes": []
       },
@@ -565,14 +549,23 @@
         "commercial_relevance": 5,
         "engineering_effort": 3,
         "applications": [
-          "US-8826487"
+          "patent_assessment"
         ],
         "challenges": [
-          "expired_nonpayment"
+          "structured_output_only",
+          "no_market_data",
+          "evidence_citation_required",
+          "maintenance_fee_analysis_required"
         ],
-        "rationale": "The patent claims a 'Mop cleaning set' with a 'dehydration device' and 'mop structure' comprising a 'flexible material' connecting portion [1f3ca4225097]. This aligns directly with the intended product category of manual cleaning tools and mops. The engineering effort is moderate as it requires mechanical design for the dehydration mechanism and tooling for plastic components, but remains within non-powered household tool capabilities. The expired status due to nonpayment indicates the original owner ceased monetization, placing the technology in the public domain. This benefits a new entrant by removing licensing barriers, though it suggests the specific design may lack distinct competitive advantage over existing free alternatives. A technical review is warranted to assess if the specific dehydration mechanism offers usability improvements over current market standards without incurring IP risk.",
+        "rationale": "Direct category match for manual mop tools. Expired status eliminates licensing barriers. Mechanical complexity is moderate.",
         "evidence_ids": [
-          "1f3ca4225097"
+          "2d487ce79662",
+          "98851d038197",
+          "63b93584aed9",
+          "7b5a8ab08f5b",
+          "63db8fcedd72",
+          "1f3ca4225097",
+          "1f123e64172a"
         ]
       },
       "related": [
@@ -619,15 +612,496 @@
       "scores": {
         "commercial_relevance": 5,
         "engineering_effort": 3,
-        "evidence_quality": 4,
+        "evidence_quality": 5,
         "unresolved_risk": 5,
-        "total": 3.55
+        "total": 3.8
+      },
+      "recommendation": "Shortlist",
+      "reviewer_note": null,
+      "is_synthetic": false,
+      "evidence_ids": [
+        "2d487ce79662",
+        "98851d038197",
+        "63b93584aed9",
+        "7b5a8ab08f5b",
+        "63db8fcedd72",
+        "1f3ca4225097",
+        "1f123e64172a"
+      ]
+    },
+    {
+      "key": "US-10052665",
+      "display": "US 10,052,665",
+      "title": "Devices and methods for dispensing fluids and wiping surfaces",
+      "grant_date": "2018-08-21",
+      "filing_date": "2014-09-19",
+      "cpc_codes": [
+        "A47L25/00",
+        "B05C17/00596",
+        "B08B1/006"
+      ],
+      "status": {
+        "label": "expired_nonpayment",
+        "as_of": "2026-11-07",
+        "effective_date": "2026-08-21",
+        "stage": 8,
+        "evidence_ids": [
+          "31b197301214",
+          "08b14e37b541",
+          "feb505fa551f",
+          "67b1dd76694c",
+          "9f5af1b5d8ca",
+          "818679383999"
+        ],
+        "timeline": [
+          {
+            "event_type": "fee_paid",
+            "event_date": "2022-02-01",
+            "effective_date": null,
+            "stage": null,
+            "source": "ops",
+            "source_code": "MAFP",
+            "evidence_id": "31b197301214"
+          },
+          {
+            "event_type": "reminder",
+            "event_date": "2026-04-13",
+            "effective_date": null,
+            "stage": null,
+            "source": "ops",
+            "source_code": "FEPP",
+            "evidence_id": "08b14e37b541"
+          },
+          {
+            "event_type": "lapse",
+            "event_date": "2026-09-28",
+            "effective_date": null,
+            "stage": null,
+            "source": "ops",
+            "source_code": "STCH",
+            "evidence_id": "feb505fa551f"
+          },
+          {
+            "event_type": "lapse",
+            "event_date": "2026-09-28",
+            "effective_date": null,
+            "stage": null,
+            "source": "ops",
+            "source_code": "LAPS",
+            "evidence_id": "67b1dd76694c"
+          },
+          {
+            "event_type": "lapse",
+            "event_date": "2026-10-20",
+            "effective_date": "2026-08-21",
+            "stage": null,
+            "source": "og_notice",
+            "source_code": "OG",
+            "evidence_id": "9f5af1b5d8ca"
+          },
+          {
+            "event_type": "lapse",
+            "event_date": "2026-10-20",
+            "effective_date": "2026-08-21",
+            "stage": null,
+            "source": "ops",
+            "source_code": "FP",
+            "evidence_id": "818679383999"
+          }
+        ],
+        "notes": [],
+        "confidence": "very_high"
+      },
+      "timeline": [
+        {
+          "date": "2018-08-21",
+          "event": "Granted",
+          "source": "bigquery",
+          "grade": "A",
+          "evidence_id": ""
+        },
+        {
+          "date": "2022-02-01",
+          "event": "Maintenance fee paid",
+          "source": "ops",
+          "grade": "B",
+          "evidence_id": "31b197301214"
+        },
+        {
+          "date": "2026-04-13",
+          "event": "Fee reminder mailed",
+          "source": "ops",
+          "grade": "B",
+          "evidence_id": "08b14e37b541"
+        },
+        {
+          "date": "2026-09-28",
+          "event": "Listed as expired for nonpayment",
+          "source": "ops",
+          "grade": "B",
+          "evidence_id": "feb505fa551f"
+        },
+        {
+          "date": "2026-09-28",
+          "event": "Listed as expired for nonpayment",
+          "source": "ops",
+          "grade": "B",
+          "evidence_id": "67b1dd76694c"
+        },
+        {
+          "date": "2026-10-20",
+          "event": "Listed as expired for nonpayment (effective 2026-08-21)",
+          "source": "og_notice",
+          "grade": "A",
+          "evidence_id": "9f5af1b5d8ca"
+        },
+        {
+          "date": "2026-10-20",
+          "event": "Listed as expired for nonpayment (effective 2026-08-21)",
+          "source": "ops",
+          "grade": "B",
+          "evidence_id": "818679383999"
+        },
+        {
+          "date": "2026-11-03",
+          "event": "No reinstatement listed in Gazette issues 2024-11-12 to 2026-11-03",
+          "source": "og_notice",
+          "grade": "A",
+          "evidence_id": ""
+        }
+      ],
+      "technical": {
+        "summary": "The patent describes a cleaning device designed to dispense fluid onto a surface and then wipe it off. The device includes a housing with an outer and inner portion, a dispenser with a porous material for delivering fluid, and a wiper with a stiff inner core and an outer fabric layer. The wiper can be repositioned to use different parts of the fabric. The device can also include caps for the dispenser and wiper. The dispenser and wiper have specific dimensions for their protruding portions. Another embodiment describes a housing with separate cavities for the dispenser and wiper, with the wiper core being slightly smaller than its cavity to allow for easy positioning.",
+        "mechanism": "The cleaning device works by having a dispenser that selectively delivers fluid to a surface being cleaned and a wiper that wipes the dispensed fluid from the surface. The wiper can be repositioned to use different portions of the outer fabric layer.",
+        "key_claim_elements": [
+          "A cleaning device configured to selectively dispense a fluid to a surface being cleaned, the cleaning device comprising: a housing comprising an outer housing portion and an inner housing portion, the outer housing portion configured to be grasped and manipulated by a user during a cleaning procedure, the outer housing portion comprising a wiper portion and an inner cavity, the inner housing portion comprising a dispenser cavity; wherein at least a portion of the inner housing portion is positioned within the inner cavity of the outer housing portion; a dispenser comprising a porous or fluid permeable material, the dispenser positioned at least partially within the dispenser cavity of the inner housing portion and protruding at least partially from an opening of the dispenser cavity; wherein the dispenser comprises a dispensing surface configured to contact a surface being cleaned and to selectively deliver fluid thereto; and a wiper removably attached to the wiper portion of the outer housing portion, the wiper comprising an inner core and an outer fabric layer, the inner core comprising a material that is stiffer than the outer fabric layer, a portion of the outer fabric layer comprising a wiping surface, the wiping surface configured to wipe dispensed fluid from a surface being cleaned, wherein the wiper is repositionable relative to the wiper portion of the outer housing portion to enable a different portion of the outer fabric layer to comprise the wiping surface.",
+          "A cleaning device configured to selectively dispense a fluid to a surface being cleaned, the cleaning device comprising: a housing comprising a first end and a second end, the first end comprising a dispenser cavity and the second end comprising a wiper cavity; a dispenser positioned at least partially within the dispenser cavity, the dispenser comprising a porous or fluid permeable material; wherein the dispenser comprises a dispensing portion at least partially protruding from the dispenser cavity, the dispensing portion configured to contact a surface being cleaned and to selectively deliver fluid thereto; and a wiper removably positioned at least partially within the wiper cavity, the wiper comprising a wiper core wrapped in at least one layer of fabric; wherein the wiper core and the wiper cavity each comprise a thickness, and the thickness of the wiper cavity is greater than the thickness of the wiper core."
+        ],
+        "implementation_unknowns": [
+          "The claims do not specify if the device is powered or non-powered."
+        ],
+        "powered": "unclear",
+        "evidence_ids": [
+          "31b197301214",
+          "08b14e37b541",
+          "feb505fa551f",
+          "67b1dd76694c",
+          "9f5af1b5d8ca",
+          "818679383999"
+        ],
+        "quotes": [
+          "A cleaning device configured to selectively dispense a fluid to a surface being cleaned, the cleaning device comprising: a housing comprising an outer housing portion and an inner housing portion, the outer housing portion configured to be grasped and manipulated by a user during a cleaning procedure, the outer housing portion comprising a wiper portion and an inner cavity, the inner housing portion comprising a dispenser cavity; wherein at least a portion of the inner housing portion is positioned within the inner cavity of the outer housing portion; a dispenser comprising a porous or fluid permeable material, the dispenser positioned at least partially within the dispenser cavity of the inner housing portion and protruding at least partially from an opening of the dispenser cavity; wherein the dispenser comprises a dispensing surface configured to contact a surface being cleaned and to selectively deliver fluid thereto; and a wiper removably attached to the wiper portion of the outer housing portion, the wiper comprising an inner core and an outer fabric layer, the inner core comprising a material that is stiffer than the outer fabric layer, a portion of the outer fabric layer comprising a wiping surface, the wiping surface configured to wipe dispensed fluid from a surface being cleaned, wherein the wiper is repositionable relative to the wiper portion of the outer housing portion to enable a different portion of the outer fabric layer to comprise the wiping surface.",
+          "A cleaning device configured to selectively dispense a fluid to a surface being cleaned, the cleaning device comprising: a housing comprising a first end and a second end, the first end comprising a dispenser cavity and the second end comprising a wiper cavity; a dispenser positioned at least partially within the dispenser cavity, the dispenser comprising a porous or fluid permeable material; wherein the dispenser comprises a dispensing portion at least partially protruding from the dispenser cavity, the dispensing portion configured to contact a surface being cleaned and to selectively deliver fluid thereto; and a wiper removably positioned at least partially within the wiper cavity, the wiper comprising a wiper core wrapped in at least one layer of fabric; wherein the wiper core and the wiper cavity each comprise a thickness, and the thickness of the wiper cavity is greater than the thickness of the wiper core."
+        ]
+      },
+      "opportunity": {
+        "commercial_relevance": 3,
+        "engineering_effort": 3,
+        "applications": [
+          "Repositionable wiper hand-cleaning tool",
+          "Fluid-dispensing microfiber wipe",
+          "Refillable surface cleaning module",
+          "Compact spray-and-wipe device for floors or windows"
+        ],
+        "challenges": [
+          "Designing a leak-resistant fluid path without powered pumps",
+          "Selecting porous dispenser material with repeatable flow",
+          "Retaining and repositioning a fabric wiper around a stiff core",
+          "Avoiding mold cavities and tolerance issues for wiper core fit",
+          "Keeping assembly simple for a small non-electronic manufacturer"
+        ],
+        "rationale": "The patent fits the intended manual household cleaning category because it combines a fluid dispenser with a wiping surface, and the disclosed features such as a porous fluid element, stiff-core fabric wiper, repositionable wiper, and simple housing cavities can be implemented without electronics. Its commercial relevance is moderate rather than high because the core idea is functionally straightforward and likely not unique enough to carry a product line by itself. Engineering effort is moderate because a small manufacturer would need to solve fluid storage, porous dispensing, wiper retention, and replacement or repositioning, but does not need complex electronics or precision manufacturing. The maintenance-fee lapse is a meaningful signal that the owner did not treat this as a high-value standalone asset, so it should not be viewed as a blocking risk or a premium differentiator. That signal may not fully apply to a new entrant because the patent is now expired and can be used freely, and a small maker could use the disclosed structure as one feature in a broader product, a refill system, or a niche customer need that the original owner did not prioritize.",
+        "evidence_ids": [
+          "31b197301214",
+          "08b14e37b541",
+          "feb505fa551f",
+          "67b1dd76694c",
+          "9f5af1b5d8ca",
+          "818679383999"
+        ]
+      },
+      "related": [
+        {
+          "relation": "terminal_disclaimer",
+          "patent_key": "US-10052665",
+          "source_field": "term_disclaimer",
+          "evidence": "A terminal disclaimer ties this patent's term to another patent.",
+          "status_to_verify": true
+        },
+        {
+          "relation": "terminal_disclaimer",
+          "patent_key": "US-10052665",
+          "source_field": "term_disclaimer",
+          "evidence": "A terminal disclaimer ties this patent's term to another patent.",
+          "status_to_verify": true
+        }
+      ],
+      "flags": [
+        "powered_unclear"
+      ],
+      "scores": {
+        "commercial_relevance": 3,
+        "engineering_effort": 3,
+        "evidence_quality": 5,
+        "unresolved_risk": 3,
+        "total": 3.5
       },
       "recommendation": "Hold",
       "reviewer_note": null,
       "is_synthetic": false,
       "evidence_ids": [
-        "1f3ca4225097"
+        "31b197301214",
+        "08b14e37b541",
+        "feb505fa551f",
+        "67b1dd76694c",
+        "9f5af1b5d8ca",
+        "818679383999"
+      ]
+    },
+    {
+      "key": "US-10052751",
+      "display": "US 10,052,751",
+      "title": "Height adjustment lock system",
+      "grant_date": "2018-08-21",
+      "filing_date": "2015-03-17",
+      "cpc_codes": [
+        "A47L13/10",
+        "A47L13/42",
+        "B25G1/04"
+      ],
+      "status": {
+        "label": "expired_nonpayment",
+        "as_of": "2026-11-07",
+        "effective_date": "2026-08-21",
+        "stage": 8,
+        "evidence_ids": [
+          "e2b395481a81",
+          "3d334f31d2ba",
+          "b6a339c2a300",
+          "bc40cab90290",
+          "775c5279027b",
+          "8dd7d8547c94",
+          "ecd1d98be25c"
+        ],
+        "timeline": [
+          {
+            "event_type": "reminder",
+            "event_date": "2022-04-11",
+            "effective_date": null,
+            "stage": null,
+            "source": "ops",
+            "source_code": "FEPP",
+            "evidence_id": "e2b395481a81"
+          },
+          {
+            "event_type": "fee_paid",
+            "event_date": "2022-08-19",
+            "effective_date": null,
+            "stage": null,
+            "source": "ops",
+            "source_code": "MAFP",
+            "evidence_id": "3d334f31d2ba"
+          },
+          {
+            "event_type": "reminder",
+            "event_date": "2026-04-13",
+            "effective_date": null,
+            "stage": null,
+            "source": "ops",
+            "source_code": "FEPP",
+            "evidence_id": "b6a339c2a300"
+          },
+          {
+            "event_type": "lapse",
+            "event_date": "2026-09-28",
+            "effective_date": null,
+            "stage": null,
+            "source": "ops",
+            "source_code": "STCH",
+            "evidence_id": "bc40cab90290"
+          },
+          {
+            "event_type": "lapse",
+            "event_date": "2026-09-28",
+            "effective_date": null,
+            "stage": null,
+            "source": "ops",
+            "source_code": "LAPS",
+            "evidence_id": "775c5279027b"
+          },
+          {
+            "event_type": "lapse",
+            "event_date": "2026-10-20",
+            "effective_date": "2026-08-21",
+            "stage": null,
+            "source": "og_notice",
+            "source_code": "OG",
+            "evidence_id": "8dd7d8547c94"
+          },
+          {
+            "event_type": "lapse",
+            "event_date": "2026-10-20",
+            "effective_date": "2026-08-21",
+            "stage": null,
+            "source": "ops",
+            "source_code": "FP",
+            "evidence_id": "ecd1d98be25c"
+          }
+        ],
+        "notes": [],
+        "confidence": "very_high"
+      },
+      "timeline": [
+        {
+          "date": "2018-08-21",
+          "event": "Granted",
+          "source": "bigquery",
+          "grade": "A",
+          "evidence_id": ""
+        },
+        {
+          "date": "2022-04-11",
+          "event": "Fee reminder mailed",
+          "source": "ops",
+          "grade": "B",
+          "evidence_id": "e2b395481a81"
+        },
+        {
+          "date": "2022-08-19",
+          "event": "Maintenance fee paid",
+          "source": "ops",
+          "grade": "B",
+          "evidence_id": "3d334f31d2ba"
+        },
+        {
+          "date": "2026-04-13",
+          "event": "Fee reminder mailed",
+          "source": "ops",
+          "grade": "B",
+          "evidence_id": "b6a339c2a300"
+        },
+        {
+          "date": "2026-09-28",
+          "event": "Listed as expired for nonpayment",
+          "source": "ops",
+          "grade": "B",
+          "evidence_id": "bc40cab90290"
+        },
+        {
+          "date": "2026-09-28",
+          "event": "Listed as expired for nonpayment",
+          "source": "ops",
+          "grade": "B",
+          "evidence_id": "775c5279027b"
+        },
+        {
+          "date": "2026-10-20",
+          "event": "Listed as expired for nonpayment (effective 2026-08-21)",
+          "source": "og_notice",
+          "grade": "A",
+          "evidence_id": "8dd7d8547c94"
+        },
+        {
+          "date": "2026-10-20",
+          "event": "Listed as expired for nonpayment (effective 2026-08-21)",
+          "source": "ops",
+          "grade": "B",
+          "evidence_id": "ecd1d98be25c"
+        },
+        {
+          "date": "2026-11-03",
+          "event": "No reinstatement listed in Gazette issues 2024-11-12 to 2026-11-03",
+          "source": "og_notice",
+          "grade": "A",
+          "evidence_id": ""
+        }
+      ],
+      "technical": {
+        "summary": "Patent US-10052751 describes a height adjustment lock system and a height adjustable cleaning device. The system includes a braking cylinder, brake shoe, and locking handle. The handle applies force to the brake shoe to lock the pole sections. It is manually operated.",
+        "mechanism": "The device uses a braking cylinder with a brake shoe and a locking handle. The handle has a pusher that applies force to the brake shoe to retain the pole section.",
+        "key_claim_elements": [
+          "braking cylinder",
+          "brake shoe",
+          "locking handle",
+          "brake shoe pusher"
+        ],
+        "implementation_unknowns": [],
+        "powered": "non_powered",
+        "evidence_ids": [
+          "e2b395481a81",
+          "3d334f31d2ba",
+          "b6a339c2a300",
+          "bc40cab90290",
+          "775c5279027b",
+          "8dd7d8547c94",
+          "ecd1d98be25c"
+        ],
+        "quotes": [
+          "A height adjustment lock system comprising: a braking cylinder for receiving an upper pole section and a lower pole section",
+          "the locking handle comprises a brake shoe pusher that protrudes inward from the generally cylindrical inner surface and is capable of applying force to the brake shoe when the locking handle is moved downward toward the lower pole section",
+          "A height adjustable cleaning device comprising: a pole comprising a lower pole section and an upper pole section",
+          "the frictional surface of the brake shoe comprises a soft durometer material",
+          "further comprising a stop plug capable of coupling to the lower pole section",
+          "the braking cylinder further comprises a stop flange for halting the linear travel of the lower pole section into the braking cylinder"
+        ]
+      },
+      "opportunity": {
+        "commercial_relevance": 3,
+        "engineering_effort": 3,
+        "applications": [
+          "patent_id",
+          "US-10052751"
+        ],
+        "challenges": [
+          "status",
+          "expired_nonpayment"
+        ],
+        "rationale": "Height adjustment is a standard feature in manual cleaning tools like mops. The described lock system offers a specific mechanical solution. Relevance is moderate as it applies to a subset of intended products. Engineering effort is moderate due to multiple components (cylinder, shoe, handle). Expired status removes IP barriers. Previous owner nonpayment suggests limited value to them, but new entrants can leverage the public domain technology for product differentiation without licensing costs.",
+        "evidence_ids": [
+          "e2b395481a81",
+          "3d334f31d2ba",
+          "b6a339c2a300",
+          "bc40cab90290",
+          "775c5279027b",
+          "8dd7d8547c94",
+          "ecd1d98be25c"
+        ]
+      },
+      "related": [
+        {
+          "relation": "terminal_disclaimer",
+          "patent_key": "US-10052751",
+          "source_field": "term_disclaimer",
+          "evidence": "A terminal disclaimer ties this patent's term to another patent.",
+          "status_to_verify": true
+        },
+        {
+          "relation": "terminal_disclaimer",
+          "patent_key": "US-10052751",
+          "source_field": "term_disclaimer",
+          "evidence": "A terminal disclaimer ties this patent's term to another patent.",
+          "status_to_verify": true
+        }
+      ],
+      "flags": [],
+      "scores": {
+        "commercial_relevance": 3,
+        "engineering_effort": 3,
+        "evidence_quality": 5,
+        "unresolved_risk": 3,
+        "total": 3.5
+      },
+      "recommendation": "Hold",
+      "reviewer_note": null,
+      "is_synthetic": false,
+      "evidence_ids": [
+        "e2b395481a81",
+        "3d334f31d2ba",
+        "b6a339c2a300",
+        "bc40cab90290",
+        "775c5279027b",
+        "8dd7d8547c94",
+        "ecd1d98be25c"
       ]
     },
     {
@@ -652,9 +1126,60 @@
         "effective_date": "2026-09-04",
         "stage": 8,
         "evidence_ids": [
-          "22ca5dba3b75"
+          "b322b6500ab7",
+          "5e65320b51c8",
+          "37827bcc0933",
+          "08cbcf4ed47e",
+          "055a26752763",
+          "22ca5dba3b75",
+          "1ef4595eef13"
         ],
         "timeline": [
+          {
+            "event_type": "reminder",
+            "event_date": "2022-04-25",
+            "effective_date": null,
+            "stage": null,
+            "source": "ops",
+            "source_code": "FEPP",
+            "evidence_id": "b322b6500ab7"
+          },
+          {
+            "event_type": "fee_paid",
+            "event_date": "2022-05-23",
+            "effective_date": null,
+            "stage": null,
+            "source": "ops",
+            "source_code": "MAFP",
+            "evidence_id": "5e65320b51c8"
+          },
+          {
+            "event_type": "reminder",
+            "event_date": "2026-04-27",
+            "effective_date": null,
+            "stage": null,
+            "source": "ops",
+            "source_code": "FEPP",
+            "evidence_id": "37827bcc0933"
+          },
+          {
+            "event_type": "lapse",
+            "event_date": "2026-10-12",
+            "effective_date": null,
+            "stage": null,
+            "source": "ops",
+            "source_code": "STCH",
+            "evidence_id": "08cbcf4ed47e"
+          },
+          {
+            "event_type": "lapse",
+            "event_date": "2026-10-12",
+            "effective_date": null,
+            "stage": null,
+            "source": "ops",
+            "source_code": "LAPS",
+            "evidence_id": "055a26752763"
+          },
           {
             "event_type": "lapse",
             "event_date": "2026-11-03",
@@ -663,10 +1188,19 @@
             "source": "og_notice",
             "source_code": "OG",
             "evidence_id": "22ca5dba3b75"
+          },
+          {
+            "event_type": "lapse",
+            "event_date": "2026-11-03",
+            "effective_date": "2026-09-04",
+            "stage": null,
+            "source": "ops",
+            "source_code": "FP",
+            "evidence_id": "1ef4595eef13"
           }
         ],
         "notes": [],
-        "confidence": "high"
+        "confidence": "very_high"
       },
       "timeline": [
         {
@@ -677,11 +1211,53 @@
           "evidence_id": ""
         },
         {
+          "date": "2022-04-25",
+          "event": "Fee reminder mailed",
+          "source": "ops",
+          "grade": "B",
+          "evidence_id": "b322b6500ab7"
+        },
+        {
+          "date": "2022-05-23",
+          "event": "Maintenance fee paid",
+          "source": "ops",
+          "grade": "B",
+          "evidence_id": "5e65320b51c8"
+        },
+        {
+          "date": "2026-04-27",
+          "event": "Fee reminder mailed",
+          "source": "ops",
+          "grade": "B",
+          "evidence_id": "37827bcc0933"
+        },
+        {
+          "date": "2026-10-12",
+          "event": "Listed as expired for nonpayment",
+          "source": "ops",
+          "grade": "B",
+          "evidence_id": "08cbcf4ed47e"
+        },
+        {
+          "date": "2026-10-12",
+          "event": "Listed as expired for nonpayment",
+          "source": "ops",
+          "grade": "B",
+          "evidence_id": "055a26752763"
+        },
+        {
           "date": "2026-11-03",
           "event": "Listed as expired for nonpayment (effective 2026-09-04)",
           "source": "og_notice",
           "grade": "A",
           "evidence_id": "22ca5dba3b75"
+        },
+        {
+          "date": "2026-11-03",
+          "event": "Listed as expired for nonpayment (effective 2026-09-04)",
+          "source": "ops",
+          "grade": "B",
+          "evidence_id": "1ef4595eef13"
         },
         {
           "date": "2026-11-03",
@@ -692,54 +1268,72 @@
         }
       ],
       "technical": {
-        "summary": "Windshield cleaning implement. First independent claim: 1. A windshield cleaning implement comprising: an elongated shaft having a proximal end and a distal end, wherein said shaft is elongated, arcuate and constructed with a resilient but flexible material, a cleaning head attached to the distal end of said shaft, said cleaning head having a front face ",
-        "mechanism": "Not summarised; the model was unavailable.",
+        "summary": "The patent describes a windshield cleaning implement with an arcuate, flexible shaft and a cleaning head that can simultaneously hold a sponge, a scrubbing brush, and a wiper blade. These elements are removably attached to the cleaning head via tubular slots, allowing the user to dampen, scrub, and scrape a windshield in one motion. The device is operated manually via a handle at the proximal end of the shaft.",
+        "mechanism": "The windshield cleaning implement has an arcuate, flexible shaft with a cleaning head at its distal end. The cleaning head features multiple tubular slots on its front face, allowing for the removable attachment of a sponge, a wiper blade, and a scrubbing brush. The sponge, scrubbing brush, and wiper blade can be simultaneously used to dampen, scrub, and scrape a windshield with a single swipe. A handle at the proximal end of the shaft enables the user to apply force, pressing the attached cleaning elements against the windshield.",
         "key_claim_elements": [
-          "1. A windshield cleaning implement comprising: an elongated shaft having a proximal end and a distal end",
-          "wherein said shaft is elongated",
-          "arcuate and constructed with a resilient but flexible material",
-          "a cleaning head attached to the distal end of said shaft",
-          "said cleaning head having a front face and a rear face"
+          "an elongated shaft having a proximal end and a distal end, wherein said shaft is elongated, arcuate and constructed with a resilient but flexible material",
+          "a cleaning head attached to the distal end of said shaft, said cleaning head having a front face and a rear face",
+          "said cleaning head including a plurality of juxtaposed, tubular slots on the front face",
+          "a sponge having a projection that is slidably receivable within one of said tubular slots to removably attach said sponge to the front face of said cleaning head",
+          "a wiper blade having a projection that is slidably receivable within one of said tubular slots to removably attach said wiper blade to the front face of said cleaning head",
+          "a scrubbing brush having a projection that is slidably receivable within one of said tubular slots to removably attach said scrubbing brush to the front face of said cleaning head, between said sponge and said wiper blade",
+          "a handle at the proximal end of said shaft whereby, when a user applies a predetermined amount of force to the handle, said sponge, said scrubbing brush and said wiper blade are simultaneously forced against a windshield"
         ],
         "implementation_unknowns": [
-          "Needs a manual read of the full claims and drawings."
+          "unclear"
         ],
-        "powered": "unclear",
+        "powered": "non_powered",
         "evidence_ids": [
-          "22ca5dba3b75"
+          "b322b6500ab7",
+          "5e65320b51c8",
+          "37827bcc0933",
+          "08cbcf4ed47e",
+          "055a26752763",
+          "22ca5dba3b75",
+          "1ef4595eef13"
         ],
-        "quotes": []
-      },
-      "opportunity": {
-        "commercial_relevance": 2,
-        "engineering_effort": 2,
-        "applications": [
-          "patent_assessment"
-        ],
-        "challenges": [
-          "The patent is expired due to non-payment of maintenance fees."
-        ],
-        "rationale": "The patent claims a specific 'windshield cleaning implement' with an arcuate, resilient shaft [22ca5dba3b75]. While the mechanical structure overlaps with household squeegees or brushes, the specific automotive application limits direct relevance to a general household cleaning product line focused on floors and surfaces. The technology is simple and within the capability of a small manufacturer producing non-powered tools. The expiration due to non-payment suggests the original owner found limited value in this specific configuration, which may indicate a niche market. However, for a new entrant, the expired status removes licensing barriers, allowing the flexible shaft design to be adapted for household windows or showers without royalty obligations, potentially finding value where the original owner did not.",
-        "evidence_ids": [
-          "22ca5dba3b75"
+        "quotes": [
+          "an elongated shaft having a proximal end and a distal end, wherein said shaft is elongated, arcuate and constructed with a resilient but flexible material",
+          "a cleaning head attached to the distal end of said shaft, said cleaning head having a front face and a rear face",
+          "said cleaning head including a plurality of juxtaposed, tubular slots on the front face",
+          "a sponge having a projection that is slidably receivable within one of said tubular slots to removably attach said sponge to the front face of said cleaning head",
+          "a wiper blade having a projection that is slidably receivable within one of said tubular slots to removably attach said wiper blade to the front face of said cleaning head",
+          "a scrubbing brush having a projection that is slidably receivable within one of said tubular slots to removably attach said scrubbing brush to the front face of said cleaning head, between said sponge and said wiper blade",
+          "a handle at the proximal end of said shaft whereby, when a user applies a predetermined amount of force to the handle, said sponge, said scrubbing brush and said wiper blade are simultaneously forced against a windshield"
         ]
       },
+      "opportunity": {
+        "commercial_relevance": 1,
+        "engineering_effort": 1,
+        "applications": [
+          "patent_id"
+        ],
+        "challenges": [
+          "string"
+        ],
+        "rationale": "string",
+        "evidence_ids": []
+      },
       "related": [],
-      "flags": [
-        "powered_unclear"
-      ],
+      "flags": [],
       "scores": {
-        "commercial_relevance": 2,
-        "engineering_effort": 2,
-        "evidence_quality": 4,
+        "commercial_relevance": 1,
+        "engineering_effort": 1,
+        "evidence_quality": 5,
         "unresolved_risk": 2,
-        "total": 3.3
+        "total": 3.4
       },
       "recommendation": "Hold",
       "reviewer_note": null,
       "is_synthetic": false,
       "evidence_ids": [
-        "22ca5dba3b75"
+        "b322b6500ab7",
+        "5e65320b51c8",
+        "37827bcc0933",
+        "08cbcf4ed47e",
+        "055a26752763",
+        "22ca5dba3b75",
+        "1ef4595eef13"
       ]
     }
   ],
@@ -914,7 +1508,7 @@
   "illustration_note": "Not a cleaning tool; shown because the official record and a secondary display disagree. The Gazette reinstatement row is in this run's scan window. Read by hand from Google Patents during research on 2026-11-07. The pipeline does not fetch Google Patents; this record exists only to show a secondary source lagging behind the Official Gazette.",
   "shortlist": [
     "US-8800092",
-    "US-10052665"
+    "US-8826487"
   ],
   "weights": {
     "commercial_relevance": 0.35,
@@ -924,10 +1518,10 @@
     "analysis_pool": 8
   },
   "prose": {
-    "executive_summary": "The run looked at 2404 US utility patents in the cleaning-tool CPC groups. 299 of them appear in Official Gazette expiration notices from the last 104 weeks, 209 passed the non-powered screen and 8 were analysed. Recommended for technical and legal review: US 8,800,092 (Apparatus to remove a disposable cloth from a hand operated flat mop through a single trigger mechanism without having to touch the disposable cloth), US 10,052,665 (Devices and methods for dispensing fluids and wiping surfaces). Every status is dated and comes from public notices; none of this is legal clearance.",
-    "methodology": "The search began with a CPC code query. This returned 2404 candidates. The Gazette was checked for expired patents and reinstatements. This found 299 candidates that expired in the relevant window. A non-powered screen was run on all candidates. This left 209 candidates. The status of these candidates was verified. This left 210 candidates. The candidates were ranked. The top 8 candidates were analysed. 201 candidates were not analysed. 2 candidates were recommended.",
-    "commercial": "All candidates align with the intended product category of non-powered household cleaning tools. US 8,800,092 and US 10,052,665 receive Shortlist recommendations while the others receive Hold recommendations. US 8,800,092 describes a trigger mechanism for releasing disposable cloths. The assembly involves ratchet collars and compression springs. This requires higher precision than static mop heads. US 10,052,665 covers a manual cleaning device configured to dispense fluid. The inclusion of a dispenser with porous material matches design constraints for manual mops. Engineering effort for both is moderate as neither requires a motor or battery.\n\nThe Hold candidates involve different mechanical systems. US 10,052,751 discloses a height adjustment lock system involving a braking cylinder. US 8,826,487 claims a mop cleaning set with a dehydration device. Both require mechanical design and tooling for plastic components. US 8,826,487 carries a flag for a related active continuation. US 10,065,611 claims a windshield cleaning implement with an arcuate shaft. The specific automotive application limits direct relevance to a general household cleaning product line compared to the floor cleaning focus of the other candidates. All five patents list expired status due to nonpayment.",
-    "next_steps": "For US 8,800,092, verify the mechanical complexity of the trigger mechanism. Assess manufacturing feasibility and costs. For US 10,052,665, evaluate the fluid dispensing mechanism. Confirm compatibility with intended cleaning solutions. Check wiper attachment mechanisms for durability and ease of use."
+    "executive_summary": "The run looked at 2404 US utility patents in the cleaning-tool CPC groups. 299 of them appear in Official Gazette expiration notices from the last 104 weeks, 209 passed the non-powered screen and 8 were analysed. Recommended for technical and legal review: US 8,800,092 (Apparatus to remove a disposable cloth from a hand operated flat mop through a single trigger mechanism without having to touch the disposable cloth), US 8,826,487 (Mop cleaning set). Every status is dated and comes from public notices; none of this is legal clearance.",
+    "methodology": "Candidates came from the BigQuery PatentsView tables, filtered to core cleaning-tool CPC groups. Their patent numbers were matched against 104 weeks of Official Gazette expiration notices. Patents with a powered co-classification or a power source in an independent claim were removed. Every later reinstatement list was scanned before a patent was called expired, and confidence was set by rule from the number of sources and the completeness of that scan. 8 candidates were summarised and scored.",
+    "commercial": "US 8,800,092: commercial relevance 5/5, engineering effort 3/5. US 8,826,487: commercial relevance 5/5, engineering effort 3/5. US 10,052,665: commercial relevance 3/5, engineering effort 3/5. US 10,052,751: commercial relevance 3/5, engineering effort 3/5. US 10,065,611: commercial relevance 1/5, engineering effort 1/5. US consumer units spent an average of $844 on housekeeping supplies in 2025 (BLS); that is category context, not a market size for any candidate. An owner who stops paying maintenance fees usually judged the patent worth little to them, so each case needs a reason that judgement does not apply to a new entrant.",
+    "next_steps": "For US 8,800,092, check whether the trigger mechanism is manual or powered and verify the tooling for the molded steel pins and cover members before product work. For US 8,826,487, check the related active continuation and clarify whether the mop cleaning set is powered before product work."
   },
   "methodology": [
     "Search: CPC prefixes for non-powered household cleaning tools (A47L 13, A47L 1, A47L 17, A47K 11/10 and related groups).",
@@ -943,15 +1537,14 @@
   ],
   "quality_of_information": [
     "Official Gazette notices are the USPTO's own publication (grade A).",
-    "EPO OPS cross-check: not configured for this run, so each status rests on one official source",
-    "201 eligible candidates were not analysed because of the analysis cap."
+    "EPO OPS cross-check: used",
+    "199 eligible candidates were not analysed because of the analysis cap."
   ],
   "limitations": [
     "US patents only; nothing here speaks to other countries.",
     "Screening only. Related patents, design patents and trade dress may still cover a product.",
     "A lapsed patent can be reinstated later; intervening rights protect only use that began during the lapse.",
-    "Terminal disclaimers are checked only where PatentsView records them.",
-    "No independent second source for status; the EPO OPS registration was pending."
+    "Terminal disclaimers are checked only where PatentsView records them."
   ],
   "references": [
     {
@@ -991,9 +1584,33 @@
       "retrieved": "2026-11-07"
     },
     {
+      "id": "055a26752763",
+      "title": "EPO OPS (INPADOC): LAPS 2026-10-12 LAPSE FOR FAILURE TO PAY MAINTENANCE FEES US201514829048A  2026-10-12LAPS-",
+      "url": "https://ops.epo.org/3.2/rest-services/legal/publication/epodoc/US10065611",
+      "retrieved": "2026-11-07"
+    },
+    {
       "id": "07c02ac642c4",
       "title": "Manual observation (Google Patents): Google Patents legal events (INPADOC), read by hand on 2026-11-07: FP Lapsed due to failur",
       "url": "https://patents.google.com/patent/US8646606B2/en",
+      "retrieved": "2026-11-07"
+    },
+    {
+      "id": "08b14e37b541",
+      "title": "EPO OPS (INPADOC): FEPP 2026-04-13 FEE PAYMENT PROCEDURE US201415022916A  2026-04-13FEPP FEE PAYMENT PROCEDUR",
+      "url": "https://ops.epo.org/3.2/rest-services/legal/publication/epodoc/US10052665",
+      "retrieved": "2026-11-07"
+    },
+    {
+      "id": "08cbcf4ed47e",
+      "title": "EPO OPS (INPADOC): STCH 2026-10-12 INFORMATION ON STATUS: PATENT DISCONTINUATION US201514829048A  2026-10-12S",
+      "url": "https://ops.epo.org/3.2/rest-services/legal/publication/epodoc/US10065611",
+      "retrieved": "2026-11-07"
+    },
+    {
+      "id": "0cb5ffae9dd2",
+      "title": "EPO OPS (INPADOC): STCH 2026-09-14 INFORMATION ON STATUS: PATENT DISCONTINUATION US201313933455A  2026-09-14S",
+      "url": "https://ops.epo.org/3.2/rest-services/legal/publication/epodoc/US8800092",
       "retrieved": "2026-11-07"
     },
     {
@@ -1003,9 +1620,27 @@
       "retrieved": "2026-11-07"
     },
     {
+      "id": "1ef4595eef13",
+      "title": "EPO OPS (INPADOC): FP 2026-11-03 LAPSED DUE TO FAILURE TO PAY MAINTENANCE FEE US201514829048A  2026-11-03FP  ",
+      "url": "https://ops.epo.org/3.2/rest-services/legal/publication/epodoc/US10065611",
+      "retrieved": "2026-11-07"
+    },
+    {
+      "id": "1f123e64172a",
+      "title": "EPO OPS (INPADOC): FP 2026-11-03 LAPSED DUE TO FAILURE TO PAY MAINTENANCE FEE US201414256970A  2026-11-03FP  ",
+      "url": "https://ops.epo.org/3.2/rest-services/legal/publication/epodoc/US8826487",
+      "retrieved": "2026-11-07"
+    },
+    {
       "id": "1f3ca4225097",
       "title": "USPTO Official Gazette: 1552 OG 3 (2026-11-03): 8,826,487                       14/256,970                       0",
       "url": "https://www.uspto.gov/web/offices/com/sol/og/2026/week44/TOC.htm#ref2",
+      "retrieved": "2026-11-07"
+    },
+    {
+      "id": "22ae38d9535a",
+      "title": "EPO OPS (INPADOC): MAFP 2018-08-10 MAINTENANCE FEE PAYMENT US201313933455A  2018-08-10MAFP+MAINTENANCE FEE PA",
+      "url": "https://ops.epo.org/3.2/rest-services/legal/publication/epodoc/US8800092",
       "retrieved": "2026-11-07"
     },
     {
@@ -1015,9 +1650,81 @@
       "retrieved": "2026-11-07"
     },
     {
+      "id": "2d487ce79662",
+      "title": "EPO OPS (INPADOC): MAFP 2018-02-22 MAINTENANCE FEE PAYMENT US201414256970A  2018-02-22MAFP+MAINTENANCE FEE PA",
+      "url": "https://ops.epo.org/3.2/rest-services/legal/publication/epodoc/US8826487",
+      "retrieved": "2026-11-07"
+    },
+    {
+      "id": "31b197301214",
+      "title": "EPO OPS (INPADOC): MAFP 2022-02-01 MAINTENANCE FEE PAYMENT US201415022916A  2022-02-01MAFP+MAINTENANCE FEE PA",
+      "url": "https://ops.epo.org/3.2/rest-services/legal/publication/epodoc/US10052665",
+      "retrieved": "2026-11-07"
+    },
+    {
+      "id": "355a8cd83634",
+      "title": "EPO OPS (INPADOC): MAFP 2022-02-11 MAINTENANCE FEE PAYMENT US201313933455A  2022-02-11MAFP+MAINTENANCE FEE PA",
+      "url": "https://ops.epo.org/3.2/rest-services/legal/publication/epodoc/US8800092",
+      "retrieved": "2026-11-07"
+    },
+    {
+      "id": "37827bcc0933",
+      "title": "EPO OPS (INPADOC): FEPP 2026-04-27 FEE PAYMENT PROCEDURE US201514829048A  2026-04-27FEPP FEE PAYMENT PROCEDUR",
+      "url": "https://ops.epo.org/3.2/rest-services/legal/publication/epodoc/US10065611",
+      "retrieved": "2026-11-07"
+    },
+    {
+      "id": "3d334f31d2ba",
+      "title": "EPO OPS (INPADOC): MAFP 2022-08-19 MAINTENANCE FEE PAYMENT US201514660644A  2022-08-19MAFP+MAINTENANCE FEE PA",
+      "url": "https://ops.epo.org/3.2/rest-services/legal/publication/epodoc/US10052751",
+      "retrieved": "2026-11-07"
+    },
+    {
+      "id": "5e65320b51c8",
+      "title": "EPO OPS (INPADOC): MAFP 2022-05-23 MAINTENANCE FEE PAYMENT US201514829048A  2022-05-23MAFP+MAINTENANCE FEE PA",
+      "url": "https://ops.epo.org/3.2/rest-services/legal/publication/epodoc/US10065611",
+      "retrieved": "2026-11-07"
+    },
+    {
+      "id": "63b93584aed9",
+      "title": "EPO OPS (INPADOC): FEPP 2026-04-27 FEE PAYMENT PROCEDURE US201414256970A  2026-04-27FEPP FEE PAYMENT PROCEDUR",
+      "url": "https://ops.epo.org/3.2/rest-services/legal/publication/epodoc/US8826487",
+      "retrieved": "2026-11-07"
+    },
+    {
+      "id": "63db8fcedd72",
+      "title": "EPO OPS (INPADOC): LAPS 2026-10-12 LAPSE FOR FAILURE TO PAY MAINTENANCE FEES US201414256970A  2026-10-12LAPS-",
+      "url": "https://ops.epo.org/3.2/rest-services/legal/publication/epodoc/US8826487",
+      "retrieved": "2026-11-07"
+    },
+    {
+      "id": "67b1dd76694c",
+      "title": "EPO OPS (INPADOC): LAPS 2026-09-28 LAPSE FOR FAILURE TO PAY MAINTENANCE FEES US201415022916A  2026-09-28LAPS-",
+      "url": "https://ops.epo.org/3.2/rest-services/legal/publication/epodoc/US10052665",
+      "retrieved": "2026-11-07"
+    },
+    {
       "id": "6ec35b6b291b",
       "title": "Manual observation (Google Patents): Google Patents legal events (INPADOC), read by hand on 2026-11-07: STCH Patent expired due",
       "url": "https://patents.google.com/patent/US8646606B2/en",
+      "retrieved": "2026-11-07"
+    },
+    {
+      "id": "775c5279027b",
+      "title": "EPO OPS (INPADOC): LAPS 2026-09-28 LAPSE FOR FAILURE TO PAY MAINTENANCE FEES US201514660644A  2026-09-28LAPS-",
+      "url": "https://ops.epo.org/3.2/rest-services/legal/publication/epodoc/US10052751",
+      "retrieved": "2026-11-07"
+    },
+    {
+      "id": "7b5a8ab08f5b",
+      "title": "EPO OPS (INPADOC): STCH 2026-10-12 INFORMATION ON STATUS: PATENT DISCONTINUATION US201414256970A  2026-10-12S",
+      "url": "https://ops.epo.org/3.2/rest-services/legal/publication/epodoc/US8826487",
+      "retrieved": "2026-11-07"
+    },
+    {
+      "id": "818679383999",
+      "title": "EPO OPS (INPADOC): FP 2026-10-20 LAPSED DUE TO FAILURE TO PAY MAINTENANCE FEE US201415022916A  2026-10-20FP  ",
+      "url": "https://ops.epo.org/3.2/rest-services/legal/publication/epodoc/US10052665",
       "retrieved": "2026-11-07"
     },
     {
@@ -1039,9 +1746,39 @@
       "retrieved": "2026-11-07"
     },
     {
+      "id": "98851d038197",
+      "title": "EPO OPS (INPADOC): MAFP 2022-03-09 MAINTENANCE FEE PAYMENT US201414256970A  2022-03-09MAFP+MAINTENANCE FEE PA",
+      "url": "https://ops.epo.org/3.2/rest-services/legal/publication/epodoc/US8826487",
+      "retrieved": "2026-11-07"
+    },
+    {
       "id": "9f5af1b5d8ca",
       "title": "USPTO Official Gazette: 1551 OG 230 (2026-10-20): 10,052,665                      15/022,916                      ",
       "url": "https://www.uspto.gov/web/offices/com/sol/og/2026/week42/TOC.htm#ref2",
+      "retrieved": "2026-11-07"
+    },
+    {
+      "id": "a1799912d88d",
+      "title": "EPO OPS (INPADOC): LAPS 2026-09-14 LAPSE FOR FAILURE TO PAY MAINTENANCE FEES US201313933455A  2026-09-14LAPS-",
+      "url": "https://ops.epo.org/3.2/rest-services/legal/publication/epodoc/US8800092",
+      "retrieved": "2026-11-07"
+    },
+    {
+      "id": "b322b6500ab7",
+      "title": "EPO OPS (INPADOC): FEPP 2022-04-25 FEE PAYMENT PROCEDURE US201514829048A  2022-04-25FEPP FEE PAYMENT PROCEDUR",
+      "url": "https://ops.epo.org/3.2/rest-services/legal/publication/epodoc/US10065611",
+      "retrieved": "2026-11-07"
+    },
+    {
+      "id": "b6a339c2a300",
+      "title": "EPO OPS (INPADOC): FEPP 2026-04-13 FEE PAYMENT PROCEDURE US201514660644A  2026-04-13FEPP FEE PAYMENT PROCEDUR",
+      "url": "https://ops.epo.org/3.2/rest-services/legal/publication/epodoc/US10052751",
+      "retrieved": "2026-11-07"
+    },
+    {
+      "id": "bc40cab90290",
+      "title": "EPO OPS (INPADOC): STCH 2026-09-28 INFORMATION ON STATUS: PATENT DISCONTINUATION US201514660644A  2026-09-28S",
+      "url": "https://ops.epo.org/3.2/rest-services/legal/publication/epodoc/US10052751",
       "retrieved": "2026-11-07"
     },
     {
@@ -1057,9 +1794,39 @@
       "retrieved": "2026-11-07"
     },
     {
+      "id": "dafe67844e99",
+      "title": "EPO OPS (INPADOC): FEPP 2018-03-26 FEE PAYMENT PROCEDURE US201313933455A  2018-03-26FEPP FEE PAYMENT PROCEDUR",
+      "url": "https://ops.epo.org/3.2/rest-services/legal/publication/epodoc/US8800092",
+      "retrieved": "2026-11-07"
+    },
+    {
+      "id": "e2b395481a81",
+      "title": "EPO OPS (INPADOC): FEPP 2022-04-11 FEE PAYMENT PROCEDURE US201514660644A  2022-04-11FEPP FEE PAYMENT PROCEDUR",
+      "url": "https://ops.epo.org/3.2/rest-services/legal/publication/epodoc/US10052751",
+      "retrieved": "2026-11-07"
+    },
+    {
+      "id": "ecd1d98be25c",
+      "title": "EPO OPS (INPADOC): FP 2026-10-20 LAPSED DUE TO FAILURE TO PAY MAINTENANCE FEE US201514660644A  2026-10-20FP  ",
+      "url": "https://ops.epo.org/3.2/rest-services/legal/publication/epodoc/US10052751",
+      "retrieved": "2026-11-07"
+    },
+    {
+      "id": "f098bceacb62",
+      "title": "EPO OPS (INPADOC): FEPP 2026-03-30 FEE PAYMENT PROCEDURE US201313933455A  2026-03-30FEPP FEE PAYMENT PROCEDUR",
+      "url": "https://ops.epo.org/3.2/rest-services/legal/publication/epodoc/US8800092",
+      "retrieved": "2026-11-07"
+    },
+    {
       "id": "f9461a22e42b",
       "title": "Manual observation (Google Patents): Google Patents legal events (INPADOC), read by hand on 2026-11-07: FPAY Year of fee paymen",
       "url": "https://patents.google.com/patent/US8646606B2/en",
+      "retrieved": "2026-11-07"
+    },
+    {
+      "id": "feb505fa551f",
+      "title": "EPO OPS (INPADOC): STCH 2026-09-28 INFORMATION ON STATUS: PATENT DISCONTINUATION US201415022916A  2026-09-28S",
+      "url": "https://ops.epo.org/3.2/rest-services/legal/publication/epodoc/US10052665",
       "retrieved": "2026-11-07"
     }
   ],

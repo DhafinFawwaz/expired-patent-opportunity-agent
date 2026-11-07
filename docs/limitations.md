@@ -12,7 +12,7 @@ These are the limits a reader of the report should know about, and what would re
 ## Status
 
 - **No live maintenance fee history.** The USPTO's own fee event data needs an ODP key, which needs ID.me identity verification. The parser is built and tested on sample lines but was not used live. Status therefore rests on the Gazette notices alone.
-- **No second live status source.** The EPO OPS adapter is built and tested against a synthetic response, but the EPO registration was still pending, so the sample run has no INPADOC cross-check. A single official source caps confidence at `high`, never `very_high`.
+- **EPO OPS lags on reinstatements.** INPADOC records lapses within about two weeks but can take months to record a reinstatement, so a later official Gazette notice always overrides it. Without EPO credentials a run falls back to the Gazette alone, which caps confidence at `high`.
 - **Petitions are not visible.** A petition to accept a late payment can be pending without any Gazette notice. The report says to check Patent Center before relying on an expiry.
 - **Patent term adjustment is unknown.** Term end is estimated as 20 years from the earliest US non-provisional filing, and the report says the adjustment is not known.
 - **Terminal disclaimers** are checked only where PatentsView records them.
@@ -21,8 +21,8 @@ These are the limits a reader of the report should know about, and what would re
 ## Screening and scoring
 
 - **The power screen is rule-based first.** Tier 1 drops powered CPC co-classes; tier 2 drops independent claims that recite a motor, battery, heater and similar terms (hand pumps and trigger sprayers excepted). Tier 3 asks the model, and its answer can be `unclear`, which is flagged rather than dropped.
-- **Free models vary from run to run.** Claim summaries, opportunity rationales and the commercial and effort scores come from free models through `freellm`. Two live runs on the same data shortlisted different second candidates (US 10,052,751 in one, US 10,052,665 in the other). Status, confidence and evidence quality do not depend on the model. `--replay` reruns the committed sample with its recorded answers, so the sample itself is reproducible.
-- **Model calls can fall back.** When a free model returns empty or invalid output twice, the step uses its template instead. The sample run had 4 fallbacks out of 20 calls; the cost record and event log list them.
+- **Free models vary from run to run.** Claim summaries, opportunity rationales and the commercial and effort scores come from free models through `freellm`. Live runs on the same data shortlisted different second candidates (US 10,052,751, US 10,052,665 and US 8,826,487 across three runs). Status, confidence and evidence quality do not depend on the model. `--replay` reruns the committed sample with its recorded answers, so the sample itself is reproducible.
+- **Model calls can fall back.** When a free model returns empty or invalid output twice, the step uses its template instead. The sample run had 5 fallbacks out of 20 calls; the cost record and event log list them.
 - **Only the top 8 eligible candidates are analysed.** The rest are counted as "eligible but not analysed" in the report, not silently dropped.
 - **Commercial relevance is a model judgement on the claims.** No market data is used; the Census shipment lookup in the design was cut.
 

@@ -99,7 +99,7 @@ flowchart TD
     S --> G2{{gate 2: review candidates}}
     G2 -- abort --> Z
     G2 -- accept or edit --> BU[bundle: one validated dataset]
-    BU --> GE[generate report.docx and deck.pptx]
+    BU --> GE[generate report and deck as .docx/.pptx and HTML]
     GE --> VA[validate both files against the bundle]
     VA -- mismatch, up to 3 tries --> GE
     VA --> Z
@@ -113,7 +113,7 @@ It is a fixed LangGraph workflow, not an autonomous agent. The model is used in 
 |---|---|---|---|
 | USPTO Official Gazette notices | Expiry for nonpayment and reinstatement lists, weekly since 2008 | None | One request per second, cached forever |
 | BigQuery `patents-public-data.patentsview` | Discovery by CPC, claims, citations, continuity, terminal disclaimers | Google Cloud project | 1 TB scanned per month free; 50 GB cap per query; grants to 2021-09-28 |
-| EPO Open Patent Services | Cross-check of legal events | Free EPO registration | Adapter built and tested; registration was still pending, so not used live |
+| EPO Open Patent Services | Second status source (INPADOC lapse and reinstatement events) | Free EPO registration (`EPO_OPS_KEY`, `EPO_OPS_SECRET`) | 4 GB a week free; one request per verified candidate, cached 24 hours |
 | USPTO ODP maintenance fee events | Full fee history | ODP key, which needs ID.me verification | Parser built and tested on sample lines; not used live |
 
 The full table, with lag, terms and query costs, is in [docs/data-sources.md](docs/data-sources.md).
@@ -124,11 +124,12 @@ Each run writes to `outputs/runs/<run id>/`:
 
 - `report.docx`: the ten sections the brief lists, with status timelines, claim summaries, related patents, scores and references.
 - `deck.pptx`: nine slides with the same candidates, statuses, scores and recommendations.
-- `bundle.json`: the dataset both files are rendered from.
-- `validation.json`: the checks that compare the two files with the bundle and with the OOXML schemas.
+- `report.html` and `deck.html`: the same report and deck as self-contained web pages. The deck pages step with the arrow keys; the report has a clickable contents list. The Word and PowerPoint styling was designed in these pages first and ported to match.
+- `bundle.json`: the dataset all four files are rendered from.
+- `validation.json`: the checks that compare every file with the bundle and the Office files with the OOXML schemas.
 - `events.jsonl`, `cost.json`, `run.json`, `checkpoints.sqlite`: the redacted event log, cost record, run settings and resume state.
 
-A real run is committed in `outputs/samples/`, with its log in `docs/sample-logs/`. It scanned 2,404 cleaning-tool patents, found 299 listed as expired in the last 104 weeks of Gazette notices, and shortlisted US 8,800,092 (a flat mop that releases its cloth with a trigger) and US 10,052,665 (a cleaning device that dispenses fluid and wipes it off).
+A real run is committed in `outputs/samples/`, with its log in `docs/sample-logs/`. It scanned 2,404 cleaning-tool patents, found 299 listed as expired in the last 104 weeks of Gazette notices, and shortlisted US 8,800,092 (a flat mop that releases its cloth with a trigger) and US 8,826,487 (a mop set with a built-in device for wringing the mop). Every reported status is `expired_nonpayment` at confidence `very_high`, because the Gazette notice and the EPO legal events agree and the reinstatement scan is complete.
 
 ## Tests and CI
 

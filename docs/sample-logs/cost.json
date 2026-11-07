@@ -1,8 +1,8 @@
 {
   "llm_calls": 20,
-  "fallback_calls": 4,
-  "tokens_in": 28306,
-  "tokens_out": 72265,
+  "fallback_calls": 5,
+  "tokens_in": 28085,
+  "tokens_out": 86705,
   "cost_usd": 0.0,
   "models": [
     "free",
