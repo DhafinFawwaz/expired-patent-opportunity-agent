@@ -1,0 +1,56 @@
+{
+  "properties": {
+    "cpc_codes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Cpc Codes",
+      "type": "array"
+    },
+    "exclusion_terms": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Exclusion Terms",
+      "type": "array"
+    },
+    "output_structure": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Output Structure",
+      "type": "array"
+    },
+    "screening_criteria": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Screening Criteria",
+      "type": "array"
+    },
+    "search_terms": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Search Terms",
+      "type": "array"
+    },
+    "sources": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Sources",
+      "type": "array"
+    }
+  },
+  "required": [
+    "search_terms",
+    "cpc_codes",
+    "exclusion_terms",
+    "sources",
+    "screening_criteria",
+    "output_structure"
+  ],
+  "title": "PlanDraft",
+  "type": "object"
+}

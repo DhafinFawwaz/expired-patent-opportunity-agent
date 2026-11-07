@@ -1,0 +1,47 @@
+{
+  "properties": {
+    "applications": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Applications",
+      "type": "array"
+    },
+    "challenges": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Challenges",
+      "type": "array"
+    },
+    "commercial_relevance": {
+      "title": "Commercial Relevance",
+      "type": "integer"
+    },
+    "engineering_effort": {
+      "title": "Engineering Effort",
+      "type": "integer"
+    },
+    "evidence_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Evidence Ids",
+      "type": "array"
+    },
+    "rationale": {
+      "title": "Rationale",
+      "type": "string"
+    }
+  },
+  "required": [
+    "commercial_relevance",
+    "engineering_effort",
+    "applications",
+    "challenges",
+    "rationale",
+    "evidence_ids"
+  ],
+  "title": "OpportunityRationale",
+  "type": "object"
+}

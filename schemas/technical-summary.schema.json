@@ -1,0 +1,60 @@
+{
+  "properties": {
+    "evidence_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Evidence Ids",
+      "type": "array"
+    },
+    "implementation_unknowns": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Implementation Unknowns",
+      "type": "array"
+    },
+    "key_claim_elements": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Key Claim Elements",
+      "type": "array"
+    },
+    "mechanism": {
+      "title": "Mechanism",
+      "type": "string"
+    },
+    "powered": {
+      "enum": [
+        "non_powered",
+        "powered",
+        "unclear"
+      ],
+      "title": "Powered",
+      "type": "string"
+    },
+    "quotes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Quotes",
+      "type": "array"
+    },
+    "summary": {
+      "title": "Summary",
+      "type": "string"
+    }
+  },
+  "required": [
+    "summary",
+    "mechanism",
+    "key_claim_elements",
+    "implementation_unknowns",
+    "powered",
+    "evidence_ids",
+    "quotes"
+  ],
+  "title": "TechnicalSummary",
+  "type": "object"
+}

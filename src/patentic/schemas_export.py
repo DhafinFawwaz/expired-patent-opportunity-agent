@@ -8,12 +8,16 @@ from patentic.adapters.base import EvidenceRecord
 from patentic.adapters.fixtures import FixtureCase
 from patentic.domain.request import ResearchRequest
 from patentic.domain.status_rules import StatusAssessment
+from patentic.llm.schemas import OpportunityRationale, PlanDraft, TechnicalSummary
 
 SCHEMAS: Final[dict[str, type[BaseModel]]] = {
     "research-request": ResearchRequest,
     "evidence-record": EvidenceRecord,
     "status-assessment": StatusAssessment,
     "fixture-case": FixtureCase,
+    "plan-draft": PlanDraft,
+    "technical-summary": TechnicalSummary,
+    "opportunity-rationale": OpportunityRationale,
 }
 
 
