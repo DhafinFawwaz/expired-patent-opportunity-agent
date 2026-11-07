@@ -13,6 +13,11 @@ Hours are wall-clock, taken from commit times in UTC+7. They measure elapsed tim
 | Build | 7 Confidence and grades | 16:35 | 16:36 | 0.02 | replaced an 8-week lag rule that real Gazette data contradicted |
 | Build | 8 Evidence records and fixtures | 16:36 | 16:38 | 0.03 | |
 | Build | 9 Screening, term, related, scoring | 16:38 | 16:40 | 0.03 | |
+| Build | 10 HTTP source | 16:40 | 16:42 | 0.03 | |
+| Build | 11 Gazette parser | 16:42 | 16:44 | 0.03 | two real pages trimmed into test data |
+| Build | 12 BigQuery gateway | 16:44 | 16:49 | 0.08 | one live discovery query, about 2.3 GB |
+| Build | 13 EPO OPS adapter | 16:49 | 16:51 | 0.03 | built against a synthetic response; credentials pending |
+| Build | 14 Maintenance fee file parser | 16:51 | 16:52 | 0.02 | |
 
 ## Run cost
 
