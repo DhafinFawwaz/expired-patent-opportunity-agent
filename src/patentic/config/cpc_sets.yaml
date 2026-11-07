@@ -1,0 +1,52 @@
+# CPC prefixes for non-powered household cleaning tools (scheme 2026.08).
+core:
+  - A47L13/      # implements for cleaning floors, carpets, furniture, walls
+  - A47L1/06     # hand implements for cleaning windows
+  - A47L1/08
+  - A47L1/1      # 1/10 to 1/16, window wipers, squeegees, scrapers
+  - A47L17/      # manual implements for crockery and cookware
+  - A47L19/      # drying racks
+  - A47L21/04    # hand polishing of tableware
+  - A47L23/      # footwear cleaning (powered subgroups excluded below)
+  - A47L25/      # domestic cleaning devices not elsewhere provided
+  - A47L11/32    # carpet sweepers
+  - A47L11/33
+  - A47K11/10    # toilet brushes
+supporting:
+  - A46B1/       # brushes, only with a household indexing code
+  - A46B3/
+  - A46B5/
+  - A46B7/
+  - A46B9/
+  - A46B11/
+  - A46B15/
+  - A46B17/
+  - B08B1/       # cleaning with tools
+  - B25G1/       # handles
+  - B25G3/
+household_index:
+  - A46B2200/30  # 302 broom, 3026 dusting, 3033 household, 304 lavatory, 3053, 306
+excluded_coclass:
+  - A47L1/02     # power-driven window cleaning
+  - A47L5/       # suction cleaners
+  - A47L7/
+  - A47L9/
+  - A47L11/      # floor-cleaning machines, except sweepers listed in core
+  - A47L21/02
+  - A47L23/02
+  - A47L23/06
+  - A47L23/263
+  - A46B13/02    # power-driven brushes
+  - A46B13/04
+  - A46B13/06
+  - A47K7/04
+  - B08B3/       # cleaning with liquid or steam
+  - B08B5/       # cleaning with air flow
+  - A61L
+  - H02
+  - H01M
+  - H05B
+  - F22B
+exclusion_exceptions:
+  - A47L11/32
+  - A47L11/33

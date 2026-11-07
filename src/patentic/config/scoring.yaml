@@ -1,0 +1,7 @@
+# Weights for the four axes; effort and risk are inverted (higher is worse).
+commercial_relevance: 0.35
+engineering_effort: 0.20
+evidence_quality: 0.25
+unresolved_risk: 0.20
+# How many screened candidates get per-patent model calls.
+analysis_pool: 8

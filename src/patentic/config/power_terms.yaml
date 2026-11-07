@@ -1,0 +1,34 @@
+# Terms that make a claimed device powered when they appear in an independent claim.
+terms:
+  - motor
+  - motorized
+  - motorised
+  - electric
+  - electrical
+  - battery
+  - batteries
+  - rechargeable
+  - charger
+  - power supply
+  - vacuum
+  - suction
+  - steam
+  - heater
+  - heating element
+  - ultrasonic
+  - ultraviolet
+  - sensor
+  - controller
+  - pump
+case_sensitive_terms:
+  - UV
+  - LED
+# Manual mechanisms that stay in scope; removed from the text before matching.
+manual_exceptions:
+  - hand-operated pump
+  - hand operated pump
+  - hand pump
+  - manual pump
+  - trigger pump
+  - trigger sprayer
+  - pump sprayer
