@@ -29,6 +29,8 @@ Hours are wall-clock, taken from commit times in UTC+7. They measure elapsed tim
 | Build | 22 Deck | 17:18 | 17:21 | 0.05 | |
 | Build | 23 Cross-file validation | 17:21 | 17:27 | 0.10 | LibreOffice render made opt-in after a macOS Gatekeeper prompt |
 | Build | 24 First real run and fixes | 17:27 | 19:32 | 2.08 | four live runs; run 1 exposed a relative-path bug in the OOXML check and a 1024-token cap that truncated model answers; most of the time was free-model latency |
+| Build | 25 Docs, outage fix, final checks | 19:32 | 19:38 | 0.10 | writing the docs found that a simulated Gazette outage was hidden by the page cache |
+| Build | Total | 16:00 | 19:38 | 3.6 | inside the 10-hour target; nothing from the plan was cut except the Census market lookup |
 
 ## Run cost
 
@@ -44,3 +46,5 @@ Sample run `run-real-4` (committed under `outputs/samples/` and `docs/sample-log
 | Wall time | about 15 minutes, almost all of it model latency on free tiers |
 
 The replay bundle (`fixtures/replay/`, 10 MB) reruns this result offline in about 6 seconds.
+
+The LLM cost is $0 because every call went to a free deployment. Free deployments report zero cost; that comes from the route, not the model. The same calls on a paid model (set `LLM_MODEL`) would be priced by LiteLLM and recorded in `cost.json`.

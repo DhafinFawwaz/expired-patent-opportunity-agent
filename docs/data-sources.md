@@ -17,3 +17,15 @@
 | Continuity and terminal disclaimers | `usreldoc`, `us_term_of_grant` | 0.55 GB |
 
 A fresh run scans about 44 GB; reruns read the on-disk query cache and scan nothing. Dry-run estimates can be wrong: a `TABLESAMPLE` query on `claim` estimated 77 MB but needed 39 GB, so every real query also carries a hard `maximum_bytes_billed` cap.
+
+## What the sample run used
+
+| Source | Live in `run-real-4` | Notes |
+|---|---|---|
+| Official Gazette | Yes | 104 weekly issues, 2024-11-12 to 2026-11-03, no missing weeks; about 73 MB of HTML, fetched once and cached |
+| BigQuery PatentsView | Yes | 44.0 GB scanned on the first run, 0 on later runs |
+| EPO OPS | No | Registration still pending; the adapter is tested against a synthetic response |
+| USPTO ODP | No | Needs an ID.me-verified key; the parser is tested on sample lines |
+| Google Patents (manual) | One observation | `fixtures/observations/US-8646606-google-patents.json`, recorded by hand on 2026-11-07 for the conflicting-evidence example, grade C |
+
+Rejected sources: Patent Public Search (no API), Lens.org (approval-gated, unclear terms for this use), IFI CLAIMS (enterprise pricing), and any shared or bought USPTO key (one key per verified person under USPTO terms).
