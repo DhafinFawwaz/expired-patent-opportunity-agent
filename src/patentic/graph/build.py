@@ -3,10 +3,10 @@ from typing import Any
 from langgraph.checkpoint.base import BaseCheckpointSaver
 from langgraph.graph import END, START, StateGraph
 from langgraph.graph.state import CompiledStateGraph
-from typing_extensions import TypedDict
 
 from patentic.graph.deps import Deps
 from patentic.graph.nodes.analyse import Analyse
+from patentic.graph.nodes.bundle import Bundle
 from patentic.graph.nodes.discover import BqClaims, BqDiscover, OgIndexNode
 from patentic.graph.nodes.normalise import Normalise
 from patentic.graph.nodes.plan import PlanNode, approve, intake
@@ -15,14 +15,6 @@ from patentic.graph.nodes.review import review
 from patentic.graph.nodes.score import Score
 from patentic.graph.nodes.verify import VerifyCandidate, verify_dispatch
 from patentic.graph.state import InputState, PipelineState
-
-
-class BundleUpdate(TypedDict, total=False):
-    stage: str
-
-
-def _bundle_placeholder(state: PipelineState) -> BundleUpdate:  # noqa: ARG001  # replaced in task 20
-    return {"stage": "bundle"}
 
 
 def build_graph(
@@ -43,7 +35,7 @@ def build_graph(
     graph.add_node("analyse", Analyse(deps))
     graph.add_node("score", Score(deps))
     graph.add_node("review", review, destinations=("bundle", END))
-    graph.add_node("bundle", _bundle_placeholder)
+    graph.add_node("bundle", Bundle(deps))
     graph.add_edge(START, "intake")
     graph.add_edge("intake", "plan")
     graph.add_edge("plan", "approve")

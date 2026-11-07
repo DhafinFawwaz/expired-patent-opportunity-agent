@@ -114,6 +114,8 @@ runtime-evaluated-base-classes = ["pydantic.BaseModel", "pydantic_settings.BaseS
 # Typer options are boolean defaults; overrides must keep the parent signature.
 "src/patentic/cli.py" = ["FBT001", "FBT002"]
 "src/patentic/llm/null_model.py" = ["ARG002"]
+# Report sentences read better unbroken.
+"src/patentic/graph/nodes/bundle.py" = ["E501"]
 "llm/tests/**" = ["S101", "S311", "SLF001", "PLR2004", "ARG", "PLC0415", "INP001", "PT011", "PT018", "FBT003", "E501", "ERA001", "B018", "SIM105", "S110", "BLE001"]
 # freellm predates this repo: style-only rules relaxed, typing rules kept.
 "llm/src/freellm/cli.py" = ["T201", "BLE001", "PLC0415"]

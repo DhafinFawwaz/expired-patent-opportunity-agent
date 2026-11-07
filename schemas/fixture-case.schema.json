@@ -148,7 +148,8 @@
             "bigquery",
             "ops",
             "odp",
-            "fixture"
+            "fixture",
+            "manual"
           ],
           "title": "Source",
           "type": "string"
@@ -496,7 +497,8 @@
             "bigquery",
             "ops",
             "odp",
-            "fixture"
+            "fixture",
+            "manual"
           ],
           "title": "Source",
           "type": "string"

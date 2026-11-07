@@ -11,6 +11,7 @@ from patentic.domain.status_rules import add_years
 from patentic.graph.deps import Deps
 from patentic.graph.progress import emit
 from patentic.graph.state import PipelineState
+from patentic.report.illustration import ILLUSTRATION_KEY
 
 if TYPE_CHECKING:
     from patentic.adapters.bigquery import Continuity
@@ -98,9 +99,12 @@ class OgIndexNode:
             emit("status_index", "outage", source="og_notice")
             return {"stage": "status_index", "coverage": index.coverage, "outages": ["og_notice"]}
         expired: set[str] = set(index.expirations()) & keys
-        found_events: dict[str, list[StatusEvent]] = {k: index.events_for(k) for k in expired}
+        shown: set[str] = expired | (
+            {ILLUSTRATION_KEY} & (set(index.reinstatements()) | set(index.expirations()))
+        )
+        found_events: dict[str, list[StatusEvent]] = {k: index.events_for(k) for k in shown}
         found_evidence: dict[str, EvidenceRecord] = {
-            e.evidence_id: e for k in expired for e in index.evidence_for(k)
+            e.evidence_id: e for k in shown for e in index.evidence_for(k)
         }
         emit(
             "status_index",

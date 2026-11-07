@@ -15,6 +15,7 @@ _STATUS_GRADES: Final[dict[Source, SourceGrade]] = {
     "odp": "A",
     "bigquery": "F",
     "fixture": "F",
+    "manual": "C",
 }
 _BIBLIOGRAPHIC_GRADES: Final[dict[Source, SourceGrade]] = {
     "og_notice": "A",
@@ -22,6 +23,7 @@ _BIBLIOGRAPHIC_GRADES: Final[dict[Source, SourceGrade]] = {
     "odp": "A",
     "bigquery": "A",
     "fixture": "F",
+    "manual": "C",
 }
 _DECISIVE: Final[dict[str, frozenset[EventType]]] = {
     "expired_nonpayment": frozenset({"lapse"}),

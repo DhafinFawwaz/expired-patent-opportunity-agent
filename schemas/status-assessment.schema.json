@@ -48,7 +48,8 @@
             "bigquery",
             "ops",
             "odp",
-            "fixture"
+            "fixture",
+            "manual"
           ],
           "title": "Source",
           "type": "string"

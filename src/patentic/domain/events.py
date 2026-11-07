@@ -3,7 +3,7 @@ from typing import Final, Literal
 
 from pydantic import BaseModel, ConfigDict
 
-Source = Literal["og_notice", "bigquery", "ops", "odp", "fixture"]
+Source = Literal["og_notice", "bigquery", "ops", "odp", "fixture", "manual"]
 EventType = Literal[
     "grant",
     "fee_paid",
