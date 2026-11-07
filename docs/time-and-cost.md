@@ -41,13 +41,13 @@ Sample run `run-real-5` (committed under `outputs/samples/` and `docs/sample-log
 | Item | Value |
 |---|---|
 | BigQuery bytes, first fresh run | 44.0 GB (discovery 2.30, claims 38.95, citations 2.20, continuity 0.55), inside the 1 TB monthly free tier |
-| BigQuery bytes, later runs the same day | 0, every query was served from the local cache (a later day or a new Gazette issue would repeat discovery and claims) |
+| BigQuery bytes, later runs | 0 until the year changes: discovery is cached per calendar year and claims, citations and continuity per patent (refilling the cache with that layout cost one more 44 GB pass) |
 | Gazette pages fetched | 104 weekly issues, about 73 MB of HTML, fetched once at one request per second |
 | EPO OPS lookups | 200, about 6 MB of the 4 GB weekly allowance |
 | LLM calls | 20 (5 fell back to templates), 28k tokens in, 87k out |
 | LLM cost | $0.00 on free models through `freellm` |
 | Wall time | about 73 minutes, almost all of it model latency on free tiers |
 
-The replay bundle (`fixtures/replay/`, 10 MB) reruns this result offline in about 6 seconds.
+The replay bundle (`fixtures/replay/`, 15 MB) reruns this result offline in about 6 seconds.
 
 The LLM cost is $0 because every call went to a free deployment. Free deployments report zero cost; that comes from the route, not the model. The same calls on a paid model (set `LLM_MODEL`) would be priced by LiteLLM and recorded in `cost.json`.

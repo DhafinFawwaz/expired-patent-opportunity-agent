@@ -16,7 +16,7 @@
 | Forward citations | `uspatentcitation` | 2.20 GB |
 | Continuity and terminal disclaimers | `usreldoc`, `us_term_of_grant` | 0.55 GB |
 
-A fresh run scans about 44 GB. Results are cached by query text, so a same-day rerun scans nothing; the discovery window is computed from today's date and the claims query from the candidate list, so a later day costs 2.3 GB again and a new Gazette issue usually costs the 39 GB claims query again. Caching claims per patent and anchoring the window to the last Gazette Tuesday would remove most of that. Dry-run estimates can be wrong: a `TABLESAMPLE` query on `claim` estimated 77 MB but needed 39 GB, so every real query also carries a hard `maximum_bytes_billed` cap.
+A fresh run scans about 44 GB; later runs scan nothing until the year changes. Discovery asks for whole calendar years and filters the exact window locally, so its query text and cache stay the same from day to day. Claims, citations and continuity are queried once for all discovered patents (the bytes scanned are the same for 300 or 3,000 ids) and cached per patent in `.cache/bq/patents/`, so the new candidates a later Gazette issue brings are already there. Dry-run estimates can be wrong: a `TABLESAMPLE` query on `claim` estimated 77 MB but needed 39 GB, so every real query also carries a hard `maximum_bytes_billed` cap.
 
 ## What the sample run used
 

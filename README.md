@@ -32,7 +32,7 @@ For a live run you need a Google Cloud project with BigQuery enabled (the free s
 make run
 ```
 
-The first live run scans about 44 GB of BigQuery data, well inside the 1 TB monthly free tier. Queries are cached by their exact text: a rerun on the same day scans nothing, a run on a later day repeats discovery (2.3 GB), and a run after a new Gazette issue changes the candidate set repeats the claims query (about 39 GB). That allows about 20 fresh weekly runs a month on the free tier. Language model calls go through `llm/` (the `freellm` package), which routes to free providers and works with no keys at all, slowly. Keys for faster free providers go in `llm/.env`; `cd llm && uv run freellm keys --steps` lists where to get them.
+The first live run scans about 44 GB of BigQuery data, well inside the 1 TB monthly free tier. After that, runs reuse a local cache in `.cache/`: discovery is cached for the calendar year (the query asks for whole years and the exact window is filtered locally), and claims, citations and continuity are fetched once for every discovered patent and kept per patent, so a new Gazette issue adds no BigQuery cost. Gazette pages are kept forever (past issues never change), EPO answers for a week, and successful model answers by prompt, so a rerun on the same data skips the model calls. Delete `.cache/` to start fresh. Language model calls go through `llm/` (the `freellm` package), which routes to free providers and works with no keys at all, slowly. Keys for faster free providers go in `llm/.env`; `cd llm && uv run freellm keys --steps` lists where to get them.
 
 ## The two gates
 
@@ -113,7 +113,7 @@ It is a fixed LangGraph workflow, not an autonomous agent. The model is used in 
 |---|---|---|---|
 | USPTO Official Gazette notices | Expiry for nonpayment and reinstatement lists, weekly since 2008 | None | One request per second, cached forever |
 | BigQuery `patents-public-data.patentsview` | Discovery by CPC, claims, citations, continuity, terminal disclaimers | Google Cloud project | 1 TB scanned per month free; 50 GB cap per query; grants to 2021-09-28 |
-| EPO Open Patent Services | Second status source (INPADOC lapse and reinstatement events) | Free EPO registration (`EPO_OPS_KEY`, `EPO_OPS_SECRET`) | 4 GB a week free; one request per verified candidate, cached 24 hours |
+| EPO Open Patent Services | Second status source (INPADOC lapse and reinstatement events) | Free EPO registration (`EPO_OPS_KEY`, `EPO_OPS_SECRET`) | 4 GB a week free; one request per verified candidate, cached for a week |
 | USPTO ODP maintenance fee events | Full fee history | ODP key, which needs ID.me verification | Parser built and tested on sample lines; not used live |
 
 The full table, with lag, terms and query costs, is in [docs/data-sources.md](docs/data-sources.md).
