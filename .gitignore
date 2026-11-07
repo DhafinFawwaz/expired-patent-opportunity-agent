@@ -24,3 +24,6 @@ outputs/runs/
 .DS_Store
 .idea/
 .vscode/
+
+# Local plan-execution ledger
+.superpowers/
