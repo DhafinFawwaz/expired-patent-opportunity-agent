@@ -26,6 +26,7 @@ class Validate:
             Path(state["report_path"]),
             deck,
             deck.with_name("deck.html"),
+            deck.with_name("report.html"),
             render=self._deps.render,
         )
         Path(state["report_path"]).with_name("validation.json").write_text(

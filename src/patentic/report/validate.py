@@ -199,6 +199,7 @@ def validate_outputs(
     docx: Path,
     pptx: Path,
     html: Path | None = None,
+    report_html: Path | None = None,
     *,
     render: bool = False,
 ) -> ValidationReport:
@@ -250,6 +251,15 @@ def validate_outputs(
                 f"{page.slide_count} slides",
             ),
         ]
+    if report_html is not None:
+        doc_page: DocFacts = extract_html_facts(report_html)
+        checks.append(
+            (
+                "report html matches bundle",
+                doc_page.candidates == expected,
+                _diff(expected, doc_page.candidates),
+            )
+        )
     for name, path in (("report schema", docx), ("deck schema", pptx)):
         problems: list[str] = ooxml_check(path)
         checks.append((name, not problems, "; ".join(problems[:3])))

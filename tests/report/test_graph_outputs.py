@@ -34,6 +34,8 @@ def test_graph_writes_valid_report_and_deck(tmp_path: Path) -> None:
     assert (Path(values["report_path"]).parent / "validation.json").exists()
     names: list[str] = [check[0] for check in values["validation"].checks]
     assert "html matches bundle" in names
+    assert "report html matches bundle" in names
+    assert (Path(values["report_path"]).parent / "report.html").exists()
     assert (Path(values["deck_path"]).parent / "deck.html").exists()
 
 
@@ -45,6 +47,7 @@ def test_graph_validation_failure_routes_back_twice_then_stops(
         docx: Path,
         pptx: Path,
         html: Path | None = None,
+        report_html: Path | None = None,
         *,
         render: bool = False,
     ) -> ValidationReport:
