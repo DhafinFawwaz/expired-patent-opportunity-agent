@@ -85,6 +85,7 @@ def make_deps(
         settings.epo_ops_secret,
         cache,
         fetcher=_FailingOps() if simulate_outage == "ops" else None,
+        offline=offline and simulate_outage != "ops",
     )
     if simulate_outage == "ops" and not ops.enabled:
         ops = OpsLegalSource("simulated", "simulated", cache, fetcher=_FailingOps())

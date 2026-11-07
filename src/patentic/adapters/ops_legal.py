@@ -109,8 +109,11 @@ class OpsLegalSource:
         secret: str | None,
         cache_dir: Path,
         fetcher: LegalFetcher | None = None,
+        *,
+        offline: bool = False,
     ) -> None:
         self.enabled: bool = bool(key and secret)
+        self.offline: bool = offline
         self._cache_dir: Path = cache_dir / "ops"
         self._fetcher: LegalFetcher | None = fetcher
         if self.enabled and fetcher is None and key and secret:
@@ -123,11 +126,14 @@ class OpsLegalSource:
         url: str = _OPS_URL.format(epodoc)
         path: Path = self._cache_dir / f"{epodoc}.xml"
         now: datetime = utc_now()
-        if (
-            path.exists()
-            and now - datetime.fromtimestamp(path.stat().st_mtime, now.tzinfo) < CACHE_TTL
-        ):
+        fresh: bool = path.exists() and (
+            self.offline
+            or now - datetime.fromtimestamp(path.stat().st_mtime, now.tzinfo) < CACHE_TTL
+        )
+        if fresh:
             return parse_legal_xml(path.read_text(), patent, url, now)
+        if self.offline:
+            return []
         try:
             xml: str = self._fetcher.fetch(epodoc)
         except LegalFetchError as exc:

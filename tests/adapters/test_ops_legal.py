@@ -1,3 +1,4 @@
+import os
 from datetime import UTC, date, datetime
 from pathlib import Path
 
@@ -70,3 +71,20 @@ def test_quota_403_not_retried(tmp_path: Path) -> None:
     assert fetcher.calls == 1
     assert [e.event_type for e, _ in pairs] == ["outage"]
     assert "403" in pairs[0][1].raw_snippet
+
+
+def test_offline_source_reads_stale_cache_and_never_fetches(tmp_path: Path) -> None:
+    OpsLegalSource("k", "s", tmp_path, fetcher=FakeFetcher(XML)).events_for(PATENT)
+    cached: Path = next((tmp_path / "ops").glob("*.xml"))
+    os.utime(cached, (0, 0))
+    fetcher: FakeFetcher = FakeFetcher(XML)
+    offline: OpsLegalSource = OpsLegalSource("k", "s", tmp_path, fetcher=fetcher, offline=True)
+    assert len(offline.events_for(PATENT)) == 5
+    assert fetcher.calls == 0
+
+
+def test_offline_cache_miss_returns_nothing(tmp_path: Path) -> None:
+    fetcher: FakeFetcher = FakeFetcher(XML)
+    offline: OpsLegalSource = OpsLegalSource("k", "s", tmp_path, fetcher=fetcher, offline=True)
+    assert offline.events_for(PATENT) == []
+    assert fetcher.calls == 0

@@ -22,7 +22,11 @@ from patentic.llm.schemas import (
 )
 
 REPLAY_DIR: Final[Path] = Path("fixtures") / "replay"
-PACKED: Final[tuple[str, ...]] = ("http", "bq")
+PACKED: Final[tuple[tuple[str, str], ...]] = (
+    ("http", "*.json"),
+    ("bq", "*.json"),
+    ("ops", "*.xml"),
+)
 
 
 class Provenance(BaseModel):
@@ -82,8 +86,8 @@ class ReplayCaller(LlmCaller):
 def pack(cache_dir: Path, out_dir: Path, provenance: Provenance, recorded: Recorded) -> None:
     files: dict[str, str] = {
         path.relative_to(cache_dir).as_posix(): path.read_text()
-        for top in PACKED
-        for path in sorted((cache_dir / top).rglob("*.json"))
+        for top, pattern in PACKED
+        for path in sorted((cache_dir / top).rglob(pattern))
     }
     out_dir.mkdir(parents=True, exist_ok=True)
     # mtime=0 keeps the archive byte-identical across rebuilds.

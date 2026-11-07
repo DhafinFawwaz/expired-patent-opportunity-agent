@@ -23,7 +23,9 @@ def test_pack_then_unpack_restores_cache_files(tmp_path: Path) -> None:
     (cache / "http" / "og" / "a.json").write_text('{"url": "u"}')
     (cache / "bq" / "queries" / "b.json").write_text("[]")
     (cache / "ops").mkdir()
-    (cache / "ops" / "skip.json").write_text("{}")
+    (cache / "ops" / "US8646606.xml").write_text("<xml/>")
+    (cache / "llm-scratch").mkdir()
+    (cache / "llm-scratch" / "skip.json").write_text("{}")
     out: Path = tmp_path / "replay"
     pack(cache, out, _provenance(), Recorded())
     restored: Path = tmp_path / "restored"
@@ -31,7 +33,8 @@ def test_pack_then_unpack_restores_cache_files(tmp_path: Path) -> None:
     assert loaded == _provenance()
     assert (restored / "http" / "og" / "a.json").read_text() == '{"url": "u"}'
     assert (restored / "bq" / "queries" / "b.json").read_text() == "[]"
-    assert not (restored / "ops").exists()
+    assert (restored / "ops" / "US8646606.xml").read_text() == "<xml/>"
+    assert not (restored / "llm-scratch").exists()
     assert sorted(p.name for p in out.iterdir()) == ["cache.json.gz", "llm.json", "provenance.json"]
 
 

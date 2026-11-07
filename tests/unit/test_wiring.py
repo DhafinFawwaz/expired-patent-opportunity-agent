@@ -28,3 +28,15 @@ def test_simulated_gazette_outage_ignores_a_warm_cache(tmp_path: Path) -> None:
     result: FetchResult = deps.og._http.get(URL)
     assert result.status != 200
     assert not result.from_cache
+
+
+def test_offline_run_keeps_ops_offline(tmp_path: Path) -> None:
+    settings: Settings = Settings(
+        epo_ops_key="k",
+        epo_ops_secret="s",
+        patentic_cache_dir=tmp_path / "cache",
+        patentic_outputs_dir=tmp_path / "out",
+        _env_file=None,
+    )
+    deps: Deps = make_deps(settings, demo=False, no_llm=True, offline=True, simulate_outage=None)
+    assert deps.ops.offline
