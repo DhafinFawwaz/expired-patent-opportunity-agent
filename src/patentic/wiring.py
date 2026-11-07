@@ -53,6 +53,7 @@ def make_deps(
     offline: bool,
     simulate_outage: Outage | None,
     today: date | None = None,
+    render: bool = False,
 ) -> Deps:
     cache: Path = settings.patentic_cache_dir
     simulated: bool = simulate_outage == "og"
@@ -96,4 +97,5 @@ def make_deps(
         power=load_power_terms(),
         today=fixtures[0].today if fixtures else (today or date.today() + timedelta(0)),  # noqa: DTZ011
         fixtures=fixtures,
+        render=render,
     )

@@ -15,3 +15,4 @@ class Settings(BaseSettings):
     census_api_key: str | None = None
     patentic_cache_dir: Path = Path(".cache")
     patentic_outputs_dir: Path = Path("outputs")
+    patentic_templates_dir: Path = Path("templates")

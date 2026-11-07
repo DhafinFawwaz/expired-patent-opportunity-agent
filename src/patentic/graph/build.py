@@ -8,11 +8,13 @@ from patentic.graph.deps import Deps
 from patentic.graph.nodes.analyse import Analyse
 from patentic.graph.nodes.bundle import Bundle
 from patentic.graph.nodes.discover import BqClaims, BqDiscover, OgIndexNode
+from patentic.graph.nodes.generate import Generate
 from patentic.graph.nodes.normalise import Normalise
 from patentic.graph.nodes.plan import PlanNode, approve, intake
 from patentic.graph.nodes.rank import Rank
 from patentic.graph.nodes.review import review
 from patentic.graph.nodes.score import Score
+from patentic.graph.nodes.validate import Validate
 from patentic.graph.nodes.verify import VerifyCandidate, verify_dispatch
 from patentic.graph.state import InputState, PipelineState
 
@@ -36,6 +38,8 @@ def build_graph(
     graph.add_node("score", Score(deps))
     graph.add_node("review", review, destinations=("bundle", END))
     graph.add_node("bundle", Bundle(deps))
+    graph.add_node("generate", Generate(deps))
+    graph.add_node("validate", Validate(deps), destinations=("generate", END))
     graph.add_edge(START, "intake")
     graph.add_edge("intake", "plan")
     graph.add_edge("plan", "approve")
@@ -47,5 +51,6 @@ def build_graph(
     graph.add_edge("rank", "analyse")
     graph.add_edge("analyse", "score")
     graph.add_edge("score", "review")
-    graph.add_edge("bundle", END)
+    graph.add_edge("bundle", "generate")
+    graph.add_edge("generate", "validate")
     return graph.compile(checkpointer=checkpointer)

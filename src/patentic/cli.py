@@ -49,6 +49,7 @@ def _execute(
         offline=bool(run_config["offline"]),
         simulate_outage=run_config.get("simulate_outage"),
         today=date.fromisoformat(run_config["today"]) if run_config.get("today") else None,
+        render=bool(run_config.get("render", False)),
     )
     if not resume:
         run_dir.mkdir(parents=True, exist_ok=True)
@@ -73,6 +74,10 @@ DecisionsOpt = Annotated[
 ThreadOpt = Annotated[
     str | None, typer.Option(help="Use this thread id instead of a generated one")
 ]
+RenderOpt = Annotated[
+    bool,
+    typer.Option("--render", help="Also render the report to PDF with LibreOffice to count pages"),
+]
 NoLlmOpt = Annotated[
     bool, typer.Option("--no-llm", help="Run without a model; every model step uses its template")
 ]
@@ -88,6 +93,7 @@ def run(
     og_weeks: Annotated[int | None, typer.Option(help="Gazette weeks to scan")] = None,
     offline: Annotated[bool, typer.Option("--offline", help="Use cached data only")] = False,
     no_llm: NoLlmOpt = False,
+    render: RenderOpt = False,
     thread_id: ThreadOpt = None,
 ) -> None:
     """Run the pipeline on a research request."""
@@ -100,6 +106,7 @@ def run(
         "request": request,
         "no_llm": no_llm,
         "offline": offline,
+        "render": render,
         "simulate_outage": outage,
         "created": utc_now().isoformat(),
         "today": date.today().isoformat(),  # noqa: DTZ011
@@ -109,7 +116,10 @@ def run(
 
 @app.command()
 def demo(
-    decisions: DecisionsOpt = None, no_llm: NoLlmOpt = False, thread_id: ThreadOpt = None
+    decisions: DecisionsOpt = None,
+    no_llm: NoLlmOpt = False,
+    render: RenderOpt = False,
+    thread_id: ThreadOpt = None,
 ) -> None:
     """Run the six synthetic fixtures through the same pipeline, offline."""
     config: dict[str, Any] = {
@@ -117,6 +127,7 @@ def demo(
         "request": dict(_load_yaml(DEMO_REQUEST)),
         "no_llm": no_llm,
         "offline": True,
+        "render": render,
         "simulate_outage": None,
         "created": utc_now().isoformat(),
     }

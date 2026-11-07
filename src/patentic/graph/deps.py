@@ -23,3 +23,4 @@ class Deps:
     power: PowerTerms
     today: date
     fixtures: tuple[FixtureCase, ...] = ()
+    render: bool = False

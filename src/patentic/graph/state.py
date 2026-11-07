@@ -14,6 +14,7 @@ from patentic.domain.scoring import Scores
 from patentic.domain.status_rules import StatusAssessment
 from patentic.graph.reducers import append_unique, merge_dict, override
 from patentic.llm.schemas import CallMeta, OpportunityRationale, PlanDraft, TechnicalSummary
+from patentic.report.validate import ValidationReport
 
 Recommendation = Literal["Shortlist", "Hold", "Exclude", "NotAnalysed"]
 
@@ -78,6 +79,10 @@ class PipelineState(TypedDict, total=False):
     pool: list[str]
     review: ReviewDecision
     bundle_path: str
+    report_path: str
+    deck_path: str
+    generation_attempts: int
+    validation: ValidationReport
     calls: Annotated[list[CallMeta], operator.add]
     outages: Annotated[list[str], append_unique]
     run_meta: RunMeta
