@@ -67,6 +67,11 @@ mypy_path = ["src", "llm/src"]
 files = ["src", "llm/src", "tests", "llm/tests", "conftest.py"]
 explicit_package_bases = true
 
+[[tool.mypy.overrides]]
+# python-epo-ops-client ships no type information.
+module = ["epo_ops", "epo_ops.*"]
+ignore_missing_imports = true
+
 [tool.pydantic-mypy]
 init_forbid_extra = true
 init_typed = true

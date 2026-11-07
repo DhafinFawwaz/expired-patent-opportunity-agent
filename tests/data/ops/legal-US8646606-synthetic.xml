@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SYNTHETIC: hand-written in the OPS v3.2 legal format (reference guide 1.3.19, section 3.5)
+     from the events Google Patents shows for US 8,646,606 on 2026-11-07, plus a PRDP event that
+     INPADOC has not published yet. Replace with a recorded response once OPS credentials exist. -->
+<ops:world-patent-data xmlns:ops="http://ops.epo.org" xmlns="http://www.epo.org/exchange">
+  <ops:patent-family>
+    <ops:family-member>
+      <ops:legal code="FPAY   " desc="FEE PAYMENT" infl="+">
+        <ops:L007EP desc="Gazette DATE">2017-04-12</ops:L007EP>
+        <ops:L008EP desc="Legal Event Code 1">FPAY</ops:L008EP>
+        <ops:L510EP desc="Free Format Text">YEAR OF FEE PAYMENT: 4</ops:L510EP>
+      </ops:legal>
+      <ops:legal code="FEPP   " desc="FEE PAYMENT PROCEDURE" infl="+">
+        <ops:L007EP desc="Gazette DATE">2025-09-29</ops:L007EP>
+        <ops:L008EP desc="Legal Event Code 1">FEPP</ops:L008EP>
+        <ops:L510EP desc="Free Format Text">MAINTENANCE FEE REMINDER MAILED</ops:L510EP>
+      </ops:legal>
+      <ops:legal code="LAPS   " desc="LAPSE FOR FAILURE TO PAY MAINTENANCE FEES" infl="-">
+        <ops:L007EP desc="Gazette DATE">2026-03-16</ops:L007EP>
+        <ops:L008EP desc="Legal Event Code 1">LAPS</ops:L008EP>
+      </ops:legal>
+      <ops:legal code="STCH   " desc="INFORMATION ON STATUS: PATENT DISCONTINUATION" infl="-">
+        <ops:L007EP desc="Gazette DATE">2026-03-16</ops:L007EP>
+        <ops:L008EP desc="Legal Event Code 1">STCH</ops:L008EP>
+      </ops:legal>
+      <ops:legal code="FP     " desc="LAPSED DUE TO FAILURE TO PAY MAINTENANCE FEE" infl="-">
+        <ops:L007EP desc="Gazette DATE">2026-04-07</ops:L007EP>
+        <ops:L008EP desc="Legal Event Code 1">FP</ops:L008EP>
+        <ops:L525EP desc="Effective DATE">20260211</ops:L525EP>
+      </ops:legal>
+      <ops:legal code="AS     " desc="ASSIGNMENT" infl="+">
+        <ops:L007EP desc="Gazette DATE">2020-01-23</ops:L007EP>
+        <ops:L008EP desc="Legal Event Code 1">AS</ops:L008EP>
+      </ops:legal>
+    </ops:family-member>
+  </ops:patent-family>
+</ops:world-patent-data>
