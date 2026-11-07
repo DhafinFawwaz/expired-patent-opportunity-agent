@@ -1,0 +1,86 @@
+{
+  "name": "03-grace-period",
+  "description": "The 4-year fee is unpaid, a reminder was mailed, and the anniversary has not passed.",
+  "record": {
+    "patent": {
+      "country": "US",
+      "prefix": "",
+      "number": 9999903,
+      "kind": "B2"
+    },
+    "title": "Dust pan with comb edge",
+    "grant_date": "2022-12-06",
+    "filing_date": "2021-03-30",
+    "kind": "B2",
+    "num_claims": 3,
+    "cpc_codes": [
+      "A47L13/52"
+    ],
+    "entity_status": "small",
+    "assignees": [
+      "Synthetic Housewares LLC"
+    ],
+    "family_key": null,
+    "parents": [],
+    "children": [],
+    "terminal_disclaimer": null
+  },
+  "claims": [
+    {
+      "patent_key": "US-9999903",
+      "sequence": 1,
+      "text": "A dust pan comprising a scoop and a row of teeth along the rear edge for combing debris from a broom.",
+      "dependent_on": null
+    },
+    {
+      "patent_key": "US-9999903",
+      "sequence": 2,
+      "text": "The dust pan of claim 1, wherein the teeth are integrally moulded.",
+      "dependent_on": 1
+    }
+  ],
+  "events": [
+    {
+      "event_type": "reminder",
+      "event_date": "2026-07-01",
+      "effective_date": null,
+      "stage": null,
+      "source": "ops",
+      "source_code": "REMI",
+      "evidence_id": "b35efedc5e75"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "b35efedc5e75",
+      "source": "fixture",
+      "url": "https://ops.epo.org/3.2/rest-services/legal/publication/docdb/US9999903",
+      "retrieved_at": "2026-11-07T09:00:00Z",
+      "from_cache": false,
+      "http_status": 200,
+      "raw_snippet": "REMI Maintenance fee reminder mailed",
+      "content_sha256": "425f3c388359e1b5d38e189211bac2371d50b0cebcba7998366d3bc988127ff8",
+      "parser_version": "fixture-1",
+      "patent_key": "US-9999903",
+      "event_type": "reminder",
+      "event_date": "2026-07-01",
+      "is_synthetic": true,
+      "source_grade": "F",
+      "credibility": 6
+    }
+  ],
+  "coverage": {
+    "weeks_fetched": 104,
+    "first_issue": "2024-11-12",
+    "last_issue": "2026-11-03",
+    "missing_weeks": [],
+    "as_of": "2026-11-07"
+  },
+  "today": "2026-11-07",
+  "related": [],
+  "expected": {
+    "label": "in_grace_period",
+    "confidence": "medium",
+    "flags": []
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "name": "04-end-of-term",
+  "description": "Twenty years from filing have passed with no lapse; the term ran out.",
+  "record": {
+    "patent": {
+      "country": "US",
+      "prefix": "",
+      "number": 9999904,
+      "kind": "B2"
+    },
+    "title": "Spray mop with hand pump",
+    "grant_date": "2006-03-07",
+    "filing_date": "2004-03-01",
+    "kind": "B2",
+    "num_claims": 3,
+    "cpc_codes": [
+      "A47L13/22"
+    ],
+    "entity_status": "small",
+    "assignees": [
+      "Synthetic Housewares LLC"
+    ],
+    "family_key": null,
+    "parents": [],
+    "children": [],
+    "terminal_disclaimer": null
+  },
+  "claims": [
+    {
+      "patent_key": "US-9999904",
+      "sequence": 1,
+      "text": "A spray mop comprising a reservoir, a hand-operated pump, and a nozzle directed at the floor ahead of the mop head.",
+      "dependent_on": null
+    },
+    {
+      "patent_key": "US-9999904",
+      "sequence": 2,
+      "text": "The spray mop of claim 1, wherein the pump is a trigger pump.",
+      "dependent_on": 1
+    }
+  ],
+  "events": [],
+  "evidence": [],
+  "coverage": {
+    "weeks_fetched": 104,
+    "first_issue": "2024-11-12",
+    "last_issue": "2026-11-03",
+    "missing_weeks": [],
+    "as_of": "2026-11-07"
+  },
+  "today": "2026-11-07",
+  "related": [],
+  "expected": {
+    "label": "expired_end_of_term",
+    "confidence": "very_low",
+    "flags": []
+  }
+}

@@ -1,0 +1,183 @@
+{
+  "$defs": {
+    "StatusEvent": {
+      "properties": {
+        "effective_date": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Effective Date"
+        },
+        "event_date": {
+          "format": "date",
+          "title": "Event Date",
+          "type": "string"
+        },
+        "event_type": {
+          "enum": [
+            "grant",
+            "fee_paid",
+            "reminder",
+            "surcharge",
+            "lapse",
+            "petition_filed",
+            "petition_granted",
+            "petition_denied",
+            "reinstated",
+            "defective_payment",
+            "terminal_disclaimer",
+            "outage"
+          ],
+          "title": "Event Type",
+          "type": "string"
+        },
+        "evidence_id": {
+          "title": "Evidence Id",
+          "type": "string"
+        },
+        "source": {
+          "enum": [
+            "og_notice",
+            "bigquery",
+            "ops",
+            "odp",
+            "fixture"
+          ],
+          "title": "Source",
+          "type": "string"
+        },
+        "source_code": {
+          "title": "Source Code",
+          "type": "string"
+        },
+        "stage": {
+          "anyOf": [
+            {
+              "enum": [
+                4,
+                8,
+                12
+              ],
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stage"
+        }
+      },
+      "required": [
+        "event_type",
+        "event_date",
+        "source",
+        "source_code",
+        "evidence_id"
+      ],
+      "title": "StatusEvent",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "as_of": {
+      "format": "date",
+      "title": "As Of",
+      "type": "string"
+    },
+    "confidence": {
+      "default": "very_low",
+      "enum": [
+        "very_low",
+        "low",
+        "medium",
+        "high",
+        "very_high"
+      ],
+      "title": "Confidence",
+      "type": "string"
+    },
+    "effective_date": {
+      "anyOf": [
+        {
+          "format": "date",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Effective Date"
+    },
+    "evidence_ids": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Evidence Ids",
+      "type": "array"
+    },
+    "label": {
+      "enum": [
+        "expired_nonpayment",
+        "reinstated",
+        "in_grace_period",
+        "petition_pending",
+        "expired_end_of_term",
+        "conflicting",
+        "in_force",
+        "not_subject_to_maintenance_fees",
+        "unknown"
+      ],
+      "title": "Label",
+      "type": "string"
+    },
+    "notes": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Notes",
+      "type": "array"
+    },
+    "stage": {
+      "anyOf": [
+        {
+          "enum": [
+            4,
+            8,
+            12
+          ],
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Stage"
+    },
+    "timeline": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/StatusEvent"
+      },
+      "title": "Timeline",
+      "type": "array"
+    }
+  },
+  "required": [
+    "label",
+    "as_of"
+  ],
+  "title": "StatusAssessment",
+  "type": "object"
+}

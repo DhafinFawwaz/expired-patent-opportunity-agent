@@ -1,0 +1,595 @@
+{
+  "$defs": {
+    "ClaimRecord": {
+      "properties": {
+        "dependent_on": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dependent On"
+        },
+        "patent_key": {
+          "title": "Patent Key",
+          "type": "string"
+        },
+        "sequence": {
+          "title": "Sequence",
+          "type": "integer"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "patent_key",
+        "sequence",
+        "text"
+      ],
+      "title": "ClaimRecord",
+      "type": "object"
+    },
+    "EvidenceRecord": {
+      "properties": {
+        "content_sha256": {
+          "title": "Content Sha256",
+          "type": "string"
+        },
+        "credibility": {
+          "enum": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ],
+          "title": "Credibility",
+          "type": "integer"
+        },
+        "event_date": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Event Date"
+        },
+        "event_type": {
+          "anyOf": [
+            {
+              "enum": [
+                "grant",
+                "fee_paid",
+                "reminder",
+                "surcharge",
+                "lapse",
+                "petition_filed",
+                "petition_granted",
+                "petition_denied",
+                "reinstated",
+                "defective_payment",
+                "terminal_disclaimer",
+                "outage"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Event Type"
+        },
+        "evidence_id": {
+          "title": "Evidence Id",
+          "type": "string"
+        },
+        "from_cache": {
+          "default": false,
+          "title": "From Cache",
+          "type": "boolean"
+        },
+        "http_status": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Http Status"
+        },
+        "is_synthetic": {
+          "default": false,
+          "title": "Is Synthetic",
+          "type": "boolean"
+        },
+        "parser_version": {
+          "title": "Parser Version",
+          "type": "string"
+        },
+        "patent_key": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Patent Key"
+        },
+        "raw_snippet": {
+          "title": "Raw Snippet",
+          "type": "string"
+        },
+        "retrieved_at": {
+          "format": "date-time",
+          "title": "Retrieved At",
+          "type": "string"
+        },
+        "source": {
+          "enum": [
+            "og_notice",
+            "bigquery",
+            "ops",
+            "odp",
+            "fixture"
+          ],
+          "title": "Source",
+          "type": "string"
+        },
+        "source_grade": {
+          "enum": [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E",
+            "F"
+          ],
+          "title": "Source Grade",
+          "type": "string"
+        },
+        "url": {
+          "title": "Url",
+          "type": "string"
+        }
+      },
+      "required": [
+        "evidence_id",
+        "source",
+        "url",
+        "retrieved_at",
+        "http_status",
+        "raw_snippet",
+        "content_sha256",
+        "parser_version",
+        "source_grade",
+        "credibility"
+      ],
+      "title": "EvidenceRecord",
+      "type": "object"
+    },
+    "FixtureExpectation": {
+      "properties": {
+        "confidence": {
+          "enum": [
+            "very_low",
+            "low",
+            "medium",
+            "high",
+            "very_high"
+          ],
+          "title": "Confidence",
+          "type": "string"
+        },
+        "flags": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Flags",
+          "type": "array"
+        },
+        "label": {
+          "enum": [
+            "expired_nonpayment",
+            "reinstated",
+            "in_grace_period",
+            "petition_pending",
+            "expired_end_of_term",
+            "conflicting",
+            "in_force",
+            "not_subject_to_maintenance_fees",
+            "unknown"
+          ],
+          "title": "Label",
+          "type": "string"
+        }
+      },
+      "required": [
+        "label",
+        "confidence"
+      ],
+      "title": "FixtureExpectation",
+      "type": "object"
+    },
+    "PatentId": {
+      "properties": {
+        "country": {
+          "const": "US",
+          "default": "US",
+          "title": "Country",
+          "type": "string"
+        },
+        "kind": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Kind"
+        },
+        "number": {
+          "title": "Number",
+          "type": "integer"
+        },
+        "prefix": {
+          "default": "",
+          "enum": [
+            "",
+            "RE",
+            "D",
+            "PP",
+            "H",
+            "T"
+          ],
+          "title": "Prefix",
+          "type": "string"
+        }
+      },
+      "required": [
+        "number"
+      ],
+      "title": "PatentId",
+      "type": "object"
+    },
+    "PatentRecord": {
+      "properties": {
+        "assignees": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Assignees",
+          "type": "array"
+        },
+        "children": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Children",
+          "type": "array"
+        },
+        "cpc_codes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Cpc Codes",
+          "type": "array"
+        },
+        "entity_status": {
+          "default": "unknown",
+          "enum": [
+            "large",
+            "small",
+            "micro",
+            "unknown"
+          ],
+          "title": "Entity Status",
+          "type": "string"
+        },
+        "family_key": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Family Key"
+        },
+        "filing_date": {
+          "format": "date",
+          "title": "Filing Date",
+          "type": "string"
+        },
+        "grant_date": {
+          "format": "date",
+          "title": "Grant Date",
+          "type": "string"
+        },
+        "kind": {
+          "title": "Kind",
+          "type": "string"
+        },
+        "num_claims": {
+          "title": "Num Claims",
+          "type": "integer"
+        },
+        "parents": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Parents",
+          "type": "array"
+        },
+        "patent": {
+          "$ref": "#/$defs/PatentId"
+        },
+        "terminal_disclaimer": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Terminal Disclaimer"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        }
+      },
+      "required": [
+        "patent",
+        "title",
+        "grant_date",
+        "filing_date",
+        "kind",
+        "num_claims",
+        "cpc_codes"
+      ],
+      "title": "PatentRecord",
+      "type": "object"
+    },
+    "ScanCoverage": {
+      "properties": {
+        "as_of": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "As Of"
+        },
+        "first_issue": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "First Issue"
+        },
+        "last_issue": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Last Issue"
+        },
+        "missing_weeks": {
+          "default": [],
+          "items": {
+            "format": "date",
+            "type": "string"
+          },
+          "title": "Missing Weeks",
+          "type": "array"
+        },
+        "weeks_fetched": {
+          "title": "Weeks Fetched",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "weeks_fetched"
+      ],
+      "title": "ScanCoverage",
+      "type": "object"
+    },
+    "StatusEvent": {
+      "properties": {
+        "effective_date": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Effective Date"
+        },
+        "event_date": {
+          "format": "date",
+          "title": "Event Date",
+          "type": "string"
+        },
+        "event_type": {
+          "enum": [
+            "grant",
+            "fee_paid",
+            "reminder",
+            "surcharge",
+            "lapse",
+            "petition_filed",
+            "petition_granted",
+            "petition_denied",
+            "reinstated",
+            "defective_payment",
+            "terminal_disclaimer",
+            "outage"
+          ],
+          "title": "Event Type",
+          "type": "string"
+        },
+        "evidence_id": {
+          "title": "Evidence Id",
+          "type": "string"
+        },
+        "source": {
+          "enum": [
+            "og_notice",
+            "bigquery",
+            "ops",
+            "odp",
+            "fixture"
+          ],
+          "title": "Source",
+          "type": "string"
+        },
+        "source_code": {
+          "title": "Source Code",
+          "type": "string"
+        },
+        "stage": {
+          "anyOf": [
+            {
+              "enum": [
+                4,
+                8,
+                12
+              ],
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stage"
+        }
+      },
+      "required": [
+        "event_type",
+        "event_date",
+        "source",
+        "source_code",
+        "evidence_id"
+      ],
+      "title": "StatusEvent",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "claims": {
+      "items": {
+        "$ref": "#/$defs/ClaimRecord"
+      },
+      "title": "Claims",
+      "type": "array"
+    },
+    "coverage": {
+      "$ref": "#/$defs/ScanCoverage"
+    },
+    "description": {
+      "title": "Description",
+      "type": "string"
+    },
+    "events": {
+      "items": {
+        "$ref": "#/$defs/StatusEvent"
+      },
+      "title": "Events",
+      "type": "array"
+    },
+    "evidence": {
+      "items": {
+        "$ref": "#/$defs/EvidenceRecord"
+      },
+      "title": "Evidence",
+      "type": "array"
+    },
+    "expected": {
+      "$ref": "#/$defs/FixtureExpectation"
+    },
+    "name": {
+      "title": "Name",
+      "type": "string"
+    },
+    "record": {
+      "$ref": "#/$defs/PatentRecord"
+    },
+    "related": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/PatentRecord"
+      },
+      "title": "Related",
+      "type": "array"
+    },
+    "today": {
+      "format": "date",
+      "title": "Today",
+      "type": "string"
+    }
+  },
+  "required": [
+    "name",
+    "description",
+    "record",
+    "claims",
+    "events",
+    "evidence",
+    "coverage",
+    "today",
+    "expected"
+  ],
+  "title": "FixtureCase",
+  "type": "object"
+}

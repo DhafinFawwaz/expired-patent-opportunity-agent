@@ -1,0 +1,53 @@
+{
+  "properties": {
+    "commercial_constraints": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Commercial Constraints",
+      "type": "array"
+    },
+    "intended_product": {
+      "title": "Intended Product",
+      "type": "string"
+    },
+    "jurisdiction": {
+      "const": "US",
+      "default": "US",
+      "title": "Jurisdiction",
+      "type": "string"
+    },
+    "lapse_window_weeks": {
+      "default": 104,
+      "maximum": 520,
+      "minimum": 1,
+      "title": "Lapse Window Weeks",
+      "type": "integer"
+    },
+    "max_candidates": {
+      "default": 5,
+      "maximum": 10,
+      "minimum": 1,
+      "title": "Max Candidates",
+      "type": "integer"
+    },
+    "max_recommended": {
+      "default": 2,
+      "maximum": 2,
+      "minimum": 0,
+      "title": "Max Recommended",
+      "type": "integer"
+    },
+    "technology_category": {
+      "title": "Technology Category",
+      "type": "string"
+    }
+  },
+  "required": [
+    "technology_category",
+    "intended_product"
+  ],
+  "title": "ResearchRequest",
+  "type": "object"
+}

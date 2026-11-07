@@ -1,0 +1,87 @@
+{
+  "name": "01-expired-nonpayment",
+  "description": "Lapsed at the 8-year fee; the Gazette lists it and no reinstatement follows.",
+  "record": {
+    "patent": {
+      "country": "US",
+      "prefix": "",
+      "number": 9999901,
+      "kind": "B2"
+    },
+    "title": "Mop head with reversible scrubbing pad",
+    "grant_date": "2018-03-06",
+    "filing_date": "2016-07-12",
+    "kind": "B2",
+    "num_claims": 3,
+    "cpc_codes": [
+      "A47L13/20",
+      "A47L13/256"
+    ],
+    "entity_status": "small",
+    "assignees": [
+      "Synthetic Housewares LLC"
+    ],
+    "family_key": null,
+    "parents": [],
+    "children": [],
+    "terminal_disclaimer": null
+  },
+  "claims": [
+    {
+      "patent_key": "US-9999901",
+      "sequence": 1,
+      "text": "A mop head comprising a frame, a first cleaning pad on a first face of the frame, and a scrubbing pad on a second face, the frame being reversible on a handle socket.",
+      "dependent_on": null
+    },
+    {
+      "patent_key": "US-9999901",
+      "sequence": 2,
+      "text": "The mop head of claim 1, wherein the scrubbing pad is a nylon mesh.",
+      "dependent_on": 1
+    }
+  ],
+  "events": [
+    {
+      "event_type": "lapse",
+      "event_date": "2026-05-05",
+      "effective_date": "2026-03-06",
+      "stage": 8,
+      "source": "og_notice",
+      "source_code": "OG",
+      "evidence_id": "f4119596e8a4"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "f4119596e8a4",
+      "source": "fixture",
+      "url": "https://www.uspto.gov/web/offices/com/sol/og/2026/synthetic/TOC.htm",
+      "retrieved_at": "2026-11-07T09:00:00Z",
+      "from_cache": false,
+      "http_status": 200,
+      "raw_snippet": "9,999,901   15/207,111   03/06/2018",
+      "content_sha256": "5ea8ec91b14223471192a252ccb8de5c0b706d366c88d9c5d4da1f3418d00667",
+      "parser_version": "fixture-1",
+      "patent_key": "US-9999901",
+      "event_type": "lapse",
+      "event_date": "2026-05-05",
+      "is_synthetic": true,
+      "source_grade": "F",
+      "credibility": 6
+    }
+  ],
+  "coverage": {
+    "weeks_fetched": 104,
+    "first_issue": "2024-11-12",
+    "last_issue": "2026-11-03",
+    "missing_weeks": [],
+    "as_of": "2026-11-07"
+  },
+  "today": "2026-11-07",
+  "related": [],
+  "expected": {
+    "label": "expired_nonpayment",
+    "confidence": "high",
+    "flags": []
+  }
+}

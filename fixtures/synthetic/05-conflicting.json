@@ -1,0 +1,114 @@
+{
+  "name": "05-conflicting",
+  "description": "OPS shows a lapse and then a later fee payment with no petition; one Gazette week is missing.",
+  "record": {
+    "patent": {
+      "country": "US",
+      "prefix": "",
+      "number": 9999905,
+      "kind": "B2"
+    },
+    "title": "Window scraper with angled blade",
+    "grant_date": "2018-10-02",
+    "filing_date": "2017-02-14",
+    "kind": "B2",
+    "num_claims": 3,
+    "cpc_codes": [
+      "A47L1/06"
+    ],
+    "entity_status": "small",
+    "assignees": [
+      "Synthetic Housewares LLC"
+    ],
+    "family_key": null,
+    "parents": [],
+    "children": [],
+    "terminal_disclaimer": null
+  },
+  "claims": [
+    {
+      "patent_key": "US-9999905",
+      "sequence": 1,
+      "text": "A window scraper comprising a handle and a blade carrier holding a blade at an angle of 20 to 35 degrees to the handle axis.",
+      "dependent_on": null
+    },
+    {
+      "patent_key": "US-9999905",
+      "sequence": 2,
+      "text": "The scraper of claim 1, wherein the blade is retractable.",
+      "dependent_on": 1
+    }
+  ],
+  "events": [
+    {
+      "event_type": "lapse",
+      "event_date": "2026-10-20",
+      "effective_date": "2026-10-02",
+      "stage": 8,
+      "source": "ops",
+      "source_code": "LAPS",
+      "evidence_id": "ad7bf46e3837"
+    },
+    {
+      "event_type": "fee_paid",
+      "event_date": "2026-10-27",
+      "effective_date": null,
+      "stage": 8,
+      "source": "ops",
+      "source_code": "MAFP",
+      "evidence_id": "eea91a937e4a"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ad7bf46e3837",
+      "source": "fixture",
+      "url": "https://ops.epo.org/3.2/rest-services/legal/publication/docdb/US9999905",
+      "retrieved_at": "2026-11-07T09:00:00Z",
+      "from_cache": false,
+      "http_status": 200,
+      "raw_snippet": "LAPS Lapse for failure to pay maintenance fees",
+      "content_sha256": "ffa4b3d66cffb0e722e8947ee4e022581c9ff1440aef3e90a929fede53dfb26d",
+      "parser_version": "fixture-1",
+      "patent_key": "US-9999905",
+      "event_type": "lapse",
+      "event_date": "2026-10-20",
+      "is_synthetic": true,
+      "source_grade": "F",
+      "credibility": 6
+    },
+    {
+      "evidence_id": "eea91a937e4a",
+      "source": "fixture",
+      "url": "https://ops.epo.org/3.2/rest-services/legal/publication/docdb/US9999905",
+      "retrieved_at": "2026-11-07T09:00:00Z",
+      "from_cache": false,
+      "http_status": 200,
+      "raw_snippet": "MAFP Maintenance fee payment, 8th yr",
+      "content_sha256": "904e3e5b1a26b8c8b20ab88a8fa9231df5158c34293dd8c2792d807451637ee5",
+      "parser_version": "fixture-1",
+      "patent_key": "US-9999905",
+      "event_type": "fee_paid",
+      "event_date": "2026-10-27",
+      "is_synthetic": true,
+      "source_grade": "F",
+      "credibility": 6
+    }
+  ],
+  "coverage": {
+    "weeks_fetched": 103,
+    "first_issue": "2024-11-12",
+    "last_issue": "2026-11-03",
+    "missing_weeks": [
+      "2026-10-13"
+    ],
+    "as_of": "2026-11-07"
+  },
+  "today": "2026-11-07",
+  "related": [],
+  "expected": {
+    "label": "conflicting",
+    "confidence": "low",
+    "flags": []
+  }
+}

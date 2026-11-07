@@ -1,0 +1,112 @@
+{
+  "name": "02-reinstated",
+  "description": "Lapsed at the 12-year fee, then reinstated on petition.",
+  "record": {
+    "patent": {
+      "country": "US",
+      "prefix": "",
+      "number": 9999902,
+      "kind": "B2"
+    },
+    "title": "Squeegee with replaceable blade",
+    "grant_date": "2014-06-10",
+    "filing_date": "2012-01-17",
+    "kind": "B2",
+    "num_claims": 3,
+    "cpc_codes": [
+      "A47L13/11"
+    ],
+    "entity_status": "small",
+    "assignees": [
+      "Synthetic Housewares LLC"
+    ],
+    "family_key": null,
+    "parents": [],
+    "children": [],
+    "terminal_disclaimer": null
+  },
+  "claims": [
+    {
+      "patent_key": "US-9999902",
+      "sequence": 1,
+      "text": "A squeegee comprising a handle, a blade holder, and a rubber blade retained in the holder by a sliding clip.",
+      "dependent_on": null
+    },
+    {
+      "patent_key": "US-9999902",
+      "sequence": 2,
+      "text": "The squeegee of claim 1, wherein the clip locks with a detent.",
+      "dependent_on": 1
+    }
+  ],
+  "events": [
+    {
+      "event_type": "lapse",
+      "event_date": "2026-08-04",
+      "effective_date": "2026-06-10",
+      "stage": 12,
+      "source": "og_notice",
+      "source_code": "OG",
+      "evidence_id": "57a26742066e"
+    },
+    {
+      "event_type": "reinstated",
+      "event_date": "2026-09-29",
+      "effective_date": null,
+      "stage": null,
+      "source": "og_notice",
+      "source_code": "OG",
+      "evidence_id": "fa434b89104a"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "57a26742066e",
+      "source": "fixture",
+      "url": "https://www.uspto.gov/web/offices/com/sol/og/2026/synthetic/TOC.htm",
+      "retrieved_at": "2026-11-07T09:00:00Z",
+      "from_cache": false,
+      "http_status": 200,
+      "raw_snippet": "9,999,902   13/351,222   06/10/2014",
+      "content_sha256": "1150049cf08f567e4be89a29c5f563a996cc15440eed1560ee0a7c8d9880ee15",
+      "parser_version": "fixture-1",
+      "patent_key": "US-9999902",
+      "event_type": "lapse",
+      "event_date": "2026-08-04",
+      "is_synthetic": true,
+      "source_grade": "F",
+      "credibility": 6
+    },
+    {
+      "evidence_id": "fa434b89104a",
+      "source": "fixture",
+      "url": "https://www.uspto.gov/web/offices/com/sol/og/2026/synthetic/TOC.htm",
+      "retrieved_at": "2026-11-07T09:00:00Z",
+      "from_cache": false,
+      "http_status": 200,
+      "raw_snippet": "9,999,902   13/351,222   01/17/2012   06/10/2014   09/29/2026",
+      "content_sha256": "ce8e7951e290f30fca18ae81a55037cc570cb92313eb00e5795d8e81b219ae82",
+      "parser_version": "fixture-1",
+      "patent_key": "US-9999902",
+      "event_type": "reinstated",
+      "event_date": "2026-09-29",
+      "is_synthetic": true,
+      "source_grade": "F",
+      "credibility": 6
+    }
+  ],
+  "coverage": {
+    "weeks_fetched": 104,
+    "first_issue": "2024-11-12",
+    "last_issue": "2026-11-03",
+    "missing_weeks": [],
+    "as_of": "2026-11-07"
+  },
+  "today": "2026-11-07",
+  "related": [],
+  "expected": {
+    "label": "reinstated",
+    "confidence": "high",
+    "flags": []
+  }
+}

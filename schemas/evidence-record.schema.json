@@ -1,0 +1,150 @@
+{
+  "properties": {
+    "content_sha256": {
+      "title": "Content Sha256",
+      "type": "string"
+    },
+    "credibility": {
+      "enum": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "title": "Credibility",
+      "type": "integer"
+    },
+    "event_date": {
+      "anyOf": [
+        {
+          "format": "date",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Event Date"
+    },
+    "event_type": {
+      "anyOf": [
+        {
+          "enum": [
+            "grant",
+            "fee_paid",
+            "reminder",
+            "surcharge",
+            "lapse",
+            "petition_filed",
+            "petition_granted",
+            "petition_denied",
+            "reinstated",
+            "defective_payment",
+            "terminal_disclaimer",
+            "outage"
+          ],
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Event Type"
+    },
+    "evidence_id": {
+      "title": "Evidence Id",
+      "type": "string"
+    },
+    "from_cache": {
+      "default": false,
+      "title": "From Cache",
+      "type": "boolean"
+    },
+    "http_status": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Http Status"
+    },
+    "is_synthetic": {
+      "default": false,
+      "title": "Is Synthetic",
+      "type": "boolean"
+    },
+    "parser_version": {
+      "title": "Parser Version",
+      "type": "string"
+    },
+    "patent_key": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Patent Key"
+    },
+    "raw_snippet": {
+      "title": "Raw Snippet",
+      "type": "string"
+    },
+    "retrieved_at": {
+      "format": "date-time",
+      "title": "Retrieved At",
+      "type": "string"
+    },
+    "source": {
+      "enum": [
+        "og_notice",
+        "bigquery",
+        "ops",
+        "odp",
+        "fixture"
+      ],
+      "title": "Source",
+      "type": "string"
+    },
+    "source_grade": {
+      "enum": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F"
+      ],
+      "title": "Source Grade",
+      "type": "string"
+    },
+    "url": {
+      "title": "Url",
+      "type": "string"
+    }
+  },
+  "required": [
+    "evidence_id",
+    "source",
+    "url",
+    "retrieved_at",
+    "http_status",
+    "raw_snippet",
+    "content_sha256",
+    "parser_version",
+    "source_grade",
+    "credibility"
+  ],
+  "title": "EvidenceRecord",
+  "type": "object"
+}

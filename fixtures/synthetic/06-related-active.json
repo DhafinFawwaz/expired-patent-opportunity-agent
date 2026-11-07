@@ -1,0 +1,117 @@
+{
+  "name": "06-related-active",
+  "description": "Lapsed like fixture 01, but a continuation with overlapping claims is still in force.",
+  "record": {
+    "patent": {
+      "country": "US",
+      "prefix": "",
+      "number": 9999906,
+      "kind": "B2"
+    },
+    "title": "Toilet brush with splash guard",
+    "grant_date": "2018-03-06",
+    "filing_date": "2016-08-23",
+    "kind": "B2",
+    "num_claims": 3,
+    "cpc_codes": [
+      "A47K11/10"
+    ],
+    "entity_status": "small",
+    "assignees": [
+      "Synthetic Housewares LLC"
+    ],
+    "family_key": "F-9999906",
+    "parents": [],
+    "children": [
+      "US-9999916"
+    ],
+    "terminal_disclaimer": null
+  },
+  "claims": [
+    {
+      "patent_key": "US-9999906",
+      "sequence": 1,
+      "text": "A toilet brush comprising a handle, a bristle head, and a flexible guard ring surrounding the head to limit splashing.",
+      "dependent_on": null
+    },
+    {
+      "patent_key": "US-9999906",
+      "sequence": 2,
+      "text": "The toilet brush of claim 1, wherein the guard ring is silicone.",
+      "dependent_on": 1
+    }
+  ],
+  "events": [
+    {
+      "event_type": "lapse",
+      "event_date": "2026-05-05",
+      "effective_date": "2026-03-06",
+      "stage": 8,
+      "source": "og_notice",
+      "source_code": "OG",
+      "evidence_id": "9b65a351d6dd"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "9b65a351d6dd",
+      "source": "fixture",
+      "url": "https://www.uspto.gov/web/offices/com/sol/og/2026/synthetic/TOC.htm",
+      "retrieved_at": "2026-11-07T09:00:00Z",
+      "from_cache": false,
+      "http_status": 200,
+      "raw_snippet": "9,999,906   15/245,333   03/06/2018",
+      "content_sha256": "b3f3d15d4a71efaec7032c6826529e871e42bb13a3066039ea528214cf448588",
+      "parser_version": "fixture-1",
+      "patent_key": "US-9999906",
+      "event_type": "lapse",
+      "event_date": "2026-05-05",
+      "is_synthetic": true,
+      "source_grade": "F",
+      "credibility": 6
+    }
+  ],
+  "coverage": {
+    "weeks_fetched": 104,
+    "first_issue": "2024-11-12",
+    "last_issue": "2026-11-03",
+    "missing_weeks": [],
+    "as_of": "2026-11-07"
+  },
+  "today": "2026-11-07",
+  "related": [
+    {
+      "patent": {
+        "country": "US",
+        "prefix": "",
+        "number": 9999916,
+        "kind": "B2"
+      },
+      "title": "Toilet brush with splash guard and drip tray",
+      "grant_date": "2021-04-13",
+      "filing_date": "2018-02-26",
+      "kind": "B2",
+      "num_claims": 3,
+      "cpc_codes": [
+        "A47K11/10"
+      ],
+      "entity_status": "small",
+      "assignees": [
+        "Synthetic Housewares LLC"
+      ],
+      "family_key": "F-9999906",
+      "parents": [
+        "US-9999906"
+      ],
+      "children": [],
+      "terminal_disclaimer": null
+    }
+  ],
+  "expected": {
+    "label": "expired_nonpayment",
+    "confidence": "high",
+    "flags": [
+      "related_active_continuation"
+    ]
+  }
+}
