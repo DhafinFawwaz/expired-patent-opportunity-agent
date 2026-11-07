@@ -1,0 +1,12 @@
+# The brief's demonstration request, split into fields.
+technology_category: non-powered household cleaning tools
+intended_product: >-
+  Manual cleaning tools for home use (mops, brushes, squeegees, scrapers, dust pans)
+  that a small manufacturer could make without electronics.
+commercial_constraints:
+  - US market only; do not infer worldwide availability
+  - recommend at most two candidates for technical and legal review
+  - return fewer than five if the evidence does not support five
+max_candidates: 5
+max_recommended: 2
+lapse_window_weeks: 104
