@@ -20,8 +20,13 @@ class Validate:
         bundle: ReportBundle = ReportBundle.model_validate_json(
             Path(state["bundle_path"]).read_text()
         )
+        deck: Path = Path(state["deck_path"])
         report: ValidationReport = validate_outputs(
-            bundle, Path(state["report_path"]), Path(state["deck_path"]), render=self._deps.render
+            bundle,
+            Path(state["report_path"]),
+            deck,
+            deck.with_name("deck.html"),
+            render=self._deps.render,
         )
         Path(state["report_path"]).with_name("validation.json").write_text(
             report.model_dump_json(indent=2)

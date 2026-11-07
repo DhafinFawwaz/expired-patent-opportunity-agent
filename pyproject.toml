@@ -122,6 +122,8 @@ runtime-evaluated-base-classes = ["pydantic.BaseModel", "pydantic_settings.BaseS
 # Report sentences read better unbroken.
 "src/patentic/graph/nodes/bundle.py" = ["E501"]
 "src/patentic/report/pptx_renderer.py" = ["E501"]
+"src/patentic/report/deck_content.py" = ["E501"]
+"src/patentic/report/html_deck.py" = ["E501"]
 "scripts/**" = ["INP001"]
 "llm/tests/**" = ["S101", "S311", "SLF001", "PLR2004", "ARG", "PLC0415", "INP001", "PT011", "PT018", "FBT003", "E501", "ERA001", "B018", "SIM105", "S110", "BLE001"]
 # freellm predates this repo: style-only rules relaxed, typing rules kept.

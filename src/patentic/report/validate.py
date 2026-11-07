@@ -2,6 +2,7 @@ import shutil
 import subprocess
 import sys
 import tempfile
+from html.parser import HTMLParser
 from pathlib import Path
 from typing import Final
 
@@ -104,6 +105,57 @@ def extract_pptx_facts(path: Path) -> DocFacts:
     return DocFacts(candidates=candidates, label_locations=locations, slide_count=len(slide_texts))
 
 
+class _ComparisonParser(HTMLParser):
+    def __init__(self) -> None:
+        super().__init__()
+        self.rows: list[list[str]] = []
+        self.footers: int = 0
+        self._in_table: bool = False
+        self._in_body: bool = False
+        self._cell: list[str] | None = None
+        self._row: list[str] = []
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        classes: str = dict(attrs).get("class") or ""
+        if tag == "table" and "comparison" in classes.split():
+            self._in_table = True
+        elif self._in_table and tag == "tbody":
+            self._in_body = True
+        elif self._in_body and tag == "tr":
+            self._row = []
+        elif self._in_body and tag == "td":
+            self._cell = []
+
+    def handle_endtag(self, tag: str) -> None:
+        if tag == "td" and self._cell is not None:
+            self._row.append("".join(self._cell).strip())
+            self._cell = None
+        elif tag == "tr" and self._in_body:
+            self.rows.append(self._row)
+        elif tag == "tbody":
+            self._in_body = False
+        elif tag == "table":
+            self._in_table = False
+
+    def handle_data(self, data: str) -> None:
+        if self._cell is not None:
+            self._cell.append(data)
+
+
+def extract_html_facts(path: Path) -> DocFacts:
+    page: str = path.read_text()
+    parser: _ComparisonParser = _ComparisonParser()
+    parser.feed(page)
+    candidates: CandidateFacts = dict(_row_facts(row) for row in parser.rows)
+    slides: list[str] = page.split('<section class="slide')[1:]
+    locations: list[str] = []
+    if slides and LABEL in slides[0]:
+        locations.append("title")
+    if slides and all(LABEL in s for s in slides):
+        locations.append("footers")
+    return DocFacts(candidates=candidates, label_locations=locations, slide_count=len(slides))
+
+
 def ooxml_check(path: Path) -> list[str]:
     done: subprocess.CompletedProcess[str] = subprocess.run(  # noqa: S603
         [sys.executable, str(VALIDATOR), str(path.resolve())],
@@ -143,7 +195,12 @@ def pdf_page_count(docx: Path) -> int | None:
 
 
 def validate_outputs(
-    bundle: ReportBundle, docx: Path, pptx: Path, *, render: bool = False
+    bundle: ReportBundle,
+    docx: Path,
+    pptx: Path,
+    html: Path | None = None,
+    *,
+    render: bool = False,
 ) -> ValidationReport:
     expected: CandidateFacts = bundle_facts(bundle)
     word: DocFacts = extract_docx_facts(docx)
@@ -178,6 +235,21 @@ def validate_outputs(
             f"{deck.slide_count} slides",
         ),
     ]
+    if html is not None:
+        page: DocFacts = extract_html_facts(html)
+        checks += [
+            ("html matches bundle", page.candidates == expected, _diff(expected, page.candidates)),
+            (
+                "label in html",
+                set(page.label_locations) == {"title", "footers"},
+                ", ".join(page.label_locations),
+            ),
+            (
+                "html slide count",
+                page.slide_count == deck.slide_count,
+                f"{page.slide_count} slides",
+            ),
+        ]
     for name, path in (("report schema", docx), ("deck schema", pptx)):
         problems: list[str] = ooxml_check(path)
         checks.append((name, not problems, "; ".join(problems[:3])))

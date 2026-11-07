@@ -7,6 +7,7 @@ from patentic.graph.progress import emit
 from patentic.graph.state import PipelineState
 from patentic.report.bundle import ReportBundle
 from patentic.report.docx_renderer import render_docx
+from patentic.report.html_deck import render_html
 from patentic.report.pptx_renderer import render_pptx
 
 
@@ -31,6 +32,7 @@ class Generate:
         deck: Path = render_pptx(
             bundle, templates / "deck_template.pptx", bundle_path.parent / "deck.pptx"
         )
+        render_html(bundle, bundle_path.parent / "deck.html")
         attempts: int = state.get("generation_attempts", 0) + 1
         emit("generation", "files_written", report=report.name, deck=deck.name, attempt=attempts)
         return {

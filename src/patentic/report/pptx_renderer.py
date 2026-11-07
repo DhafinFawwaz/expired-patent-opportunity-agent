@@ -13,49 +13,37 @@ from pptx.slide import Slide
 from pptx.util import Emu, Inches, Pt
 
 from patentic.report.bundle import LABEL, CandidateReport, ReportBundle
+from patentic.report.deck_content import (
+    COMMERCIAL_NOTES,
+    FLOW,
+    SLIDES,
+    WORKFLOW_NOTES,
+    all_evidence,
+    objective,
+    risks,
+    scope,
+    technical,
+)
 from patentic.report.docx_renderer import COMPARISON_HEADER
 from patentic.report.formatters import fmt_confidence, fmt_date, fmt_score, fmt_source, fmt_status
 
-SLIDES: Final[tuple[str, ...]] = (
-    "Title",
-    "Business objective",
-    "Agent workflow and architecture",
-    "Search scope and evidence sources",
-    "Candidate comparison",
-    "Status-verification example",
-    "Technical opportunity",
-    "Commercial assessment",
-    "Unresolved risks and next steps",
-)
 _TITLE_LAYOUT: Final[int] = 0
 _TITLE_ONLY_LAYOUT: Final[int] = 5
 _GREY: Final[RGBColor] = RGBColor(0x59, 0x59, 0x59)
 _GATE: Final[RGBColor] = RGBColor(0xF4, 0xB1, 0x83)
 _STEP: Final[RGBColor] = RGBColor(0xD9, 0xE2, 0xF3)
-_FLOW: Final[tuple[tuple[str, bool], ...]] = (
-    ("Intake", False),
-    ("Plan (model)", False),
-    ("Approval (you)", True),
-    ("Discovery: BigQuery", False),
-    ("Gazette index", False),
-    ("Claims and continuity", False),
-    ("Screen and verify status", False),
-    ("Analyse (model)", False),
-    ("Score", False),
-    ("Review (you)", True),
-    ("Report and deck", False),
-)
+_FLOW: Final[tuple[tuple[str, bool], ...]] = FLOW
 
 
 def render_pptx(bundle: ReportBundle, template: Path, out: Path) -> Path:
     deck: Deck = Presentation(str(template))
     _title(deck, bundle)
-    _text_slide(deck, SLIDES[1], _objective(bundle), _all_evidence(bundle))
+    _text_slide(deck, SLIDES[1], objective(bundle), all_evidence(bundle))
     _workflow(deck)
-    _text_slide(deck, SLIDES[3], _scope(bundle), "")
+    _text_slide(deck, SLIDES[3], scope(bundle), "")
     _comparison(deck, bundle)
     _status_example(deck, bundle)
-    _text_slide(deck, SLIDES[6], _technical(bundle), _all_evidence(bundle))
+    _text_slide(deck, SLIDES[6], technical(bundle), all_evidence(bundle))
     _commercial(deck, bundle)
     _text_slide(deck, SLIDES[8], _risks(bundle), "")
     out.parent.mkdir(parents=True, exist_ok=True)
@@ -104,18 +92,6 @@ def _title(deck: Deck, bundle: ReportBundle) -> None:
     subtitle.add_paragraph().text = LABEL
 
 
-def _objective(bundle: ReportBundle) -> list[str]:
-    return [
-        f"Find US patents in {bundle.request.technology_category} that appear to have expired for nonpayment.",
-        "Verify each status over time, including later reinstatement.",
-        (
-            f"Rank up to {bundle.request.max_candidates} candidates and recommend up to "
-            f"{bundle.request.max_recommended} for technical and legal review."
-        ),
-        "Evidence-backed screening, not a claim that the technology is free to use.",
-    ]
-
-
 def _workflow(deck: Deck) -> None:
     slide: Slide = _content_slide(
         deck, SLIDES[2], "Orange boxes are human gates; the run pauses there."
@@ -148,39 +124,16 @@ def _workflow(deck: Deck) -> None:
         connector.line.color.rgb = _GREY
     _write_lines(
         slide,
-        [
-            "Code makes every data call and applies the status rules; the model drafts the plan, summarises claims and writes prose.",
-            "Every claim in the outputs points to an evidence record with its source URL and retrieval time.",
-        ],
+        WORKFLOW_NOTES,
         top=5.0,
         size=14,
     )
 
 
-def _scope(bundle: ReportBundle) -> list[str]:
-    flow = bundle.flow
-    coverage = bundle.coverage
-    return [
-        f"CPC groups: {', '.join(bundle.plan.cpc_codes[:8]) or 'n/a'}.",
-        f"Official Gazette notices: {coverage.weeks_fetched} weekly issues, last issue {fmt_date(coverage.last_issue)} (grade A).",
-        "BigQuery PatentsView: bibliographic data, claims, citations, continuity (grants to 2021-09-28).",
-        "EPO OPS legal events: "
-        + (
-            "used as a cross-check."
-            if bundle.run.ops_configured
-            else "not configured for this run."
-        ),
-        (
-            f"Narrowing: {flow.found} found, {flow.expired_in_window} expired in window, "
-            f"{flow.passed_screening} non-powered, {flow.analysed} analysed, {flow.recommended} recommended."
-        ),
-    ]
-
-
 def _comparison(deck: Deck, bundle: ReportBundle) -> None:
     synthetic: bool = any(c.is_synthetic for c in bundle.candidates)
     title: str = SLIDES[4]
-    slide: Slide = _content_slide(deck, title, _all_evidence(bundle))
+    slide: Slide = _content_slide(deck, title, all_evidence(bundle))
     if synthetic:
         _write_lines(
             slide,
@@ -252,19 +205,6 @@ def _status_example(deck: Deck, bundle: ReportBundle) -> None:
                     run.font.size = Pt(11)
 
 
-def _technical(bundle: ReportBundle) -> list[str]:
-    lines: list[str] = []
-    for report in bundle.candidates:
-        if report.recommendation != "Shortlist" or report.technical is None:
-            continue
-        lines.append(f"{report.display}: {report.technical.summary}")
-        if report.technical.implementation_unknowns:
-            lines.append(
-                "Open questions: " + "; ".join(report.technical.implementation_unknowns[:3])
-            )
-    return lines or ["No candidate was shortlisted, so no technical opportunity is presented."]
-
-
 def _commercial(deck: Deck, bundle: ReportBundle) -> None:
     scored: list[CandidateReport] = [c for c in bundle.candidates if c.scores]
     slide: Slide = _content_slide(deck, SLIDES[7], "Weights: " + bundle.weights.model_dump_json())
@@ -284,11 +224,7 @@ def _commercial(deck: Deck, bundle: ReportBundle) -> None:
     )
     _write_lines_at(
         slide,
-        [
-            "Scores run 1 to 5; effort and risk count against a candidate.",
-            "Owners who stop paying usually judged the patent worth little to them; each case needs a reason that does not bind a new entrant.",
-            "US housekeeping-supplies spending: $844 per household in 2025 (BLS). Category context only.",
-        ],
+        COMMERCIAL_NOTES,
         left=8.3,
     )
 
@@ -305,16 +241,8 @@ def _write_lines_at(slide: Slide, lines: Sequence[str], left: float) -> None:
 
 
 def _risks(bundle: ReportBundle) -> list[str]:
-    related: int = sum(len(c.related) for c in bundle.candidates)
     return [
-        f"{related} related records (continuations, citations, same owner) need their own status check.",
-        "A lapsed patent can be reinstated; recent lapses carry the most risk.",
-        "Design patents and trade dress may cover the product's look.",
+        *risks(bundle),
         "Next: confirm status in Patent Center, read full claims, and have an attorney run a freedom-to-operate search.",
         LABEL,
     ]
-
-
-def _all_evidence(bundle: ReportBundle) -> str:
-    ids: list[str] = [e for c in bundle.candidates for e in c.evidence_ids]
-    return "Evidence: " + ", ".join(ids) if ids else ""

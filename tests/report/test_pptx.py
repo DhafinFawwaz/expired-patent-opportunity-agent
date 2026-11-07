@@ -6,8 +6,9 @@ from pptx.presentation import Presentation as Deck
 from pptx.util import Inches
 
 from patentic.report.bundle import LABEL, ReportBundle
+from patentic.report.deck_content import SLIDES
 from patentic.report.formatters import fmt_score, fmt_status
-from patentic.report.pptx_renderer import SLIDES, render_pptx
+from patentic.report.pptx_renderer import render_pptx
 from tests.report.helpers import TEMPLATES
 
 

@@ -32,13 +32,21 @@ def test_graph_writes_valid_report_and_deck(tmp_path: Path) -> None:
     assert values["validation"].ok, values["validation"].checks
     assert values["stage"] == "validated"
     assert (Path(values["report_path"]).parent / "validation.json").exists()
+    names: list[str] = [check[0] for check in values["validation"].checks]
+    assert "html matches bundle" in names
+    assert (Path(values["deck_path"]).parent / "deck.html").exists()
 
 
 def test_graph_validation_failure_routes_back_twice_then_stops(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     def failing(
-        bundle: ReportBundle, docx: Path, pptx: Path, *, render: bool = False
+        bundle: ReportBundle,
+        docx: Path,
+        pptx: Path,
+        html: Path | None = None,
+        *,
+        render: bool = False,
     ) -> ValidationReport:
         return ValidationReport(ok=False, checks=[("forced", False, "test")])
 
