@@ -13,7 +13,8 @@ from patentic.domain.identifiers import PatentId
 
 PARSER_VERSION: Final[str] = "ops-legal-1"
 NS: Final[dict[str, str]] = {"ops": "http://ops.epo.org"}
-CACHE_TTL: Final[timedelta] = timedelta(hours=24)
+# The Gazette is the fresh source each run; INPADOC lags weeks, so a week-old answer is current.
+CACHE_TTL: Final[timedelta] = timedelta(days=7)
 _EFFECTIVE_TEXT: Final[re.Pattern[str]] = re.compile(
     r"EFFECTIVE DATE:?\s*(\d{8}|\d{4}-\d{2}-\d{2})", re.IGNORECASE
 )
@@ -126,12 +127,10 @@ class OpsLegalSource:
         url: str = _OPS_URL.format(epodoc)
         path: Path = self._cache_dir / f"{epodoc}.xml"
         now: datetime = utc_now()
-        fresh: bool = path.exists() and (
-            self.offline
-            or now - datetime.fromtimestamp(path.stat().st_mtime, now.tzinfo) < CACHE_TTL
-        )
-        if fresh:
-            return parse_legal_xml(path.read_text(), patent, url, now)
+        if path.exists():
+            fetched: datetime = datetime.fromtimestamp(path.stat().st_mtime, now.tzinfo)
+            if self.offline or now - fetched < CACHE_TTL:
+                return parse_legal_xml(path.read_text(), patent, url, fetched)
         if self.offline:
             return []
         try:

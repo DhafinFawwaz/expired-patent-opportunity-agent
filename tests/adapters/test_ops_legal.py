@@ -2,6 +2,8 @@ import os
 from datetime import UTC, date, datetime
 from pathlib import Path
 
+import pytest
+
 from patentic.adapters.base import EvidenceRecord
 from patentic.adapters.ops_legal import LegalFetchError, OpsLegalSource, parse_legal_xml
 from patentic.domain.events import StatusEvent
@@ -88,3 +90,17 @@ def test_offline_cache_miss_returns_nothing(tmp_path: Path) -> None:
     offline: OpsLegalSource = OpsLegalSource("k", "s", tmp_path, fetcher=fetcher, offline=True)
     assert offline.events_for(PATENT) == []
     assert fetcher.calls == 0
+
+
+def test_cached_answer_keeps_its_retrieval_time_and_lasts_a_week(tmp_path: Path) -> None:
+    OpsLegalSource("k", "s", tmp_path, fetcher=FakeFetcher(XML)).events_for(PATENT)
+    cached: Path = next((tmp_path / "ops").glob("*.xml"))
+    five_days_ago: float = cached.stat().st_mtime - 5 * 86400
+    os.utime(cached, (five_days_ago, five_days_ago))
+    fetcher: FakeFetcher = FakeFetcher(XML)
+    source: OpsLegalSource = OpsLegalSource("k", "s", tmp_path, fetcher=fetcher)
+    first = source.events_for(PATENT)
+    second = source.events_for(PATENT)
+    assert fetcher.calls == 0
+    assert [e.evidence_id for e, _ in first] == [e.evidence_id for e, _ in second]
+    assert first[0][1].retrieved_at.timestamp() == pytest.approx(five_days_ago, abs=1)
