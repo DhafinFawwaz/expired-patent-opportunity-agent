@@ -16,6 +16,12 @@ Relation = Literal[
     "terminal_disclaimer",
 ]
 _LINEAGE: Final[frozenset[str]] = frozenset({"continuation", "division", "cip"})
+_DECLARED: Final[dict[str, Relation]] = {
+    "continuation": "continuation",
+    "division": "division",
+    "cip": "cip",
+    "reissue": "reissue",
+}
 
 
 class RelatedRecord(BaseModel):
@@ -38,7 +44,7 @@ def related_records(
     ):
         related.extend(
             RelatedRecord(
-                relation="reissue" if "-RE" in key else "continuation",
+                relation=_relation_for(key, record.relation_types.get(key)),
                 patent_key=key,
                 source_field=field,
                 evidence=f"{key} is listed as a {word} of {record.patent.key}",
@@ -73,6 +79,12 @@ def related_records(
             )
         )
     return related
+
+
+def _relation_for(key: str, declared: str | None) -> Relation:
+    if declared in _DECLARED:
+        return _DECLARED[declared]
+    return "reissue" if "-RE" in key else "continuation"
 
 
 def related_flags(related: Sequence[RelatedRecord]) -> list[str]:

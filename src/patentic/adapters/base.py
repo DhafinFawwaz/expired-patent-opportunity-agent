@@ -60,6 +60,7 @@ class PatentRecord(BaseModel):
     family_key: str | None = None
     parents: list[str] = []
     children: list[str] = []
+    relation_types: dict[str, str] = {}
     terminal_disclaimer: bool | None = None
 
 

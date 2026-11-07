@@ -38,3 +38,10 @@ def test_citations_assignee_and_disclaimer() -> None:
     relations: set[str] = {r.relation for r in related}
     assert relations == {"forward_citation", "same_assignee", "terminal_disclaimer"}
     assert related_flags(related) == []
+
+
+def test_declared_relation_types_win() -> None:
+    record: PatentRecord = make(["application 14712345"]).model_copy(
+        update={"relation_types": {"application 14712345": "cip"}}
+    )
+    assert related_records(record, [], [])[0].relation == "cip"

@@ -350,6 +350,14 @@
         "patent": {
           "$ref": "#/$defs/PatentId"
         },
+        "relation_types": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "default": {},
+          "title": "Relation Types",
+          "type": "object"
+        },
         "terminal_disclaimer": {
           "anyOf": [
             {
