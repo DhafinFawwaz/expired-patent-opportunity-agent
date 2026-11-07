@@ -64,7 +64,8 @@ warn_unreachable = true
 enable_error_code = ["deprecated", "ignore-without-code"]
 plugins = ["pydantic.mypy"]
 mypy_path = ["src", "llm/src"]
-packages = ["patentic", "freellm"]
+files = ["src", "llm/src", "tests", "llm/tests", "conftest.py"]
+explicit_package_bases = true
 
 [tool.pydantic-mypy]
 init_forbid_extra = true
@@ -101,7 +102,10 @@ runtime-evaluated-base-classes = ["pydantic.BaseModel", "pydantic_settings.BaseS
 
 [tool.ruff.lint.per-file-ignores]
 "tests/**" = ["S101", "S311", "SLF001", "PLR2004", "ARG", "PLC0415", "INP001"]
-"llm/tests/**" = ["S101", "S311", "SLF001", "PLR2004", "ARG", "PLC0415", "INP001"]
+"llm/tests/**" = ["S101", "S311", "SLF001", "PLR2004", "ARG", "PLC0415", "INP001", "PT011", "PT018", "FBT003", "E501", "ERA001", "B018", "SIM105", "S110", "BLE001"]
+# freellm predates this repo: style-only rules relaxed, typing rules kept.
+"llm/src/freellm/cli.py" = ["T201", "BLE001", "PLC0415"]
+"llm/src/freellm/**" = ["E501", "ARG001", "ARG002", "PLW2901", "D205", "BLE001", "EM101", "EM102", "TRY003", "FBT001", "FBT002", "FBT003", "PLR2004", "PLW0603", "PERF401", "S324", "S110", "SIM105"]
 
 [tool.pytest.ini_options]
 addopts = "--disable-socket --allow-unix-socket --strict-markers --strict-config -m 'not live and not render'"

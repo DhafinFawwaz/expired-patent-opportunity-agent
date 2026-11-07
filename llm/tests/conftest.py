@@ -1,8 +1,9 @@
 import os
 import tempfile
+from collections.abc import Iterator
+from pathlib import Path
 
 import pytest
-
 from freellm import config
 
 # Point FREELLM_HOME at a throwaway folder for the whole session, never back at llm/.
@@ -13,7 +14,7 @@ os.environ["FREELLM_HOME"] = _SESSION_HOME
 
 
 @pytest.fixture(autouse=True)
-def isolated_home(tmp_path, monkeypatch):
+def isolated_home(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Iterator[Path]:
     """Every test gets an empty FREELLM_HOME (no real keys, cache or stats)."""
     monkeypatch.setenv("FREELLM_HOME", str(tmp_path))
     for k in list(os.environ):

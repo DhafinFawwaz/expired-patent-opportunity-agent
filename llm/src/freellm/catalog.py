@@ -25,7 +25,7 @@ NON_CHAT = re.compile(
     r"whisper|tts|embed|bge-|guard|rerank|stable-diffusion|sdxl|flux|dall-e|gpt-image|image-|-image|"
     r"imagen|veo|kling|lyria|speech|voice|transcri|moderation|audio|ocr|clip|nano-banana|chroma|"
     r"krea|safety|reward|parse|seg-|detect|-vl-embed|sora|orpheus|playai|lyria",
-    re.I,
+    re.IGNORECASE,
 )
 
 
@@ -68,7 +68,9 @@ class Provider:
         return [None] if self.keyless else []
 
 
-_VISION_HINT = re.compile(r"(^|[-_/.])vl\b|vision|omni|gemma-?[34]\b|llama-4|pixtral|gemini", re.I)
+_VISION_HINT = re.compile(
+    r"(^|[-_/.])vl\b|vision|omni|gemma-?[34]\b|llama-4|pixtral|gemini", re.IGNORECASE
+)
 
 
 @dataclass
@@ -138,14 +140,22 @@ def _parse_model(p: Provider, m: dict[str, Any]) -> ModelInfo | None:
         return None
     if m.get("model_type") and m["model_type"] != "chat":
         return None
-    if NON_CHAT.search(mid) or any(re.search(x, mid, re.I) for x in p.exclude):
+    if NON_CHAT.search(mid) or any(re.search(x, mid, re.IGNORECASE) for x in p.exclude):
         return None
     caps = m.get("capabilities") or {}
     params = m.get("supported_parameters")
-    tools = caps.get("tools") if "tools" in caps else (("tools" in params) if params is not None else None)
+    tools = (
+        caps.get("tools")
+        if "tools" in caps
+        else (("tools" in params) if params is not None else None)
+    )
     ins = arch.get("input_modalities") or (m.get("modalities") or {}).get("input")
     vision = caps.get("vision") if "vision" in caps else (("image" in ins) if ins else None)
-    ctx = m.get("context_length") or (m.get("context_window") or {}).get("tokens") or m.get("context_window")
+    ctx = (
+        m.get("context_length")
+        or (m.get("context_window") or {}).get("tokens")
+        or m.get("context_window")
+    )
     return ModelInfo(
         provider=p.id,
         model_id=mid,
@@ -189,5 +199,7 @@ def discover(p: Provider, refresh: bool = False) -> list[ModelInfo]:
         return seeds
     if not models:
         return seeds
-    cp.write_text(json.dumps({"ts": time.time(), "models": [m.to_dict() for m in models]}, indent=1))
+    cp.write_text(
+        json.dumps({"ts": time.time(), "models": [m.to_dict() for m in models]}, indent=1)
+    )
     return models

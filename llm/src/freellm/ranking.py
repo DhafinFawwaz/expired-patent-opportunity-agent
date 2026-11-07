@@ -14,11 +14,14 @@ import json
 import logging
 import re
 import time
-from pathlib import Path
+from typing import TYPE_CHECKING, Any
 
 import httpx
 
 from . import config
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 log = logging.getLogger("freellm")
 
@@ -28,16 +31,74 @@ DEFAULT_RATING = 1250.0  # unknown models rank below well-known mid-tier models
 
 # Tokens that don't change which model it is.
 _STOP = {
-    "instruct", "it", "chat", "versatile", "preview", "free", "latest", "fp8", "fp16", "bf16", "nvfp4",
-    "hf", "fast", "turbo", "exp", "experimental", "model", "base", "online", "highspeed", "thinking",
-    "non", "instant", "a", "the", "and", "v1", "beta",
+    "instruct",
+    "it",
+    "chat",
+    "versatile",
+    "preview",
+    "free",
+    "latest",
+    "fp8",
+    "fp16",
+    "bf16",
+    "nvfp4",
+    "hf",
+    "fast",
+    "turbo",
+    "exp",
+    "experimental",
+    "model",
+    "base",
+    "online",
+    "highspeed",
+    "thinking",
+    "non",
+    "instant",
+    "a",
+    "the",
+    "and",
+    "v1",
+    "beta",
 }
 # Organisation names that some providers prefix onto ids.
 _ORGS = {
-    "meta", "llama", "openai", "google", "nvidia", "qwen", "deepseek", "ai", "deepseekai", "mistralai",
-    "moonshotai", "moonshot", "zai", "z", "zhipu", "thudm", "minimax", "minimaxai", "xiaomi", "cf",
-    "microsoft", "ibm", "cohere", "coherelabs", "stepfun", "baidu", "alibaba", "tencent", "liquid",
-    "nousresearch", "allenai", "bytedance", "xai", "x", "amazon", "anthropic", "org",
+    "meta",
+    "llama",
+    "openai",
+    "google",
+    "nvidia",
+    "qwen",
+    "deepseek",
+    "ai",
+    "deepseekai",
+    "mistralai",
+    "moonshotai",
+    "moonshot",
+    "zai",
+    "z",
+    "zhipu",
+    "thudm",
+    "minimax",
+    "minimaxai",
+    "xiaomi",
+    "cf",
+    "microsoft",
+    "ibm",
+    "cohere",
+    "coherelabs",
+    "stepfun",
+    "baidu",
+    "alibaba",
+    "tencent",
+    "liquid",
+    "nousresearch",
+    "allenai",
+    "bytedance",
+    "xai",
+    "x",
+    "amazon",
+    "anthropic",
+    "org",
 }
 
 
@@ -48,7 +109,9 @@ _VER = re.compile(r"\d+(\.\d+)*")
 def tokens(name: str) -> frozenset[str]:
     """Normalise a model id or display name into comparable tokens."""
     s = name.lower()
-    s = s.split(":")[0] if not re.search(r":\d", s) else s.replace(":", "-")  # "gpt-oss:20b" -> gpt-oss-20b
+    s = (
+        s.split(":")[0] if not re.search(r":\d", s) else s.replace(":", "-")
+    )  # "gpt-oss:20b" -> gpt-oss-20b
     s = re.sub(r"\([^)]*\)", " ", s)  # "(High)", "(Thinking)" qualifiers
     s = s.replace("@cf/", "")
     s = re.sub(r"\b(fp8|fp16|bf16|nvfp4|int4|int8|awq|gguf)\b", " ", s)
@@ -64,7 +127,7 @@ def tokens(name: str) -> frozenset[str]:
 
 def canonical(model_id: str) -> str:
     """A provider-independent name used to group the same model across providers."""
-    base = model_id.split("/")[-1]
+    base = model_id.rsplit("/", maxsplit=1)[-1]
     return "-".join(sorted(tokens(base))) or model_id
 
 
@@ -75,14 +138,15 @@ def _arena_cache() -> Path:
     return config.cache_dir() / "arena_text.json"
 
 
-def fetch_arena(refresh: bool = False) -> list[dict]:
+def fetch_arena(refresh: bool = False) -> list[dict[str, Any]]:
     """Overall LMArena text rows: [{model_name, rating, rank, ...}]. Cached; [] when offline."""
     cp = _arena_cache()
     if not refresh and cp.exists():
-        data = json.loads(cp.read_text())
+        data: dict[str, Any] = json.loads(cp.read_text())
         if time.time() - data.get("ts", 0) < ARENA_TTL:
-            return data["rows"]
-    rows: list[dict] = []
+            cached: list[dict[str, Any]] = data["rows"]
+            return cached
+    rows: list[dict[str, Any]] = []
     try:
         for offset in range(0, 2000, 100):
             r = httpx.get(
@@ -105,9 +169,12 @@ def fetch_arena(refresh: bool = False) -> list[dict]:
     except Exception as e:
         log.warning("freellm: LMArena fetch failed (%s); using cached/default ratings", e)
         if cp.exists():
-            return json.loads(cp.read_text())["rows"]
+            stale: list[dict[str, Any]] = json.loads(cp.read_text())["rows"]
+            return stale
         return []
-    keep = [{"model_name": x["model_name"], "rating": x["rating"], "rank": x.get("rank")} for x in rows]
+    keep = [
+        {"model_name": x["model_name"], "rating": x["rating"], "rank": x.get("rank")} for x in rows
+    ]
     cp.write_text(json.dumps({"ts": time.time(), "rows": keep}))
     return keep
 
@@ -115,7 +182,9 @@ def fetch_arena(refresh: bool = False) -> list[dict]:
 class Ratings:
     """Looks up an arena rating for any provider model id."""
 
-    def __init__(self, rows: list[dict] | None = None, overrides: dict[str, float] | None = None):
+    def __init__(
+        self, rows: list[dict[str, Any]] | None = None, overrides: dict[str, float] | None = None
+    ):
         rows = fetch_arena() if rows is None else rows
         self.by_tokens: dict[frozenset[str], float] = {}
         for r in rows:
@@ -130,7 +199,7 @@ class Ratings:
             return self.overrides[model_id.lower()]
         if model_id in self._memo:
             return self._memo[model_id]
-        t = tokens(model_id.split("/")[-1]) if "/" in model_id else tokens(model_id)
+        t = tokens(model_id.rsplit("/", maxsplit=1)[-1]) if "/" in model_id else tokens(model_id)
         result = self.by_tokens.get(t)
         core = t - _ORGS
         if result is None and core:
@@ -150,9 +219,13 @@ class Ratings:
                 result = min(close)
         if "latest" in model_id.lower() and core:
             # 3. "-latest" aliases: best of the family ("mistral-medium-latest" -> newest Mistral Medium)
-            fam = [r for at, r in self.by_tokens.items() if core <= at and all(_VER.fullmatch(x) for x in at - core - _ORGS)]
+            fam = [
+                r
+                for at, r in self.by_tokens.items()
+                if core <= at and all(_VER.fullmatch(x) for x in at - core - _ORGS)
+            ]
             if fam:
-                result = max(fam + [result or 0.0])
+                result = max([*fam, result or 0.0])
         self._memo[model_id] = result
         return result
 
@@ -164,7 +237,7 @@ class Ratings:
 # --------------------------------------------------------------------------- final score
 
 
-def score(rating: float, stat: dict | None, preference: str = "quality") -> float:
+def score(rating: float, stat: dict[str, Any] | None, preference: str = "quality") -> float:
     """Higher is better.
 
     quality : arena rating, minus penalties for unreliable / currently rate-limited deployments

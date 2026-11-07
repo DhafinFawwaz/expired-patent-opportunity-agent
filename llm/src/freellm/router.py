@@ -18,15 +18,23 @@ from __future__ import annotations
 import hashlib
 import logging
 from dataclasses import dataclass, field
-from typing import Any, Iterable
+from typing import TYPE_CHECKING, Any, cast
 
 import litellm
-from litellm import Router
+from litellm.router import Router
+from litellm.types.utils import ModelResponse
 
 from . import stats as stats_mod
-from ._anon import ANON_KEY, install as install_anon_hook
+from ._anon import ANON_KEY
+from ._anon import install as install_anon_hook
 from .catalog import ModelInfo, Provider, discover, load_providers
 from .ranking import Ratings, canonical, score
+
+if TYPE_CHECKING:
+    from collections.abc import Iterable
+
+    from langchain_litellm import ChatLiteLLMRouter
+    from litellm.types.llms.openai import AllMessageValues
 
 log = logging.getLogger("freellm")
 
@@ -121,18 +129,17 @@ class FreeLLM:
         timeout: float = 60,
         cooldown: float = 60,
         catalog: dict[Provider, list[ModelInfo]] | None = None,
-        arena_rows: list[dict] | None = None,
+        arena_rows: list[dict[str, Any]] | None = None,
         record_stats: bool = True,
     ):
-        """
-        providers         only use these provider ids (default: all with a key, plus keyless ones)
+        """Providers         only use these provider ids (default: all with a key, plus keyless ones)
         exclude_providers / exclude_models   skip these (model ids or canonical names)
         preference        "quality" (default), "balanced" or "speed"
         top_n             how many models the ``free*`` groups fall back through
         refresh           re-query provider /models lists and the leaderboard now
         rating_overrides  {model_id_or_canonical: rating} to force your own ranking
         timeout           per-request timeout (s); cooldown: how long a failing deployment is benched
-        catalog / arena_rows   inject data (tests, offline use)
+        catalog / arena_rows   inject data (tests, offline use).
         """
         self.preference = preference
         self.top_n = top_n
@@ -162,14 +169,23 @@ class FreeLLM:
         out: list[Deployment] = []
         for p, models in self._catalog.items():
             for m in models:
-                if m.model_id.lower() in self.exclude_models or canonical(m.model_id) in self.exclude_models:
+                if (
+                    m.model_id.lower() in self.exclude_models
+                    or canonical(m.model_id) in self.exclude_models
+                ):
                     continue
                 for i, key in enumerate(p.credentials):
                     out.append(Deployment(p, m, key, i))
         return out
 
-    def ranked(self, *, tools: bool = False, vision: bool = False, min_context: int | None = None,
-               preference: str | None = None) -> list[RankedModel]:
+    def ranked(
+        self,
+        *,
+        tools: bool = False,
+        vision: bool = False,
+        min_context: int | None = None,
+        preference: str | None = None,
+    ) -> list[RankedModel]:
         """Usable free models, best first. Filters: tools / vision capability, context size."""
         pref = preference or self.preference
         if self._ranked is None or pref != self.preference:
@@ -214,7 +230,10 @@ class FreeLLM:
                     vision=_merge_flag(d.model.vision for d in deps),
                     context=max(ctxs) if ctxs else None,
                     latency=min(lats) if lats else None,
-                    deployments=[d for _, d in sorted(zip(dep_scores, deps), key=lambda x: -x[0])],
+                    deployments=[
+                        d
+                        for _, d in sorted(zip(dep_scores, deps, strict=False), key=lambda x: -x[0])
+                    ],
                 )
             )
         if preference == "speed":
@@ -305,7 +324,9 @@ class FreeLLM:
                 max_fallbacks=self.top_n + 1,
                 timeout=self.timeout,
             )
-            if self.record_stats and not any(isinstance(c, stats_mod.StatsCallback) for c in litellm.callbacks):
+            if self.record_stats and not any(
+                isinstance(c, stats_mod.StatsCallback) for c in litellm.callbacks
+            ):
                 litellm.callbacks.append(stats_mod.StatsCallback())
         return self._router
 
@@ -322,35 +343,57 @@ class FreeLLM:
         by_key = {canonical(i): r.canonical for r in self.ranked() for i in r.model_ids}
         if (c := by_key.get(canonical(model.split("/")[-1]))) and c in names:
             return c
-        raise ValueError(f"freellm: unknown model {model!r}. Try one of: {', '.join(GROUPS)} or `freellm models`.")
+        raise ValueError(
+            f"freellm: unknown model {model!r}. Try one of: {', '.join(GROUPS)} or `freellm models`."
+        )
 
     # ------------------------------------------------------------------ convenience
 
-    def chat_model(self, model: str | None = None, **kwargs: Any):
+    def chat_model(self, model: str | None = None, **kwargs: Any) -> ChatLiteLLMRouter:
         """A LangChain chat model (``ChatLiteLLMRouter``) backed by the router.
 
         ``model``: "free" (default), "free-tools", "free-vision", "free-fast", a canonical name,
         or "<provider>/<model_id>". Extra kwargs (temperature, max_tokens, ...) go to LangChain.
         """
-        from langchain_litellm import ChatLiteLLMRouter
+        from langchain_litellm import ChatLiteLLMRouter  # noqa: PLC0415  # heavy import, only when used
 
         group = self.resolve(model)
         return ChatLiteLLMRouter(router=self.router, model=group, model_name=group, **kwargs)
 
-    def completion(self, messages: list[dict[str, Any]], model: str | None = None, **kwargs: Any):
+    def completion(
+        self, messages: list[dict[str, Any]], model: str | None = None, **kwargs: Any
+    ) -> ModelResponse:
         """Raw LiteLLM completion (OpenAI-format response) through the router."""
-        return self.router.completion(model=self.resolve(model), messages=messages, **kwargs)
+        resp: object = self.router.completion(
+            model=self.resolve(model), messages=messages, **kwargs
+        )
+        if not isinstance(resp, ModelResponse):
+            msg = "streaming responses are not supported here; use the LangChain model"
+            raise TypeError(msg)
+        return resp
 
-    async def acompletion(self, messages: list[dict[str, Any]], model: str | None = None, **kwargs: Any):
-        return await self.router.acompletion(model=self.resolve(model), messages=messages, **kwargs)
+    async def acompletion(
+        self, messages: list[dict[str, Any]], model: str | None = None, **kwargs: Any
+    ) -> ModelResponse:
+        resp: object = await self.router.acompletion(
+            model=self.resolve(model), messages=cast("list[AllMessageValues]", messages), **kwargs
+        )
+        if not isinstance(resp, ModelResponse):
+            msg = "streaming responses are not supported here; use the LangChain model"
+            raise TypeError(msg)
+        return resp
 
-    def complete(self, prompt: str, model: str | None = None, system: str | None = None, **kwargs: Any) -> str:
-        msgs = ([{"role": "system", "content": system}] if system else []) + [{"role": "user", "content": prompt}]
+    def complete(
+        self, prompt: str, model: str | None = None, system: str | None = None, **kwargs: Any
+    ) -> str:
+        msgs = ([{"role": "system", "content": system}] if system else []) + [
+            {"role": "user", "content": prompt}
+        ]
         resp = self.completion(msgs, model=model, **kwargs)
         return resp.choices[0].message.content or ""
 
     @staticmethod
-    def served_by(response: Any) -> str | None:
+    def served_by(response: object) -> str | None:
         """Which deployment answered a LiteLLM response (``provider:model:keyhash``)."""
         hidden = getattr(response, "_hidden_params", {}) or {}
         mid = hidden.get("model_id") or ""

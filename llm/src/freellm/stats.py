@@ -10,12 +10,15 @@ import json
 import os
 import threading
 import time
-from pathlib import Path
-from typing import Any
+from datetime import datetime
+from typing import TYPE_CHECKING, Any
 
 from litellm.integrations.custom_logger import CustomLogger
 
 from . import config
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 _LOCK = threading.Lock()
 EWMA = 0.3  # weight of the newest latency sample
@@ -30,9 +33,10 @@ def load() -> dict[str, dict[str, Any]]:
     if not p.exists():
         return {}
     try:
-        return json.loads(p.read_text())
+        data: dict[str, dict[str, Any]] = json.loads(p.read_text())
     except json.JSONDecodeError:
         return {}
+    return data
 
 
 def _save(data: dict[str, dict[str, Any]]) -> None:
@@ -42,7 +46,9 @@ def _save(data: dict[str, dict[str, Any]]) -> None:
     tmp.replace(p)
 
 
-def record(key: str, ok: bool, latency: float | None = None, error: BaseException | str | None = None) -> None:
+def record(
+    key: str, ok: bool, latency: float | None = None, error: BaseException | str | None = None
+) -> None:
     with _LOCK:
         data = load()
         s = data.setdefault(key, {"ok": 0, "fail": 0})
@@ -52,7 +58,9 @@ def record(key: str, ok: bool, latency: float | None = None, error: BaseExceptio
             s["last_ok"] = now
             if latency is not None:
                 prev = s.get("latency")
-                s["latency"] = round(latency if prev is None else EWMA * latency + (1 - EWMA) * prev, 3)
+                s["latency"] = round(
+                    latency if prev is None else EWMA * latency + (1 - EWMA) * prev, 3
+                )
         else:
             s["fail"] += 1
             s["last_fail"] = now
@@ -61,7 +69,9 @@ def record(key: str, ok: bool, latency: float | None = None, error: BaseExceptio
             if kind == "rate_limit":
                 s["last_rate_limit"] = now
             elif kind in ("auth", "payment"):
-                s["last_auth_error"] = now  # bad key or not free for this account: rank last until it works
+                s["last_auth_error"] = (
+                    now  # bad key or not free for this account: rank last until it works
+                )
         # Old evidence fades: halve counts once they get large so the score can recover.
         if s["ok"] + s["fail"] > 200:
             s["ok"] //= 2
@@ -81,11 +91,27 @@ def classify(error: BaseException | str | None) -> str:
     text = f"{name} {error}".lower()
     if "ratelimiterror" in text.replace(" ", "") or "usage limit" in text:
         return "rate_limit"  # includes daily free quotas ("Free usage limit reached"): temporary
-    if any(x in text for x in ("402", "usage credits", "payment method", "subscribe", "insufficient credit", "billing")):
+    if any(
+        x in text
+        for x in (
+            "402",
+            "usage credits",
+            "payment method",
+            "subscribe",
+            "insufficient credit",
+            "billing",
+        )
+    ):
         return "payment"  # not actually free for this account
     if "ratelimit" in text or "429" in text or "rate limit" in text or "quota" in text:
         return "rate_limit"
-    if "authentication" in text or "401" in text or "403" in text or "permission" in text or "api key" in text:
+    if (
+        "authentication" in text
+        or "401" in text
+        or "403" in text
+        or "permission" in text
+        or "api key" in text
+    ):
         return "auth"
     if "notfound" in text or "404" in text or "does not exist" in text or "not found" in text:
         return "not_found"
@@ -98,32 +124,46 @@ def classify(error: BaseException | str | None) -> str:
 
 def _key_from_kwargs(kwargs: dict[str, Any]) -> str | None:
     lp = kwargs.get("litellm_params") or {}
-    for info in (lp.get("model_info"), kwargs.get("model_info"), (lp.get("metadata") or {}).get("model_info")):
+    for info in (
+        lp.get("model_info"),
+        kwargs.get("model_info"),
+        (lp.get("metadata") or {}).get("model_info"),
+    ):
         if isinstance(info, dict) and info.get("freellm_key"):
-            return info["freellm_key"]
+            return str(info["freellm_key"])
     return None
 
 
-def _latency(start: Any, end: Any) -> float | None:
-    try:
+def _latency(start: object, end: object) -> float | None:
+    if isinstance(start, datetime) and isinstance(end, datetime):
         return (end - start).total_seconds()
-    except Exception:
-        return None
+    if isinstance(start, (int, float)) and isinstance(end, (int, float)):
+        return float(end - start)
+    return None
 
 
 class StatsCallback(CustomLogger):
     """Feeds every LiteLLM success/failure for freellm deployments into :func:`record`."""
 
-    def log_success_event(self, kwargs, response_obj, start_time, end_time):
+    def log_success_event(
+        self, kwargs: dict[str, Any], response_obj: object, start_time: object, end_time: object
+    ) -> None:
         if key := _key_from_kwargs(kwargs):
             record(key, True, _latency(start_time, end_time))
 
-    def log_failure_event(self, kwargs, response_obj, start_time, end_time):
+    def log_failure_event(
+        self, kwargs: dict[str, Any], response_obj: object, start_time: object, end_time: object
+    ) -> None:
         if key := _key_from_kwargs(kwargs):
-            record(key, False, error=kwargs.get("exception") or response_obj)
+            err: object = kwargs.get("exception") or response_obj
+            record(key, False, error=err if isinstance(err, BaseException | str) else None)
 
-    async def async_log_success_event(self, kwargs, response_obj, start_time, end_time):
+    async def async_log_success_event(
+        self, kwargs: dict[str, Any], response_obj: object, start_time: object, end_time: object
+    ) -> None:
         self.log_success_event(kwargs, response_obj, start_time, end_time)
 
-    async def async_log_failure_event(self, kwargs, response_obj, start_time, end_time):
+    async def async_log_failure_event(
+        self, kwargs: dict[str, Any], response_obj: object, start_time: object, end_time: object
+    ) -> None:
         self.log_failure_event(kwargs, response_obj, start_time, end_time)

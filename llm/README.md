@@ -61,19 +61,19 @@ Real environment variables override `.env`. Set `FREELLM_HOME=/some/dir` to keep
 ```python
 from freellm import get_chat_model, complete
 
-llm = get_chat_model()                      # best free model first, falls back automatically
+llm = get_chat_model()  # best free model first, falls back automatically
 print(llm.invoke("Explain BM25 in one line").content)
 
-complete("Summarise: ...")                  # str -> str
+complete("Summarise: ...")  # str -> str
 ```
 
 Pick a group or a specific model:
 
 ```python
-get_chat_model("free")          # everything, ranked by quality (default)
-get_chat_model("free-tools")    # skips models known NOT to support tool calling
-get_chat_model("free-vision")   # models known to accept images
-get_chat_model("free-fast")     # ranked by observed latency
+get_chat_model("free")  # everything, ranked by quality (default)
+get_chat_model("free-tools")  # skips models known NOT to support tool calling
+get_chat_model("free-vision")  # models known to accept images
+get_chat_model("free-fast")  # ranked by observed latency
 get_chat_model("gpt-oss-120b")  # one model, spread over all providers/keys serving it
 get_chat_model("groq/openai/gpt-oss-120b")  # one exact provider deployment
 ```
@@ -84,18 +84,26 @@ Tools, structured output and LangGraph:
 from langchain_core.tools import tool
 from pydantic import BaseModel
 
+
 @tool
 def add(a: int, b: int) -> int:
     "Add two integers."
     return a + b
 
+
 get_chat_model("free-tools").bind_tools([add]).invoke("add 2 and 3").tool_calls
+
 
 class Answer(BaseModel):
     city: str
-get_chat_model("free-tools").with_structured_output(Answer, method="function_calling").invoke("Capital of France?")
 
-from langgraph.prebuilt import create_react_agent   # if you use LangGraph
+
+get_chat_model("free-tools").with_structured_output(Answer, method="function_calling").invoke(
+    "Capital of France?"
+)
+
+from langgraph.prebuilt import create_react_agent  # if you use LangGraph
+
 agent = create_react_agent(get_chat_model("free-tools"), [add])
 ```
 
@@ -105,16 +113,16 @@ More control:
 from freellm import FreeLLM
 
 fl = FreeLLM(
-    providers=["groq", "gemini", "openrouter"],   # restrict (default: all usable)
+    providers=["groq", "gemini", "openrouter"],  # restrict (default: all usable)
     exclude_models=["gpt-oss-20b"],
-    preference="balanced",                         # quality | balanced | speed
-    top_n=25,                                      # how far the free* groups fall back
-    rating_overrides={"glm-5.3-flash": 1600},      # force your own ranking
+    preference="balanced",  # quality | balanced | speed
+    top_n=25,  # how far the free* groups fall back
+    rating_overrides={"glm-5.3-flash": 1600},  # force your own ranking
 )
 for m in fl.ranked(tools=True)[:5]:
     print(m.canonical, m.rating, m.providers)
 resp = fl.completion([{"role": "user", "content": "hi"}])
-print(FreeLLM.served_by(resp))                     # provider:model:keyhash
+print(FreeLLM.served_by(resp))  # provider:model:keyhash
 ```
 
 ## CLI

@@ -86,7 +86,7 @@ def fill_placeholders(text: str) -> str | None:
     """Replace ``{ENV_VAR}`` placeholders; None if any is missing."""
     missing = False
 
-    def sub(m: re.Match) -> str:
+    def sub(m: re.Match[str]) -> str:
         nonlocal missing
         v = get_env(m.group(1))
         if not v:

@@ -15,23 +15,26 @@ and where to get free keys.
 
 from __future__ import annotations
 
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 from .catalog import ModelInfo, Provider, discover, load_providers
 from .router import GROUPS, FreeLLM, RankedModel
 
+if TYPE_CHECKING:
+    from langchain_litellm import ChatLiteLLMRouter
+
 __all__ = [
-    "FreeLLM",
-    "RankedModel",
-    "Provider",
-    "ModelInfo",
     "GROUPS",
+    "FreeLLM",
+    "ModelInfo",
+    "Provider",
+    "RankedModel",
+    "complete",
+    "discover",
     "get_chat_model",
     "get_router",
-    "complete",
-    "ranked_models",
     "load_providers",
-    "discover",
+    "ranked_models",
 ]
 
 _default: FreeLLM | None = None
@@ -45,7 +48,7 @@ def get_router(**kwargs: Any) -> FreeLLM:
     return _default
 
 
-def get_chat_model(model: str | None = None, **kwargs: Any):
+def get_chat_model(model: str | None = None, **kwargs: Any) -> ChatLiteLLMRouter:
     """LangChain chat model over the best free models.
 
     model: "free" (default) | "free-tools" | "free-vision" | "free-fast" | a model name.
