@@ -266,7 +266,7 @@ class Bundle:
         self, reports: list[CandidateReport], flow: FlowCounts, weeks: int, outages: list[str]
     ) -> tuple[dict[str, str], list[CallMeta]]:
         fallbacks: dict[str, str] = {
-            "executive_summary": _executive_fallback(reports, flow, weeks),
+            "executive_summary": _executive_fallback(reports, flow, weeks, outages),
             "methodology": _methodology_fallback(flow, weeks),
             "commercial": _commercial_fallback(reports),
             "next_steps": _next_steps_fallback(reports),
@@ -352,12 +352,21 @@ def _reference(item: EvidenceRecord) -> Reference:
     )
 
 
-def _executive_fallback(reports: list[CandidateReport], flow: FlowCounts, weeks: int) -> str:
+def _executive_fallback(
+    reports: list[CandidateReport], flow: FlowCounts, weeks: int, outages: list[str]
+) -> str:
     names: str = ", ".join(
         f"{r.display} ({r.title})" for r in reports if r.recommendation == "Shortlist"
     )
     text: str = (
         f"The run looked at {flow.found} US utility patents in the cleaning-tool CPC groups. "
+    )
+    if "og_notice" in outages:
+        return text + (
+            "The Official Gazette could not be reached, so no expiry or reinstatement could be "
+            "checked and no candidate is reported. Run again when the Gazette is back."
+        )
+    text += (
         f"{flow.expired_in_window} of them appear in Official Gazette expiration notices from the last {weeks} weeks, "
         f"{flow.passed_screening} passed the non-powered screen and {flow.analysed} were analysed. "
     )

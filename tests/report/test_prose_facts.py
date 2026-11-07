@@ -1,4 +1,4 @@
-from patentic.graph.nodes.bundle import prose_facts
+from patentic.graph.nodes.bundle import _executive_fallback, prose_facts
 from patentic.report.bundle import CandidateReport, FlowCounts, ReportBundle
 
 FLOW: FlowCounts = FlowCounts(
@@ -42,3 +42,12 @@ def test_executive_summary_gets_only_the_two_headline_counts(bundle: ReportBundl
         "listed_expired_for_nonpayment_in_window": 299,
     }
     assert "flow" not in facts
+
+
+def test_executive_fallback_names_a_gazette_outage() -> None:
+    empty: FlowCounts = FLOW.model_copy(
+        update={"expired_in_window": 0, "passed_screening": 0, "status_verified": 0, "analysed": 0}
+    )
+    text: str = _executive_fallback([], empty, 104, ["og_notice"])
+    assert "could not be reached" in text
+    assert "0 of them appear" not in text
