@@ -12,7 +12,6 @@ class Settings(BaseSettings):
     epo_ops_secret: str | None = None
     uspto_odp_api_key: str | None = None
     llm_model: str | None = None
-    census_api_key: str | None = None
     patentic_cache_dir: Path = Path(".cache")
     patentic_outputs_dir: Path = Path("outputs")
     patentic_templates_dir: Path = Path("templates")
