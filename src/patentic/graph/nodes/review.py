@@ -19,6 +19,7 @@ def review_payload(state: PipelineState) -> dict[str, object]:
             "synthetic": c.is_synthetic,
         }
         for c in sorted(candidates.values(), key=lambda c: -(c.scores.total if c.scores else -1.0))
+        if c.scores is not None
     ]
     return {
         "kind": "candidate_review",
@@ -37,7 +38,10 @@ def review(state: PipelineState) -> Command[Literal["bundle", "__end__"]]:
     updated: dict[str, Candidate] = {}
     if decision.action == "edit":
         limit: int = state["request"].max_recommended
-        chosen: list[str] = [k for k in decision.shortlist if k in candidates][:limit]
+        # Only analysed candidates can be shortlisted; the report shows nothing else.
+        chosen: list[str] = [
+            k for k in decision.shortlist if k in candidates and candidates[k].scores is not None
+        ][:limit]
         for key, candidate in candidates.items():
             changes: dict[str, object] = {}
             if key in decision.drop:

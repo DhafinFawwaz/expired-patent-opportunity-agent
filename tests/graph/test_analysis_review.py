@@ -178,3 +178,26 @@ def test_review_edit_applies_drops(tmp_path: Path) -> None:
     assert candidates["US-9999906"].reviewer_note == "dropped at review"
     assert candidates["US-9999901"].reviewer_note == "check the pad clip"
     assert candidates["US-9999901"].recommendation == "Shortlist"
+
+
+def test_review_ignores_shortlist_keys_that_were_not_analysed(tmp_path: Path) -> None:
+    graph, _ = graph_to_review(
+        tmp_path, tech("non_powered"), tech("non_powered"), opp(4, 2), opp(3, 3)
+    )
+    before: dict[str, Candidate] = graph.get_state(CONFIG).values["candidates"]
+    unscored: list[str] = [k for k, c in before.items() if c.scores is None]
+    assert unscored
+    decision: dict[str, object] = {"action": "edit", "shortlist": [unscored[0], "US-9999901"]}
+    run_until_interrupt(graph, Command(resume=decision))
+    after: dict[str, Candidate] = graph.get_state(CONFIG).values["candidates"]
+    assert after[unscored[0]].recommendation != "Shortlist"
+    assert after["US-9999901"].recommendation == "Shortlist"
+
+
+def test_review_payload_lists_only_scored_candidates(tmp_path: Path) -> None:
+    graph, payloads = graph_to_review(
+        tmp_path, tech("non_powered"), tech("non_powered"), opp(4, 2), opp(3, 3)
+    )
+    candidates: dict[str, Candidate] = graph.get_state(CONFIG).values["candidates"]
+    scored: set[str] = {k for k, c in candidates.items() if c.scores is not None}
+    assert {row["key"] for row in payloads[0]["candidates"]} == scored

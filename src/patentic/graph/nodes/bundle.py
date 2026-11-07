@@ -81,6 +81,13 @@ def timeline_rows(
     return rows
 
 
+def report_candidates(ranked: list[tuple[str, str]], limit: int) -> list[str]:
+    shortlisted: list[str] = [k for k, rec in ranked if rec == "Shortlist"]
+    rest: list[str] = [k for k, rec in ranked if rec != "Shortlist"]
+    keep: set[str] = set(shortlisted) | set(rest[: max(0, limit - len(shortlisted))])
+    return [k for k, _ in ranked if k in keep]
+
+
 def _scan_text(coverage: ScanCoverage, effective: date | None) -> str:
     span: str = f"Gazette issues {coverage.first_issue} to {coverage.last_issue}"
     gaps: list[date] = [w for w in coverage.missing_weeks if effective is None or w >= effective]
@@ -140,8 +147,11 @@ class Bundle:
             key=lambda c: (-(c.scores.total if c.scores else 0.0), c.key),
         )
         coverage: ScanCoverage = state.get("coverage") or ScanCoverage(weeks_fetched=0)
+        picked: list[str] = report_candidates(
+            [(c.key, c.recommendation or "") for c in analysed], request.max_candidates
+        )
         reports: list[CandidateReport] = [
-            candidate_report(c, coverage) for c in analysed[: request.max_candidates]
+            candidate_report(c, coverage) for c in analysed if c.key in picked
         ]
         shortlist: list[str] = [r.key for r in reports if r.recommendation == "Shortlist"]
         illustration, note = self._illustration(state, candidates, coverage, evidence)

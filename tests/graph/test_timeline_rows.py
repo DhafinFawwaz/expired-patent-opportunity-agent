@@ -3,7 +3,7 @@ from datetime import date
 from patentic.domain.coverage import ScanCoverage
 from patentic.domain.events import StatusEvent
 from patentic.domain.status_rules import StatusAssessment
-from patentic.graph.nodes.bundle import _methodology_fallback, timeline_rows
+from patentic.graph.nodes.bundle import _methodology_fallback, report_candidates, timeline_rows
 from patentic.report.bundle import TimelineRow
 
 LAPSE: StatusEvent = StatusEvent(
@@ -60,3 +60,9 @@ def test_methodology_fallback_admits_missing_weeks() -> None:
     gappy: ScanCoverage = COVERAGE.model_copy(update={"missing_weeks": [date(2026, 10, 13)]})
     assert "Every later reinstatement list was scanned" not in _methodology_fallback(8, 104, gappy)
     assert "Every later reinstatement list was scanned" in _methodology_fallback(8, 104, COVERAGE)
+
+
+def test_report_candidates_always_include_the_shortlist() -> None:
+    ranked: list[tuple[str, str]] = [("a", "Hold"), ("b", "Hold"), ("c", "Shortlist")]
+    assert report_candidates(ranked, 2) == ["a", "c"]
+    assert report_candidates(ranked, 3) == ["a", "b", "c"]
