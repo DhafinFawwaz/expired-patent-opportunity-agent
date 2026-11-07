@@ -5,6 +5,7 @@ from typing import TYPE_CHECKING, Any, Literal
 
 import pydantic
 from langchain_core.runnables import RunnableConfig
+from langgraph.checkpoint.serde.jsonplus import JsonPlusSerializer
 from langgraph.checkpoint.sqlite import SqliteSaver
 from langgraph.graph.state import CompiledStateGraph
 from langgraph.types import Command, StateSnapshot
@@ -22,6 +23,20 @@ if TYPE_CHECKING:
     from patentic.llm.schemas import CallMeta
 
 RunStatus = Literal["completed", "aborted", "interrupted"]
+
+
+def _project_models(base: type[BaseModel] = BaseModel) -> list[type[BaseModel]]:
+    found: list[type[BaseModel]] = []
+    for sub in base.__subclasses__():
+        if sub.__module__.startswith("patentic."):
+            found.append(sub)
+        found.extend(_project_models(sub))
+    return found
+
+
+def checkpoint_serde() -> JsonPlusSerializer:
+    # Register our own state models so checkpoints load without LangGraph's msgpack warning.
+    return JsonPlusSerializer(allowed_msgpack_modules=list(dict.fromkeys(_project_models())))
 
 
 class RunResult(BaseModel):
@@ -49,7 +64,7 @@ class Runner:
         )
         try:
             graph: CompiledStateGraph[Any, Any, Any, Any] = build_graph(
-                self._deps, SqliteSaver(conn)
+                self._deps, SqliteSaver(conn, serde=checkpoint_serde())
             )
             return self._drive(graph, inputs)
         finally:
