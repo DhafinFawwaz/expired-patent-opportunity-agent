@@ -37,8 +37,9 @@ def record(number: str, cpc: list[str], grant: date = date(2014, 9, 9)) -> Paten
 
 
 class FakeOg(OgIndexer):
-    def __init__(self, *, empty: bool = False) -> None:
+    def __init__(self, *, empty: bool = False, gaps: list[date] | None = None) -> None:
         self.empty: bool = empty
+        self.gaps: list[date] = gaps or []
         self.keep: Collection[str] | None = None
 
     def fetch_window(self, weeks: int, today: date, keep: Collection[str] | None = None) -> OgIndex:
@@ -49,7 +50,11 @@ class FakeOg(OgIndexer):
             PAGE, "https://og/2026/week44/TOC.htm", datetime(2026, 11, 7, tzinfo=UTC), keep
         )
         coverage = ScanCoverage(
-            weeks_fetched=1, first_issue=page.issue_date, last_issue=page.issue_date, as_of=today
+            weeks_fetched=1,
+            first_issue=page.issue_date,
+            last_issue=page.issue_date,
+            as_of=today,
+            missing_weeks=self.gaps,
         )
         return OgIndex(pages=[page], coverage=coverage)
 
@@ -163,3 +168,10 @@ def test_source_outage_recorded_and_run_continues(tmp_path: Path) -> None:
     assert values["outages"] == ["og_notice"]
     assert values["candidates"] == {}
     assert values["stage"] == "screening"
+
+
+def test_partial_gazette_outage_is_recorded(tmp_path: Path) -> None:
+    bq: FakeBq = FakeBq(tmp_path, [record("8826466", ["A47L13/20"])])
+    og: FakeOg = FakeOg(gaps=[date(2026, 10, 13)])
+    values: dict[str, Any] = approve_and_run(make_deps(tmp_path, og=og, bq=bq))
+    assert values["outages"] == ["og_notice_partial"]

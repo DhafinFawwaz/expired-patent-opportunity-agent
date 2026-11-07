@@ -457,6 +457,14 @@ def _assumptions(coverage: ScanCoverage) -> list[str]:
     ]
 
 
+OUTAGE_TEXT: Final[dict[str, str]] = {
+    "og_notice": "Official Gazette",
+    "og_notice_partial": "Official Gazette, for some weeks",
+    "bigquery": "BigQuery",
+    "ops": "EPO OPS",
+}
+
+
 def _quality(ops_enabled: bool, outages: list[str], flow: FlowCounts) -> list[str]:  # noqa: FBT001
     items: list[str] = [
         "Official Gazette notices are the USPTO's own publication (grade A).",
@@ -468,7 +476,8 @@ def _quality(ops_enabled: bool, outages: list[str], flow: FlowCounts) -> list[st
         ),
     ]
     if outages:
-        items.append(f"Sources unavailable during the run: {', '.join(sorted(set(outages)))}.")
+        names: list[str] = [OUTAGE_TEXT.get(o, o) for o in sorted(set(outages))]
+        items.append(f"Sources unavailable during the run: {', '.join(names)}.")
     if flow.not_analysed:
         items.append(
             f"{flow.not_analysed} eligible candidates were not analysed because of the analysis cap."

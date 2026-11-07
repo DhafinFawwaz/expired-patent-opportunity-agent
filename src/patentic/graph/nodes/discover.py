@@ -113,11 +113,15 @@ class OgIndexNode:
             missing=len(index.coverage.missing_weeks),
             expired_candidates=len(expired),
         )
+        partial: bool = bool(index.coverage.missing_weeks) or index.circuit_open
+        if partial:
+            emit("status_index", "outage", source="og_notice", partial=True)
         return {
             "stage": "status_index",
             "coverage": index.coverage,
             "events": found_events,
             "evidence": found_evidence,
+            "outages": ["og_notice_partial"] if partial else [],
         }
 
 
