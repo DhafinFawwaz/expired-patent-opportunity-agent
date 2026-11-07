@@ -57,7 +57,7 @@ The graph is built in `src/patentic/graph/build.py`; each node is a class in `sr
 
 Every fact a source returns becomes an `EvidenceRecord` with a deterministic id, the source, the URL, the retrieval time and a short raw snippet. Status events (`lapse`, `reinstated`, `petition_granted` and so on) point at their evidence id.
 
-`assess_status` in `src/patentic/domain/status_rules.py` turns the events into one of nine labels: `expired_nonpayment`, `reinstated`, `in_grace_period`, `petition_pending`, `expired_end_of_term`, `conflicting`, `in_force`, `not_subject_to_maintenance_fees`, `unknown`. The rules are ADR 004: the later official notice wins; a later secondary revival against an official lapse is `conflicting`; design and plant patents pay no fees.
+`assess_status` in `src/patentic/domain/status_rules.py` turns the events into one of nine labels: `expired_nonpayment`, `reinstated`, `in_grace_period`, `petition_pending`, `expired_end_of_term`, `conflicting`, `in_force`, `not_subject_to_maintenance_fees`, `unknown`. The rules are ADR 004: the later official event wins, with lapses ordered by expiry date rather than by the date the notice was printed; a later secondary revival against an official lapse is `conflicting`; design and plant patents pay no fees.
 
 Confidence (`very_low` to `very_high`) is computed by `compute_confidence` from the label, which sources agree, and whether the Gazette scan covers every week after the expiry date. A missing week or a scan that is more than a week old caps it at `medium`. The model never sets confidence.
 

@@ -23,7 +23,7 @@ What patentic must do, written as EARS requirements. Each line names the test th
 
 - WHEN a candidate appears in an Official Gazette expiration notice THE SYSTEM SHALL record the row as dated evidence with its source URL. (`tests/adapters/test_og_notices.py::test_rows_carry_evidence_with_grade_a`)
 - WHEN a candidate appears in an expiration notice AND a later reinstatement notice THE SYSTEM SHALL set status `reinstated` and attach both notices. (`tests/unit/test_status_rules.py::test_reinstated_after_lapse`)
-- WHEN sources disagree AND a later official notice exists THE SYSTEM SHALL follow the later official notice and keep the other evidence visible. (`tests/unit/test_status_rules.py::test_later_official_notice_wins`)
+- WHEN sources disagree AND a later official notice exists THE SYSTEM SHALL follow the later official notice and keep the other evidence visible. (`tests/unit/test_status_rules.py::test_later_official_notice_wins`, `tests/unit/test_status_rules.py::test_reinstatement_granted_before_the_lapse_notice_still_wins`)
 - WHEN sources disagree AND no later official notice resolves it THE SYSTEM SHALL set status `conflicting`. (`tests/unit/test_status_rules.py::test_conflicting_without_resolving_notice`)
 - WHEN the reinstatement scan does not cover every Gazette week published after the expiry date THE SYSTEM SHALL cap confidence at `medium` and state the gap. (`tests/unit/test_confidence.py::test_incomplete_scan_caps_at_medium`, `tests/unit/test_confidence.py::test_missing_week_after_expiry_breaks_coverage`)
 - THE SYSTEM SHALL compute confidence from rules over the evidence and SHALL NOT take it from a model. (`tests/unit/test_confidence.py::test_assess_status_fills_confidence`)
