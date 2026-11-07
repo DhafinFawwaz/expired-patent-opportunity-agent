@@ -2,7 +2,7 @@ import operator
 from datetime import datetime
 from typing import Annotated, Literal
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from typing_extensions import TypedDict
 
 from patentic.adapters.base import ClaimRecord, EvidenceRecord, PatentRecord
@@ -28,7 +28,7 @@ class ReviewDecision(BaseModel):
     keep: list[str] = []
     drop: list[str] = []
     flag: dict[str, str] = {}
-    shortlist: list[str] = []
+    shortlist: list[str] = Field(default=[], max_length=2)
 
 
 class ScreeningResult(BaseModel):

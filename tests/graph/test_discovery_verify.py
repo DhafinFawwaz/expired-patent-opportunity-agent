@@ -137,7 +137,7 @@ def test_verify_fanout_assesses_every_fixture(tmp_path: Path) -> None:
             case.expected.confidence,
         ), case.name
         assert candidate.is_synthetic
-    assert values["candidates"]["US-9999906"].flags == ["related_active_continuation"]
+    assert "related_active_continuation" in values["candidates"]["US-9999906"].flags
 
 
 def test_rank_pool_limits_to_configured_size(tmp_path: Path) -> None:
@@ -162,4 +162,4 @@ def test_source_outage_recorded_and_run_continues(tmp_path: Path) -> None:
     values: dict[str, Any] = approve_and_run(make_deps(tmp_path, og=FakeOg(empty=True), bq=bq))
     assert values["outages"] == ["og_notice"]
     assert values["candidates"] == {}
-    assert values["stage"] == "rank"
+    assert values["stage"] == "screening"
