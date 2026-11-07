@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+*.egg-info/
+dist/
+build/
+
+# Secrets and local config
+.env
+.env.*
+!.env.example
+
+# Run artefacts (committed samples live in outputs/samples/ and docs/sample-logs/)
+outputs/runs/
+*.sqlite
+*.sqlite-journal
+.cache/
+
+# OS / editors
+.DS_Store
+.idea/
+.vscode/
