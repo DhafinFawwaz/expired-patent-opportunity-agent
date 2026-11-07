@@ -1,0 +1,40 @@
+{
+  "thread_id": "run-real-4",
+  "today": "2026-11-07",
+  "request": {
+    "technology_category": "non-powered household cleaning tools",
+    "intended_product": "Manual cleaning tools for home use (mops, brushes, squeegees, scrapers, dust pans) that a small manufacturer could make without electronics.",
+    "commercial_constraints": [
+      "US market only; do not infer worldwide availability",
+      "recommend at most two candidates for technical and legal review",
+      "return fewer than five if the evidence does not support five"
+    ],
+    "max_candidates": 5,
+    "max_recommended": 2,
+    "lapse_window_weeks": 104
+  },
+  "commit": "626644a",
+  "bigquery_bytes": 46207598592,
+  "candidates": [
+    [
+      "US-8800092",
+      "expired_nonpayment"
+    ],
+    [
+      "US-10052665",
+      "expired_nonpayment"
+    ],
+    [
+      "US-10052751",
+      "expired_nonpayment"
+    ],
+    [
+      "US-8826487",
+      "expired_nonpayment"
+    ],
+    [
+      "US-10065611",
+      "expired_nonpayment"
+    ]
+  ]
+}

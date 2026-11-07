@@ -1,0 +1,13 @@
+{
+  "llm_calls": 20,
+  "fallback_calls": 4,
+  "tokens_in": 28306,
+  "tokens_out": 72265,
+  "cost_usd": 0.0,
+  "models": [
+    "free",
+    "free-tools"
+  ],
+  "bigquery_bytes_total": 46207598592,
+  "note": "Free deployments report zero cost; that comes from the route, not the model."
+}

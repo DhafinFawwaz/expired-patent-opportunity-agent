@@ -24,7 +24,23 @@ Hours are wall-clock, taken from commit times in UTC+7. They measure elapsed tim
 | Build | 18 Analysis, scoring, review gate | 17:01 | 17:03 | 0.03 | |
 | Build | 19 CLI, run log, resume | 17:03 | 17:12 | 0.15 | a first version hung retrying 104 failing weeks; added an offline mode and a circuit breaker |
 | Build | Checkpoint after task 19 | | 17:12 | 1.2 total | under the 7.5 h cut line, nothing cut |
+| Build | 20 Report bundle | 17:12 | 17:16 | 0.07 | |
+| Build | 21 Word report | 17:16 | 17:18 | 0.03 | |
+| Build | 22 Deck | 17:18 | 17:21 | 0.05 | |
+| Build | 23 Cross-file validation | 17:21 | 17:27 | 0.10 | LibreOffice render made opt-in after a macOS Gatekeeper prompt |
+| Build | 24 First real run and fixes | 17:27 | 19:32 | 2.08 | four live runs; run 1 exposed a relative-path bug in the OOXML check and a 1024-token cap that truncated model answers; most of the time was free-model latency |
 
 ## Run cost
 
-Filled in after the real run: BigQuery bytes scanned, LLM cost, wall time.
+Sample run `run-real-4` (committed under `outputs/samples/` and `docs/sample-logs/`):
+
+| Item | Value |
+|---|---|
+| BigQuery bytes, first fresh run | 44.0 GB (discovery 2.30, claims 38.95, citations 2.20, continuity 0.55), inside the 1 TB monthly free tier |
+| BigQuery bytes, later runs | 0, every query was served from the local cache |
+| Gazette pages fetched | 104 weekly issues, about 73 MB of HTML, fetched once at one request per second |
+| LLM calls | 20 (4 fell back to templates), 28k tokens in, 72k out |
+| LLM cost | $0.00 on free models through `freellm` |
+| Wall time | about 15 minutes, almost all of it model latency on free tiers |
+
+The replay bundle (`fixtures/replay/`, 10 MB) reruns this result offline in about 6 seconds.

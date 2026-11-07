@@ -11,6 +11,7 @@ from rich.console import Console
 from patentic.adapters.http import utc_now
 from patentic.config.settings import Settings
 from patentic.domain.request import ResearchRequest
+from patentic.replay import REPLAY_DIR, Provenance, Recorded, load_recorded, unpack
 from patentic.runner import Runner, RunResult
 from patentic.schemas_export import export_schemas
 from patentic.tui.prompts import AskHuman, StopRunError, rich_ask_human, scripted_ask_human
@@ -41,6 +42,12 @@ def _execute(
     run_config: dict[str, Any], thread_id: str, decisions: Path | None, *, resume: bool
 ) -> RunResult:
     settings: Settings = Settings()
+    recorded: Recorded | None = None
+    if run_config["mode"] == "replay":
+        recorded = load_recorded(REPLAY_DIR)
+        cache: Path = settings.patentic_cache_dir / "replay"
+        unpack(REPLAY_DIR, cache)
+        settings = settings.model_copy(update={"patentic_cache_dir": cache})
     run_dir: Path = settings.patentic_outputs_dir / "runs" / thread_id
     deps = make_deps(
         settings,
@@ -50,6 +57,7 @@ def _execute(
         simulate_outage=run_config.get("simulate_outage"),
         today=date.fromisoformat(run_config["today"]) if run_config.get("today") else None,
         render=bool(run_config.get("render", False)),
+        recorded=recorded,
     )
     if not resume:
         run_dir.mkdir(parents=True, exist_ok=True)
@@ -65,6 +73,9 @@ def _execute(
         console.print(f"Stopped. Resume with: patentic resume {thread_id}")
         raise typer.Exit(130) from None
     console.print(f"Run {result.status}. Logs: {run_dir / 'events.jsonl'}")
+    if result.status == "validation_failed":
+        console.print(f"The report and deck failed checks; see {run_dir / 'validation.json'}")
+        raise typer.Exit(1)
     return result
 
 
@@ -94,24 +105,34 @@ def run(
     offline: Annotated[bool, typer.Option("--offline", help="Use cached data only")] = False,
     no_llm: NoLlmOpt = False,
     render: RenderOpt = False,
+    replay: Annotated[
+        bool, typer.Option("--replay", help="Rerun the committed real run offline, without a model")
+    ] = False,
     thread_id: ThreadOpt = None,
 ) -> None:
     """Run the pipeline on a research request."""
     request: dict[str, object] = dict(_load_yaml(request_file))
+    today: date = date.today()  # noqa: DTZ011
+    if replay:
+        provenance: Provenance = Provenance.model_validate_json(
+            (REPLAY_DIR / "provenance.json").read_text()
+        )
+        request, today = dict(provenance.request), provenance.today
     if og_weeks:
         request["lapse_window_weeks"] = og_weeks
     outage: Outage | None = simulate_outage
     config: dict[str, Any] = {
-        "mode": "live",
+        "mode": "replay" if replay else "live",
         "request": request,
-        "no_llm": no_llm,
-        "offline": offline,
+        "no_llm": no_llm or replay,
+        "offline": offline or replay,
         "render": render,
         "simulate_outage": outage,
         "created": utc_now().isoformat(),
-        "today": date.today().isoformat(),  # noqa: DTZ011
+        "today": today.isoformat(),
     }
-    _execute(config, thread_id or new_thread_id("live"), decisions, resume=False)
+    slug: str = "replay" if replay else "live"
+    _execute(config, thread_id or new_thread_id(slug), decisions, resume=False)
 
 
 @app.command()

@@ -1,0 +1,61 @@
+{
+  "ok": true,
+  "checks": [
+    [
+      "bundle schema",
+      true,
+      ""
+    ],
+    [
+      "report matches bundle",
+      true,
+      ""
+    ],
+    [
+      "pptx matches bundle",
+      true,
+      ""
+    ],
+    [
+      "report matches deck",
+      true,
+      ""
+    ],
+    [
+      "label in report",
+      true,
+      "header, body, section10, properties"
+    ],
+    [
+      "label in deck",
+      true,
+      "title, footers, last"
+    ],
+    [
+      "report sections",
+      true,
+      "10 sections"
+    ],
+    [
+      "slide count",
+      true,
+      "9 slides"
+    ],
+    [
+      "report schema",
+      true,
+      ""
+    ],
+    [
+      "deck schema",
+      true,
+      ""
+    ],
+    [
+      "render",
+      true,
+      "render check skipped (not requested)"
+    ]
+  ],
+  "page_count": null
+}

@@ -17,6 +17,7 @@ from patentic.domain.screening import load_cpc_sets, load_power_terms
 from patentic.graph.deps import Deps
 from patentic.llm.calls import LlmCaller, build_models, probe_structured
 from patentic.llm.null_model import NullChatModel
+from patentic.replay import Recorded, ReplayCaller
 
 if TYPE_CHECKING:
     from langchain_core.language_models import BaseChatModel
@@ -54,6 +55,7 @@ def make_deps(
     simulate_outage: Outage | None,
     today: date | None = None,
     render: bool = False,
+    recorded: Recorded | None = None,
 ) -> Deps:
     cache: Path = settings.patentic_cache_dir
     simulated: bool = simulate_outage == "og"
@@ -91,7 +93,7 @@ def make_deps(
         og=OgIndexer(http),
         bq=gateway,
         ops=ops,
-        llm=make_llm(settings, no_llm=no_llm),
+        llm=ReplayCaller(recorded) if recorded else make_llm(settings, no_llm=no_llm),
         weights=load_weights(),
         cpc=load_cpc_sets(),
         power=load_power_terms(),
