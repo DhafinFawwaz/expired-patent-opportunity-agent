@@ -41,7 +41,7 @@ def test_bundle_node_writes_json_and_prose_keys(tmp_path: Path) -> None:
     assert bundle.illustration is not None
     assert bundle.illustration.key == "US-9999902"
     assert len(bundle.candidates) <= REQUEST.max_candidates
-    assert "—" not in json.dumps(bundle.prose)
+    assert "\u2014" not in json.dumps(bundle.prose)
 
 
 def test_every_cited_evidence_id_has_a_reference(tmp_path: Path) -> None:

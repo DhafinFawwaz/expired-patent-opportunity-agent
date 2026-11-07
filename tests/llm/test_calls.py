@@ -117,13 +117,13 @@ def test_opportunity_scores_clamped() -> None:
 
 
 def test_prose_respects_word_budget_and_strips_em_dashes() -> None:
-    long_text: str = "This tool works well — it is cheap. " * 40
+    long_text: str = "This tool works well \u2014 it is cheap. " * 40
     prose_model: ScriptedChatModel = scripted(
         tool_reply(ProseSection, {"section": "summary", "text": long_text})
     )
     section, _ = caller(scripted(), prose_model).prose("summary", {"fallback": "x"}, 50)
     assert len(section.text.split()) <= 60
-    assert "—" not in section.text
+    assert "\u2014" not in section.text
 
 
 def test_prose_falls_back_to_supplied_text() -> None:
