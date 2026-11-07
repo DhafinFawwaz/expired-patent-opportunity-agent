@@ -18,6 +18,12 @@ Hours are wall-clock, taken from commit times in UTC+7. They measure elapsed tim
 | Build | 12 BigQuery gateway | 16:44 | 16:49 | 0.08 | one live discovery query, about 2.3 GB |
 | Build | 13 EPO OPS adapter | 16:49 | 16:51 | 0.03 | built against a synthetic response; credentials pending |
 | Build | 14 Maintenance fee file parser | 16:51 | 16:52 | 0.02 | |
+| Build | 15 LLM calls and fallbacks | 16:52 | 16:56 | 0.07 | |
+| Build | 16 State, plan, approval gate | 16:56 | 16:58 | 0.03 | |
+| Build | 17 Discovery and status fan-out | 16:58 | 17:01 | 0.05 | |
+| Build | 18 Analysis, scoring, review gate | 17:01 | 17:03 | 0.03 | |
+| Build | 19 CLI, run log, resume | 17:03 | 17:12 | 0.15 | a first version hung retrying 104 failing weeks; added an offline mode and a circuit breaker |
+| Build | Checkpoint after task 19 | | 17:12 | 1.2 total | under the 7.5 h cut line, nothing cut |
 
 ## Run cost
 
