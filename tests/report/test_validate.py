@@ -71,3 +71,11 @@ def test_validate_fails_when_label_missing(bundle: ReportBundle, tmp_path: Path)
 def test_ooxml_check_passes_generated_files(files: tuple[Path, Path]) -> None:
     assert ooxml_check(files[0]) == []
     assert ooxml_check(files[1]) == []
+
+
+def test_ooxml_check_accepts_relative_paths(
+    files: tuple[Path, Path], monkeypatch: pytest.MonkeyPatch
+) -> None:
+    monkeypatch.chdir(files[0].parent.parent)
+    relative: Path = Path(files[0].parent.name) / files[0].name
+    assert ooxml_check(relative) == []

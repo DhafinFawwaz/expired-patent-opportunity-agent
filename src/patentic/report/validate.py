@@ -106,7 +106,7 @@ def extract_pptx_facts(path: Path) -> DocFacts:
 
 def ooxml_check(path: Path) -> list[str]:
     done: subprocess.CompletedProcess[str] = subprocess.run(  # noqa: S603
-        [sys.executable, str(VALIDATOR), str(path)],
+        [sys.executable, str(VALIDATOR), str(path.resolve())],
         cwd=VALIDATOR.parent,
         capture_output=True,
         text=True,
