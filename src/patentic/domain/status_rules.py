@@ -5,6 +5,7 @@ from typing import Final, Literal
 
 from pydantic import BaseModel
 
+from patentic.domain.confidence import Confidence, compute_confidence
 from patentic.domain.coverage import ScanCoverage
 from patentic.domain.events import EventType, Stage, StatusEvent
 from patentic.domain.identifiers import PatentId
@@ -44,7 +45,7 @@ class StatusAssessment(BaseModel):
     evidence_ids: list[str] = []
     timeline: list[StatusEvent] = []
     notes: list[str] = []
-    confidence: str | None = None
+    confidence: Confidence = "very_low"
 
 
 def add_years(d: date, years: int) -> date:
@@ -90,16 +91,22 @@ def assess_status(
         evidence_ids=[e.evidence_id for e in timeline],
     )
     if not patent.maintenance_eligible:
-        return base.model_copy(
-            update={
-                "label": "not_subject_to_maintenance_fees",
-                "notes": ["Design and plant patents pay no maintenance fees."],
-            }
+        return _with_confidence(
+            base.model_copy(
+                update={
+                    "label": "not_subject_to_maintenance_fees",
+                    "notes": ["Design and plant patents pay no maintenance fees."],
+                }
+            ),
+            coverage,
         )
     lapses: list[StatusEvent] = [e for e in timeline if e.event_type == "lapse"]
-    if lapses:
-        return _assess_after_lapse(base, timeline, lapses, grant_date, coverage)
-    return _assess_without_lapse(base, timeline, grant_date, filing_date, today)
+    result: StatusAssessment = (
+        _assess_after_lapse(base, timeline, lapses, grant_date, coverage)
+        if lapses
+        else _assess_without_lapse(base, timeline, grant_date, filing_date, today)
+    )
+    return _with_confidence(result, coverage)
 
 
 def _assess_after_lapse(
@@ -232,6 +239,13 @@ def _assess_without_lapse(
                 }
             )
     return base.model_copy(update={"label": "in_force"})
+
+
+def _with_confidence(result: StatusAssessment, coverage: ScanCoverage) -> StatusAssessment:
+    confidence: Confidence = compute_confidence(
+        result.label, result.timeline, coverage, result.effective_date
+    )
+    return result.model_copy(update={"confidence": confidence})
 
 
 def _dedupe(events: Sequence[StatusEvent]) -> list[StatusEvent]:
