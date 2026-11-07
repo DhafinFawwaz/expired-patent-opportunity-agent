@@ -159,3 +159,10 @@ def test_fallback_records_the_last_problem() -> None:
     _, meta = caller(model).technical(TECH_CTX)
     assert meta.last_error is not None
     assert "a motor drives the pad" in meta.last_error
+
+
+def test_technical_accepts_quotes_wrapped_in_json_punctuation() -> None:
+    wrapped: dict[str, object] = {**TECH_ARGS, "quotes": ['"a scrubbing pad on a second face",']}
+    summary, meta = caller(scripted(tool_reply(TechnicalSummary, wrapped))).technical(TECH_CTX)
+    assert meta.method != "fallback"
+    assert summary.quotes == ["a scrubbing pad on a second face"]

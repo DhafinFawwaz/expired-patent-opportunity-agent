@@ -1,6 +1,6 @@
 from typing import Literal
 
-from pydantic import BaseModel
+from pydantic import BaseModel, field_validator
 
 StructuredMethod = Literal["json_schema", "json_mode", "function_calling"]
 
@@ -22,6 +22,12 @@ class TechnicalSummary(BaseModel):
     powered: Literal["non_powered", "powered", "unclear"]
     evidence_ids: list[str]
     quotes: list[str]
+
+    @field_validator("quotes")
+    @classmethod
+    def _unwrap(cls, quotes: list[str]) -> list[str]:
+        # Some free models wrap each quote in literal JSON quote marks and a trailing comma.
+        return [q.strip().strip(",").strip().strip("\"'").strip() for q in quotes]
 
 
 class OpportunityRationale(BaseModel):
