@@ -141,8 +141,9 @@ class BqClaims:
             return {"stage": "claims", "claims": {}}
         emit("claims", "bigquery_start", patents=len(keys))
         try:
-            found: dict[str, list[ClaimRecord]] = deps.bq.claims(keys)
-            links: dict[str, Continuity] = deps.bq.continuity(keys)
+            everyone: list[str] = sorted(state.get("records", {}))
+            found: dict[str, list[ClaimRecord]] = deps.bq.claims(keys, prefetch=everyone)
+            links: dict[str, Continuity] = deps.bq.continuity(keys, prefetch=everyone)
         except Exception as exc:  # noqa: BLE001  # any source failure becomes an outage record
             emit("claims", "outage", source="bigquery", error=str(exc))
             return {"stage": "claims", "claims": {}, "outages": ["bigquery"]}

@@ -196,16 +196,54 @@ class BigQueryGateway:
     def discover(
         self, cpc_prefixes: Sequence[str], grant_from: date, grant_to: date
     ) -> list[PatentRecord]:
+        # Whole years keep the query text and its cache stable from day to day at the same cost.
         params: dict[str, object] = {
             "prefixes": list(cpc_prefixes),
-            "grant_from": grant_from.isoformat(),
-            "grant_to": grant_to.isoformat(),
+            "grant_from": date(grant_from.year, 1, 1).isoformat(),
+            "grant_to": date(grant_to.year, 12, 31).isoformat(),
         }
         rows: list[Row] = self.query(DISCOVERY_SQL, params, "discovery")
-        return [to_patent_record(row) for row in rows]
+        records: list[PatentRecord] = [to_patent_record(row) for row in rows]
+        return [r for r in records if grant_from <= r.grant_date <= grant_to]
 
-    def claims(self, keys: Sequence[str]) -> dict[str, list[ClaimRecord]]:
-        rows: list[Row] = self.query(CLAIMS_SQL, {"ids": [_id(k) for k in keys]}, "claims")
+    def _per_patent(
+        self,
+        kind: str,
+        keys: Sequence[str],
+        prefetch: Sequence[str],
+        sql: str,
+        id_field: str,
+    ) -> dict[str, list[Row]]:
+        # A query costs the same for 300 patents or 3,000, so fetch everyone once, cache each.
+        folder: Path = self._cache_dir.parent / "patents" / kind
+        found: dict[str, list[Row]] = {}
+        missing: list[str] = []
+        for key in keys:
+            path: Path = folder / f"{key}.json"
+            if path.exists():
+                found[key] = json.loads(path.read_text())
+            else:
+                missing.append(key)
+        if not missing:
+            return found
+        wanted: list[str] = sorted(set(missing) | set(prefetch))
+        rows: list[Row] = self.query(sql, {"ids": [_id(k) for k in wanted]}, kind)
+        grouped: dict[str, list[Row]] = {}
+        for row in rows:
+            grouped.setdefault(f"US-{row[id_field]}", []).append(row)
+        folder.mkdir(parents=True, exist_ok=True)
+        for key in wanted:
+            (folder / f"{key}.json").write_text(json.dumps(grouped.get(key, [])))
+        found.update({key: grouped.get(key, []) for key in missing})
+        return found
+
+    def claims(
+        self, keys: Sequence[str], prefetch: Sequence[str] = ()
+    ) -> dict[str, list[ClaimRecord]]:
+        per: dict[str, list[Row]] = self._per_patent(
+            "claims", keys, prefetch, CLAIMS_SQL, "patent_id"
+        )
+        rows: list[Row] = [row for key in keys for row in per.get(key, [])]
         grouped: dict[str, list[ClaimRecord]] = {}
         for row in rows:
             key: str = f"US-{row['patent_id']}"
@@ -219,15 +257,25 @@ class BigQueryGateway:
             )
         return {k: sorted(v, key=lambda c: c.sequence) for k, v in grouped.items()}
 
-    def forward_citations(self, keys: Sequence[str]) -> dict[str, list[str]]:
-        rows: list[Row] = self.query(CITATIONS_SQL, {"ids": [_id(k) for k in keys]}, "citations")
+    def forward_citations(
+        self, keys: Sequence[str], prefetch: Sequence[str] = ()
+    ) -> dict[str, list[str]]:
+        per: dict[str, list[Row]] = self._per_patent(
+            "citations", keys, prefetch, CITATIONS_SQL, "citation_id"
+        )
+        rows: list[Row] = [row for key in keys for row in per.get(key, [])]
         cites: dict[str, list[str]] = {}
         for row in rows:
             cites.setdefault(f"US-{row['citation_id']}", []).append(f"US-{row['patent_id']}")
         return cites
 
-    def continuity(self, keys: Sequence[str]) -> dict[str, Continuity]:
-        rows: list[Row] = self.query(CONTINUITY_SQL, {"ids": [_id(k) for k in keys]}, "continuity")
+    def continuity(
+        self, keys: Sequence[str], prefetch: Sequence[str] = ()
+    ) -> dict[str, Continuity]:
+        per: dict[str, list[Row]] = self._per_patent(
+            "continuity", keys, prefetch, CONTINUITY_SQL, "patent_id"
+        )
+        rows: list[Row] = [row for key in keys for row in per.get(key, [])]
         info: dict[str, Continuity] = {}
         for row in rows:
             key: str = f"US-{row['patent_id']}"

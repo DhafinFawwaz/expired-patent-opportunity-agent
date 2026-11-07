@@ -57,7 +57,8 @@ class Score:
         citations: dict[str, list[str]] = {}
         if pool and not deps.fixtures:
             try:
-                citations = deps.bq.forward_citations(pool)
+                everyone: list[str] = sorted(state.get("records", {}))
+                citations = deps.bq.forward_citations(pool, prefetch=everyone)
             except Exception:  # noqa: BLE001  # citations are optional evidence
                 outages.append("bigquery")
         scored: list[Candidate] = []

@@ -154,3 +154,39 @@ def test_continuity_types_and_disclaimer(tmp_path: Path) -> None:
     assert entry.children == {"application 14712345": "continuation"}
     assert entry.parents == {"US-8123456": "division"}
     assert entry.terminal_disclaimer is True
+
+
+def test_claims_are_cached_per_patent_and_prefetched(tmp_path: Path) -> None:
+    rows: list[dict[str, object]] = [
+        {"patent_id": "1", "sequence": 1, "text": "1. A mop.", "dependent": None},
+        {"patent_id": "2", "sequence": 1, "text": "1. A brush.", "dependent": None},
+    ]
+    runner: FakeRunner = FakeRunner(rows)
+    gw: BigQueryGateway = gateway(tmp_path, runner)
+    first: dict[str, list[ClaimRecord]] = gw.claims(["US-1"], prefetch=["US-1", "US-2", "US-3"])
+    assert list(first) == ["US-1"]
+    later: dict[str, list[ClaimRecord]] = gw.claims(["US-2", "US-3"])
+    assert [c.text for c in later["US-2"]] == ["1. A brush."]
+    assert later.get("US-3", []) == []
+    assert len(runner.runs) == 1
+
+
+def test_discovery_window_is_widened_to_whole_years(tmp_path: Path) -> None:
+    def row(patent_id: str, granted: str) -> dict[str, object]:
+        return {
+            "id": patent_id,
+            "kind": "B2",
+            "date": granted,
+            "title": "Mop",
+            "cpc": ["A47L13/20"],
+        }
+
+    runner: FakeRunner = FakeRunner(
+        [row("1", "2014-01-05"), row("2", "2014-06-01"), row("3", "2022-12-30")]
+    )
+    gw: BigQueryGateway = gateway(tmp_path, runner)
+    monday: list[PatentRecord] = gw.discover(["A47L13/"], date(2014, 3, 1), date(2022, 11, 7))
+    tuesday: list[PatentRecord] = gw.discover(["A47L13/"], date(2014, 3, 2), date(2022, 11, 8))
+    assert [r.patent.key for r in monday] == ["US-2"]
+    assert [r.patent.key for r in tuesday] == ["US-2"]
+    assert len(runner.runs) == 1

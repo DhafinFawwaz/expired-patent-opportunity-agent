@@ -69,16 +69,22 @@ class FakeBq(BigQueryGateway):
     ) -> list[PatentRecord]:
         return self.records
 
-    def claims(self, keys: Sequence[str]) -> dict[str, list[ClaimRecord]]:
+    def claims(
+        self, keys: Sequence[str], prefetch: Sequence[str] = ()
+    ) -> dict[str, list[ClaimRecord]]:
         return {
             k: [ClaimRecord(patent_key=k, sequence=1, text="A mop comprising a pad on a frame.")]
             for k in keys
         }
 
-    def continuity(self, keys: Sequence[str]) -> dict[str, Continuity]:
+    def continuity(
+        self, keys: Sequence[str], prefetch: Sequence[str] = ()
+    ) -> dict[str, Continuity]:
         return {k: Continuity(terminal_disclaimer=False) for k in keys}
 
-    def forward_citations(self, keys: Sequence[str]) -> dict[str, list[str]]:
+    def forward_citations(
+        self, keys: Sequence[str], prefetch: Sequence[str] = ()
+    ) -> dict[str, list[str]]:
         return {}
 
 
