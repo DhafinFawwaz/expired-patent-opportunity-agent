@@ -154,9 +154,9 @@ class LlmCaller:
     ) -> tuple[ProseSection, CallMeta]:
         system, human = _prompt("prose")
         data: str = json.dumps(
-            {k: v for k, v in ctx.items() if k != "fallback"}, default=str, indent=1
+            {k: v for k, v in ctx.items() if k not in {"fallback", "brief"}}, default=str, indent=1
         )
-        prompt: str = human.format(section=section, data=data)
+        prompt: str = human.format(section=section, brief=ctx.get("brief", ""), data=data)
         result, meta = self._structured(
             self._prose,
             ProseSection,

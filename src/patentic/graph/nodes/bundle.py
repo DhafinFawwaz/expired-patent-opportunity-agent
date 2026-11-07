@@ -265,23 +265,6 @@ class Bundle:
     def _prose(
         self, reports: list[CandidateReport], flow: FlowCounts, weeks: int, outages: list[str]
     ) -> tuple[dict[str, str], list[CallMeta]]:
-        facts: dict[str, object] = {
-            "flow": flow.model_dump(),
-            "weeks": weeks,
-            "outages": outages,
-            "candidates": [
-                {
-                    "patent": r.display,
-                    "title": r.title,
-                    "status": fmt_status(r.status.label),
-                    "confidence": r.status.confidence,
-                    "score": r.scores.total if r.scores else None,
-                    "recommendation": r.recommendation,
-                    "rationale": r.opportunity.rationale if r.opportunity else "",
-                }
-                for r in reports
-            ],
-        }
         fallbacks: dict[str, str] = {
             "executive_summary": _executive_fallback(reports, flow, weeks),
             "methodology": _methodology_fallback(flow, weeks),
@@ -291,12 +274,73 @@ class Bundle:
         prose: dict[str, str] = {}
         calls: list[CallMeta] = []
         for section, budget in BUDGETS.items():
+            facts: dict[str, object] = prose_facts(section, reports, flow, weeks, outages)
             result, meta = self._deps.llm.prose(
                 section, {**facts, "fallback": fallbacks[section]}, budget
             )
             prose[section] = result.text
             calls.append(meta)
         return prose, calls
+
+
+SECTION_BRIEFS: Final[dict[str, str]] = {
+    "executive_summary": (
+        "Two short paragraphs for a busy reader. Say what was searched and which candidates are "
+        "recommended for review, with one reason each. Use at most two numbers."
+    ),
+    "methodology": (
+        "Explain how candidates were found and checked: CPC search, Gazette expiry and "
+        "reinstatement lists, the non-powered screen, ranking. A table next to this text lists "
+        "every count, so do not list them."
+    ),
+    "commercial": (
+        "Compare the commercial case of the candidates against each other, using their "
+        "rationales. Do not mention screening counts."
+    ),
+    "next_steps": (
+        "Say what to check next for each shortlisted patent before any product work. A standard "
+        "checklist follows this text, so do not repeat generic legal advice."
+    ),
+}
+
+
+def _candidate_facts(report: CandidateReport) -> dict[str, object]:
+    return {
+        "patent": report.display,
+        "title": report.title,
+        "status": fmt_status(report.status.label),
+        "confidence": report.status.confidence,
+        "score": report.scores.total if report.scores else None,
+        "recommendation": report.recommendation,
+        "rationale": report.opportunity.rationale if report.opportunity else "",
+        "flags": report.flags,
+    }
+
+
+def prose_facts(
+    section: str,
+    reports: list[CandidateReport],
+    flow: FlowCounts,
+    weeks: int,
+    outages: list[str],
+) -> dict[str, object]:
+    facts: dict[str, object] = {"brief": SECTION_BRIEFS[section]}
+    if section == "executive_summary":
+        facts["counts"] = {
+            "patents_searched": flow.found,
+            "listed_expired_for_nonpayment_in_window": flow.expired_in_window,
+        }
+        facts |= {"weeks": weeks, "outages": outages}
+    if section == "methodology":
+        facts |= {"flow": flow.model_dump(), "weeks": weeks, "outages": outages}
+    chosen: list[CandidateReport] = (
+        [r for r in reports if r.recommendation == "Shortlist"]
+        if section == "next_steps"
+        else reports
+    )
+    if section != "methodology":
+        facts["candidates"] = [_candidate_facts(r) for r in chosen]
+    return facts
 
 
 def _reference(item: EvidenceRecord) -> Reference:
