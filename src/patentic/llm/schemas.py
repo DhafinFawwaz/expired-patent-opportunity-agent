@@ -65,7 +65,7 @@ class OpportunityContext(BaseModel):
 class CallMeta(BaseModel):
     call: str
     model: str
-    method: StructuredMethod | Literal["fallback", "default"]
+    method: StructuredMethod | Literal["fallback", "default", "cached"]
     attempts: int
     tokens_in: int = 0
     tokens_out: int = 0

@@ -43,7 +43,7 @@ def make_llm(settings: Settings, *, no_llm: bool) -> LlmCaller:
         return LlmCaller(null, null, None, usage)
     tools, prose = build_models(settings)
     method: StructuredMethod | None = probe_structured(tools)
-    return LlmCaller(tools, prose, method, usage)
+    return LlmCaller(tools, prose, method, usage, cache_dir=settings.patentic_cache_dir / "llm")
 
 
 def make_deps(

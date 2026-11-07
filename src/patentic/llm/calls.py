@@ -1,7 +1,9 @@
+import hashlib
 import json
 import re
 from collections.abc import Callable, Mapping, Sequence
 from importlib import resources
+from pathlib import Path
 from typing import Any, Final, TypeVar
 
 from langchain_core.callbacks import UsageMetadataCallbackHandler
@@ -75,7 +77,10 @@ class LlmCaller:
         prose_model: BaseChatModel,
         method: StructuredMethod | None,
         usage: UsageMetadataCallbackHandler,
+        *,
+        cache_dir: Path | None = None,
     ) -> None:
+        self._cache_dir: Path | None = cache_dir
         self._tools: BaseChatModel = tools_model
         self._prose: BaseChatModel = prose_model
         self._method: StructuredMethod | None = method
@@ -192,6 +197,13 @@ class LlmCaller:
         meta: CallMeta = CallMeta(
             call=call, model=_model_name(model), method=self._method or "default", attempts=0
         )
+        digest: str = hashlib.sha256(
+            json.dumps([call, schema.__name__, system, prompt]).encode()
+        ).hexdigest()
+        cached: Path | None = self._cache_dir / f"{digest}.json" if self._cache_dir else None
+        if cached is not None and cached.exists():
+            meta.method = "cached"
+            return schema.model_validate_json(cached.read_text()), meta
         messages: list[BaseMessage] = [SystemMessage(system), HumanMessage(prompt)]
         for _ in range(ATTEMPTS):
             meta.attempts += 1
@@ -217,6 +229,9 @@ class LlmCaller:
             )
             issue: str | None = check(candidate)
             if issue is None:
+                if cached is not None:
+                    cached.parent.mkdir(parents=True, exist_ok=True)
+                    cached.write_text(candidate.model_dump_json())
                 return candidate, meta
             meta.last_error = issue[:300]
             messages = [*messages, HumanMessage(f"Your answer was invalid: {issue}. Answer again.")]

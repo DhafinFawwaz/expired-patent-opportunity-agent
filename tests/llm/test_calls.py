@@ -1,3 +1,5 @@
+from pathlib import Path
+
 import pytest
 from langchain_core.callbacks import UsageMetadataCallbackHandler
 from langchain_core.messages import AIMessage
@@ -166,3 +168,31 @@ def test_technical_accepts_quotes_wrapped_in_json_punctuation() -> None:
     summary, meta = caller(scripted(tool_reply(TechnicalSummary, wrapped))).technical(TECH_CTX)
     assert meta.method != "fallback"
     assert summary.quotes == ["a scrubbing pad on a second face"]
+
+
+def test_successful_answers_are_cached_on_disk(tmp_path: Path) -> None:
+    usage: UsageMetadataCallbackHandler = UsageMetadataCallbackHandler()
+    first: LlmCaller = LlmCaller(
+        scripted(tool_reply(TechnicalSummary, TECH_ARGS)),
+        scripted(),
+        None,
+        usage,
+        cache_dir=tmp_path,
+    )
+    summary, meta = first.technical(TECH_CTX)
+    assert meta.method != "fallback"
+    broken: LlmCaller = LlmCaller(
+        scripted("garbage", "garbage"), scripted(), None, usage, cache_dir=tmp_path
+    )
+    again, again_meta = broken.technical(TECH_CTX)
+    assert again == summary
+    assert again_meta.method == "cached"
+    assert again_meta.attempts == 0
+
+
+def test_fallbacks_are_not_cached(tmp_path: Path) -> None:
+    usage: UsageMetadataCallbackHandler = UsageMetadataCallbackHandler()
+    LlmCaller(
+        scripted("garbage", "garbage"), scripted(), None, usage, cache_dir=tmp_path
+    ).technical(TECH_CTX)
+    assert list(tmp_path.iterdir()) == []
