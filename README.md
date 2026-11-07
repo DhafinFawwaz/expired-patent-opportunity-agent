@@ -30,7 +30,7 @@ For a live run you need a Google Cloud project with BigQuery enabled (the free s
 make run
 ```
 
-The first live run scans about 44 GB of BigQuery data, well inside the 1 TB monthly free tier. Later runs read the local cache and scan nothing. Language model calls go through `llm/` (the `freellm` package), which routes to free providers and works with no keys at all, slowly. Keys for faster free providers go in `llm/.env`; `cd llm && uv run freellm keys --steps` lists where to get them.
+The first live run scans about 44 GB of BigQuery data, well inside the 1 TB monthly free tier. Queries are cached by their exact text: a rerun on the same day scans nothing, a run on a later day repeats discovery (2.3 GB), and a run after a new Gazette issue changes the candidate set repeats the claims query (about 39 GB). That allows about 20 fresh weekly runs a month on the free tier. Language model calls go through `llm/` (the `freellm` package), which routes to free providers and works with no keys at all, slowly. Keys for faster free providers go in `llm/.env`; `cd llm && uv run freellm keys --steps` lists where to get them.
 
 ## The two gates
 

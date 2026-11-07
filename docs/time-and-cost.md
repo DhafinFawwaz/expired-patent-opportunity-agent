@@ -39,7 +39,7 @@ Sample run `run-real-4` (committed under `outputs/samples/` and `docs/sample-log
 | Item | Value |
 |---|---|
 | BigQuery bytes, first fresh run | 44.0 GB (discovery 2.30, claims 38.95, citations 2.20, continuity 0.55), inside the 1 TB monthly free tier |
-| BigQuery bytes, later runs | 0, every query was served from the local cache |
+| BigQuery bytes, later runs the same day | 0, every query was served from the local cache (a later day or a new Gazette issue would repeat discovery and claims) |
 | Gazette pages fetched | 104 weekly issues, about 73 MB of HTML, fetched once at one request per second |
 | LLM calls | 20 (4 fell back to templates), 28k tokens in, 72k out |
 | LLM cost | $0.00 on free models through `freellm` |
