@@ -8,7 +8,7 @@ An expired patent can be reinstated months or years later. Secondary displays su
 
 ## Decision
 
-Events from every source map onto one vocabulary. Status comes from ordered rules: eligibility, end of term, revival after lapse, lapse with a complete reinstatement scan, pending petition, grace period, in force. A later official event beats an earlier or secondary one. Events are ordered by legal effect, not by publication: a lapse counts from its expiry date, because the Gazette prints it about eight weeks later, and a reinstatement counts from the date the petition was granted. Ordering by notice date would miss the one in five reinstatements that are granted before the expiry notice appears. Confidence is one of five words computed from the number of independent sources and whether the reinstatement scan covers every later Gazette week. Each evidence item carries an Admiralty grade.
+Events from every source map onto one vocabulary. Status comes from ordered rules: eligibility, end of term, revival after lapse, lapse with a complete reinstatement scan, pending petition, grace period, in force. A later official event beats an earlier or secondary one. Events are ordered by legal effect, not by publication: a lapse counts from its expiry date, because the Gazette prints it about eight weeks later, and a reinstatement counts from the date the petition was granted. Ordering by notice date missed reinstatements granted before the expiry notice appeared, which the final review found to be common in the real Gazette data. Confidence is one of five words computed from the number of independent sources and whether the reinstatement scan covers every later Gazette week. Each evidence item carries an Admiralty grade.
 
 ## Consequences
 
