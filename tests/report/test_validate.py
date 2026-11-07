@@ -4,7 +4,7 @@ import pytest
 from pptx import Presentation
 
 from patentic.report.bundle import ReportBundle
-from patentic.report.docx_renderer import render_docx
+from patentic.report.docx_renderer import COMPARISON_HEADER, render_docx
 from patentic.report.pptx_renderer import render_pptx
 from patentic.report.validate import (
     DocFacts,
@@ -46,7 +46,12 @@ def test_validate_fails_when_pptx_score_differs(
     bundle: ReportBundle, files: tuple[Path, Path], tmp_path: Path
 ) -> None:
     deck = Presentation(str(files[1]))
-    table = next(shape.table for slide in deck.slides for shape in slide.shapes if shape.has_table)
+    table = next(
+        shape.table
+        for slide in deck.slides
+        for shape in slide.shapes
+        if shape.has_table and shape.table.cell(0, 0).text == COMPARISON_HEADER[0]
+    )
     table.cell(1, 4).text = "9.9"
     tampered: Path = tmp_path / "tampered.pptx"
     deck.save(str(tampered))
