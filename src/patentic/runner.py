@@ -22,7 +22,15 @@ if TYPE_CHECKING:
 
     from patentic.llm.schemas import CallMeta
 
-RunStatus = Literal["completed", "aborted", "interrupted"]
+RunStatus = Literal["completed", "aborted", "interrupted", "validation_failed"]
+
+
+def run_status(stage: object) -> RunStatus:
+    if stage == "aborted":
+        return "aborted"
+    if stage == "validation_failed":
+        return "validation_failed"
+    return "completed"
 
 
 def _project_models(base: type[BaseModel] = BaseModel) -> list[type[BaseModel]]:
@@ -94,7 +102,7 @@ class Runner:
             payload = None
         values: dict[str, Any] = snapshot.values
         self._write_cost(values)
-        status: RunStatus = "aborted" if values.get("stage") == "aborted" else "completed"
+        status: RunStatus = run_status(values.get("stage"))
         self._log.write({"stage": "run", "event": status})
         return RunResult(
             thread_id=self._thread_id,
