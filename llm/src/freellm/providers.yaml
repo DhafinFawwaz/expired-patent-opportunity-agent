@@ -1,0 +1,246 @@
+# Free LLM providers known to freellm.
+#
+# Every provider here is called through its OpenAI-compatible endpoint
+# (LiteLLM "openai/<model>" + api_base) unless `litellm_prefix` says otherwise.
+#
+# Fields
+#   name            display name
+#   api_base        OpenAI-compatible base URL ({ENV_VAR} placeholders are filled from env)
+#   key_env         env var holding the key. Extra keys: <KEY_ENV>_2, <KEY_ENV>_3, ... or comma-separated values
+#   extra_env       other env vars the provider needs (e.g. Cloudflare account id)
+#   keyless         true = works with no key at all (anonymous tier)
+#   signup_url      where to create the key
+#   steps           how to get the key (shown by `freellm keys`)
+#   limits          free-tier limits as documented (informational)
+#   rpm             conservative requests/minute per key, used for load spreading
+#   free_filter     which models from /models are free:
+#                     all          every chat model the endpoint lists
+#                     openrouter   pricing.prompt == pricing.completion == "0"
+#                     suffix:<s>   model id ends with <s>
+#                     field:<k>=<v> /models entry has field k equal to v (e.g. LLM7 usage_based_only=false)
+#                     seed         don't trust /models; use only `seed_models`
+#   exclude         extra regexes of model ids to drop (non-chat models are always dropped)
+#   seed_models     known-free model ids, used when /models can't be queried
+#   verified        what was verified on 2026-11-07 (keyless calls only; keyed providers are from docs)
+#
+# Sources: https://github.com/open-free-llm-api/awesome-freellm-apis (freellm.net, refreshed 2026-10-20),
+# provider docs linked in signup_url.
+
+providers:
+  openrouter:
+    name: OpenRouter
+    api_base: https://openrouter.ai/api/v1
+    key_env: OPENROUTER_API_KEY
+    signup_url: https://openrouter.ai/settings/keys
+    steps:
+      - Sign in at https://openrouter.ai (Google/GitHub/email).
+      - Open https://openrouter.ai/settings/keys and click "Create Key".
+      - Models tagged (free) cost nothing. A one-time $10 credit top-up raises the free limit from 50 to 1000 requests/day.
+    limits: 20 RPM, 50 RPD on ":free" models (1000 RPD after a one-time $10 top-up)
+    rpm: 20
+    free_filter: openrouter
+    verified: model list is keyless (GET /api/v1/models), chat needs a key
+
+  groq:
+    name: Groq
+    api_base: https://api.groq.com/openai/v1
+    key_env: GROQ_API_KEY
+    signup_url: https://console.groq.com/keys
+    steps:
+      - Sign up at https://console.groq.com (email, no credit card).
+      - Open https://console.groq.com/keys and click "Create API Key".
+    limits: ~30 RPM, 1K-14.4K RPD depending on model
+    rpm: 30
+    free_filter: all
+    seed_models: [openai/gpt-oss-120b, openai/gpt-oss-20b, moonshotai/kimi-k2-instruct-0905, llama-3.3-70b-versatile, qwen/qwen3-32b]
+
+  cerebras:
+    name: Cerebras
+    api_base: https://api.cerebras.ai/v1
+    key_env: CEREBRAS_API_KEY
+    signup_url: https://cloud.cerebras.ai/
+    steps:
+      - Sign up at https://cloud.cerebras.ai (email, no credit card).
+      - Left sidebar -> "API Keys" -> "Generate API Key".
+    limits: ~5-30 RPM, 1M tokens/day
+    rpm: 10
+    free_filter: all
+    seed_models: [gpt-oss-120b, zai-glm-4.7, llama3.1-8b]
+
+  gemini:
+    name: Google AI Studio (Gemini)
+    api_base: https://generativelanguage.googleapis.com/v1beta/openai
+    key_env: GEMINI_API_KEY
+    signup_url: https://aistudio.google.com/app/apikey
+    steps:
+      - Sign in with a Google account at https://aistudio.google.com/app/apikey.
+      - Click "Create API key" (it creates a Google Cloud project for you). No billing needed.
+      - Free-tier prompts may be used by Google to improve products.
+    limits: 5-30 RPM, 20-1500 RPD depending on model
+    rpm: 10
+    free_filter: all
+    exclude: ['(^|/)gemini-(.*-)?pro', 'tts', 'image', 'embedding', 'aqa', 'imagen', 'veo', 'live', 'native-audio', 'robotics', 'computer-use', 'deep-research', 'antigravity']
+    seed_models: [gemini-3.8-flash, gemini-3.7-flash, gemini-3.6-flash]
+
+  mistral:
+    name: Mistral AI (Experiment plan)
+    api_base: https://api.mistral.ai/v1
+    key_env: MISTRAL_API_KEY
+    signup_url: https://console.mistral.ai/api-keys
+    steps:
+      - Sign up at https://console.mistral.ai.
+      - Choose the free "Experiment" plan (phone number verification, no card).
+      - Open https://console.mistral.ai/api-keys -> "Create new key".
+      - Experiment-plan requests may be used for training.
+    limits: ~1 RPS, 500K TPM, 1B tokens/month
+    rpm: 30
+    free_filter: all
+    seed_models: [mistral-medium-latest, mistral-small-latest, codestral-latest]
+
+  nvidia:
+    name: NVIDIA NIM (build.nvidia.com)
+    api_base: https://integrate.api.nvidia.com/v1
+    key_env: NVIDIA_API_KEY
+    signup_url: https://build.nvidia.com/settings/api-keys
+    steps:
+      - Sign up at https://build.nvidia.com (NVIDIA account, phone verification).
+      - Open https://build.nvidia.com/settings/api-keys -> "Generate API Key" (starts with nvapi-).
+    limits: up to 40 RPM
+    rpm: 40
+    free_filter: all
+    seed_models: [z-ai/glm-5.2, deepseek-ai/deepseek-v4-flash, moonshotai/kimi-k2.6, qwen/qwen3.5-397b-a17b]
+
+  ovh:
+    name: OVHcloud AI Endpoints
+    api_base: https://oai.endpoints.kepler.ai.cloud.ovh.net/v1
+    key_env: OVH_AI_ENDPOINTS_ACCESS_TOKEN
+    keyless: true
+    signup_url: https://www.ovhcloud.com/en/public-cloud/ai-endpoints/catalog/
+    steps:
+      - Works with NO key (2 requests/minute per IP).
+      - For higher limits create an OVHcloud account, open Public Cloud -> AI Endpoints -> API keys.
+    limits: 2 RPM anonymous; higher with a token
+    rpm: 2
+    free_filter: all
+    verified: keyless chat + /models returned 200 on 2026-11-07
+
+  llm7:
+    name: LLM7.io
+    api_base: https://api.llm7.io/v1
+    key_env: LLM7_API_KEY
+    keyless: true
+    signup_url: https://token.llm7.io
+    steps:
+      - Works with NO key today (undocumented anonymous tier; may disappear).
+      - For the documented free tier (60 RPM, 250 req/h, 100K tokens/day) sign in at https://token.llm7.io and copy the token.
+    limits: 60 RPM, 250 req/h, 100K tokens/day with a free token
+    rpm: 20
+    free_filter: field:usage_based_only=false
+    verified: keyless chat returned 200 on 2026-11-07 (free models are tier "turbo", usage_based_only=false)
+
+  cohere:
+    name: Cohere (trial key)
+    api_base: https://api.cohere.ai/compatibility/v1
+    key_env: COHERE_API_KEY
+    signup_url: https://dashboard.cohere.com/api-keys
+    steps:
+      - Sign up at https://dashboard.cohere.com.
+      - A trial key is created automatically; copy it from https://dashboard.cohere.com/api-keys.
+    limits: 20 RPM, 1000 calls/month
+    rpm: 10
+    free_filter: seed
+    seed_models: [command-a-03-2025, command-r-plus-08-2024]
+
+  sambanova:
+    name: SambaNova Cloud
+    api_base: https://api.sambanova.ai/v1
+    key_env: SAMBANOVA_API_KEY
+    signup_url: https://cloud.sambanova.ai/apis
+    steps:
+      - Sign up at https://cloud.sambanova.ai.
+      - Open https://cloud.sambanova.ai/apis -> "Generate New API Key".
+    limits: ~20 RPM, 20 RPD, 200K TPD
+    rpm: 10
+    free_filter: all
+    seed_models: [DeepSeek-V3.1, gpt-oss-120b, Meta-Llama-3.3-70B-Instruct]
+
+  huggingface:
+    name: Hugging Face Inference Providers
+    api_base: https://router.huggingface.co/v1
+    key_env: HF_TOKEN
+    signup_url: https://huggingface.co/settings/tokens
+    steps:
+      - Sign up at https://huggingface.co.
+      - Open https://huggingface.co/settings/tokens -> "Create new token" -> type "Fine-grained" with "Make calls to Inference Providers".
+      - Free accounts get small monthly credits, so this is a late fallback.
+    limits: small monthly credit
+    rpm: 10
+    free_filter: seed
+    seed_models: [openai/gpt-oss-120b, deepseek-ai/DeepSeek-V3.2, Qwen/Qwen3-235B-A22B-Instruct-2507]
+
+  cloudflare:
+    name: Cloudflare Workers AI
+    api_base: https://api.cloudflare.com/client/v4/accounts/{CLOUDFLARE_ACCOUNT_ID}/ai/v1
+    key_env: CLOUDFLARE_API_TOKEN
+    extra_env: [CLOUDFLARE_ACCOUNT_ID]
+    signup_url: https://dash.cloudflare.com/profile/api-tokens
+    steps:
+      - Sign up at https://dash.cloudflare.com (free plan).
+      - Copy your Account ID from the dashboard home (right sidebar) into CLOUDFLARE_ACCOUNT_ID.
+      - Open https://dash.cloudflare.com/profile/api-tokens -> "Create Token" -> template "Workers AI".
+    limits: 10K neurons/day
+    rpm: 20
+    free_filter: seed
+    seed_models: ['@cf/openai/gpt-oss-120b', '@cf/meta/llama-3.3-70b-instruct-fp8-fast', '@cf/qwen/qwen3-30b-a3b-fp8']
+
+  opencode:
+    name: OpenCode Zen (free models)
+    api_base: https://opencode.ai/zen/v1
+    key_env: OPENCODE_API_KEY
+    signup_url: https://opencode.ai/auth
+    steps:
+      - Sign in at https://opencode.ai/auth.
+      - Create an API key in the Zen dashboard. Only models whose id ends with "-free" cost nothing.
+    limits: unpublished
+    rpm: 10
+    free_filter: suffix:-free
+    seed_models: [deepseek-v4-flash-free, mimo-v2.5-free]
+
+  kilo:
+    name: Kilo Code gateway (free models)
+    api_base: https://api.kilo.ai/api/gateway
+    key_env: KILO_API_KEY
+    signup_url: https://app.kilo.ai/profile
+    steps:
+      - Sign in at https://app.kilo.ai.
+      - Copy the API key from https://app.kilo.ai/profile. Only ":free" models cost nothing.
+    limits: ~200 req/hour
+    rpm: 10
+    free_filter: suffix::free
+    seed_models: ['nvidia/nemotron-3-ultra-550b-a55b:free', 'nvidia/nemotron-3-super-120b-a12b:free']
+
+  zai:
+    name: Z.ai (GLM flash models)
+    api_base: https://api.z.ai/api/paas/v4
+    key_env: ZAI_API_KEY
+    signup_url: https://z.ai/manage-apikey/apikey-list
+    steps:
+      - Sign up at https://z.ai.
+      - Open https://z.ai/manage-apikey/apikey-list -> "Create a new API key". Only "-flash" GLM models are free.
+    limits: 1 concurrent request
+    rpm: 5
+    free_filter: seed
+    seed_models: [glm-4.7-flash, glm-4.6v-flash]
+
+  ollama:
+    name: Ollama Cloud
+    api_base: https://ollama.com/v1
+    key_env: OLLAMA_API_KEY
+    signup_url: https://ollama.com/settings/keys
+    steps:
+      - Sign up at https://ollama.com.
+      - Open https://ollama.com/settings/keys -> "Add API Key".
+    limits: session/weekly limits (unpublished)
+    rpm: 10
+    free_filter: all
+    seed_models: [deepseek-v4-flash, gpt-oss:120b]

@@ -1,0 +1,13 @@
+# secrets: real API keys live here
+.env
+.env.*
+!.env.example
+providers.local.yaml
+
+# local state
+.cache/
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+dist/

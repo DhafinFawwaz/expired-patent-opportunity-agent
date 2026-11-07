@@ -1,0 +1,33 @@
+[project]
+name = "freellm"
+version = "0.1.0"
+description = "Route LangChain/LiteLLM calls to the best free LLMs across providers and keys"
+readme = "README.md"
+authors = [
+    { name = "Dhafin Fawwaz", email = "dhafin.fawwaz@gmail.com" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "langchain-core>=1.7.6",
+    "langchain-litellm>=0.11.2",
+    "litellm>=1.108.2",
+    "python-dotenv>=1.2.4",
+    "pyyaml>=6.0.3",
+]
+
+[project.scripts]
+freellm = "freellm.cli:main"
+
+[build-system]
+requires = ["uv_build>=0.11.29,<0.12.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.2.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = ["live: hits real provider APIs (run with -m live)"]
+addopts = "-m 'not live'"
