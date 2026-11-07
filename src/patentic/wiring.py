@@ -59,9 +59,10 @@ def make_deps(
 ) -> Deps:
     cache: Path = settings.patentic_cache_dir
     simulated: bool = simulate_outage == "og"
+    # A simulated outage needs an empty cache, or cached pages would hide it.
     http: HttpSource = HttpSource(
         "og",
-        cache / "http",
+        cache / ("http-outage" if simulated else "http"),
         None,
         1.0,
         USER_AGENT,
