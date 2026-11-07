@@ -20,13 +20,13 @@ Sleep 4s
 Type "# 2. Offline demo: six synthetic patents, and you answer the two gates" Enter
 Sleep 500ms
 Type "uv run patentic demo --no-llm --thread-id video-demo" Enter
-Wait+Screen@60s /Plan/
+Wait+Line@60s /Plan \[/
 Sleep 1500ms
 Type "approve" Enter
-Wait+Screen@60s /Candidates/
+Wait+Line@60s /Candidates \[/
 Sleep 2500ms
 Type "accept" Enter
-Wait@60s /Run completed/
+Wait@60s /^\$\s*$/
 Sleep 3s
 
 Type "clear" Enter
@@ -37,7 +37,7 @@ Sleep 3s
 Type "# 4. Rerun the committed real result offline, with its recorded model answers" Enter
 Sleep 500ms
 Type "uv run patentic run --replay --decisions fixtures/decisions/approve-all.yaml --thread-id video-replay" Enter
-Wait@120s /Run completed/
+Wait@120s /^\$\s*$/
 Sleep 3s
 
 Type "clear" Enter
@@ -47,12 +47,12 @@ Sleep 4s
 Type "# 5. Simulate a Gazette outage: the run records it and still writes both files" Enter
 Sleep 500ms
 Type "uv run patentic run --offline --no-llm --simulate-outage og --decisions fixtures/decisions/approve-all.yaml --thread-id video-outage" Enter
-Wait@120s /Run completed/
+Wait@120s /^\$\s*$/
 Sleep 3s
 
 Type "clear" Enter
 Type "# 6. A live run needs GOOGLE_CLOUD_PROJECT in .env and gcloud application-default login" Enter
-Type "# make run          (first run scans about 44 GB of BigQuery free tier, later runs 0)" Enter
+Type "# make run          (first run scans about 44 GB of the BigQuery free tier; a same-day rerun scans 0)" Enter
 Type "# patentic resume <run id>   continues a run stopped at a gate" Enter
 Type "# make check        lint, mypy --strict and the offline test suite" Enter
 Sleep 6s

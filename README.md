@@ -8,6 +8,8 @@ Every status claim in the output carries a date and a source. An expired patent 
 
 ## Quick start
 
+A 70-second recording of these steps is in [docs/demo/demo.mp4](docs/demo/demo.mp4). Re-record it with `vhs docs/demo/demo.tape`.
+
 You need Python 3.12 and [uv](https://docs.astral.sh/uv/).
 
 ```bash
