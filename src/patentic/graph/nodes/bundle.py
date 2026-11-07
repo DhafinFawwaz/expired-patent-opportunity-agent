@@ -44,8 +44,10 @@ class BundleUpdate(TypedDict, total=False):
     calls: list[CallMeta]
 
 
-def timeline_rows(assessment: StatusAssessment) -> list[TimelineRow]:
-    return [
+def timeline_rows(
+    assessment: StatusAssessment, grant: date | None = None, coverage: ScanCoverage | None = None
+) -> list[TimelineRow]:
+    rows: list[TimelineRow] = [
         TimelineRow(
             date=e.event_date,
             event=fmt_event(e.event_type, e.effective_date),
@@ -55,9 +57,38 @@ def timeline_rows(assessment: StatusAssessment) -> list[TimelineRow]:
         )
         for e in assessment.timeline
     ]
+    # Derived rows carry no evidence id; the bundle's reference check skips them.
+    if grant is not None:
+        granted: TimelineRow = TimelineRow(
+            date=grant,
+            event="Granted",
+            source="bigquery",
+            grade=grade_for_source("bigquery", "bibliographic"),
+            evidence_id="",
+        )
+        rows.insert(0, granted)
+    scanned: bool = coverage is not None and coverage.first_issue is not None
+    if scanned and coverage and coverage.last_issue and assessment.label == "expired_nonpayment":
+        rows.append(
+            TimelineRow(
+                date=coverage.last_issue,
+                event=(
+                    f"No reinstatement listed in Gazette issues {coverage.first_issue} "
+                    f"to {coverage.last_issue}"
+                ),
+                source="og_notice",
+                grade=grade_for_source("og_notice", "status"),
+                evidence_id="",
+            )
+        )
+    return rows
 
 
-def candidate_report(candidate: Candidate) -> CandidateReport:
+def _cited(rows: list[TimelineRow]) -> list[str]:
+    return [row.evidence_id for row in rows if row.evidence_id]
+
+
+def candidate_report(candidate: Candidate, coverage: ScanCoverage | None = None) -> CandidateReport:
     assessment: StatusAssessment = candidate.assessment or StatusAssessment(
         label="unknown", as_of=date.min
     )
@@ -74,7 +105,7 @@ def candidate_report(candidate: Candidate) -> CandidateReport:
         filing_date=candidate.record.filing_date,
         cpc_codes=candidate.record.cpc_codes,
         status=assessment,
-        timeline=timeline_rows(assessment),
+        timeline=timeline_rows(assessment, candidate.record.grant_date, coverage),
         technical=candidate.technical,
         opportunity=candidate.opportunity,
         related=candidate.related,
@@ -83,7 +114,7 @@ def candidate_report(candidate: Candidate) -> CandidateReport:
         recommendation=recommendation,
         reviewer_note=candidate.reviewer_note,
         is_synthetic=candidate.is_synthetic,
-        evidence_ids=[row.evidence_id for row in timeline_rows(assessment)],
+        evidence_ids=_cited(timeline_rows(assessment)),
     )
 
 
@@ -101,11 +132,11 @@ class Bundle:
             (c for c in candidates.values() if c.scores is not None),
             key=lambda c: (-(c.scores.total if c.scores else 0.0), c.key),
         )
+        coverage: ScanCoverage = state.get("coverage") or ScanCoverage(weeks_fetched=0)
         reports: list[CandidateReport] = [
-            candidate_report(c) for c in analysed[: request.max_candidates]
+            candidate_report(c, coverage) for c in analysed[: request.max_candidates]
         ]
         shortlist: list[str] = [r.key for r in reports if r.recommendation == "Shortlist"]
-        coverage: ScanCoverage = state.get("coverage") or ScanCoverage(weeks_fetched=0)
         illustration, note = self._illustration(state, candidates, coverage, evidence)
         flow: FlowCounts = FlowCounts(
             found=len(state.get("records", {})),
@@ -192,7 +223,7 @@ class Bundle:
             ]
             if not reinstated:
                 return None, ""
-            report: CandidateReport = candidate_report(reinstated[0]).model_copy(
+            report: CandidateReport = candidate_report(reinstated[0], coverage).model_copy(
                 update={"recommendation": "Exclude"}
             )
             return report, "Synthetic fixture: an expiry notice followed by a reinstatement notice."
@@ -220,9 +251,9 @@ class Bundle:
             filing_date=observation.filing_date,
             cpc_codes=[],
             status=assessment,
-            timeline=timeline_rows(assessment),
+            timeline=timeline_rows(assessment, observation.grant_date, coverage),
             recommendation="Exclude",
-            evidence_ids=[row.evidence_id for row in timeline_rows(assessment)],
+            evidence_ids=_cited(timeline_rows(assessment)),
         )
         found: str = "is in" if official else "is not in"
         note: str = (

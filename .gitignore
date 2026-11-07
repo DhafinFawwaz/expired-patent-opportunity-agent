@@ -27,3 +27,4 @@ outputs/runs/
 
 # Local plan-execution ledger
 .superpowers/
+outputs/bytes-ledger.json
