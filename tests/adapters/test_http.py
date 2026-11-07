@@ -124,3 +124,12 @@ def test_ttl_expiry_refetches(tmp_path: Path) -> None:
     clock.now += timedelta(hours=25)
     assert not http.get("https://example.test/a").from_cache
     assert len(calls) == 2
+
+
+def test_offline_source_never_calls_network(tmp_path: Path) -> None:
+    transport, calls = counting(200)
+    http: HttpSource = HttpSource(
+        "og", tmp_path, None, 1.0, "t", transport=transport, offline=True, sleep=lambda _s: None
+    )
+    assert http.get("https://example.test/a").status == 0
+    assert calls == []

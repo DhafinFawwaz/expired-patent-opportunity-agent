@@ -1,0 +1,3 @@
+# Approves the plan, then stops the process at candidate review (used to test resume).
+- action: approve
+- stop: true

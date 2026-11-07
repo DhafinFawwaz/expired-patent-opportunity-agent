@@ -59,7 +59,10 @@ class HttpSource:
         transport: httpx.BaseTransport | None = None,
         clock: Callable[[], datetime] = utc_now,
         sleep: Callable[[float], None] = time.sleep,
+        *,
+        offline: bool = False,
     ) -> None:
+        self._offline: bool = offline
         self.name: str = name
         self._cache_dir: Path = cache_dir / name
         self._ttl: timedelta | None = ttl
@@ -79,6 +82,8 @@ class HttpSource:
         cached: FetchResult | None = self._read_cache(url)
         if cached is not None:
             return cached
+        if self._offline:
+            return self._result(url, 0, "")
         retrying: Retrying = Retrying(
             stop=stop_after_attempt(MAX_ATTEMPTS),
             wait=self._wait,

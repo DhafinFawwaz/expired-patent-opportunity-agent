@@ -19,6 +19,8 @@ from patentic.domain.identifiers import (
 
 PARSER_VERSION: Final[str] = "og-1"
 MIRROR_WEEKS: Final[int] = 52
+# Stop after this many weeks in a row fail with server errors: the source is down.
+MAX_FAILED_WEEKS: Final[int] = 3
 _EXPIRED_TITLE: Final[str] = "Notice of Expiration of Patents Due to Failure to Pay Maintenance Fee"
 _REINSTATED_TITLE: Final[str] = "Patents Reinstated Due to the Acceptance of a Late Maintenance Fee"
 _TOC_LINK: Final[re.Pattern[str]] = re.compile(r'href="#(ref\d+)">\s*([^<]+)')
@@ -221,6 +223,7 @@ def mirror_url(week: int) -> str:
 class OgIndex(BaseModel):
     pages: list[OgPage]
     coverage: ScanCoverage
+    circuit_open: bool = False
 
     def _rows(self, kind: RowKind) -> dict[str, list[tuple[OgPage, OgRow]]]:
         found: dict[str, list[tuple[OgPage, OgRow]]] = {}
@@ -278,12 +281,18 @@ class OgIndexer:
     def fetch_window(self, weeks: int, today: date, keep: Collection[str] | None = None) -> OgIndex:
         pages: list[OgPage] = []
         missing: list[date] = []
+        failed_in_a_row: int = 0
         for tuesday in issue_tuesdays(today, weeks):
-            page: OgPage | None = self._fetch_week(tuesday, today, keep)
+            if failed_in_a_row >= MAX_FAILED_WEEKS:
+                missing.append(tuesday)
+                continue
+            page, server_failed = self._fetch_week(tuesday, today, keep)
             if page is None:
                 missing.append(tuesday)
+                failed_in_a_row = failed_in_a_row + 1 if server_failed else 0
             else:
                 pages.append(page)
+                failed_in_a_row = 0
         issues: list[date] = [p.issue_date for p in pages]
         coverage: ScanCoverage = ScanCoverage(
             weeks_fetched=len(pages),
@@ -292,17 +301,22 @@ class OgIndexer:
             missing_weeks=missing,
             as_of=today,
         )
-        return OgIndex(pages=pages, coverage=coverage)
+        return OgIndex(
+            pages=pages, coverage=coverage, circuit_open=failed_in_a_row >= MAX_FAILED_WEEKS
+        )
 
     def _fetch_week(
         self, tuesday: date, today: date, keep: Collection[str] | None
-    ) -> OgPage | None:
+    ) -> tuple[OgPage | None, bool]:
         year, week = og_week(tuesday)
         urls: list[str] = [archive_url(year, week)]
         if today - tuesday < timedelta(weeks=MIRROR_WEEKS):
             urls.append(mirror_url(week))
+        server_failed: bool = True
         for url in urls:
             result: FetchResult = self._http.get(url)
+            if 0 < result.status < 500:  # noqa: PLR2004
+                server_failed = False
             if result.status != 200:  # noqa: PLR2004
                 continue
             try:
@@ -312,5 +326,5 @@ class OgIndexer:
             except ValueError:
                 continue
             if page.issue_date == tuesday:
-                return page
-        return None
+                return page, False
+        return None, server_failed

@@ -151,3 +151,19 @@ def test_events_for_builds_lapse_and_reinstated_events(tmp_path: Path) -> None:
     assert lapse.event_date == date(2026, 11, 3)
     assert "US-8826466" in index.expirations()
     assert len(index.evidence_for("US-8646606")) == 1
+
+
+def test_fetch_window_stops_after_consecutive_failures(tmp_path: Path) -> None:
+    calls: list[str] = []
+
+    def handle(request: httpx.Request) -> httpx.Response:
+        calls.append(str(request.url))
+        return httpx.Response(503)
+
+    index: OgIndex = indexer(tmp_path, httpx.MockTransport(handle)).fetch_window(
+        20, date(2026, 11, 7)
+    )
+    assert index.circuit_open
+    assert index.coverage.weeks_fetched == 0
+    assert len(index.coverage.missing_weeks) == 20
+    assert len(set(calls)) == 6
