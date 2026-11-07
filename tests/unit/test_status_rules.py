@@ -186,3 +186,21 @@ def test_8646606_recorded_sequence() -> None:
     assert result.effective_date == date(2026, 2, 11)
     assert result.stage == 12
     assert [e.source_code for e in result.timeline][-1] == "OG"
+
+
+def test_reinstatement_granted_before_the_lapse_notice_still_wins() -> None:
+    # Real shape: expiry 2026-09-09, petition granted 2026-10-15, expiry notice printed 2026-11-03.
+    lapse: StatusEvent = ev("lapse", date(2026, 11, 3), effective=date(2026, 9, 9))
+    revived: StatusEvent = ev("reinstated", date(2026, 10, 15), code="REIN")
+    result: StatusAssessment = assess([lapse, revived], date(2026, 11, 7))
+    assert result.label == "reinstated"
+    assert result.effective_date == date(2026, 9, 9)
+
+
+def test_lapse_after_an_earlier_reinstatement_is_expired_again() -> None:
+    first: StatusEvent = ev("lapse", date(2018, 11, 6), effective=date(2018, 9, 9))
+    revived: StatusEvent = ev("reinstated", date(2019, 1, 15), code="REIN")
+    second: StatusEvent = ev("lapse", date(2022, 11, 8), effective=date(2022, 9, 9))
+    result: StatusAssessment = assess([first, revived, second], date(2026, 11, 7))
+    assert result.label == "expired_nonpayment"
+    assert result.effective_date == date(2022, 9, 9)

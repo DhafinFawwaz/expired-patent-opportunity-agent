@@ -116,12 +116,16 @@ def _assess_after_lapse(
     grant: date,
     coverage: ScanCoverage,
 ) -> StatusAssessment:
+    # Order by legal effect: a lapse counts from its expiry, not from the notice that prints it.
+    def legal(e: StatusEvent) -> tuple[date, bool, bool]:
+        on: date = _lapse_date(e, grant) if e.event_type == "lapse" else e.event_date
+        return (on, e.event_type in _REVIVALS, e.source == _OFFICIAL)
+
     decisive: list[StatusEvent] = sorted(
-        [e for e in timeline if e.event_type == "lapse" or e.event_type in _REVIVALS],
-        key=lambda e: (e.event_date, e.source == _OFFICIAL),
+        [e for e in timeline if e.event_type == "lapse" or e.event_type in _REVIVALS], key=legal
     )
     last: StatusEvent = decisive[-1]
-    expiry: date = max(_lapse_date(e, grant) for e in lapses if e.event_date <= last.event_date)
+    expiry: date = max(_lapse_date(e, grant) for e in lapses if legal(e) <= legal(last))
     stage: Stage | None = _stage_for(expiry, grant)
     notes: list[str] = []
 
