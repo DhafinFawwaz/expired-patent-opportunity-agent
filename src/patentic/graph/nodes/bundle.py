@@ -72,16 +72,23 @@ def timeline_rows(
         rows.append(
             TimelineRow(
                 date=coverage.last_issue,
-                event=(
-                    f"No reinstatement listed in Gazette issues {coverage.first_issue} "
-                    f"to {coverage.last_issue}"
-                ),
+                event=_scan_text(coverage, assessment.effective_date),
                 source="og_notice",
                 grade=grade_for_source("og_notice", "status"),
                 evidence_id="",
             )
         )
     return rows
+
+
+def _scan_text(coverage: ScanCoverage, effective: date | None) -> str:
+    span: str = f"Gazette issues {coverage.first_issue} to {coverage.last_issue}"
+    gaps: list[date] = [w for w in coverage.missing_weeks if effective is None or w >= effective]
+    if not gaps:
+        return f"No reinstatement listed in {span}"
+    named: str = ", ".join(str(w) for w in gaps[:3])
+    more: str = f" and {len(gaps) - 3} more" if len(gaps) > 3 else ""  # noqa: PLR2004
+    return f"Reinstatement lists read in {span}, except {named}{more}, which could not be read"
 
 
 def _cited(rows: list[TimelineRow]) -> list[str]:
@@ -149,7 +156,9 @@ class Bundle:
         )
         calls: list[CallMeta] = list(state.get("calls", []))
         outages: list[str] = list(state.get("outages", []))
-        prose, prose_calls = self._prose(reports, flow, request.lapse_window_weeks, outages)
+        prose, prose_calls = self._prose(
+            reports, flow, request.lapse_window_weeks, outages, coverage
+        )
         cited: set[str] = {e for r in reports for e in r.evidence_ids}
         if illustration:
             cited |= set(illustration.evidence_ids)
@@ -263,11 +272,16 @@ class Bundle:
         return report, note
 
     def _prose(
-        self, reports: list[CandidateReport], flow: FlowCounts, weeks: int, outages: list[str]
+        self,
+        reports: list[CandidateReport],
+        flow: FlowCounts,
+        weeks: int,
+        outages: list[str],
+        coverage: ScanCoverage,
     ) -> tuple[dict[str, str], list[CallMeta]]:
         fallbacks: dict[str, str] = {
             "executive_summary": _executive_fallback(reports, flow, weeks, outages),
-            "methodology": _methodology_fallback(flow, weeks),
+            "methodology": _methodology_fallback(flow.analysed, weeks, coverage),
             "commercial": _commercial_fallback(reports),
             "next_steps": _next_steps_fallback(reports),
         }
@@ -383,13 +397,19 @@ def _executive_fallback(
     )
 
 
-def _methodology_fallback(flow: FlowCounts, weeks: int) -> str:
+def _methodology_fallback(analysed: int, weeks: int, coverage: ScanCoverage) -> str:
+    scan: str = (
+        "Every later reinstatement list was scanned before a patent was called expired"
+        if not coverage.missing_weeks
+        else f"{len(coverage.missing_weeks)} Gazette weeks could not be read, so some reinstatement "
+        "lists were not checked and the affected candidates say so"
+    )
     return (
         "Candidates came from the BigQuery PatentsView tables, filtered to core cleaning-tool CPC groups. "
         f"Their patent numbers were matched against {weeks} weeks of Official Gazette expiration notices. "
         "Patents with a powered co-classification or a power source in an independent claim were removed. "
-        "Every later reinstatement list was scanned before a patent was called expired, and confidence was set by rule "
-        f"from the number of sources and the completeness of that scan. {flow.analysed} candidates were summarised and scored."
+        f"{scan}, and confidence was set by rule "
+        f"from the number of sources and the completeness of that scan. {analysed} candidates were summarised and scored."
     )
 
 

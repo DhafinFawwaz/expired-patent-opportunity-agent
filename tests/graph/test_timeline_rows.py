@@ -3,7 +3,7 @@ from datetime import date
 from patentic.domain.coverage import ScanCoverage
 from patentic.domain.events import StatusEvent
 from patentic.domain.status_rules import StatusAssessment
-from patentic.graph.nodes.bundle import timeline_rows
+from patentic.graph.nodes.bundle import _methodology_fallback, timeline_rows
 from patentic.report.bundle import TimelineRow
 
 LAPSE: StatusEvent = StatusEvent(
@@ -41,3 +41,22 @@ def test_reinstated_timeline_has_no_scan_row() -> None:
     rows: list[TimelineRow] = timeline_rows(assessment, date(2018, 9, 4), COVERAGE)
     assert len(rows) == 3
     assert rows[-1].evidence_id == "r"
+
+
+def test_scan_row_names_missing_weeks() -> None:
+    gappy: ScanCoverage = COVERAGE.model_copy(update={"missing_weeks": [date(2026, 10, 13)]})
+    assessment: StatusAssessment = StatusAssessment(
+        label="expired_nonpayment",
+        as_of=date(2026, 11, 7),
+        effective_date=date(2026, 9, 4),
+        timeline=[LAPSE],
+    )
+    rows: list[TimelineRow] = timeline_rows(assessment, date(2018, 9, 4), gappy)
+    assert "No reinstatement listed" not in rows[-1].event
+    assert "2026-10-13" in rows[-1].event
+
+
+def test_methodology_fallback_admits_missing_weeks() -> None:
+    gappy: ScanCoverage = COVERAGE.model_copy(update={"missing_weeks": [date(2026, 10, 13)]})
+    assert "Every later reinstatement list was scanned" not in _methodology_fallback(8, 104, gappy)
+    assert "Every later reinstatement list was scanned" in _methodology_fallback(8, 104, COVERAGE)
