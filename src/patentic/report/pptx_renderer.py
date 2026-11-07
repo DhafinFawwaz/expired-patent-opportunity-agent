@@ -1,0 +1,320 @@
+from collections.abc import Sequence
+from itertools import pairwise
+from pathlib import Path
+from typing import Final
+
+from pptx import Presentation
+from pptx.chart.data import CategoryChartData
+from pptx.dml.color import RGBColor
+from pptx.enum.chart import XL_CHART_TYPE
+from pptx.enum.shapes import MSO_CONNECTOR, MSO_SHAPE
+from pptx.presentation import Presentation as Deck
+from pptx.slide import Slide
+from pptx.util import Emu, Inches, Pt
+
+from patentic.report.bundle import LABEL, CandidateReport, ReportBundle
+from patentic.report.docx_renderer import COMPARISON_HEADER
+from patentic.report.formatters import fmt_confidence, fmt_date, fmt_score, fmt_source, fmt_status
+
+SLIDES: Final[tuple[str, ...]] = (
+    "Title",
+    "Business objective",
+    "Agent workflow and architecture",
+    "Search scope and evidence sources",
+    "Candidate comparison",
+    "Status-verification example",
+    "Technical opportunity",
+    "Commercial assessment",
+    "Unresolved risks and next steps",
+)
+_TITLE_LAYOUT: Final[int] = 0
+_TITLE_ONLY_LAYOUT: Final[int] = 5
+_GREY: Final[RGBColor] = RGBColor(0x59, 0x59, 0x59)
+_GATE: Final[RGBColor] = RGBColor(0xF4, 0xB1, 0x83)
+_STEP: Final[RGBColor] = RGBColor(0xD9, 0xE2, 0xF3)
+_FLOW: Final[tuple[tuple[str, bool], ...]] = (
+    ("Intake", False),
+    ("Plan (model)", False),
+    ("Approval (you)", True),
+    ("Discovery: BigQuery", False),
+    ("Gazette index", False),
+    ("Claims and continuity", False),
+    ("Screen and verify status", False),
+    ("Analyse (model)", False),
+    ("Score", False),
+    ("Review (you)", True),
+    ("Report and deck", False),
+)
+
+
+def render_pptx(bundle: ReportBundle, template: Path, out: Path) -> Path:
+    deck: Deck = Presentation(str(template))
+    _title(deck, bundle)
+    _text_slide(deck, SLIDES[1], _objective(bundle), _all_evidence(bundle))
+    _workflow(deck)
+    _text_slide(deck, SLIDES[3], _scope(bundle), "")
+    _comparison(deck, bundle)
+    _status_example(deck, bundle)
+    _text_slide(deck, SLIDES[6], _technical(bundle), _all_evidence(bundle))
+    _commercial(deck, bundle)
+    _text_slide(deck, SLIDES[8], _risks(bundle), "")
+    out.parent.mkdir(parents=True, exist_ok=True)
+    deck.save(str(out))
+    return out
+
+
+def _content_slide(deck: Deck, title: str, notes: str) -> Slide:
+    slide: Slide = deck.slides.add_slide(deck.slide_layouts[_TITLE_ONLY_LAYOUT])
+    if slide.shapes.title is not None:
+        slide.shapes.title.text = title
+    footer = slide.shapes.add_textbox(
+        Inches(0.5), Inches(6.9), Inches(12.3), Inches(0.4)
+    ).text_frame
+    footer.text = LABEL
+    footer.paragraphs[0].runs[0].font.size = Pt(10)
+    footer.paragraphs[0].runs[0].font.color.rgb = _GREY
+    notes_frame = slide.notes_slide.notes_text_frame
+    if notes and notes_frame is not None:
+        notes_frame.text = notes
+    return slide
+
+
+def _write_lines(slide: Slide, lines: Sequence[str], top: float = 1.5, size: int = 16) -> None:
+    frame = slide.shapes.add_textbox(Inches(0.6), Inches(top), Inches(12.1), Inches(5.2)).text_frame
+    frame.word_wrap = True
+    for index, line in enumerate(lines):
+        paragraph = frame.paragraphs[0] if index == 0 else frame.add_paragraph()
+        paragraph.text = line
+        paragraph.space_after = Pt(8)
+        for run in paragraph.runs:
+            run.font.size = Pt(size)
+
+
+def _text_slide(deck: Deck, title: str, lines: Sequence[str], notes: str) -> None:
+    _write_lines(_content_slide(deck, title, notes), lines)
+
+
+def _title(deck: Deck, bundle: ReportBundle) -> None:
+    slide: Slide = deck.slides.add_slide(deck.slide_layouts[_TITLE_LAYOUT])
+    if slide.shapes.title is not None:
+        slide.shapes.title.text = f"Expired-patent screening: {bundle.request.technology_category}"
+    subtitle = slide.placeholders[1].text_frame
+    assert subtitle is not None  # noqa: S101  # the title layout always has a subtitle
+    subtitle.text = f"US patents only. Run {bundle.run.thread_id}, {bundle.run.created:%Y-%m-%d}."
+    subtitle.add_paragraph().text = LABEL
+
+
+def _objective(bundle: ReportBundle) -> list[str]:
+    return [
+        f"Find US patents in {bundle.request.technology_category} that appear to have expired for nonpayment.",
+        "Verify each status over time, including later reinstatement.",
+        (
+            f"Rank up to {bundle.request.max_candidates} candidates and recommend up to "
+            f"{bundle.request.max_recommended} for technical and legal review."
+        ),
+        "Evidence-backed screening, not a claim that the technology is free to use.",
+    ]
+
+
+def _workflow(deck: Deck) -> None:
+    slide: Slide = _content_slide(
+        deck, SLIDES[2], "Orange boxes are human gates; the run pauses there."
+    )
+    width: float = 2.1
+    height: float = 0.8
+    positions: list[tuple[float, float]] = [
+        (0.5 + (i % 6) * (width + 0.05), 1.7 + (i // 6) * 1.6) for i in range(len(_FLOW))
+    ]
+    shapes = []
+    for (label, gate), (left, top) in zip(_FLOW, positions, strict=True):
+        box = slide.shapes.add_shape(
+            MSO_SHAPE.ROUNDED_RECTANGLE, Inches(left), Inches(top), Inches(width), Inches(height)
+        )
+        box.fill.solid()
+        box.fill.fore_color.rgb = _GATE if gate else _STEP
+        box.line.color.rgb = _GREY
+        box.text_frame.text = label
+        box.text_frame.paragraphs[0].runs[0].font.size = Pt(12)
+        box.text_frame.paragraphs[0].runs[0].font.color.rgb = RGBColor(0, 0, 0)
+        shapes.append(box)
+    for first, second in pairwise(shapes):
+        connector = slide.shapes.add_connector(
+            MSO_CONNECTOR.STRAIGHT,
+            Emu(first.left + first.width),
+            Emu(first.top + first.height // 2),
+            Emu(second.left),
+            Emu(second.top + second.height // 2),
+        )
+        connector.line.color.rgb = _GREY
+    _write_lines(
+        slide,
+        [
+            "Code makes every data call and applies the status rules; the model drafts the plan, summarises claims and writes prose.",
+            "Every claim in the outputs points to an evidence record with its source URL and retrieval time.",
+        ],
+        top=5.0,
+        size=14,
+    )
+
+
+def _scope(bundle: ReportBundle) -> list[str]:
+    flow = bundle.flow
+    coverage = bundle.coverage
+    return [
+        f"CPC groups: {', '.join(bundle.plan.cpc_codes[:8]) or 'n/a'}.",
+        f"Official Gazette notices: {coverage.weeks_fetched} weekly issues, last issue {fmt_date(coverage.last_issue)} (grade A).",
+        "BigQuery PatentsView: bibliographic data, claims, citations, continuity (grants to 2021-09-28).",
+        "EPO OPS legal events: "
+        + (
+            "used as a cross-check."
+            if bundle.run.ops_configured
+            else "not configured for this run."
+        ),
+        (
+            f"Narrowing: {flow.found} found, {flow.expired_in_window} expired in window, "
+            f"{flow.passed_screening} non-powered, {flow.analysed} analysed, {flow.recommended} recommended."
+        ),
+    ]
+
+
+def _comparison(deck: Deck, bundle: ReportBundle) -> None:
+    synthetic: bool = any(c.is_synthetic for c in bundle.candidates)
+    title: str = SLIDES[4]
+    slide: Slide = _content_slide(deck, title, _all_evidence(bundle))
+    if synthetic:
+        _write_lines(
+            slide,
+            ["SYNTHETIC FIXTURE: made-up patents used to test the pipeline."],
+            top=1.2,
+            size=12,
+        )
+    if not bundle.candidates:
+        _write_lines(slide, ["No candidate passed the evidence and screening checks."])
+        return
+    rows: int = len(bundle.candidates) + 1
+    table = slide.shapes.add_table(
+        rows, len(COMPARISON_HEADER), Inches(0.5), Inches(1.7), Inches(12.3), Inches(0.4 * rows)
+    ).table
+    for column, text in enumerate(COMPARISON_HEADER):
+        table.cell(0, column).text = text
+    for row, report in enumerate(bundle.candidates, start=1):
+        values: tuple[str, ...] = (
+            report.display,
+            report.title,
+            fmt_status(report.status.label),
+            fmt_confidence(report.status.confidence),
+            fmt_score(report.scores.total if report.scores else None),
+            report.recommendation,
+        )
+        for column, text in enumerate(values):
+            table.cell(row, column).text = text
+    for row_cells in table.rows:
+        for cell in row_cells.cells:
+            for paragraph in cell.text_frame.paragraphs:
+                for run in paragraph.runs:
+                    run.font.size = Pt(12)
+
+
+def _status_example(deck: Deck, bundle: ReportBundle) -> None:
+    example: CandidateReport | None = bundle.illustration or (
+        bundle.candidates[0] if bundle.candidates else None
+    )
+    notes: str = ("Evidence: " + ", ".join(example.evidence_ids)) if example else ""
+    slide: Slide = _content_slide(deck, SLIDES[5], notes)
+    if example is None:
+        _write_lines(slide, ["No status example is available for this run."])
+        return
+    _write_lines(
+        slide,
+        [
+            (
+                f"{example.display}: {example.title}. {fmt_status(example.status.label)}, "
+                f"confidence {fmt_confidence(example.status.confidence)}."
+            ),
+            bundle.illustration_note,
+        ],
+        top=1.2,
+        size=13,
+    )
+    rows: list[tuple[str, str, str]] = [
+        (fmt_date(r.date), r.event, f"{fmt_source(r.source)} ({r.grade})") for r in example.timeline
+    ][:9]
+    table = slide.shapes.add_table(
+        len(rows) + 1, 3, Inches(0.5), Inches(2.6), Inches(12.3), Inches(0.35 * (len(rows) + 1))
+    ).table
+    for column, text in enumerate(("Date", "Event", "Source")):
+        table.cell(0, column).text = text
+    for row, values in enumerate(rows, start=1):
+        for column, text in enumerate(values):
+            table.cell(row, column).text = text
+            for paragraph in table.cell(row, column).text_frame.paragraphs:
+                for run in paragraph.runs:
+                    run.font.size = Pt(11)
+
+
+def _technical(bundle: ReportBundle) -> list[str]:
+    lines: list[str] = []
+    for report in bundle.candidates:
+        if report.recommendation != "Shortlist" or report.technical is None:
+            continue
+        lines.append(f"{report.display}: {report.technical.summary}")
+        if report.technical.implementation_unknowns:
+            lines.append(
+                "Open questions: " + "; ".join(report.technical.implementation_unknowns[:3])
+            )
+    return lines or ["No candidate was shortlisted, so no technical opportunity is presented."]
+
+
+def _commercial(deck: Deck, bundle: ReportBundle) -> None:
+    scored: list[CandidateReport] = [c for c in bundle.candidates if c.scores]
+    slide: Slide = _content_slide(deck, SLIDES[7], "Weights: " + bundle.weights.model_dump_json())
+    if not scored:
+        _write_lines(slide, ["No candidate was scored."])
+        return
+    data: CategoryChartData = CategoryChartData()
+    data.categories = [c.display for c in scored]
+    data.add_series("Total score", [round(c.scores.total, 2) for c in scored if c.scores])
+    slide.shapes.add_chart(
+        XL_CHART_TYPE.BAR_CLUSTERED,
+        Inches(0.5),
+        Inches(1.5),
+        Inches(7.5),
+        Inches(5.0),
+        data,  # type: ignore[arg-type]  # CategoryChartData is a ChartData at runtime
+    )
+    _write_lines_at(
+        slide,
+        [
+            "Scores run 1 to 5; effort and risk count against a candidate.",
+            "Owners who stop paying usually judged the patent worth little to them; each case needs a reason that does not bind a new entrant.",
+            "US housekeeping-supplies spending: $844 per household in 2025 (BLS). Category context only.",
+        ],
+        left=8.3,
+    )
+
+
+def _write_lines_at(slide: Slide, lines: Sequence[str], left: float) -> None:
+    frame = slide.shapes.add_textbox(Inches(left), Inches(1.6), Inches(4.5), Inches(5.0)).text_frame
+    frame.word_wrap = True
+    for index, line in enumerate(lines):
+        paragraph = frame.paragraphs[0] if index == 0 else frame.add_paragraph()
+        paragraph.text = line
+        paragraph.space_after = Pt(10)
+        for run in paragraph.runs:
+            run.font.size = Pt(14)
+
+
+def _risks(bundle: ReportBundle) -> list[str]:
+    related: int = sum(len(c.related) for c in bundle.candidates)
+    return [
+        f"{related} related records (continuations, citations, same owner) need their own status check.",
+        "A lapsed patent can be reinstated; recent lapses carry the most risk.",
+        "Design patents and trade dress may cover the product's look.",
+        "Next: confirm status in Patent Center, read full claims, and have an attorney run a freedom-to-operate search.",
+        LABEL,
+    ]
+
+
+def _all_evidence(bundle: ReportBundle) -> str:
+    ids: list[str] = [e for c in bundle.candidates for e in c.evidence_ids]
+    return "Evidence: " + ", ".join(ids) if ids else ""
