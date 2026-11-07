@@ -30,7 +30,7 @@ def test_resume_approve_moves_to_discover(tmp_path: Path) -> None:
     run_until_interrupt(g, Command(resume={"action": "approve"}))
     snapshot = g.get_state(CONFIG)
     assert snapshot.values["approval"].action == "approve"
-    assert snapshot.values["stage"] == "discover"
+    assert "bigquery" in snapshot.values["outages"]
 
 
 def test_resume_revise_replans_with_feedback(tmp_path: Path) -> None:

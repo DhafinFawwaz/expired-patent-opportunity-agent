@@ -7,6 +7,7 @@ from typing_extensions import TypedDict
 
 from patentic.adapters.base import ClaimRecord, EvidenceRecord, PatentRecord
 from patentic.domain.coverage import ScanCoverage
+from patentic.domain.events import StatusEvent
 from patentic.domain.related import RelatedRecord
 from patentic.domain.request import ResearchRequest
 from patentic.domain.scoring import Scores
@@ -71,6 +72,7 @@ class PipelineState(TypedDict, total=False):
     coverage: ScanCoverage
     records: Annotated[dict[str, PatentRecord], merge_dict]
     claims: Annotated[dict[str, list[ClaimRecord]], merge_dict]
+    events: Annotated[dict[str, list[StatusEvent]], merge_dict]
     candidates: Annotated[dict[str, Candidate], merge_dict]
     evidence: Annotated[dict[str, EvidenceRecord], merge_dict]
     pool: list[str]
