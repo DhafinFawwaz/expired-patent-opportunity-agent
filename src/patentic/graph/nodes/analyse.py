@@ -47,7 +47,14 @@ class Analyse:
             screening = candidate.screening.model_copy(
                 update={"tier3": summary.powered, "passed": summary.powered != "powered"}
             )
-            emit("technical", "summarised", key=key, powered=summary.powered, method=meta.method)
+            emit(
+                "technical",
+                "summarised",
+                key=key,
+                powered=summary.powered,
+                method=meta.method,
+                error=meta.last_error,
+            )
             updated[key] = candidate.model_copy(
                 update={
                     "technical": summary,

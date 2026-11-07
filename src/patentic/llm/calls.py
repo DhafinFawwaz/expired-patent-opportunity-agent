@@ -31,7 +31,7 @@ from patentic.llm.schemas import (
 
 T = TypeVar("T", bound=BaseModel)
 Structured = Runnable[LanguageModelInput, dict[str, Any] | BaseModel]
-MAX_TOKENS: Final[int] = 1024
+MAX_TOKENS: Final[int] = 4096
 ATTEMPTS: Final[int] = 2
 EM_DASH: Final[str] = "\u2014"
 EN_DASH: Final[str] = "\u2013"
@@ -198,6 +198,7 @@ class LlmCaller:
             try:
                 result: dict[str, Any] | BaseModel = runnable.invoke(messages, config=config)
             except Exception as exc:  # noqa: BLE001  # free providers fail in many ways; we fall back
+                meta.last_error = f"{type(exc).__name__}: {exc}"[:300]
                 messages = [*messages, HumanMessage(f"The last attempt failed: {exc}. Try again.")]
                 continue
             out: dict[str, Any] = result if isinstance(result, dict) else {"parsed": result}
@@ -205,6 +206,7 @@ class LlmCaller:
             parsed: object = out.get("parsed")
             if parsed is None:
                 problem: str = str(out.get("parsing_error") or "no structured output was returned")
+                meta.last_error = problem[:300]
                 messages = [
                     *messages,
                     HumanMessage(f"Your answer was invalid: {problem}. Answer again."),
@@ -216,6 +218,7 @@ class LlmCaller:
             issue: str | None = check(candidate)
             if issue is None:
                 return candidate, meta
+            meta.last_error = issue[:300]
             messages = [*messages, HumanMessage(f"Your answer was invalid: {issue}. Answer again.")]
         meta.method = "fallback"
         return None, meta

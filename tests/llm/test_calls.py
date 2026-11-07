@@ -149,3 +149,13 @@ def test_call_meta_records_cost() -> None:
     _, meta = caller(scripted(tool_reply(PlanDraft, PLAN_ARGS))).plan(REQUEST, [])
     assert isinstance(meta, CallMeta)
     assert meta.cost_usd == 0.0
+
+
+def test_fallback_records_the_last_problem() -> None:
+    bad: dict[str, object] = {**TECH_ARGS, "quotes": ["a motor drives the pad"]}
+    model: ScriptedChatModel = scripted(
+        tool_reply(TechnicalSummary, bad), tool_reply(TechnicalSummary, bad)
+    )
+    _, meta = caller(model).technical(TECH_CTX)
+    assert meta.last_error is not None
+    assert "a motor drives the pad" in meta.last_error
