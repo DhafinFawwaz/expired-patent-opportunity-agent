@@ -110,6 +110,102 @@ flowchart TD
 
 It is a fixed LangGraph workflow, not an autonomous agent. The model is used in a few bounded places (plan and its refinement against the data, claim summaries, opportunity rationale, report prose), always with a schema, a check on its answer and a template to fall back on. Status labels, confidence and scores are computed by code from the evidence. Details are in [docs/architecture.md](docs/architecture.md).
 
+## Code structure
+
+The entry point is `patentic` (`pyproject.toml` maps it to `patentic.cli:app`, and `python -m patentic` does the same). `cli.py` reads the request, builds the dependencies in `wiring.py`, and hands both to `runner.py`, which runs the LangGraph workflow from `graph/build.py`.
+
+```text
+repo/
+├── src/patentic/        the package
+├── tests/               offline tests, mirrors src/
+├── fixtures/            synthetic patents, scripted gate answers, the committed replay run
+├── schemas/             JSON Schemas exported from the data models
+├── templates/           styled blank .docx and .pptx the renderers fill in
+├── scripts/             one-off tools (build the replay, regenerate templates)
+├── tools/ooxml/         OOXML schema validator used by the output checks
+├── docs/                architecture, data sources, limitations, ADRs, demo material
+├── outputs/             run folders and the committed sample run
+├── llm/                 the freellm package: routes model calls to free providers
+└── Makefile             shortcuts for every workflow (`make help`)
+```
+
+### `src/patentic/`
+
+| Path | What it does |
+|---|---|
+| `cli.py` | Typer commands: `run`, `demo`, `resume`, `cost`, `schemas`. Parses flags and starts a run. |
+| `wiring.py` | Builds the `Deps` bundle (data sources, model caller, settings) for live, demo, offline and replay modes. This is where `--simulate-outage` swaps in a failing source. |
+| `runner.py` | Runs the compiled graph on a SQLite checkpoint, pauses at the two gates, resumes, and writes the run folder. |
+| `runlog.py` | Writes `events.jsonl` and redacts keys and tokens from it. |
+| `replay.py` | Packs a finished run into `fixtures/replay/` and unpacks it for `run --replay`. Answers model calls from the recording. |
+| `schemas_export.py` | Writes the JSON Schemas for `patentic schemas`. |
+
+**`graph/`** is the workflow. `build.py` wires the nodes into the graph drawn above. `state.py` defines the shared state and `reducers.py` the rules for merging updates from parallel branches. `deps.py` is the dependency container, and `progress.py` emits the progress lines.
+
+| Node file in `graph/nodes/` | Step |
+|---|---|
+| `plan.py` | Intake, the model's search plan, probe-and-revise against BigQuery, and gate 1 (`approve`) |
+| `discover.py` | BigQuery discovery on the approved CPC codes, the Gazette status index, and the claims fetch |
+| `normalise.py` | Cleans records and screens out powered tools |
+| `verify.py` | One branch per candidate: collects status events and grades them |
+| `rank.py` | Picks the pool that gets model analysis |
+| `analyse.py` | Model summaries of the independent claims |
+| `score.py` | Model rates opportunity, code computes totals and recommendations |
+| `review.py` | Gate 2, where the user accepts or edits the shortlist |
+| `bundle.py` | Assembles the single `ReportBundle`, including timelines, related patents and prose |
+| `generate.py` | Renders the four output files |
+| `validate.py` | Checks the files against the bundle and sends the run back to `generate` on a mismatch |
+
+**`domain/`** holds the rules, as plain code with no I/O. Status labels, confidence and scores come from here, never from the model.
+
+| File | Contents |
+|---|---|
+| `status_rules.py` | The core logic: maintenance due dates, lapse and reinstatement, status label and next action |
+| `events.py` | `StatusEvent` and the mapping from INPADOC, USPTO and Gazette codes |
+| `confidence.py` | Confidence grade from source agreement and scan coverage |
+| `coverage.py` | Which Gazette weeks were actually scanned |
+| `scoring.py` | Four-axis score, weights from `config/scoring.yaml`, ranking |
+| `screening.py` | CPC and power-term screening of candidates |
+| `search_scope.py` | Turns the approved plan into the CPC set that discovery queries |
+| `related.py` | Family, continuity and citation links |
+| `term.py` | Estimated end of patent term |
+| `identifiers.py` | Patent and application number parsing |
+| `request.py` | The `ResearchRequest` model |
+
+**`adapters/`** is one module per data source, all returning the same record types (`base.py`).
+
+| File | Source |
+|---|---|
+| `og_notices.py` | Parses USPTO Official Gazette expiry and reinstatement pages |
+| `bigquery.py`, `bigquery_sql.py` | PatentsView tables on BigQuery: discovery, claims, citations, continuity. Dry-runs every query, caches per patent and keeps a bytes ledger. |
+| `ops_legal.py` | EPO Open Patent Services legal events, the second status source |
+| `odp_maintfee.py` | USPTO ODP maintenance fee parser, tested on samples and not used live |
+| `fixtures.py` | Loads the synthetic patents for `demo` |
+| `http.py` | Shared HTTP client: rate limit, retries, on-disk cache, outage simulation |
+
+**`llm/`** holds the bounded model calls. `calls.py` wraps each call with a schema, a validity check, retries and an on-disk answer cache. `schemas.py` defines what the model must return. `prompts/*.md` are the prompt templates. `fallbacks.py` has the template answer used when the model fails or `--no-llm` is set, and `null_model.py` is the stand-in model for that mode.
+
+**`report/`** turns the `ReportBundle` into files. `bundle.py` defines it. `report_content.py` and `deck_content.py` hold the text and structure shared by every format. `docx_renderer.py`, `pptx_renderer.py`, `html_report.py` and `html_deck.py` render it, with `oxml.py` for raw Word XML, `formatters.py` for dates and labels, and `assets/*.css` for the HTML styling. `validate.py` reads the finished files back and compares identifiers, statuses, scores and recommendations with the bundle.
+
+**`config/`** is data, not code: `cpc_sets.yaml` (CPC prefixes), `power_terms.yaml` (words that mark a powered tool), `scoring.yaml` (weights), and `settings.py` (environment variables). **`tui/prompts.py`** draws the two gates with Rich, or reads scripted answers from a decisions file.
+
+### Where to look
+
+| To change | Start at |
+|---|---|
+| How a status or confidence is decided | `domain/status_rules.py`, `domain/confidence.py` |
+| Which patents are searched | `config/cpc_sets.yaml`, `domain/search_scope.py` |
+| What the model is asked | `llm/prompts/`, `llm/schemas.py` |
+| Score weights | `config/scoring.yaml` |
+| Report or deck wording | `report/report_content.py`, `report/deck_content.py` |
+| Report or deck look | `report/docx_renderer.py`, `report/pptx_renderer.py`, `report/assets/` |
+| A new data source | Add a module in `adapters/` and wire it in `wiring.py` |
+| A new workflow step | Add a node in `graph/nodes/` and register it in `graph/build.py` |
+
+### `tests/`
+
+Folders mirror the source: `unit/` for domain rules, `adapters/` for parsers against saved pages in `tests/data/`, `graph/` for nodes and gates, `llm/` for the model wrapper, `report/` for the four renderers and the validator, `cli/` for commands, and `e2e/test_replay.py` for the full sample rerun. Sockets are blocked, so nothing touches the network.
+
 ## Data sources
 
 | Source | Used for | Credential | Limits |
