@@ -38,7 +38,7 @@ The first live run scans about 44 GB of BigQuery data, well inside the 1 TB mont
 
 A run pauses twice and waits for you.
 
-1. **Plan approval.** The model drafts a search plan from the request: CPC codes, search terms, exclusions and sources. Answer `approve`, `revise` (you type what should change, up to three times) or `abort`.
+1. **Plan approval.** The model drafts a search plan from the request: CPC codes, search terms, exclusions and sources. On a live run it then checks the plan against BigQuery for up to two rounds: it sees how many patents each code finds, sample titles, and groups that often appear next to its hits, and revises the plan. The gate shows what the search will add to the default CPC set and which codes were ignored and why. Answer `approve`, `revise` (you type what should change, up to three times) or `abort`. The approved CPC codes are what discovery searches.
 2. **Candidate review.** After scoring, you see the candidates with status, confidence and score. Answer `accept`, `edit` (drop candidates, pick a shortlist of at most two, add a note to one) or `abort`.
 
 To run without prompts, pass a file of answers. `fixtures/decisions/approve-all.yaml` approves the plan and accepts the review:
@@ -85,10 +85,11 @@ The real report also carries one real conflicting case as a worked example. The 
 ```mermaid
 flowchart TD
     A[intake] --> B[plan: model drafts search plan]
-    B --> G1{{gate 1: approve plan}}
+    B --> P[probe: model checks plan against BigQuery, revises, up to 2 rounds]
+    P --> G1{{gate 1: approve plan}}
     G1 -- revise --> B
     G1 -- abort --> Z[end]
-    G1 -- approve --> C[discover: BigQuery CPC search]
+    G1 -- approve --> C[discover: BigQuery search on the approved CPC codes]
     C --> D[status index: Gazette expiry and reinstatement lists]
     D --> E[claims for the intersected set]
     E --> F[normalise and screen out powered tools]
@@ -105,7 +106,7 @@ flowchart TD
     VA --> Z
 ```
 
-It is a fixed LangGraph workflow, not an autonomous agent. The model is used in a few bounded places (plan, claim summaries, opportunity rationale, report prose), always with a schema, a check on its answer and a template to fall back on. Status labels, confidence and scores are computed by code from the evidence. Details are in [docs/architecture.md](docs/architecture.md).
+It is a fixed LangGraph workflow, not an autonomous agent. The model is used in a few bounded places (plan and its refinement against the data, claim summaries, opportunity rationale, report prose), always with a schema, a check on its answer and a template to fall back on. Status labels, confidence and scores are computed by code from the evidence. Details are in [docs/architecture.md](docs/architecture.md).
 
 ## Data sources
 
@@ -137,7 +138,7 @@ A real run is committed in `outputs/samples/`, with its log in `docs/sample-logs
 make check
 ```
 
-This runs ruff, `mypy --strict` and the test suite (about 275 tests, all offline; sockets are blocked). GitHub Actions runs the same on every push, plus a non-blocking job that renders the report with LibreOffice. `tests/e2e/test_replay.py` reruns the real sample from `fixtures/replay/` and checks it matches.
+This runs ruff, `mypy --strict` and the test suite (about 330 tests, all offline; sockets are blocked). GitHub Actions runs the same on every push, plus a non-blocking job that renders the report with LibreOffice. `tests/e2e/test_replay.py` reruns the real sample from `fixtures/replay/` and checks it matches.
 
 ## Limitations, time and cost
 

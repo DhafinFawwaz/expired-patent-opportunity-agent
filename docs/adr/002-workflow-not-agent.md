@@ -14,4 +14,10 @@ patentic is a LangGraph `StateGraph` with a fixed path. Plain code makes every d
 
 The run is reproducible and testable without a model. A weak or rate-limited model degrades the prose, not the findings. The cost is that the agent cannot decide on its own to search somewhere new; changing the search means changing the plan or the code.
 
-Confirmed by: `tests/graph/test_plan_approval.py`, `tests/llm/test_calls.py`.
+## Amendment, 2026-11-11: the plan drives the search
+
+Until this change, discovery searched a fixed CPC list and ignored the plan, so revising the plan at gate 1 changed nothing. Now the approved plan's CPC codes are added to the search, and before the gate the model gets up to two rounds to test its plan against BigQuery and revise it. Code still decides what the model may change: added codes must sit in the subclasses the default list already uses, powered co-classes are refused, the default list is always searched, and the plan's own power terms only flag a claim for review. A failed probe or a failed answer ends the loop and the run continues with the plan it has.
+
+We considered a full tool-calling agent with the fixed workflow as a fallback and rejected it. A fallback catches errors, not an agent that quietly skips the reinstatement scan, and tool calling is where free models fail most.
+
+Confirmed by: `tests/graph/test_plan_approval.py`, `tests/graph/test_plan_scope.py`, `tests/unit/test_search_scope.py`, `tests/llm/test_calls.py`.

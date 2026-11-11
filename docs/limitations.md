@@ -20,7 +20,9 @@ These are the limits a reader of the report should know about, and what would re
 
 ## Screening and scoring
 
-- **The power screen is rule-based first.** Tier 1 drops powered CPC co-classes; tier 2 drops independent claims that recite a motor, battery, heater and similar terms (hand pumps and trigger sprayers excepted). Tier 3 asks the model, and its answer can be `unclear`, which is flagged rather than dropped.
+- **Plan refinement is narrow.** The model can add CPC groups only inside the subclasses the default list already uses (A46B, A47K, A47L, B08B, B25G), and the committed sample run predates the refinement loop, so its plan added no codes. A code the model adds widens the candidate set but is checked by the same screens.
+
+- **The power screen is rule-based first.** Tier 1 drops powered CPC co-classes; tier 2 drops independent claims that recite a motor, battery, heater and similar terms (hand pumps and trigger sprayers excepted). Tier 3 asks the model, and its answer can be `unclear`, which is flagged rather than dropped. Power terms the plan adds (the model suggested "machine" in one live test, which would hit "machine washable") only flag a claim; they never drop it.
 - **Free models vary from run to run.** Claim summaries, opportunity rationales and the commercial and effort scores come from free models through `freellm`. Live runs on the same data shortlisted different second candidates (US 10,052,751, US 10,052,665 and US 8,826,487 across three runs). Status, confidence and evidence quality do not depend on the model. `--replay` reruns the committed sample with its recorded answers, so the sample itself is reproducible.
 - **Model calls can fall back.** When a free model returns empty or invalid output twice, the step uses its template instead. The sample run had 5 fallbacks out of 20 calls; the cost record and event log list them.
 - **Only the top 8 eligible candidates are analysed.** The rest are counted as "eligible but not analysed" in the report, not silently dropped.

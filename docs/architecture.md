@@ -27,12 +27,12 @@ The graph is built in `src/patentic/graph/build.py`; each node is a class in `sr
 | Node | Does | Model? |
 |---|---|---|
 | `intake` | Validates the `ResearchRequest` | no |
-| `plan` | Drafts the search plan (CPC codes, terms, exclusions, sources) | yes, `PlanDraft` schema, template fallback |
+| `plan` | Drafts the search plan, then for up to `PATENTIC_REFINE_ROUNDS` rounds probes it against BigQuery and lets the model revise it; resolves the plan into a `SearchScope` | yes, `PlanDraft` and `PlanRevision` schemas, template fallback; a failed probe or answer ends the loop with the current plan |
 | `approve` | Gate 1: `interrupt()` with the plan; routes to `plan`, `discover` or the end | no |
-| `discover` | BigQuery PatentsView search by CPC prefix over the grant window that covers all three fee stages | no |
+| `discover` | BigQuery PatentsView search on the approved scope's CPC prefixes over the grant window that covers all three fee stages | no |
 | `status_index` | Fetches the Gazette weeks in the window and indexes expiry and reinstatement rows | no |
 | `claims` | Claims, citations and continuity for patents that are both in the CPC set and listed as expired | no |
-| `normalise` | Builds candidates, drops design and plant patents, runs the tier 1 (CPC) and tier 2 (claim terms) power screens | no |
+| `normalise` | Builds candidates, drops design and plant patents, runs the tier 1 (CPC) and tier 2 (claim terms) power screens; claims that use the plan's own power terms are flagged, not dropped | no |
 | `verify_candidate` | One branch per candidate (`Send`): gathers status events and runs `assess_status` | no |
 | `rank` | Orders eligible candidates and picks the analysis pool (8 by default) | no |
 | `analyse` | Claim summary per pooled candidate, with a tier 3 powered or non-powered call | yes, quotes must appear word for word in the claims |
@@ -42,6 +42,12 @@ The graph is built in `src/patentic/graph/build.py`; each node is a class in `sr
 | `generate` | Renders `report.docx` and `deck.pptx` from the bundle | no |
 | `validate` | Re-reads both files and compares them with the bundle; runs the OOXML schema check | no |
 
+## How the plan drives the search
+
+`resolve_scope` in `src/patentic/domain/search_scope.py` turns the plan's CPC codes into what discovery sends to BigQuery. The default sets in `config/cpc_sets.yaml` are always searched, so a bad plan cannot shrink the search. A plan code is added only if it parses as a CPC main group or subgroup, sits in a subclass the default sets already use, is not a powered co-class, and is not already covered; at most ten are added. Everything else is listed at gate 1 with the reason. When nothing is added, the query is byte for byte the default one, so its cache still applies.
+
+Before gate 1, the plan node fetches one probe table per calendar year (every US utility grant in those subclasses with its CPC codes, about 1.7 GB scanned once, then cached). `probe_scope` counts locally what each added code finds, how many of those pass the CPC screen, and which main groups co-occur with current hits without being searched. The model sees that summary and returns a revised plan, or says it is done. The probe is skipped in demo, replay and `--no-llm` runs.
+
 ## State
 
 `PipelineState` in `src/patentic/graph/state.py` is a `TypedDict`. Keys that several branches write use reducers:
@@ -49,7 +55,7 @@ The graph is built in `src/patentic/graph/build.py`; each node is a class in `sr
 - `records`, `claims`, `events`, `candidates`, `evidence`: dictionaries merged by key, so parallel `verify_candidate` branches never overwrite each other.
 - `calls`: every model call's `CallMeta` (model, method, attempts, tokens, cost, last error), appended.
 - `outages`: sources that failed in this run, appended once each.
-- `plan`, `plan_feedback`, `revisions`, `approval`, `review`: the two gates and their history.
+- `plan`, `scope`, `probes`, `plan_feedback`, `revisions`, `approval`, `review`: the plan, what it searches, the probe rounds, and the two gates with their history.
 - `coverage`: which Gazette issues were read and which weeks are missing.
 - `pool`, `bundle_path`, `report_path`, `deck_path`, `generation_attempts`, `validation`: later stages.
 
