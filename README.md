@@ -12,6 +12,8 @@ A 70-second recording of these steps is in [docs/demo/demo.mp4](docs/demo/demo.m
 
 You need Python 3.12 and [uv](https://docs.astral.sh/uv/).
 
+The full guide, including how to write a request file and answer the gates, is [docs/usage.md](docs/usage.md).
+
 ```bash
 uv sync
 cp .env.example .env
