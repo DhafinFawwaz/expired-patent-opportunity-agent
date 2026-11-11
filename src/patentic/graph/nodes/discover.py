@@ -6,7 +6,8 @@ from typing_extensions import TypedDict
 from patentic.adapters.base import ClaimRecord, EvidenceRecord, PatentRecord
 from patentic.domain.coverage import ScanCoverage
 from patentic.domain.events import StatusEvent
-from patentic.domain.screening import is_core_hit
+from patentic.domain.screening import CpcSets, is_core_hit
+from patentic.domain.search_scope import SearchScope, resolve_scope, scoped_sets
 from patentic.domain.status_rules import add_years
 from patentic.graph.deps import Deps
 from patentic.graph.progress import emit
@@ -21,6 +22,7 @@ if TYPE_CHECKING:
 class DiscoverUpdate(TypedDict, total=False):
     stage: str
     records: dict[str, PatentRecord]
+    scope: SearchScope
     outages: list[str]
 
 
@@ -39,6 +41,16 @@ class ClaimsUpdate(TypedDict, total=False):
     outages: list[str]
 
 
+def scope_for(state: PipelineState, deps: Deps) -> SearchScope | None:
+    if "scope" in state:
+        return state["scope"]
+    if "plan" not in state:
+        return None
+    return resolve_scope(
+        state["plan"].cpc_codes, state["plan"].exclusion_terms, deps.cpc, deps.power
+    )
+
+
 def grant_window_for(lapse_from: date, lapse_to: date) -> tuple[date, date]:
     return add_years(lapse_from, -12), add_years(lapse_to, -4)
 
@@ -55,21 +67,31 @@ class BqDiscover:
             }
             emit("discovery", "fixtures", count=len(records))
             return {"stage": "discovery", "records": records}
+        scope: SearchScope | None = scope_for(state, deps)
+        prefixes: list[str] = scope.prefixes if scope else [*deps.cpc.core, *deps.cpc.supporting]
+        sets: CpcSets = scoped_sets(deps.cpc, scope)
         weeks: int = state["request"].lapse_window_weeks
         grant_from, grant_to = grant_window_for(deps.today - timedelta(weeks=weeks), deps.today)
-        emit("discovery", "bigquery_start", grant_from=str(grant_from), grant_to=str(grant_to))
+        emit(
+            "discovery",
+            "bigquery_start",
+            grant_from=str(grant_from),
+            grant_to=str(grant_to),
+            added=", ".join(scope.added) if scope and scope.added else "none",
+        )
         try:
-            found: list[PatentRecord] = deps.bq.discover(
-                [*deps.cpc.core, *deps.cpc.supporting], grant_from, grant_to
-            )
+            found: list[PatentRecord] = deps.bq.discover(prefixes, grant_from, grant_to)
         except Exception as exc:  # noqa: BLE001  # any source failure becomes an outage record
             emit("discovery", "outage", source="bigquery", error=str(exc))
             return {"stage": "discovery", "records": {}, "outages": ["bigquery"]}
         kept: dict[str, PatentRecord] = {
-            r.patent.key: r for r in found if is_core_hit(r.cpc_codes, deps.cpc)
+            r.patent.key: r for r in found if is_core_hit(r.cpc_codes, sets)
         }
         emit("discovery", "bigquery_done", found=len(found), core=len(kept))
-        return {"stage": "discovery", "records": kept}
+        update: DiscoverUpdate = {"stage": "discovery", "records": kept}
+        if scope is not None:
+            update["scope"] = scope
+        return update
 
 
 class OgIndexNode:

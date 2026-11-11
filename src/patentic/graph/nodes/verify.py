@@ -79,6 +79,10 @@ class VerifyCandidate:
             confidence=assessment.confidence,
         )
         updated: Candidate = candidate.model_copy(
-            update={"assessment": assessment, "related": related, "flags": related_flags(related)}
+            update={
+                "assessment": assessment,
+                "related": related,
+                "flags": [*candidate.flags, *related_flags(related)],
+            }
         )
         return {"candidates": {candidate.key: updated}, "evidence": evidence}

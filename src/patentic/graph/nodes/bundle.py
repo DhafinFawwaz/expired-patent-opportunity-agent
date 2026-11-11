@@ -8,6 +8,7 @@ from patentic.adapters.base import EvidenceRecord
 from patentic.adapters.http import utc_now
 from patentic.domain.confidence import grade_for_source
 from patentic.domain.coverage import ScanCoverage
+from patentic.domain.search_scope import SearchScope
 from patentic.domain.status_rules import StatusAssessment, assess_status
 from patentic.graph.deps import Deps
 from patentic.graph.progress import emit
@@ -214,7 +215,7 @@ class Bundle:
             shortlist=shortlist,
             weights=deps.weights,
             prose=prose,
-            methodology=_methodology(coverage, request.lapse_window_weeks),
+            methodology=_methodology(coverage, request.lapse_window_weeks, state.get("scope")),
             key_assumptions=_assumptions(coverage),
             quality_of_information=_quality(deps.ops.enabled, outages, flow),
             limitations=_limitations(flow, request.max_candidates, deps.ops.enabled),
@@ -448,9 +449,24 @@ def _next_steps_fallback(reports: list[CandidateReport]) -> str:
     )
 
 
-def _methodology(coverage: ScanCoverage, weeks: int) -> list[str]:
+def _search_line(scope: SearchScope | None) -> str:
+    text: str = "Search: CPC prefixes for non-powered household cleaning tools (A47L 13, A47L 1, A47L 17, A47K 11/10 and related groups)"
+    if scope is None:
+        return text + "."
+    if scope.added:
+        text += f", plus {', '.join(scope.added)} from the approved plan"
+    if scope.exclusion_terms:
+        text += f"; claims using the plan's power terms ({', '.join(scope.exclusion_terms)}) are flagged for review"
+    if scope.rejected:
+        text += (
+            f"; {len(scope.rejected)} plan codes were ignored as too broad, malformed or powered"
+        )
+    return text + "."
+
+
+def _methodology(coverage: ScanCoverage, weeks: int, scope: SearchScope | None) -> list[str]:
     return [
-        "Search: CPC prefixes for non-powered household cleaning tools (A47L 13, A47L 1, A47L 17, A47K 11/10 and related groups).",
+        _search_line(scope),
         f"Status source: Official Gazette notices, {coverage.weeks_fetched} weekly issues fetched out of {weeks} requested.",
         "Screening: powered co-classes removed, power terms in independent claims removed, unclear cases flagged.",
         "Status rules: a later official notice wins; expired means listed as expired with no later reinstatement found.",

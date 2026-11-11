@@ -3,7 +3,14 @@ from collections.abc import Sequence
 from typing_extensions import TypedDict
 
 from patentic.adapters.base import ClaimRecord, PatentRecord, independent_claims
-from patentic.domain.screening import is_core_hit, tier1_rejects, tier2_power_hits
+from patentic.domain.screening import (
+    CpcSets,
+    PowerTerms,
+    is_core_hit,
+    tier1_rejects,
+    tier2_power_hits,
+)
+from patentic.domain.search_scope import SearchScope, plan_terms, scoped_sets
 from patentic.domain.status_rules import StatusAssessment
 from patentic.graph.deps import Deps
 from patentic.graph.progress import emit
@@ -15,10 +22,20 @@ class NormaliseUpdate(TypedDict, total=False):
     candidates: dict[str, Candidate]
 
 
-def screen_record(record: PatentRecord, claims: Sequence[ClaimRecord], deps: Deps) -> Candidate:
-    core: bool = is_core_hit(record.cpc_codes, deps.cpc)
-    tier1: list[str] = tier1_rejects(record.cpc_codes, deps.cpc)
-    tier2: list[str] = tier2_power_hits([c.text for c in independent_claims(claims)], deps.power)
+def screen_record(
+    record: PatentRecord,
+    claims: Sequence[ClaimRecord],
+    deps: Deps,
+    scope: SearchScope | None = None,
+) -> Candidate:
+    sets: CpcSets = scoped_sets(deps.cpc, scope)
+    core: bool = is_core_hit(record.cpc_codes, sets)
+    tier1: list[str] = tier1_rejects(record.cpc_codes, sets)
+    texts: list[str] = [c.text for c in independent_claims(claims)]
+    tier2: list[str] = tier2_power_hits(texts, deps.power)
+    # Plan terms come from the model, so they flag a candidate for review instead of dropping it.
+    planned: PowerTerms = plan_terms(deps.power, scope)
+    flags: list[str] = [f"plan_term:{t}" for t in tier2_power_hits(texts, planned)]
     eligible: bool = record.patent.maintenance_eligible
     assessment: StatusAssessment | None = None
     if not eligible:
@@ -38,6 +55,7 @@ def screen_record(record: PatentRecord, claims: Sequence[ClaimRecord], deps: Dep
             tier2_hits=tier2,
             passed=eligible and core and not tier1 and not tier2,
         ),
+        flags=flags,
         is_synthetic=bool(deps.fixtures),
     )
 
@@ -50,8 +68,9 @@ class Normalise:
         records: dict[str, PatentRecord] = state.get("records", {})
         claims: dict[str, list[ClaimRecord]] = state.get("claims", {})
         keys: list[str] = sorted(set(state.get("events", {})) & set(records))
+        scope: SearchScope | None = state.get("scope")
         candidates: dict[str, Candidate] = {
-            k: screen_record(records[k], claims.get(k, []), self._deps) for k in keys
+            k: screen_record(records[k], claims.get(k, []), self._deps, scope) for k in keys
         }
         passed: int = sum(1 for c in candidates.values() if c.screening.passed)
         emit("normalise", "screened", candidates=len(candidates), passed=passed)

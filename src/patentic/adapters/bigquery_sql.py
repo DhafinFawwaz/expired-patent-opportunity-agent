@@ -67,3 +67,20 @@ SELECT t.patent_id, NULL, NULL, NULL, t.term_disclaimer
 FROM {PV}.us_term_of_grant` t
 WHERE t.patent_id IN UNNEST(@ids)
 """
+
+PROBE_SQL: Final[str] = f"""
+WITH hits AS (
+  SELECT DISTINCT c.patent_id
+  FROM {PV}.cpc_current` c
+  WHERE EXISTS (SELECT 1 FROM UNNEST(@subclasses) sub WHERE STARTS_WITH(c.subgroup_id, sub))
+)
+SELECT p.id, p.kind, p.date, p.title,
+  ARRAY_AGG(DISTINCT c.subgroup_id IGNORE NULLS ORDER BY c.subgroup_id) AS cpc
+FROM {PV}.patent` p
+JOIN hits h ON h.patent_id = p.id
+JOIN {PV}.cpc_current` c ON c.patent_id = p.id
+WHERE p.type = 'utility' AND p.kind IN ('B1', 'B2')
+  AND p.date BETWEEN @grant_from AND @grant_to
+GROUP BY p.id, p.kind, p.date, p.title
+ORDER BY p.id
+"""

@@ -11,7 +11,13 @@ from typing import Final, Protocol
 from pydantic import BaseModel
 
 from patentic.adapters.base import ClaimRecord, PatentRecord
-from patentic.adapters.bigquery_sql import CITATIONS_SQL, CLAIMS_SQL, CONTINUITY_SQL, DISCOVERY_SQL
+from patentic.adapters.bigquery_sql import (
+    CITATIONS_SQL,
+    CLAIMS_SQL,
+    CONTINUITY_SQL,
+    DISCOVERY_SQL,
+    PROBE_SQL,
+)
 from patentic.adapters.http import utc_now
 from patentic.domain.identifiers import (
     IdentifierError,
@@ -203,6 +209,18 @@ class BigQueryGateway:
             "grant_to": date(grant_to.year, 12, 31).isoformat(),
         }
         rows: list[Row] = self.query(DISCOVERY_SQL, params, "discovery")
+        records: list[PatentRecord] = [to_patent_record(row) for row in rows]
+        return [r for r in records if grant_from <= r.grant_date <= grant_to]
+
+    def probe(
+        self, subclasses: Sequence[str], grant_from: date, grant_to: date
+    ) -> list[PatentRecord]:
+        params: dict[str, object] = {
+            "subclasses": list(subclasses),
+            "grant_from": date(grant_from.year, 1, 1).isoformat(),
+            "grant_to": date(grant_to.year, 12, 31).isoformat(),
+        }
+        rows: list[Row] = self.query(PROBE_SQL, params, "probe")
         records: list[PatentRecord] = [to_patent_record(row) for row in rows]
         return [r for r in records if grant_from <= r.grant_date <= grant_to]
 

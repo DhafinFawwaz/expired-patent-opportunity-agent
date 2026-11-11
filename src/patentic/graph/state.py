@@ -11,6 +11,7 @@ from patentic.domain.events import StatusEvent
 from patentic.domain.related import RelatedRecord
 from patentic.domain.request import ResearchRequest
 from patentic.domain.scoring import Scores
+from patentic.domain.search_scope import ProbeReport, SearchScope
 from patentic.domain.status_rules import StatusAssessment
 from patentic.graph.reducers import append_unique, merge_dict, override
 from patentic.llm.schemas import CallMeta, OpportunityRationale, PlanDraft, TechnicalSummary
@@ -67,6 +68,8 @@ class PipelineState(TypedDict, total=False):
     request: ResearchRequest
     stage: str
     plan: PlanDraft
+    scope: SearchScope
+    probes: list[ProbeReport]
     plan_feedback: Annotated[list[str], override]
     revisions: int
     approval: ApprovalDecision

@@ -79,6 +79,33 @@ def _show_plan(console: Console, payload: dict[str, object]) -> None:
                 ", ".join(map(str, value)) if isinstance(value, list) else str(value),
             )
     console.print(table)
+    _show_scope(console, payload)
+
+
+def _show_scope(console: Console, payload: dict[str, object]) -> None:
+    scope: object = payload.get("scope")
+    if not isinstance(scope, dict):
+        return
+    added: object = scope.get("added") or []
+    terms: object = scope.get("exclusion_terms") or []
+    console.print(
+        "Search adds to the default CPC set: "
+        + (", ".join(map(str, added)) if isinstance(added, list) and added else "nothing")
+    )
+    if isinstance(terms, list) and terms:
+        console.print("Claims with these plan terms get flagged: " + ", ".join(map(str, terms)))
+    rejected: object = scope.get("rejected") or []
+    if isinstance(rejected, list):
+        for item in rejected:
+            if isinstance(item, dict):
+                console.print(f"Ignored {item.get('code')}: {item.get('reason')}")
+    probes: object = payload.get("probes") or []
+    if isinstance(probes, list):
+        for probe in probes:
+            if isinstance(probe, dict):
+                hits: str = f"{probe.get('scoped_hits')} patents in scope"
+                base: str = f"{probe.get('baseline_hits')} with the default set"
+                console.print(f"Probe round {probe.get('round')}: {hits} ({base})")
 
 
 def _show_candidates(console: Console, payload: dict[str, object]) -> None:

@@ -32,6 +32,7 @@ excluded_coclass:
   - A47L7/
   - A47L9/
   - A47L11/      # floor-cleaning machines, except sweepers listed in core
+  - A47L15/      # dishwashing machines
   - A47L21/02
   - A47L23/02
   - A47L23/06

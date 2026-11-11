@@ -102,4 +102,5 @@ def make_deps(
         today=fixtures[0].today if fixtures else (today or date.today() + timedelta(0)),  # noqa: DTZ011
         fixtures=fixtures,
         render=render,
+        refine_rounds=0 if demo or no_llm or recorded else settings.patentic_refine_rounds,
     )

@@ -1,6 +1,9 @@
+from datetime import date
 from typing import Literal
 
 from pydantic import BaseModel, field_validator
+
+from patentic.domain.request import ResearchRequest
 
 StructuredMethod = Literal["json_schema", "json_mode", "function_calling"]
 
@@ -12,6 +15,22 @@ class PlanDraft(BaseModel):
     sources: list[str]
     screening_criteria: list[str]
     output_structure: list[str]
+
+
+class PlanRevision(PlanDraft):
+    done: bool
+    change_note: str
+
+
+class RefineContext(BaseModel):
+    request: ResearchRequest
+    plan: PlanDraft
+    feedback: list[str]
+    probe: str
+    subclasses: list[str]
+    grant_from: date
+    grant_to: date
+    round: int
 
 
 class TechnicalSummary(BaseModel):

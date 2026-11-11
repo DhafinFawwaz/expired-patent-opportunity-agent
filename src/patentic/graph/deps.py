@@ -24,3 +24,4 @@ class Deps:
     today: date
     fixtures: tuple[FixtureCase, ...] = ()
     render: bool = False
+    refine_rounds: int = 0

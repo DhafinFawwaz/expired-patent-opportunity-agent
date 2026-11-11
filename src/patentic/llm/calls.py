@@ -25,7 +25,9 @@ from patentic.llm.schemas import (
     OpportunityContext,
     OpportunityRationale,
     PlanDraft,
+    PlanRevision,
     ProseSection,
+    RefineContext,
     StructuredMethod,
     TechnicalContext,
     TechnicalSummary,
@@ -98,6 +100,30 @@ class LlmCaller:
             self._tools, PlanDraft, system, prompt, "plan", lambda _p: None
         )
         return (result or plan_from_template(request)), meta
+
+    def refine_plan(self, ctx: RefineContext) -> tuple[PlanRevision | None, CallMeta]:
+        system, human = _prompt("refine")
+        prompt: str = human.format(
+            technology_category=ctx.request.technology_category,
+            intended_product=ctx.request.intended_product,
+            feedback="; ".join(ctx.feedback) or "none",
+            plan=ctx.plan.model_dump_json(indent=1),
+            grant_from=ctx.grant_from,
+            grant_to=ctx.grant_to,
+            probe=ctx.probe,
+        )
+
+        def check(revision: PlanRevision) -> str | None:
+            return None if revision.cpc_codes else "the plan needs at least one CPC code"
+
+        return self._structured(
+            self._tools,
+            PlanRevision,
+            system.format(subclasses=", ".join(ctx.subclasses)),
+            prompt,
+            f"refine:{ctx.round}",
+            check,
+        )
 
     def technical(self, ctx: TechnicalContext) -> tuple[TechnicalSummary, CallMeta]:
         system, human = _prompt("technical")
